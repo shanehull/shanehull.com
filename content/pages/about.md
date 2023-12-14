@@ -1,6 +1,6 @@
 ---
 title: 👨‍💻 About
-description: Meet Shane, an Engineer with over 8 years of experience.
+description: Read more about Shane, an Engineer with 7+ years of experience.
 ---
 
 I am an Engineer with 7+ years of experience across DevOps, Systems and Cloud with a focus on Kubernetes and the Cloud-Native ecosystem.
