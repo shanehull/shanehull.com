@@ -2,7 +2,6 @@
 <article class="container">
   <p>{{ .Site.Params.Description }}</p>
   {{ range .Sections }}
-  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
   <ul>
     {{ range .Pages }}
       <li>
