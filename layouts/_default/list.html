@@ -8,7 +8,7 @@
   <ul>
     {{ range .Pages }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ or .Title .RelPermalink }}</a>
+        <a href="{{ .RelPermalink }}" aria-label={{ .Description }}>{{ or .Title .RelPermalink }}</a>
       </li>
     {{ end }}
   </ul>
