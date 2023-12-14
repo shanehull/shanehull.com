@@ -1,6 +1,7 @@
 baseURL: "/"
 languageCode: en-us
 title: Shane Hull
+enableRobotsTXT: true
 
 permalinks:
   page:
