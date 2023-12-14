@@ -59,7 +59,7 @@ body {
 .wot {
   max-width: 640px;
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 4rem 1rem;
 
   #quote-container {
     display: flex;
@@ -81,12 +81,13 @@ body {
       align-self: flex-end;
     }
   }
+
+  #quote-container.htmx-swapping blockquote {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
 }
 
-#quote-container.htmx-swapping blockquote {
-  opacity: 0;
-  transition: opacity 0.4s ease-out;
-}
 
 div.four-oh-four {
   display: flex;

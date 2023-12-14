@@ -1,7 +1,6 @@
 {{ define "page" }}
 <article class="container">
   {{ range .Sections }}
-  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
   <ul>
     {{ range .Pages }}
       <li>
