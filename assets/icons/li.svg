@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   fill="#000000"
+   viewBox="0 0 30 30"
+   width="24px"
+   height="24px"
+   version="1.1"
+   id="svg9720"
+   alt="LinkedIn"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata9726">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs9724" />
+  <path
+     d="M 6.6221929,29.45126 H 0.11674085 V 9.6566571 H 6.6221929 Z M 3.370768,7.017377 c -1.799408,0 -3.25402715,-1.4793168 -3.25402715,-3.3004203 0,-1.8211034 1.45722125,-3.2977809 3.25402715,-3.2977809 1.7929026,0 3.2514249,1.4793166 3.2514249,3.2977809 0,1.8211035 -1.4585223,3.3004203 -3.2514249,3.3004203 z M 30.04182,29.45126 h -6.254341 v -9.633374 c 0,-2.297493 -0.04293,-5.252167 -3.251425,-5.252167 -3.25663,0 -3.757549,2.502037 -3.757549,5.085893 v 9.799648 h -6.25304 V 9.6421409 h 6.003231 v 2.7065821 h 0.08458 c 0.835299,-1.557175 2.876712,-3.1988074 5.921261,-3.1988074 6.336312,0 7.507292,4.1027624 7.507292,9.4367474 0,0 0,10.864597 0,10.864597 z"
+     id="path9718"
+     style="stroke-width:1.31033" />
+</svg>

@@ -1,0 +1,15 @@
+baseURL: https://shanehull.com
+languageCode: en-us
+title: Shane Hull
+
+permalinks:
+  page:
+    pages: /:slug/
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+params:
+  description: Shane Hull's corner of the intertubes. Shane is an Engineer working on DevOps, Systems and Cloud.

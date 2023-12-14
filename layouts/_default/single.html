@@ -1,0 +1,7 @@
+{{ define "page" }}
+<article class="container">
+  <a href="{{ .Site.BaseURL }}" class="back-link"> <- back </a>
+  <h2>{{ .Title }}</h2>
+  {{ .Content }}
+</article>
+{{ end }}

@@ -1,0 +1,228 @@
+$dark-background: #202122;
+$dark-text: #ddd;
+$dark-icon: #ff1f50;
+
+$light-background: #eee;
+$light-text: #292929;
+$light-icon: #dd1a44;
+
+$button-color-dark: lighten($dark-background, 10%);
+$button-color-light: darken($light-background, 10%);
+
+@import 'fonts';
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Space Mono', 'monospace';;
+  font-size: 1.6rem;
+  line-height: 1.3;
+  background-color: $light-background;
+  color: $light-text;
+  
+  .wot {
+    max-width: 640px;
+    margin: auto;
+    padding: 2rem 1rem;
+
+    #quote-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+
+      blockquote {
+        margin: 1rem;
+        min-height: 16rem;
+      }
+    
+      footer {
+        margin-top: 1.2rem;
+      }
+    
+      button {
+        display: flex;
+        margin: auto;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .yeh {
+    display: flex;
+    justify-content: space-between;
+
+    .site-title {
+      padding: 0.8rem;
+    }
+
+    .social-div {
+      margin-top: auto;
+
+      .social-list {
+        display: flex;
+        list-style: none;
+    
+        li {
+          margin-right: 1.2rem;
+      
+          svg {
+            width: 18px;
+            height: 18px;
+            opacity: 60%;
+            transition: opacity 0.5s ease;
+            
+            &:hover {
+              opacity: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#quote-container.htmx-swapping blockquote {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+button {
+  color: $light-icon;
+  background-color: $button-color-light;
+  border: 1px solid darken($button-color-light, 5%);
+  box-shadow: 0 0 3px lighten($button-color-light, 5%);  padding: 1rem 2rem;
+  border-radius: 1.4rem;
+  cursor: pointer;
+  font-size: 16px;
+
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    color: darken($light-icon, 10%);
+    background-color: darken($button-color-light, 5%);
+    box-shadow: 0 0 5px darken($button-color-light, 20%);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', 'sans-serif';
+  margin: 3.8rem 0 .6rem;
+}
+
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+p, ul, ol {
+  font-size: 1.8rem;
+  margin: 0 0 .8em;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.4s ease;
+  color: $light-icon;
+
+  &:hover {
+    color: lighten($light-icon, 50%);
+  }
+
+  &:visited {
+    color: darken($light-icon, 20%);
+  }
+
+  &:visited:hover {
+    color: $light-text;
+  }
+}
+
+a.back-link {
+  transition: color 0.4s ease;
+  color: $light-icon;
+
+  &:hover {
+    color: lighten($light-icon, 50%);
+  }
+
+  &:visited {
+    color: $light-icon;
+  }
+
+  &:visited:hover {
+    color: $light-text;
+  }
+}
+
+li {
+  padding: 0.2rem;
+}
+
+article {
+  padding: 2rem 1rem;
+  max-width: calc(44em + 2rem);
+  margin: 0 auto;
+}
+
+// dark mode media query
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: $dark-background;
+    color: $dark-text;
+  }
+
+  .social-link svg {
+    filter: invert(100%);
+  }
+
+  a {
+    color: $dark-icon;
+
+    &:hover {
+      color: lighten($dark-icon, 50%);
+    }
+  
+    &:visited {
+      color: darken($dark-icon, 20%);
+    }
+  
+    &:visited:hover {
+      color: $dark-text;
+    }
+  }
+
+  a.back-link {
+    color: $dark-icon;
+  
+    &:hover {
+      color: lighten($dark-icon, 50%);
+    }
+  
+    &:visited {
+      color: $dark-icon;
+    }
+  
+    &:visited:hover {
+      color: $dark-text;
+    }
+  }
+
+  button {
+    color: $dark-icon;
+    background-color: $button-color-dark;
+    border: 1px solid lighten($button-color-dark, 5%);
+    box-shadow: 0 0 3px darken($button-color-dark, 5%);
+  
+    &:hover {
+      color: darken($dark-icon, 10%);
+      background-color: darken($button-color-dark, 5%);
+      box-shadow: 0 0 5px darken($button-color-dark, 20%);
+    }
+  }
+}
