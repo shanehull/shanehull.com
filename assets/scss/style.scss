@@ -150,6 +150,8 @@ a {
   transition: color 0.4s ease;
   color: $light-icon;
 
+  -webkit-tap-highlight-color: transparent;
+
   &:hover {
     color: lighten($light-icon, 50%);
   }
