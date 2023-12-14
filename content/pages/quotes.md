@@ -7,7 +7,7 @@ htmx: true
 Sure! Here's a random quote for you..
 
 <div id="quote-container">
-	<blockquote hx-get="https://shanehull.dev/quote" hx-trigger="load"hx-target="#quote-container" hx-swap="swap:0.4s">
+	<blockquote hx-get="/quote" hx-trigger="load"hx-target="#quote-container" hx-swap="swap:0.4s">
         <i></i>
         <footer></footer>
     </blockquote>
