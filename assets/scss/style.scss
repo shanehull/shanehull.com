@@ -23,16 +23,30 @@ body {
   color: $light-text;
 }
 
+.wot {
+  max-width: 640px;
+  margin: auto;
+  padding: 4rem 1rem;
+}
+
 .yeh {
   display: flex;
   justify-content: space-between;
+  margin: auto;
 
-  .site-title {
-    padding: 0.8rem;
+  header.site-title {
+    display: flex;
+    align-items: flex-end;
+    padding-block: 0.9rem;
+    
+    img.hero-image {
+      padding: 1rem;
+    }
   }
 
   .social-div {
-    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
 
     .social-list {
       display: flex;
@@ -56,38 +70,31 @@ body {
   }
 }
 
-.wot {
-  max-width: 640px;
-  margin: auto;
-  padding: 4rem 1rem;
+#quote-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
-  #quote-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    blockquote {
-      margin: 1rem;
-      min-height: 16rem;
-    }
-  
-    footer {
-      margin-top: 1.2rem;
-    }
-  
-    button {
-      display: flex;
-      margin: auto;
-      align-self: flex-end;
-    }
+  blockquote {
+    margin: 1rem;
+    min-height: 16rem;
   }
 
-  #quote-container.htmx-swapping blockquote {
-    opacity: 0;
-    transition: opacity 0.4s ease-out;
+  footer {
+    margin-top: 1.2rem;
+  }
+
+  button {
+    display: flex;
+    margin: auto;
+    align-self: flex-end;
   }
 }
 
+#quote-container.htmx-swapping blockquote {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
 
 div.four-oh-four {
   display: flex;
@@ -246,5 +253,16 @@ article {
       background-color: darken($button-color-dark, 5%);
       box-shadow: 0 0 5px darken($button-color-dark, 20%);
     }
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.0rem;
+  }
+
+  img.hero-image {
+    width: 40px;
+    height: 30.4px;
   }
 }
