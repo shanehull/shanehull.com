@@ -1,0 +1,14 @@
+{{ define "main" }}
+<main class="container">
+  <a href="/blog/" class="back-link"> <- back </a>
+  <h2>{{ .Title }}</h2>
+  <small class="date">{{.Date.Format "2024-12-01" }}</small>
+  <p class="description">{{.Description }}</p>
+  <p class="tags">
+    {{ range.Params.tags }}
+    <a href="/blog/tags/{{. }}">{{. }}</a>
+    {{ end }}
+  </p>
+  {{ .Content }}
+</main>
+{{ end }}

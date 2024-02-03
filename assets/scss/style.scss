@@ -49,19 +49,17 @@ header {
     .social-list {
       display: flex;
       list-style: none;
+      padding-inline: 0.2rem;
 
-      li {
-        margin-right: 1.2rem;
+      svg {
+        margin-inline: 0.6rem;
+        width: 18px;
+        height: 18px;
+        opacity: 60%;
+        transition: opacity 0.5s ease;
 
-        svg {
-          width: 18px;
-          height: 18px;
-          opacity: 60%;
-          transition: opacity 0.5s ease;
-
-          &:hover {
-            opacity: 100%;
-          }
+        &:hover {
+          opacity: 100%;
         }
       }
     }
@@ -196,7 +194,7 @@ a.back-link {
 }
 
 ul {
-  padding-inline: 3.8rem;
+  padding-inline: 2rem;
   li {
     padding-block: 0.2rem;
   }
@@ -244,6 +242,10 @@ main {
     transform: translateY(-5px);
   }
 
+  .blog-card-link {
+    color: inherit;
+  }
+
   // Blog card content
   .blog-card-content {
     margin: 0.5rem;
@@ -259,13 +261,11 @@ main {
     p {
       margin: 0;
       padding-block: 0.2rem;
-      font-size: 0.9rem;
-      //color: #888;
+      font-size: 1.2rem;
       overflow: hidden;
     }
     small {
-      font-size: 0.7rem;
-      //color: #888;
+      font-size: 0.9rem;
     }
   }
 }
