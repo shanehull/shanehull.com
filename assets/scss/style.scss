@@ -18,7 +18,7 @@ html {
 body {
   max-width: 640px;
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 2.6rem 0;
 
   font-family: "Space Mono", "monospace";
   font-size: 1.6rem;
@@ -195,8 +195,11 @@ a.back-link {
   }
 }
 
-li {
-  padding: 0.2rem;
+ul {
+  padding-inline: 3.8rem;
+  li {
+    padding-block: 0.2rem;
+  }
 }
 
 main {
