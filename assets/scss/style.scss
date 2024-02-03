@@ -16,6 +16,10 @@ html {
 }
 
 body {
+  max-width: 640px;
+  margin: auto;
+  padding: 2rem 1rem;
+
   font-family: "Space Mono", "monospace";
   font-size: 1.6rem;
   line-height: 1.3;
@@ -23,18 +27,12 @@ body {
   color: $light-text;
 }
 
-.wot {
-  max-width: 640px;
-  margin: auto;
-  padding: 4rem 1rem;
-}
-
-.yeh {
+header {
   display: flex;
   justify-content: space-between;
   margin: auto;
 
-  header.site-title {
+  .site-title {
     display: flex;
     align-items: flex-end;
     padding-block: 0.9rem;
@@ -142,7 +140,7 @@ h4,
 h5,
 h6 {
   font-family: "Open Sans", "sans-serif";
-  margin: 3.8rem 0 0.6rem;
+  margin: 3.5rem 0 0.6rem;
 }
 
 h1 {
