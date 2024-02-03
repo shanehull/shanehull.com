@@ -1,21 +1,19 @@
 <!doctype html>
 <html lang="{{ .Site.LanguageCode }}">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ .Site.Title }}{{ if ne .Kind "home" }} | {{ .Title }}{{ end }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {{ .Site.Title }}{{ if ne .Kind "home" }} | {{ .Title }}{{ end }}
+    </title>
     {{- if .IsHome -}}
     <meta name="description" content="{{ site.Params.description }}" />
     {{- else -}}
     <meta name="description" content="{{ .Params.description }}" />
-    {{- end }}
-    {{ $style := resources.Get "scss/style.scss" | 
-        resources.ExecuteAsTemplate "style.main.scss" . | 
-        toCSS | 
-        minify | 
-        fingerprint 
-    }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    {{- end }} {{ $style := resources.Get "scss/style.scss" |
+    resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify |
+    fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
     {{ partial "htmx" . }}
   </head>
   <body class="overflow-hidden">
@@ -24,7 +22,13 @@
         <header class="site-title">
           <div class="hero-image-container">
             <a href="/">
-              <img  class="hero-image" src="/images/bull.webp" height="38px" width="50px" alt="Pixelated image of a bull.">
+              <img
+                class="hero-image"
+                src="/images/bull.webp"
+                height="38px"
+                width="50px"
+                alt="Pixelated image of a bull."
+              />
             </a>
           </div>
           <h1>{{ .Site.Title }}</h1>
@@ -32,24 +36,39 @@
         <div class="social-div">
           <ul class="social-list">
             <li>
-              <a aria-label="LinkedIn profile" class="social-link" href="https://www.linkedin.com/in/shanehull0" target="_blank">
+              <a
+                aria-label="LinkedIn profile"
+                class="social-link"
+                href="https://www.linkedin.com/in/shanehull0"
+                target="_blank"
+              >
                 {{ readFile "/assets/icons/li.svg" | safeHTML }}
               </a>
             </li>
             <li>
-              <a aria-label="X profile" class="social-link" href="https://twitter.com/shed_one" target="_blank">
+              <a
+                aria-label="X profile"
+                class="social-link"
+                href="https://twitter.com/shed_one"
+                target="_blank"
+              >
                 {{ readFile "/assets/icons/x.svg" | safeHTML }}
               </a>
             </li>
             <li>
-              <a aria-label="GitHub profile" class="social-link" href="https://github.com/shanehull" target="_blank">
+              <a
+                aria-label="GitHub profile"
+                class="social-link"
+                href="https://github.com/shanehull"
+                target="_blank"
+              >
                 {{ readFile "/assets/icons/gh.svg" | safeHTML }}
               </a>
             </li>
           </ul>
         </div>
       </div>
-        {{ block "page" . }}{{ end }}
+      {{ block "main" . }}{{ end }}
     </div>
   </body>
 </html>

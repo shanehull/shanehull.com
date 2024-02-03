@@ -1,0 +1,26 @@
+{{ define "main" }}
+<main class="container">
+  <a href="{{ .Site.BaseURL }}" class="back-link"> <- back </a>
+
+  <h2>{{ .Title }}</h2>
+
+  <p>Welcome to my blog.</p>
+  <p>
+    Here you'll find thoughts and tips on tech and investing, financial advice
+    (you heard me), as well as thoughts on philosophy and life.
+  </p>
+
+  {{ $pages := where .Site.RegularPages.ByDate.Reverse "Section" "blog" }} {{
+  $paginator := .Paginate $pages }} {{ with $paginator }}
+
+  <div class="blog-list-wrap">
+    <ul class="blog-list">
+      {{ range .Pages }} {{ partial "post.html" . }} {{ end }}
+    </ul>
+  </div>
+
+  {{ partial "pagination.html" (dict "paginator" $paginator) }} {{ else }}
+  <p>No posts found.</p>
+  {{ end }}
+</main>
+{{ end }}

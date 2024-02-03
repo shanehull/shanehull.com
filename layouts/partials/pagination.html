@@ -1,0 +1,13 @@
+<nav class="pagination-nav">
+  <div class="pagination-action-wrapper">
+    {{ if .paginator.HasPrev }}
+    <a href="{{ .paginator.Prev.URL }}">Back</a>
+    {{ end }}
+  </div>
+
+  <div class="pagination-action-wrapper">
+    {{ if .paginator.HasNext }}
+    <a href="{{ .paginator.Next.URL }}">More</a>
+    {{ end }}
+  </div>
+</nav>

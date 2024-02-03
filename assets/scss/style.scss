@@ -201,13 +201,91 @@ li {
   padding: 0.2rem;
 }
 
-article {
+main {
   padding: 2rem 1rem;
   max-width: calc(44em + 2rem);
   margin: 0 auto;
 
   h2 {
     padding-block: 1rem;
+  }
+}
+
+// Style for the blog list container
+.blog-list-wrap {
+  min-height: 28rem;
+  position: relative;
+
+  .blog-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// Style for individual blog cards
+.blog-card {
+  width: calc(33.33% - 20px); // Adjust the width as per your design
+  margin: 0.6rem;
+  border: 1px solid $dark-icon;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  background-color: darken($light-background, 10%);
+  transition: transform 0.3s ease-in-out;
+
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  // Blog card content
+  .blog-card-content {
+    margin: 0.5rem;
+
+    // Post title
+    h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+    }
+
+    // Other details like date and summary
+    p {
+      margin: 0;
+      padding-block: 0.2rem;
+      font-size: 0.9rem;
+      //color: #888;
+      overflow: hidden;
+    }
+    small {
+      font-size: 0.7rem;
+      //color: #888;
+    }
+  }
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: space-between; /* Align items at both ends */
+  align-items: center; /* Vertically center the buttons */
+  padding: 1rem;
+
+  a {
+    padding: 1rem;
+  }
+  .pagination-action-wrapper {
+    width: 50%; /* Adjust as needed */
+    text-align: center; /* Center the button within the wrapper */
+  }
+
+  .pagination-action-wrapper:empty {
+    display: block; /* Switch to block-level for consistent height */
+    height: 30px; /* Adjust as needed */
   }
 }
 
@@ -266,6 +344,10 @@ article {
       box-shadow: 0 0 5px darken($button-color-dark, 20%);
     }
   }
+
+  .blog-card {
+    background-color: lighten($dark-background, 8%);
+  }
 }
 
 @media (max-width: 768px) {
@@ -276,5 +358,17 @@ article {
   img.hero-image {
     width: 40px;
     height: 30.4px;
+  }
+
+  .blog-list-wrap {
+    min-height: 14rem;
+  }
+
+  .blog-card {
+    width: 100%; // Full width for mobile
+
+    .blog-card-content {
+      padding: 0.2rem;
+    }
   }
 }

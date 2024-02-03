@@ -1,6 +1,6 @@
 ---
-title: 🤔 Random Quote
-description: A randomly generated quote intented to be rarely inspiring, but often realistic. By the way, this page uses htmx and I'm not sorry.
+title: 🤔 Quotes
+description: A randomly generated quote indented to be rarely inspiring, but often realistic. By the way, this page uses htmx and I'm not sorry.
 htmx: true
 ---
 
