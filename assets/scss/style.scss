@@ -212,7 +212,7 @@ main {
 
 // Style for the blog list container
 .blog-list-wrap {
-  min-height: 28rem;
+  min-height: 36rem;
   position: relative;
 
   .blog-list {
@@ -228,6 +228,7 @@ main {
 // Style for individual blog cards
 .blog-card {
   width: calc(33.33% - 20px); // Adjust the width as per your design
+  height: 10rem;
   margin: 0.6rem;
   border: 1px solid $dark-icon;
   border-radius: 5px;
@@ -249,6 +250,7 @@ main {
   // Blog card content
   .blog-card-content {
     margin: 0.5rem;
+    padding: 0.2rem;
 
     // Post title
     h2 {
@@ -362,14 +364,14 @@ main {
   }
 
   .blog-list-wrap {
-    min-height: 14rem;
+    min-height: 16rem;
   }
 
   .blog-card {
     width: 100%; // Full width for mobile
 
     .blog-card-content {
-      padding: 0.2rem;
+      padding: 0.4rem;
     }
   }
 }
