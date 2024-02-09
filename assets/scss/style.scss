@@ -219,11 +219,7 @@ main {
 
 // Style for the blog list container
 .blog-list-wrap {
-<<<<<<< Updated upstream
-  min-height: 36rem;
-=======
   min-height: 44rem;
->>>>>>> Stashed changes
   position: relative;
 
   .blog-list {
@@ -238,20 +234,11 @@ main {
 
 // Style for individual blog cards
 .blog-card {
-<<<<<<< Updated upstream
-  width: calc(33.33% - 20px); // Adjust the width as per your design
-  height: 10rem;
-  margin: 0.6rem;
-  border: 1px solid $dark-icon;
-  border-radius: 5px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-=======
   width: calc(45% - 20px); // Adjust the width as per your design
   height: 18rem;
   margin: 0.7rem;
   border: 2px solid $light-icon;
   border-radius: 8px;
->>>>>>> Stashed changes
   background-color: darken($light-background, 10%);
   cursor: pointer;
   position: relative;
