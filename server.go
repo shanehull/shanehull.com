@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"embed"
-	"encoding/gob"
 	"fmt"
 	"io/fs"
 	"log"
@@ -37,12 +36,13 @@ func main() {
 	ctx, cancel := signal.NotifyContext(
 		context.Background(), os.Interrupt, syscall.SIGTERM)
 
+	// Check if the SERVER_HOST env var is set and override
 	envHost, ok := os.LookupEnv("SH_SERVER_HOST")
 	if ok {
 		serverHost = envHost
 	}
 
-	// Check if the SERVER_HOST env var is set
+	// Check if SH_ALLOWED_ORIGIN env var is set and override
 	envOrigin, ok := os.LookupEnv("SH_ALLOWED_ORIGIN")
 	if ok {
 		allowedOrigin = envOrigin
@@ -60,7 +60,8 @@ func main() {
 	mux.Handle("/", fileServerWith404(fileServer, serverRoot))
 
 	mux.HandleFunc("/quote", cors(http.HandlerFunc(api.QuoteHandler)))
-	// TODO: endpoint for portfolio and blog search
+
+	// TODO: endpoint for portfolio and blog search here
 
 	// Get the pages from the gob file that was generated at build time.
 	// We'll use it in our search endpoint for the blog (later).
@@ -106,23 +107,6 @@ func cors(h http.Handler) http.HandlerFunc {
 
 		h.ServeHTTP(w, r)
 	}
-}
-
-func getPagesFromGob(path string) ([]Page, error) {
-	var pages []Page
-
-	f, err := os.Open(path)
-	if err != nil {
-		return pages, err
-	}
-
-	if err := gob.NewDecoder(f).Decode(&pages); err != nil {
-		return pages, err
-	}
-
-	f.Close()
-
-	return pages, nil
 }
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {
