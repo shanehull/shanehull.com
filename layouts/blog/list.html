@@ -1,0 +1,44 @@
+{{ define "main" }}
+<main class="container">
+  <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link"> <- back </a>
+
+  <h2>{{ .Title }}</h2>
+
+  <p>Welcome to my blog.</p>
+  <p>
+    Here you'll find thoughts and tips on tech and investing, financial advice
+    (sue me), as well as thoughts on philosophy and life.
+  </p>
+
+  <!-- set pages to all pages in the blog section -->
+  {{ $pages := where .Site.RegularPages.ByDate.Reverse "Section" "blog" }}
+
+  <!-- paginate the pages -->
+  {{ $paginator := .Paginate $pages }} {{ with $paginator }}
+
+  <!-- display posts (if there are any)  -->
+  {{ if gt $paginator.TotalPages 0 }}
+
+  <div class="blog-list-wrap">
+    <ul class="blog-list">
+      {{ range .Pages }} {{ partial "post.html" . }} {{ end }}
+    </ul>
+  </div>
+
+  {{ else }}
+
+  <div class="no-posts">
+    <p>Uh oh...</p>
+    <p>No posts found.</p>
+  </div>
+  {{ end }}
+
+  <!-- paginator partial (displays if there are multiple pages) -->
+  {{ partial "pagination.html" (dict "paginator" $paginator) }}
+
+  <!-- if there are no posts, display a message -->
+  {{ else }}
+  <p>No posts found.</p>
+  {{ end }}
+</main>
+{{ end }}

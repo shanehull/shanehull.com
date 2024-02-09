@@ -1,0 +1,13 @@
+<li class="blog-card">
+  <a
+    href="{{ .RelPermalink }}"
+    class="blog-card-link"
+    aria-label="Link to blog post {{.Title}}"
+  >
+    <div class="blog-card-content">
+      <h2>{{ .Title }}</h2>
+      <small>{{ .Date.Format "2006-12-01" }}</small>
+      <p>{{ .Summary }}</p>
+    </div>
+  </a>
+</li>
