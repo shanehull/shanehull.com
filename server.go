@@ -40,15 +40,15 @@ func main() {
 
 	// Default server address
 	serverProto, serverHost, serverPort = "http", "localhost", "1314"
-	serverAddr = fmt.Sprintf("%s://%s:%s", serverProto, serverHost, serverPort)
 
 	// Check if the SERVER_HOST env var is set
 	envHost, ok := os.LookupEnv("SH_SERVER_HOST")
 	if ok {
 		// If it is, use it as the server host (cors)
 		serverProto, serverHost, serverPort = "https", envHost, "1314"
-		serverAddr = fmt.Sprintf("%s://%s", serverProto, serverHost)
 	}
+
+	serverAddr = fmt.Sprintf("%s://%s:%s", serverProto, serverHost, serverPort)
 
 	mux := http.NewServeMux()
 
