@@ -4,7 +4,9 @@ description: A randomly generated quote indented to be rarely inspiring, but oft
 htmx: true
 ---
 
-Sure! Here's a random quote for you..
+Someone ask for a random quote?
+
+Sure! Here's one for you..
 
 <div id="quote-container">
 	<blockquote hx-get="/quote" hx-trigger="load"hx-target="#quote-container" hx-swap="swap:0.4s">
