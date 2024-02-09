@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/shanehull/shanehull.com/api"
+	"github.com/shanehull/shanehull.com/internal/pages"
 )
 
 //go:embed all:public
@@ -63,7 +64,7 @@ func main() {
 
 	// Get the pages from the gob file that was generated at build time.
 	// We'll use it in our search endpoint for the blog (later).
-	_, err := getPagesFromGob("build/pages.gob")
+	_, err := pages.PagesFromGob("build/pages.gob")
 	if err != nil {
 		log.Fatal(err)
 	}

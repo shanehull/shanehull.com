@@ -7,6 +7,14 @@ import (
 	"os/exec"
 )
 
+type Page struct {
+	Title       string
+	Description string
+	Content     string
+	Keywords    []string
+	Slug        string
+}
+
 func RunCommand(cmd *exec.Cmd) error {
 	outPipe, _ := cmd.StdoutPipe()
 	errPipe, _ := cmd.StderrPipe()
