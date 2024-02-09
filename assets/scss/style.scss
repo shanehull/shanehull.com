@@ -18,7 +18,7 @@ html {
 body {
   max-width: 640px;
   margin: auto;
-  padding: 2.6rem 0;
+  padding: 2.6rem 0.2rem;
   font-family: "Space Mono", "monospace";
   font-size: 1.5rem;
   line-height: 1.2;
@@ -27,6 +27,7 @@ body {
 
   a.back-link {
     font-size: 1.6rem;
+    padding: 1rem;
   }
 }
 
@@ -207,10 +208,10 @@ a {
 }
 
 ul {
-  padding-inline: 2.6rem;
+  padding-inline: 3rem;
 
   li {
-    padding-block: 0.2rem;
+    padding-block: 0.3rem;
   }
 }
 

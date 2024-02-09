@@ -1,5 +1,7 @@
 # Generated files by hugo
-/public/
+# Keep public folder but not files
+public/*
+!public/.gitkeep
 /resources/_gen/
 /assets/jsconfig.json
 hugo_stats.json
@@ -14,4 +16,3 @@ hugo.linux
 
 # Build output
 /build/
-/tmp/
