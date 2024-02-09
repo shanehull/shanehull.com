@@ -13,6 +13,7 @@ RUN GO_ENABLED=0 GOOS=linux go run cmd/build/main.go
 
 FROM scratch
 
+ENV SH_ALLOWED_ORIGIN="*"
 ENV SH_SERVER_HOST=""
 
 COPY --from=builder /app/build/server ./build/server

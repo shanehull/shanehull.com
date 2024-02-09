@@ -19,12 +19,9 @@ import (
 //go:embed all:public
 var content embed.FS
 
-var (
-	serverProto string
-	serverHost  string
-	serverPort  string
-	serverAddr  string
-)
+var allowedOrigin = "*"
+var serverHost = "127.0.0.1"
+var serverPort = "1314"
 
 type Page struct {
 	Title       string
@@ -38,17 +35,16 @@ func main() {
 	ctx, cancel := signal.NotifyContext(
 		context.Background(), os.Interrupt, syscall.SIGTERM)
 
-	// Default server address
-	serverProto, serverHost, serverPort = "http", "localhost", "1314"
-
-	// Check if the SERVER_HOST env var is set
 	envHost, ok := os.LookupEnv("SH_SERVER_HOST")
 	if ok {
-		// If it is, use it as the server host (cors)
-		serverProto, serverHost, serverPort = "https", envHost, "1314"
+		serverHost = envHost
 	}
 
-	serverAddr = fmt.Sprintf("%s://%s:%s", serverProto, serverHost, serverPort)
+	// Check if the SERVER_HOST env var is set
+	envOrigin, ok := os.LookupEnv("SH_ALLOW_ORIGIN")
+	if ok {
+		allowedOrigin = envOrigin
+	}
 
 	mux := http.NewServeMux()
 
@@ -65,18 +61,17 @@ func main() {
 	}
 
 	mux.HandleFunc("/quote", cors(http.HandlerFunc(api.QuoteHandler)))
+	// TODO: endpoint for portfolio and blog search
 
-	// TODO: endpoint for portfolio and blog
+	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
 
 	go func() {
-		serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
-
 		if err := http.ListenAndServe(serveAt, mux); err != nil {
 			log.Fatal(err)
 		}
 	}()
 
-	fmt.Printf("API Server available at %s\n", serverAddr)
+	fmt.Printf("API Server available at %s\n", serveAt)
 
 	// Wait for interrupt signal.
 	<-ctx.Done()
@@ -93,7 +88,7 @@ func main() {
 
 func cors(h http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", serverAddr)
+		w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
 		w.Header().Set("Access-Control-Allow-Methods", "GET")
 		w.Header().Set("Access-Control-Allow-Headers",
 			"Content-Type, hx-target, hx-current-url, hx-request")
