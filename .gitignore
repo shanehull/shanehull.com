@@ -1,7 +1,6 @@
 # Generated files by hugo
 # Keep public folder but not files
-public/*
-!public/.gitkeep
+/public/
 /resources/_gen/
 /assets/jsconfig.json
 hugo_stats.json
