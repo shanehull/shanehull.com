@@ -45,6 +45,7 @@ func main() {
 	if ok {
 		allowedOrigin = envOrigin
 	}
+	fmt.Printf("Allowed origin: %s\n", allowedOrigin)
 
 	mux := http.NewServeMux()
 
