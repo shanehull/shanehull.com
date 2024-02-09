@@ -1,8 +1,11 @@
 module github.com/shanehull/shanehull.com
 
-go 1.21.5
+go 1.22
 
-require github.com/gohugoio/hugo v0.121.2
+require (
+	github.com/a-h/templ v0.2.543
+	github.com/gohugoio/hugo v0.121.2
+)
 
 require (
 	cloud.google.com/go v0.110.10 // indirect
@@ -20,7 +23,6 @@ require (
 	github.com/BurntSushi/locker v0.0.0-20171006230638-a6e239ea1c69 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
-	github.com/a-h/templ v0.2.543 // indirect
 	github.com/alecthomas/chroma/v2 v2.12.0 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/aws/aws-sdk-go v1.48.6 // indirect
