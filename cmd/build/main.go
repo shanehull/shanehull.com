@@ -12,7 +12,7 @@ import (
 	"github.com/gohugoio/hugo/deps"
 	"github.com/gohugoio/hugo/hugofs"
 	"github.com/gohugoio/hugo/hugolib"
-	"github.com/shanehull/shanehull.com/internal/helpers"
+	"github.com/shanehull/shanehull.com/internal/util"
 )
 
 type Page struct {
@@ -33,19 +33,19 @@ func main() {
 
 	// build hugo site static content
 	cmd := exec.Command("hugo", "--cleanDestinationDir")
-	if err := helpers.RunCommand(cmd); err != nil {
+	if err := util.RunCommand(cmd); err != nil {
 		log.Printf("unable to build hugo site: %v", err)
 	}
 
 	// build the templ tempaltes
 	cmd = exec.Command("templ", "generate")
-	if err := helpers.RunCommand(cmd); err != nil {
+	if err := util.RunCommand(cmd); err != nil {
 		log.Printf("unable to build templ templates: %v", err)
 	}
 
 	// build the server executable
 	cmd = exec.Command("go", "build", "-o", "build/server", "server.go")
-	if err := helpers.RunCommand(cmd); err != nil {
+	if err := util.RunCommand(cmd); err != nil {
 		log.Printf("unable to build API server executable: %v", err)
 	}
 
