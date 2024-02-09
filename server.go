@@ -41,7 +41,7 @@ func main() {
 	}
 
 	// Check if the SERVER_HOST env var is set
-	envOrigin, ok := os.LookupEnv("SH_ALLOW_ORIGIN")
+	envOrigin, ok := os.LookupEnv("SH_ALLOWED_ORIGIN")
 	if ok {
 		allowedOrigin = envOrigin
 	}
