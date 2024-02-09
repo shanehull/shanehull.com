@@ -1,6 +1,6 @@
 {{ define "main" }}
 <main class="container">
-  <a href="{{ .Site.BaseURL }}" class="unchanging-link"> <- back </a>
+  <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link"> <- back </a>
 
   <h2>{{ .Title }}</h2>
 
@@ -10,8 +10,14 @@
     (sue me), as well as thoughts on philosophy and life.
   </p>
 
-  {{ $pages := where .Site.RegularPages.ByDate.Reverse "Section" "blog" }} {{
-  $paginator := .Paginate $pages }} {{ with $paginator }}
+  <!-- set pages to all pages in the blog section -->
+  {{ $pages := where .Site.RegularPages.ByDate.Reverse "Section" "blog" }}
+
+  <!-- paginate the pages -->
+  {{ $paginator := .Paginate $pages }} {{ with $paginator }}
+
+  <!-- display posts (if there are any)  -->
+  {{ if gt $paginator.TotalPages 0 }}
 
   <div class="blog-list-wrap">
     <ul class="blog-list">
@@ -19,7 +25,19 @@
     </ul>
   </div>
 
-  {{ partial "pagination.html" (dict "paginator" $paginator) }} {{ else }}
+  {{ else }}
+
+  <div class="no-posts">
+    <p>Uh oh...</p>
+    <p>No posts found.</p>
+  </div>
+  {{ end }}
+
+  <!-- paginator partial (displays if there are multiple pages) -->
+  {{ partial "pagination.html" (dict "paginator" $paginator) }}
+
+  <!-- if there are no posts, display a message -->
+  {{ else }}
   <p>No posts found.</p>
   {{ end }}
 </main>

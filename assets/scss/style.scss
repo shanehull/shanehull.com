@@ -19,12 +19,15 @@ body {
   max-width: 640px;
   margin: auto;
   padding: 2.6rem 0;
-
   font-family: "Space Mono", "monospace";
-  font-size: 1.6rem;
-  line-height: 1.3;
+  font-size: 1.5rem;
+  line-height: 1.2;
   background-color: $light-background;
   color: $light-text;
+
+  a.back-link {
+    font-size: 1.6rem;
+  }
 }
 
 header {
@@ -147,6 +150,10 @@ h1 {
 
 h2 {
   font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.9rem;
 }
 
 p,
@@ -312,6 +319,14 @@ main {
       font-size: 1.2rem;
     }
   }
+}
+
+div.no-posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 // dark mode media query

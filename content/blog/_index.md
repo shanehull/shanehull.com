@@ -1,7 +1,4 @@
 ---
 title: "📝 Blog"
-date: 2024-02-03
-description: "This is my blog"
+description: "A blog about my experiences with the world of programming, investing and life."
 ---
-
-Welcome to my blog!
