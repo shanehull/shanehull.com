@@ -1,4 +1,4 @@
-package helpers
+package util
 
 import (
 	"bufio"
@@ -6,6 +6,14 @@ import (
 	"log"
 	"os/exec"
 )
+
+type Page struct {
+	Title       string
+	Description string
+	Content     string
+	Keywords    []string
+	Slug        string
+}
 
 func RunCommand(cmd *exec.Cmd) error {
 	outPipe, _ := cmd.StdoutPipe()

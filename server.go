@@ -10,10 +10,12 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
 	"github.com/shanehull/shanehull.com/api"
+	"github.com/shanehull/shanehull.com/internal/pages"
 )
 
 //go:embed all:public
@@ -45,27 +47,30 @@ func main() {
 	if ok {
 		allowedOrigin = envOrigin
 	}
-	fmt.Printf("Allowed origin: %s\n", allowedOrigin)
+
+	fmt.Printf("API routes allowed origin: %s\n", allowedOrigin)
 
 	mux := http.NewServeMux()
 
+	// Custom file server handler
 	serverRoot, _ := fs.Sub(content, "public")
+	fileServer := http.FileServer(http.FS(serverRoot))
 
 	// Serve all hugo content (the 'public' directory) at the root url
-	mux.Handle("/", http.FileServer(http.FS(serverRoot)))
-
-	// Get the pages from the gob file that was generated at build time.
-	// We'll use it in our search endpoint for the blog.
-	_, err := getPagesFromGob("build/pages.gob")
-	if err != nil {
-		log.Fatal(err)
-	}
+	mux.Handle("/", fileServerWith404(fileServer, serverRoot))
 
 	mux.HandleFunc("/quote", cors(http.HandlerFunc(api.QuoteHandler)))
 	// TODO: endpoint for portfolio and blog search
 
-	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
+	// Get the pages from the gob file that was generated at build time.
+	// We'll use it in our search endpoint for the blog (later).
+	_, err := pages.PagesFromGob("build/pages.gob")
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	// Run the server at
+	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
 	go func() {
 		if err := http.ListenAndServe(serveAt, mux); err != nil {
 			log.Fatal(err)
@@ -90,7 +95,7 @@ func main() {
 func cors(h http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
-		w.Header().Set("Access-Control-Allow-Methods", "GET")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers",
 			"Content-Type, hx-target, hx-current-url, hx-request")
 
@@ -118,4 +123,15 @@ func getPagesFromGob(path string) ([]Page, error) {
 	f.Close()
 
 	return pages, nil
+}
+
+func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_, err := fs.Open(strings.TrimPrefix(r.URL.Path, "/"))
+		if os.IsNotExist(err) {
+			// Rewrite request to use 404.html
+			r.URL.Path = "/404.html"
+		}
+		handler.ServeHTTP(w, r)
+	}
 }

@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/shanehull/shanehull.com/internal/helpers"
+	"github.com/shanehull/shanehull.com/internal/util"
 )
 
 func main() {
@@ -32,8 +32,8 @@ func main() {
 
 	// start hugo server
 	go func() {
-		cmd := exec.Command("hugo", "server", "--cleanDestinationDir")
-		if err := helpers.RunCommand(cmd); err != nil {
+		cmd := exec.Command("hugo", "server", "--cleanDestinationDir", "--disableFastRender")
+		if err := util.RunCommand(cmd); err != nil {
 			log.Fatal(err)
 		}
 	}()
@@ -47,7 +47,7 @@ func main() {
 			cmd = exec.Command("go", "run", "server.go")
 		}
 
-		if err := helpers.RunCommand(cmd); err != nil {
+		if err := util.RunCommand(cmd); err != nil {
 			log.Fatal(err)
 		}
 	}()

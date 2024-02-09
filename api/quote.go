@@ -3,20 +3,18 @@ package api
 import (
 	"bytes"
 	"log"
-	"math/rand"
+	"math/rand/v2"
 	"net/http"
-	"time"
 )
-
-var globalRand = rand.New(rand.NewSource(time.Now().UnixNano()))
-
-func genRandIndex() int {
-	return globalRand.Intn(len(quotes))
-}
 
 func QuoteHandler(w http.ResponseWriter, r *http.Request) {
 
-	idx := genRandIndex()
+	if r.Method != http.MethodGet {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	idx := rand.N(len(quotes))
 
 	component := quote(quotes[idx].Text, quotes[idx].Author)
 
