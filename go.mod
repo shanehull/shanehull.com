@@ -1,8 +1,11 @@
 module github.com/shanehull/shanehull.com
 
-go 1.21.5
+go 1.22
 
-require github.com/gohugoio/hugo v0.121.2
+require (
+	github.com/a-h/templ v0.2.543
+	github.com/gohugoio/hugo v0.121.2
+)
 
 require (
 	cloud.google.com/go v0.110.10 // indirect

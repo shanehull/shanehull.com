@@ -1,0 +1,28 @@
+{{ define "main" }}
+<main class="container">
+  <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link"> <- back </a>
+  <h2>{{ .Title }}</h2>
+  {{ .Content }}
+
+  <div id="quote-container">
+    <blockquote
+      hx-get="https://shanehull.com/quote"
+      hx-trigger="load"
+      hx-target="#quote-container"
+      hx-swap="swap:0.4s"
+    >
+      <i></i>
+      <footer></footer>
+    </blockquote>
+
+    <button
+      hx-get="/quote"
+      hx-target="#quote-container"
+      hx-trigger="click"
+      hx-swap="innerHTML swap:0.4s"
+    >
+      more plz
+    </button>
+  </div>
+</main>
+{{ end }}

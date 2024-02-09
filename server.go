@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"embed"
 	"encoding/gob"
@@ -13,6 +12,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/shanehull/shanehull.com/api"
 )
 
 //go:embed all:public
@@ -63,10 +64,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	mux.HandleFunc("/hello_world", cors(http.HandlerFunc(helloWorld)))
+	mux.HandleFunc("/quote", cors(http.HandlerFunc(api.QuoteHandler)))
 
-	// TODO: endpoint for blog search server
-	// TODO: endpoint for quotes api server
+	// TODO: endpoint for portfolio and blog
 
 	go func() {
 		serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
@@ -94,7 +94,7 @@ func main() {
 func cors(h http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", serverAddr)
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
+		w.Header().Set("Access-Control-Allow-Methods", "GET")
 		w.Header().Set("Access-Control-Allow-Headers",
 			"Content-Type, hx-target, hx-current-url, hx-request")
 
@@ -122,16 +122,4 @@ func getPagesFromGob(path string) ([]Page, error) {
 	f.Close()
 
 	return pages, nil
-}
-
-// It responds with the the HTML partial `partials/helloworld.html`
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	buf := &bytes.Buffer{}
-
-	w.WriteHeader(http.StatusOK)
-
-	_, err := w.Write(buf.Bytes())
-	if err != nil {
-		log.Fatal(err)
-	}
 }

@@ -1,0 +1,9 @@
+package api
+
+templ quote(text string, author string) {
+	<blockquote>
+        <i>{ text }</i>
+        <footer>{ author }</footer>
+    </blockquote>
+    <button hx-get="/quote" hx-target="#quote-container" hx-trigger="click" hx-swap="innerHTML swap:0.4s">more plz</button>
+}
