@@ -1,14 +1,24 @@
 {{ define "main" }}
-<main class="container">
+<main class="container blog-container">
   <a href="/blog/" class="unchanging-link"> <- back </a>
-  <h2>{{ .Title }}</h2>
-  <small class="date">{{.Date.Format "2024-12-01" }}</small>
-  <p class="description">{{.Description }}</p>
-  <p class="tags">
-    {{ range.Params.tags }}
-    <a href="/blog/tags/{{. }}">{{. }}</a>
-    {{ end }}
-  </p>
+  <h1>{{ .Title }}</h1>
+  <small class="date">Published: {{.Date.Format "2006-01-02" }}</small>
+  <img
+    src="/blog/images/{{ .Params.featured_image }}"
+    width="260px"
+    height="260px"
+    alt="{{ .Title }}"
+  />
+  <p class="description"><i>{{.Description }}</i></p>
+  <hr />
+  <br />
+  <!--<div id="tags">-->
+  <!--<p>-->
+  <!--{{ range .Params.tags }}-->
+  <!--[><a href="/blog/tags/{{. }}">{{. }}</a><]-->
+  <!--{{ end }}-->
+  <!--</p>-->
+  <!--</div>-->
   {{ .Content }}
 </main>
 {{ end }}

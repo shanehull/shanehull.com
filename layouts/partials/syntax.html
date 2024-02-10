@@ -1,0 +1,4 @@
+{{ if eq .Type "blog" }} {{ $style := resources.Get "css/syntax.css" |
+resources.Minify }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+{{ end }}

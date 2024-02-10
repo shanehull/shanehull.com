@@ -14,7 +14,7 @@
     resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify |
     fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-    {{ partial "htmx" . }}
+    {{ partial "htmx" . }} {{ partial "syntax" . }}
   </head>
   <body class="overflow-hidden">
     <header>

@@ -6,8 +6,14 @@
   >
     <div class="blog-card-content">
       <h2>{{ .Title }}</h2>
-      <small>{{ .Date.Format "2006-12-01" }}</small>
-      <p>{{ .Summary }}</p>
+      <small>{{ .Date.Format "2006-01-02" }}</small>
+      <img
+        src="/blog/images/{{ .Params.featured_image }}"
+        width="100px"
+        height="100px"
+        alt="{{ .Title }}"
+      />
+      <p>{{ .Description }}</p>
     </div>
   </a>
 </li>
