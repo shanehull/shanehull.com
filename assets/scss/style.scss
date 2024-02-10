@@ -43,38 +43,51 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
-  margin: auto;
+  flex-direction: column; // Stack elements vertically
+  align-items: center; // Center align the child elements
 
-  .site-title {
-    display: flex;
-    align-items: flex-end;
-    padding-block: 0.9rem;
-
-    div.hero-image-container {
-      padding: 0.8rem;
-      justify-self: center;
-    }
+  .hero-image-container {
+    padding-top: 1.8rem;
   }
 
-  .social-div {
+  .title-socials-container {
     display: flex;
-    align-items: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem;
+    width: 94%;
 
-    .social-list {
+    .site-title {
+      align-items: center;
+
+      h1 {
+        margin: 0;
+      }
+    }
+
+    .social-div {
       display: flex;
-      list-style: none;
-      padding-inline: 0.2rem;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 1.2rem;
 
-      svg {
-        margin-inline: 0.6rem;
-        width: 18px;
-        height: 18px;
-        opacity: 60%;
-        transition: opacity 0.5s ease;
+      .social-list {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        list-style: none;
+        margin: auto;
 
-        &:hover {
-          opacity: 100%;
+        svg {
+          margin-inline: 0.6rem;
+          width: 18px;
+          height: 18px;
+          opacity: 60%;
+          transition: opacity 0.5s ease;
+
+          &:hover {
+            opacity: 100%;
+          }
         }
       }
     }
@@ -219,8 +232,7 @@ a {
 }
 
 ul {
-  padding-inline: 3rem;
-
+  //padding-inline: 3rem;
   li {
     padding-block: 0.3rem;
   }
@@ -409,6 +421,29 @@ div.no-posts {
   }
 }
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  img.hero-image {
+    width: 120px;
+    height: 91.2px;
+  }
+
+  .blog-list-wrap {
+    min-height: 16rem;
+  }
+
+  .blog-card {
+    width: 100%; // Full width for mobile
+
+    .blog-card-content {
+      padding: 0.4rem;
+    }
+  }
+}
+
 // dark mode media query
 @media (prefers-color-scheme: dark) {
   body {
@@ -485,29 +520,6 @@ div.no-posts {
     h1,
     h2 {
       text-decoration-color: $dark-icon;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 3rem;
-  }
-
-  img.hero-image {
-    width: 48px;
-    height: 36.48px;
-  }
-
-  .blog-list-wrap {
-    min-height: 16rem;
-  }
-
-  .blog-card {
-    width: 100%; // Full width for mobile
-
-    .blog-card-content {
-      padding: 0.4rem;
     }
   }
 }
