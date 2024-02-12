@@ -30,10 +30,8 @@ body {
     padding-inline: 1.2rem;
   }
 
-  ul {
-    li {
-      padding-block: 0.3rem;
-    }
+  li {
+    padding-block: 0.3rem;
   }
 
   header {
@@ -44,34 +42,33 @@ body {
     padding-top: 1rem;
 
     .hero-image-container {
-      padding-block: 1.8rem;
+      padding-block: 2rem;
     }
 
     .title-socials-container {
       display: flex;
       justify-content: space-between;
+      align-items: end;
       padding-block: 0.4rem;
-      padding-left: 0.4rem;
       width: 98.8%;
 
       .site-title {
-        align-items: center;
-
+        align-items: end;
+        margin-left: 0.4rem;
         h1 {
-          margin-top: 0;
+          margin-block: 0.1rem;
         }
       }
 
       .social-div {
         display: flex;
         justify-content: flex-end;
-        align-items: center;
-        margin-top: 0.4rem;
+        align-items: end;
 
         .social-list {
           display: flex;
           list-style: none;
-          margin: auto;
+          margin-block: auto;
 
           svg {
             margin-inline: 0.6rem;
