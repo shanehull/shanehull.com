@@ -18,13 +18,13 @@ The tool should be ran on every merge to the branch you want to release from. It
 
 For a release PR, it creates it's own special branch that it understands. Only when one of these special branches are merged will it create a release.
 
-Basically its: Merge > PR > Release, with the option to merge as many times as you want before triggering the release, adding to the changes and the changelog of the branch and PR.
+Basically its: Merge to `main` > PR > Release, with the option to merge changes into your `main` branch as many times as you want before triggering the release.
 
 ### Workflow for Merging a Feature Branch
 
-1. **Triggering the Release-Please Job**:
+1. **The Release-Please Job is Triggered**:
 
-   - This process begins when the 'release-please' job is triggered.
+   - The process begins when the 'release-please' job is triggered on a merge to the branch you want to release from.
 
 2. **Checking for Feature/Fix Commits**:
 
@@ -34,9 +34,9 @@ Basically its: Merge > PR > Release, with the option to merge as many times as y
 
 3. **Handling the Release Pull Request (PR)**:
 
-   - Check for the existence of an existing branch or PR for a release. This is a special branch created by the tool.
+   - Check for the existence of an existing branch + PR for a release. This is a special branch created by the tool.
      - If an **existing release PR is found**:
-       - Update the changelog in the branch and the PR with the latest feature/fix changes.
+       - Update the changelog in the branch and the PR description with notes on latest feature/fix changes.
      - If **no existing release PR is found**:
        - Create a new release PR.
        - Add the label 'autorelease: pending' to the new PR.
