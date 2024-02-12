@@ -48,7 +48,7 @@ Basically its: Merge to `main` > PR > Release, with the option to merge changes 
 
 ### Workflow for Merging a Release Branch
 
-1. **Triggering the Release-Please Job**:
+1. **The Release-Please Job is Triggered**:
 
    - Similar to the feature branch, this process starts when the 'release-please' job is triggered for a release branch.
 
