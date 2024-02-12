@@ -208,4 +208,14 @@ At this point, we have a full release with a list of fixes, features and chores,
 
 By default, `release-please` will create the first release with the version number `1.0.0`, which is not desired in any case..
 
-To start at `0.0.1`, create a commit like so be
+To start at `0.0.1`, create a commit like so before merging into main for the first time:
+
+```bash
+git commit -m "chore: release 0.0.1
+
+Release-As: 0.0.1" --allow-empty
+```
+
+This will override the release version for the first PR, and subsequent releases are incremented correctly from there.
+
+And that's it, enjoy (please)!
