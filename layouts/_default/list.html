@@ -3,7 +3,7 @@
   <p>{{ .Site.Params.Description }}</p>
   <ul>
     {{ range where .Site.RegularPages "Section" "pages" }}
-    <li>
+    <li class="list-layout-li">
       <a href="{{ .RelPermalink }}"><span>{{ .Title }}</span></a>
     </li>
     {{ end }}

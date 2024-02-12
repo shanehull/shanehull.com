@@ -20,25 +20,42 @@ For a release PR, it creates it's own special branch that it understands. Only w
 
 Basically its: Merge > PR > Release, with the option to merge as many times as you want before triggering the release, adding to the changes and the changelog of the branch and PR.
 
-### The workflow when merging a feature branch
+### Workflow for Merging a Feature Branch
 
-- The `release-please` job is triggered and
-  - Is there feat/fix commits?
-    - If no feat/fix commits are found; do nothing
-    - If feat/fix commits are found; check if there is an existing branch/PR for a release (the special branch created by the tool)
-  - Is there already a release PR?
-    - If there is an existing release PR; update the changelog in the branch and the PR with the latest feat/fix changes
-    - If there is no existing release PR, create a new one and add the label `autorelease: pending`, including any changes for the changelog
+1. **Triggering the Release-Please Job**:
 
-At this point, if there were feat/fix commits in any merge to main, you'll have a PR for a release.
+   - This process begins when the 'release-please' job is triggered.
 
-When you're ready to release, just merged the PR, which triggers then next phase of the workflow.
+2. **Checking for Feature/Fix Commits**:
 
-### The workflow when merging a release branch
+   - Determine if there are any 'feature' or 'fix' commits.
+     - If there are **no feature/fix commits**, the process stops here (do nothing).
+     - If there **are feature/fix commits**, proceed to the next step.
 
-- The `release-please` job is triggered
-  - If the branch is not a `release-please` branch, do nothing
-  - If the branch is a `release-please` branch, create a release
+3. **Handling the Release Pull Request (PR)**:
+
+   - Check for the existence of an existing branch or PR for a release. This is a special branch created by the tool.
+     - If an **existing release PR is found**:
+       - Update the changelog in the branch and the PR with the latest feature/fix changes.
+     - If **no existing release PR is found**:
+       - Create a new release PR.
+       - Add the label 'autorelease: pending' to the new PR.
+       - Include any necessary changes for the changelog in this new PR.
+
+4. **Finalizing the Feature Branch Merge**:
+   - At this point, if there were feature/fix commits merged into the main branch, a PR for a release will be prepared.
+   - When ready to release, merge the prepared PR. This action triggers the next phase of the workflow.
+
+### Workflow for Merging a Release Branch
+
+1. **Triggering the Release-Please Job**:
+
+   - Similar to the feature branch, this process starts when the 'release-please' job is triggered for a release branch.
+
+2. **Determining Branch Type**:
+   - Assess if the branch in question is a 'release-please' branch.
+     - If it is **not a release-please branch**, the process ends here (do nothing).
+     - If it **is a release-please branch**, proceed to create a release.
 
 There is an official GitHub action available for us to use, which we'll explore now.
 
@@ -191,15 +208,4 @@ At this point, we have a full release with a list of fixes, features and chores,
 
 By default, `release-please` will create the first release with the version number `1.0.0`, which is not desired in any case..
 
-To start at `0.0.1`, create a commit like so before merging into main for the first time:
-
-```bash
-git commit -m "chore: release 0.0.1
-
-Release-As: 0.0.1" --allow-empty
-`
-```
-
-This will override the release version for the first PR, and subsequent releases are incremented correctly from there.
-
-And that's it, enjoy (please)!
+To start at `0.0.1`, create a commit like so be
