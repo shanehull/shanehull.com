@@ -20,7 +20,7 @@ For a release PR, it creates it's own special branch that it understands. Only w
 
 Basically its: Merge to `main` > PR > Release, with the option to merge changes into your `main` branch as many times as you want before triggering the release.
 
-### Workflow for Merging a Feature Branch
+**Workflow for Merging a Feature Branch**
 
 1. **The Release-Please Job is Triggered**:
 
@@ -46,7 +46,7 @@ Basically its: Merge to `main` > PR > Release, with the option to merge changes 
    - At this point, if there were feature/fix commits merged into the main branch, a PR for a release will be prepared.
    - When ready to release, merge the prepared PR. This action triggers the next phase of the workflow.
 
-### Workflow for Merging a Release Branch
+**Workflow for Merging a Release Branch**
 
 1. **The Release-Please Job is Triggered**:
 
@@ -208,14 +208,4 @@ At this point, we have a full release with a list of fixes, features and chores,
 
 By default, `release-please` will create the first release with the version number `1.0.0`, which is not desired in any case..
 
-To start at `0.0.1`, create a commit like so before merging into main for the first time:
-
-```bash
-git commit -m "chore: release 0.0.1
-
-Release-As: 0.0.1" --allow-empty
-```
-
-This will override the release version for the first PR, and subsequent releases are incremented correctly from there.
-
-And that's it, enjoy (please)!
+To s
