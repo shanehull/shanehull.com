@@ -23,10 +23,17 @@ body {
   line-height: 1.2;
   background-color: $light-background;
   color: $light-text;
+  padding: 1rem 0.8rem;
 
-  a.back-link {
-    font-size: 1.6rem;
-    padding-inline: 1rem;
+  main {
+    h2 {
+      padding-block: 1rem;
+    }
+
+    a.back-link {
+      font-size: 1.6rem;
+      padding: 1.2rem;
+    }
   }
 
   li {
@@ -38,7 +45,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1rem;
+    padding-block: 1rem;
 
     .hero-image-container {
       padding-top: 4rem;
@@ -49,13 +56,11 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: end;
-      width: 98.6%;
+      width: 100%;
 
       .site-title {
-        margin: 0.2rem;
-
         h1 {
-          margin-block: 0.1rem;
+          margin-block: 0.2rem;
         }
       }
 
@@ -82,14 +87,6 @@ body {
           }
         }
       }
-    }
-  }
-
-  main {
-    padding: 1rem 0.6rem;
-
-    h2 {
-      padding-block: 1rem;
     }
   }
 
