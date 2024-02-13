@@ -18,12 +18,12 @@ html {
 body {
   max-width: 768px;
   margin: auto;
+  padding: 1rem;
   font-family: "Space Mono", "monospace";
   font-size: 1.5rem;
   line-height: 1.2;
   background-color: $light-background;
   color: $light-text;
-  padding: 1rem 0.8rem;
 
   main {
     h2 {
