@@ -23,7 +23,11 @@ var quotes = []Quote{
 		Author: "John Kenneth Galbraith",
 	},
 	{
-		Text:   "No matter how sophisticated our choices, how good we are at dominating the odds, randomness will have the last word.",
+		Text:   "It is much more sound to take risks you can measure than to measure the risks you are taking.",
+		Author: "Nassim Nicholas Taleb",
+	},
+	{
+		Text:   "Mother nature does not like overspecialisation, as it limits evolution and weakens the animals.",
 		Author: "Nassim Nicholas Taleb",
 	},
 	{

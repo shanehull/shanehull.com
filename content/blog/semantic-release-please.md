@@ -168,7 +168,7 @@ The first conditional step is self explanatory, which just checks out `main` and
 
 The great thing about `release-please` is that none of these hefty steps need to run unless we actually release, so it's a super quick pipeline in almost all cases.
 
-At this point, we have a GitHub release with the changelog, description, etc, etc.. But, we don't have any binaries for out cli tool.
+At this point, we have a GitHub release with the changelog, description, etc, etc.. But, we don't have any binaries for our cli tool.
 
 So, the next step is to build the binaries with `xgo`:
 
