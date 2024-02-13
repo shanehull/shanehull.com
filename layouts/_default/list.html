@@ -1,13 +1,13 @@
 {{ define "main" }}
 <main class="container">
   <p>{{ .Site.Params.Description }}</p>
-  <ul>
+  <ul class="list-layout-list">
     {{ range where .Site.RegularPages "Section" "pages" }}
-    <li class="list-layout-li">
+    <li>
       <a href="{{ .RelPermalink }}"><span>{{ .Title }}</span></a>
     </li>
     {{ end }}
-    <li class="list-layout-li">
+    <li>
       <a href="/blog/"><span>📝 Blog</span></a>
     </li>
   </ul>

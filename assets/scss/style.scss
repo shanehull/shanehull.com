@@ -87,10 +87,56 @@ body {
 
   main {
     padding: 1rem 0.6rem;
-    max-width: calc(44em + 2rem);
 
     h2 {
       padding-block: 1rem;
+    }
+  }
+
+  ul.list-layout-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 2rem;
+
+    li {
+      background: darken($light-background, 5%);
+      color: $light-text;
+      margin-bottom: 1.2rem;
+      padding: 1rem;
+      border-radius: 0.4rem;
+      //transition: background-color 0.3s ease;
+      border: 1px solid $light-text;
+      min-width: 24rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background: linear-gradient(
+          145deg,
+          $dark-background,
+          darken($dark-background, 3%)
+        );
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        transition: transform 0.3s ease;
+        text-decoration: underline $light-icon;
+      }
+
+      a {
+        color: $light-text;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      i {
+        margin-right: 1rem;
+        color: $light-icon;
+      }
     }
   }
 
@@ -135,7 +181,7 @@ body {
 
 #quote-container.htmx-swapping blockquote {
   opacity: 0;
-  transition: opacity 0.4s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 div.four-oh-four {
@@ -207,7 +253,7 @@ ol {
 
 a {
   text-decoration: none;
-  transition: color 0.4s ease;
+  transition: color 0.3s ease;
   color: $light-icon;
 
   -webkit-tap-highlight-color: transparent;
@@ -226,7 +272,7 @@ a {
 }
 
 a.unchanging-link {
-  transition: color 0.4s ease;
+  transition: color 0.3s ease;
   color: $light-icon;
 
   &:hover {
@@ -332,8 +378,8 @@ a {
 
 .pagination-nav {
   display: flex;
-  justify-content: space-between; /* Align items at both ends */
-  align-items: center; /* Vertically center the buttons */
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
 
   a {
@@ -426,7 +472,7 @@ div.no-posts {
     font-size: 1.5rem;
   }
 
-  li.list-layout-li {
+  ul.list-layout-list {
     font-size: 1.8rem;
   }
 
@@ -537,6 +583,32 @@ div.no-posts {
     h2 {
       margin-top: 4rem;
       border-bottom: 0.2rem solid $dark-icon;
+    }
+  }
+
+  main {
+    ul.list-layout-list {
+      li {
+        background: lighten($dark-background, 5%);
+        border: 1px solid $dark-text;
+
+        &:hover {
+          background: linear-gradient(
+            145deg,
+            $dark-background,
+            darken($dark-background, 3%)
+          );
+          text-decoration: underline $dark-icon;
+        }
+
+        a {
+          color: $dark-text;
+        }
+
+        i {
+          color: $dark-icon;
+        }
+      }
     }
   }
 }
