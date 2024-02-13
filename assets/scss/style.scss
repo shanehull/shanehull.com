@@ -76,8 +76,8 @@ body {
 
           svg {
             margin-inline: 0.6rem;
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             opacity: 60%;
             transition: opacity 0.5s ease;
 
@@ -112,8 +112,8 @@ body {
       &:hover {
         background: linear-gradient(
           145deg,
-          $dark-background,
-          darken($dark-background, 3%)
+          $light-background,
+          lighten($light-background, 4%)
         );
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
@@ -313,7 +313,7 @@ a {
   margin: 0.7rem;
   border: 2px solid $light-icon;
   border-radius: 8px;
-  background-color: darken($light-background, 10%);
+  background-color: darken($light-background, 5%);
   cursor: pointer;
   position: relative;
   filter: drop-shadow(5px 6px 0 darken($light-background, 8%));
@@ -474,16 +474,16 @@ div.no-posts {
   }
 
   h1 {
-    font-size: 2.2rem;
+    font-size: 3rem;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   img.hero-image {
     width: 120px;
-    height: 91.2px;
+    height: 96px;
   }
 
   .blog-list-wrap {
@@ -568,7 +568,7 @@ div.no-posts {
 
   .blog-card {
     border: 2px solid $dark-icon;
-    background: lighten($dark-background, 8%);
+    background: lighten($dark-background, 5%);
     filter: drop-shadow(5px 6px 0 lighten($dark-background, 8%));
 
     &:hover {
@@ -594,7 +594,7 @@ div.no-posts {
           background: linear-gradient(
             145deg,
             $dark-background,
-            darken($dark-background, 3%)
+            darken($dark-background, 4%)
           );
           text-decoration: underline $dark-icon;
         }
