@@ -11,6 +11,15 @@ $button-color-light: darken($light-background, 10%);
 
 @import "fonts";
 
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 html {
   font-size: 62.5%;
 }
@@ -26,6 +35,7 @@ body {
   color: $light-text;
 
   main {
+    animation: fadeInAnimation ease 0.8s;
     h2 {
       padding-block: 1rem;
     }
@@ -98,6 +108,7 @@ body {
     padding: 2rem;
 
     li {
+      animation: fadeInAnimation ease 1.2s;
       background: darken($light-background, 5%);
       color: $light-text;
       margin-bottom: 1.2rem;
@@ -158,9 +169,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  animation: fadeInAnimation ease-in 1.2s;
 
   blockquote {
-    margin: 1rem;
+    margin: 1.2rem;
     min-height: 16rem;
   }
 
@@ -177,7 +189,7 @@ body {
 
 #quote-container.htmx-swapping blockquote {
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 1s ease;
 }
 
 div.four-oh-four {
@@ -318,6 +330,7 @@ a {
   position: relative;
   filter: drop-shadow(5px 6px 0 darken($light-background, 8%));
   transition: all 0.3s ease-out;
+  animation: fadeInAnimation ease 1.2s;
 
   &:hover {
     transform: translateY(-3px);
@@ -482,7 +495,6 @@ div.no-posts {
   }
 
   img.hero-image {
-    width: 120px;
     height: 96px;
   }
 
