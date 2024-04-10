@@ -90,4 +90,8 @@ var quotes = []Quote{
 		Text:   "Everything should be made as simple as possible, but no simpler.",
 		Author: "Not Einstein",
 	},
+	{
+		Text:   "To think is easy. To act is hard. But the hardest thing in the world is to act in accordance with your thinking.",
+		Author: "Johann Wolfgang von Goethe",
+	},
 }
