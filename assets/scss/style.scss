@@ -2,7 +2,7 @@ $dark-background: #19191a;
 $dark-text: #ddd;
 $dark-icon: #ff1f50;
 
-$light-background: #eee;
+$light-background: #ebeaea45;
 $light-text: #292929;
 $light-icon: #dd1a44;
 
@@ -129,7 +129,10 @@ body {
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
         transition: transform 0.3s ease;
-        text-decoration: underline $light-icon;
+        text-decoration-line: underline;
+        text-decoration-thickness: 0.15rem;
+        text-decoration-style: wavy;
+        text-decoration-color: $light-icon;
       }
 
       a {
@@ -213,7 +216,6 @@ div.four-oh-four {
 }
 
 button {
-  color: $light-text;
   background-color: $button-color-light;
   border: 1px solid darken($button-color-light, 5%);
   box-shadow: 0 0 3px lighten($button-color-light, 5%);
@@ -225,10 +227,13 @@ button {
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    color: darken($light-icon, 10%);
+    color: $light-text;
     background-color: darken($button-color-light, 5%);
     box-shadow: 0 0 5px darken($button-color-light, 20%);
-    text-decoration: underline $dark-icon;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.15rem;
+    text-decoration-style: wavy;
+    text-decoration-color: $light-icon;
   }
 }
 
@@ -574,7 +579,10 @@ div.no-posts {
       color: $dark-text;
       background-color: darken($button-color-dark, 5%);
       box-shadow: 0 0 5px darken($button-color-dark, 20%);
-      text-decoration: underline $dark-icon;
+      text-decoration-line: underline;
+      text-decoration-thickness: 0.15rem;
+      text-decoration-style: wavy;
+      text-decoration-color: $light-icon;
     }
   }
 
@@ -608,7 +616,7 @@ div.no-posts {
             $dark-background,
             darken($dark-background, 4%)
           );
-          text-decoration: underline $dark-icon;
+          text-decoration-color: $light-icon;
         }
 
         a {
