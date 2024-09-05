@@ -32,7 +32,11 @@ var quotes = []Quote{
 	},
 	{
 		Text:   "The idea is that flowing water never goes stale, so just keep on flowing.",
-		Author: "Bruce Lee",
+		Author: "Lee Jun-fan",
+	},
+	{
+		Text:   "Absorb what is useful, discard what is useless and add what is specifically your own.",
+		Author: "Lee Jun-fan",
 	},
 	{
 		Text:   "The idea that the future is unpredictable is undermined every day by the ease with which the past is explained.",
@@ -93,5 +97,13 @@ var quotes = []Quote{
 	{
 		Text:   "To think is easy. To act is hard. But the hardest thing in the world is to act in accordance with your thinking.",
 		Author: "Johann Wolfgang von Goethe",
+	},
+	{
+		Text:   "Never ascribe to malice that which can be adequately explained by stupidity.",
+		Author: "Robert J. Hanlon",
+	},
+	{
+		Text:   "In theory, there is no difference between theory and practice. But in practice, there is.",
+		Author: "Yogi Berra",
 	},
 }
