@@ -39,7 +39,7 @@ body {
     Liberation Mono,
     Courier New,
     monospace;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.2;
   background-color: $light-background;
   color: $light-text;
@@ -51,7 +51,7 @@ body {
     }
 
     a.back-link {
-      font-size: 2rem;
+      font-size: 1.8rem;
       padding: 2rem;
     }
   }
@@ -173,7 +173,7 @@ body {
     padding: 0.8rem;
     white-space: break-spaces;
     border-radius: 0.8rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     word-break: break-all;
   }
 }
@@ -203,13 +203,13 @@ body {
     div {
       position: relative;
       z-index: 10;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
   }
 
   footer {
     margin-top: 1.2rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
   }
 }
@@ -259,7 +259,7 @@ div.four-oh-four {
     font-family: "Pixelify Sans", "sans-serif";
     font-style: normal;
     font-weight: 700;
-    font-size: 12rem;
+    font-size: 10rem;
   }
 }
 
@@ -270,7 +270,7 @@ button {
   padding: 1rem 2rem;
   border-radius: 0.8rem;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
 
   -webkit-tap-highlight-color: transparent;
 
@@ -300,17 +300,17 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
 }
 
 h3 {
-  font-size: 1.9rem;
+  font-size: 1.6rem;
 }
 
 p,
 ul,
 ol {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 }
 
 a {
@@ -411,13 +411,13 @@ a {
     // Post title
     h2 {
       padding: 0;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       text-align: center;
       margin: 0.5rem;
     }
 
     small {
-      font-size: 1.1rem;
+      font-size: 1rem;
       text-align: center;
       margin-bottom: 0.4rem;
     }
@@ -432,7 +432,7 @@ a {
 
     p {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-align: center;
       margin: 0.5rem;
     }
@@ -464,7 +464,7 @@ a {
     text-overflow: ellipsis;
 
     small {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 }
@@ -489,12 +489,12 @@ div.no-posts {
   > div.highlight {
     align-self: center;
     display: block;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.4rem;
   }
 
   h1,
   h2 {
-    margin-top: 4rem;
+    margin-top: 2rem;
     border-bottom: 0.2rem solid $light-icon;
   }
 
@@ -532,19 +532,19 @@ div.no-posts {
   p,
   ol,
   ul {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   ul.list-layout-list {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 
   h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   img.hero-image {
@@ -564,7 +564,7 @@ div.no-posts {
   }
 
   pre {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
