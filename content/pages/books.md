@@ -16,7 +16,6 @@ Some books I like..
 ### Business & Finance
 
 - **A Short History of Financial Euphoria** by John Kenneth Galbraith
-- **Margin of Safety** by Seth Klarman
 - **The Most Important Thing: Uncommon Sense for the Thoughtful Investor** by Howard Marks
 - **100 Baggers: Stocks that Return 100-to-1 and How to Find Them** by Christopher W Mayer
 - **Poor Charlie’s Almanack: The Essential Wit and Wisdom of Charles T. Munger** by Charles T. Munger & Peter D. Kaufman
@@ -24,11 +23,10 @@ Some books I like..
 ### Psychology
 
 - **Influence: The Psychology of Persuasion** by Dr. Robert Cialdini
-- **Thinking in Bets: Making Smarter Decisions When You Don't Have All the Facts** by Annie Duke
 - **Thinking, Fast and Slow** by Daniel Kahneman
 
 ### Philosophy & Other
 
-- **The Ecology Of Freedom** by Murray Bookchin
 - **Tao Te Ching** by Laozi (Gia-Fu Feng and Jane English)
 - **Incerto** by Nassim Nicholas Taleb
+- **Letters from a Stoic** by Seneca
