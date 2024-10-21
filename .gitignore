@@ -16,3 +16,4 @@ hugo.linux
 # Build output
 /bin/
 /tmp/
+/bin/
