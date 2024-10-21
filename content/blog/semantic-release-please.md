@@ -1,7 +1,7 @@
 ---
 title: Semantic Release (Please)
 date: 2024-02-10
-description: Using release-please to automate software releases using Semantic Commits (without the bloat).
+description: Using release-please to automate software releases with Semantic Commits (without the bloat).
 featured_image: /release-please.webp
 tags:
   - tech
