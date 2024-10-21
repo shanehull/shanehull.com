@@ -1,14 +1,15 @@
-package api
+package handlers
 
 import (
 	"bytes"
 	"log"
 	"math/rand/v2"
 	"net/http"
+
+	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
 func QuoteHandler(w http.ResponseWriter, r *http.Request) {
-
 	if r.Method != http.MethodGet {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -16,7 +17,7 @@ func QuoteHandler(w http.ResponseWriter, r *http.Request) {
 
 	idx := rand.N(len(quotes))
 
-	component := quote(quotes[idx].Text, quotes[idx].Author)
+	component := templates.Quote(quotes[idx].Text, quotes[idx].Author)
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()

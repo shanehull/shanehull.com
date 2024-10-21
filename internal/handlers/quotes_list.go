@@ -1,4 +1,4 @@
-package api
+package handlers
 
 type Quote struct {
 	Text   string `json:"text"`

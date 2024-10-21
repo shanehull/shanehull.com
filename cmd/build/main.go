@@ -34,7 +34,7 @@ func main() {
 
 	// fetch pages by path and save to gob file
 	if err := pages.PagesToGob("blog/", "bin/pages.gob"); err != nil {
-		log.Fatalf("ERROR: unable to retrieve pages from gob: %q", err)
+		log.Fatalf("ERROR: unable to save pages to gob: %q", err)
 	}
 
 	log.Println("build complete")

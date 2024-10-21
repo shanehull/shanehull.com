@@ -3,6 +3,13 @@
   <h2>{{ .Title }}</h2>
   {{ .Content }}
 
+  <div id="quote-container" id="fade-me-in">
+    <blockquote>
+      <i></i>
+      <footer></footer>
+    </blockquote>
+  </div>
+
   <div
     class="center-items quote-button"
     hx-swap="swap:0.4s settle:0.4s"
@@ -124,13 +131,6 @@
         </g>
       </g>
     </svg>
-  </div>
-
-  <div id="quote-container" id="fade-me-in">
-    <blockquote>
-      <i></i>
-      <footer></footer>
-    </blockquote>
   </div>
 
   <div class="center-items">

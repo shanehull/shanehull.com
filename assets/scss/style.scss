@@ -170,7 +170,7 @@ body {
 }
 
 #quote-container {
-  padding: 1.2rem;
+  padding-top: 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -179,7 +179,7 @@ body {
   blockquote {
     position: relative;
     margin: 0.8rem;
-    min-height: 16rem;
+    min-height: 8rem;
     opacity: 1;
     svg {
       position: absolute;
@@ -216,7 +216,7 @@ body {
 
 div.quote-button {
   cursor: pointer;
-  padding-top: 1rem;
+  padding: 1rem;
   svg {
     margin-inline: 0.6rem;
     opacity: 90%;

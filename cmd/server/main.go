@@ -13,7 +13,8 @@ import (
 	"time"
 
 	root "github.com/shanehull/shanehull.com"
-	"github.com/shanehull/shanehull.com/internal/api"
+	"github.com/shanehull/shanehull.com/internal/handlers"
+	"github.com/shanehull/shanehull.com/internal/middleware"
 	"github.com/shanehull/shanehull.com/internal/pages"
 )
 
@@ -60,7 +61,15 @@ func main() {
 	// Serve all hugo content (the 'public' directory) at the root url
 	mux.Handle("/", fileServerWith404(fileServer, serverRoot))
 
-	mux.HandleFunc("/quote", cors(http.HandlerFunc(api.QuoteHandler)))
+	mux.HandleFunc(
+		"/quote",
+		middleware.CORS(
+			http.HandlerFunc(
+				handlers.QuoteHandler,
+			),
+			allowedOrigin,
+		),
+	)
 
 	// TODO: endpoint for portfolio and blog search here
 
@@ -70,6 +79,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	mux.HandleFunc("/healthz", http.HandlerFunc(handlers.HealthzHandler))
 
 	// Run the server at
 	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
@@ -92,22 +103,6 @@ func main() {
 	cancel()
 
 	fmt.Println("Server stopped")
-}
-
-func cors(h http.Handler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
-		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers",
-			"Content-Type, hx-target, hx-current-url, hx-request")
-
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-
-		h.ServeHTTP(w, r)
-	}
 }
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {
