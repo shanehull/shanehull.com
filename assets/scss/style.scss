@@ -29,7 +29,16 @@ body {
   margin: auto;
   padding: 1rem;
   padding-bottom: 4rem;
-  font-family: "Space Mono", "monospace";
+  font-family:
+    "Space Mono",
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
   font-size: 1.5rem;
   line-height: 1.2;
   background-color: $light-background;

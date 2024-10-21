@@ -10,11 +10,15 @@
     <meta name="description" content="{{ site.Params.description }}" />
     {{- else -}}
     <meta name="description" content="{{ .Params.description }}" />
-    {{- end }}
-    {{ $style := resources.Get "scss/style.scss" | resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}"/>
-    {{ partial "htmx" . }}
-    {{ partial "syntax" . }}
+    {{- end }} {{ $style := resources.Get "scss/style.scss" |
+    resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify |
+    fingerprint }}
+    <link
+      rel="stylesheet"
+      href="{{ $style.RelPermalink }}"
+      integrity="{{ $style.Data.Integrity }}"
+    />
+    {{ partial "htmx" . }} {{ partial "syntax" . }}
   </head>
   <body>
     <header>
