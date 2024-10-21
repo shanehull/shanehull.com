@@ -18,9 +18,15 @@
       href="{{ $style.RelPermalink }}"
       integrity="{{ $style.Data.Integrity }}"
     />
-    {{ partial "htmx" . }} {{ partial "syntax" . }}
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.2/dist/htmx.min.js"
+      integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    {{ partial "syntax" . }}
   </head>
-  <body>
+  <body hx-boost="true">
     <header>
       <div class="hero-image-container">
         <a href="/">
