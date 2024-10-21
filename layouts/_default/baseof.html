@@ -13,10 +13,20 @@
     {{- end }} {{ $style := resources.Get "scss/style.scss" |
     resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify |
     fingerprint }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-    {{ partial "htmx" . }} {{ partial "syntax" . }}
+    <link
+      rel="stylesheet"
+      href="{{ $style.RelPermalink }}"
+      integrity="{{ $style.Data.Integrity }}"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.2/dist/htmx.min.js"
+      integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    {{ partial "syntax" . }}
   </head>
-  <body>
+  <body hx-boost="true">
     <header>
       <div class="hero-image-container">
         <a href="/">
@@ -25,7 +35,7 @@
             src="/images/bull.webp"
             width="auto"
             height="120px"
-            alt="Pixelated image of a bull."
+            alt="Pixel-art image of a bull."
           />
         </a>
       </div>

@@ -1,4 +1,4 @@
-package api
+package handlers
 
 type Quote struct {
 	Text   string `json:"text"`
@@ -12,6 +12,10 @@ var quotes = []Quote{
 	},
 	{
 		Text:   "The first principle is that you must not fool yourself - and you are the easiest person to fool.",
+		Author: "Richard P. Feynman",
+	},
+	{
+		Text:   "To decide upon the answer is not scientific. In order to make progress, one must leave the door to the unknown ajar–ajar only.",
 		Author: "Richard P. Feynman",
 	},
 	{
@@ -31,8 +35,20 @@ var quotes = []Quote{
 		Author: "Nassim Nicholas Taleb",
 	},
 	{
+		Text:   "You don't become completely free just by avoiding to be a slave; you also need to avoid becoming a master.",
+		Author: "Nassim Nicholas Taleb",
+	},
+	{
+		Text:   "Anything you do to optimize your work, cut some corners, or squeeze more “efficiency” out of it (and out of your life) will eventually make you dislike it.",
+		Author: "Nassim Nicholas Taleb",
+	},
+	{
 		Text:   "The idea is that flowing water never goes stale, so just keep on flowing.",
-		Author: "Bruce Lee",
+		Author: "Lee Jun-fan",
+	},
+	{
+		Text:   "Absorb what is useful, discard what is useless and add what is specifically your own.",
+		Author: "Lee Jun-fan",
 	},
 	{
 		Text:   "The idea that the future is unpredictable is undermined every day by the ease with which the past is explained.",
@@ -83,15 +99,27 @@ var quotes = []Quote{
 		Author: "Laozi",
 	},
 	{
-		Text:   "It is better to be vaguely right than exactly wrong.",
-		Author: "Carveth Read",
-	},
-	{
 		Text:   "Everything should be made as simple as possible, but no simpler.",
 		Author: "Not Einstein",
 	},
 	{
 		Text:   "To think is easy. To act is hard. But the hardest thing in the world is to act in accordance with your thinking.",
 		Author: "Johann Wolfgang von Goethe",
+	},
+	{
+		Text:   "Never ascribe to malice that which can be adequately explained by stupidity.",
+		Author: "Robert J. Hanlon",
+	},
+	{
+		Text:   "In theory, there is no difference between theory and practice. But in practice, there is.",
+		Author: "Yogi Berra",
+	},
+	{
+		Text:   "The geometrician teaches me how I may avoid losing any fraction of my estates, but what I really want to learn is how to lose the lot and still keep smiling.",
+		Author: "Lucius Annaeus Seneca",
+	},
+	{
+		Text:   "It is better to be roughly right than precisely wrong.",
+		Author: "John Maynard Keynes",
 	},
 }

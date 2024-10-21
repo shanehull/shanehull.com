@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"embed"
 	"fmt"
 	"io/fs"
 	"log"
@@ -13,16 +12,19 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/shanehull/shanehull.com/api"
+	root "github.com/shanehull/shanehull.com"
+	"github.com/shanehull/shanehull.com/internal/handlers"
+	"github.com/shanehull/shanehull.com/internal/middleware"
 	"github.com/shanehull/shanehull.com/internal/pages"
 )
 
-//go:embed all:public
-var content embed.FS
+var (
+	allowedOrigin = "*"
+	serverHost    = "127.0.0.1"
+	serverPort    = "1314"
+)
 
-var allowedOrigin = "*"
-var serverHost = "127.0.0.1"
-var serverPort = "1314"
+var content = &root.Public
 
 type Page struct {
 	Title       string
@@ -37,13 +39,13 @@ func main() {
 		context.Background(), os.Interrupt, syscall.SIGTERM)
 
 	// Check if the SERVER_HOST env var is set and override
-	envHost, ok := os.LookupEnv("SH_SERVER_HOST")
+	envHost, ok := os.LookupEnv("SERVER_HOST")
 	if ok {
 		serverHost = envHost
 	}
 
-	// Check if SH_ALLOWED_ORIGIN env var is set and override
-	envOrigin, ok := os.LookupEnv("SH_ALLOWED_ORIGIN")
+	// Check if ALLOWED_ORIGIN env var is set and override
+	envOrigin, ok := os.LookupEnv("ALLOWED_ORIGIN")
 	if ok {
 		allowedOrigin = envOrigin
 	}
@@ -59,16 +61,26 @@ func main() {
 	// Serve all hugo content (the 'public' directory) at the root url
 	mux.Handle("/", fileServerWith404(fileServer, serverRoot))
 
-	mux.HandleFunc("/quote", cors(http.HandlerFunc(api.QuoteHandler)))
+	mux.HandleFunc(
+		"/quote",
+		middleware.CORS(
+			http.HandlerFunc(
+				handlers.QuoteHandler,
+			),
+			allowedOrigin,
+		),
+	)
 
 	// TODO: endpoint for portfolio and blog search here
 
 	// Get the pages from the gob file that was generated at build time.
 	// We'll use it in our search endpoint for the blog (later).
-	_, err := pages.PagesFromGob("build/pages.gob")
+	_, err := pages.PagesFromGob("bin/pages.gob")
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	mux.HandleFunc("/healthz", http.HandlerFunc(handlers.HealthzHandler))
 
 	// Run the server at
 	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
@@ -91,22 +103,6 @@ func main() {
 	cancel()
 
 	fmt.Println("Server stopped")
-}
-
-func cors(h http.Handler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
-		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers",
-			"Content-Type, hx-target, hx-current-url, hx-request")
-
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-
-		h.ServeHTTP(w, r)
-	}
 }
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {

@@ -1,7 +1,11 @@
 {{ define "main" }}
 <main class="container">
-  <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link"> <- back </a>
   <h2>{{ .Title }}</h2>
   {{ .Content }}
+  <div class="center-items">
+    <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link">
+      <- back
+    </a>
+  </div>
 </main>
 {{ end }}
