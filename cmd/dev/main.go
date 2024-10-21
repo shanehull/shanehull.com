@@ -44,7 +44,7 @@ func main() {
 		if haveAir {
 			cmd = exec.Command("air")
 		} else {
-			cmd = exec.Command("go", "run", "server.go")
+			cmd = exec.Command("go", "run", "cmd/server/main.go")
 		}
 
 		if err := util.RunCommand(cmd); err != nil {

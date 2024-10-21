@@ -5,6 +5,4 @@ htmx: true
 layout: quotes
 ---
 
-Someone ask for a random quote?
-
-Sure! Here's one for you..
+Sure! Here's a quote... but don't press the button.

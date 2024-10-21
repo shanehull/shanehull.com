@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"embed"
 	"fmt"
 	"io/fs"
 	"log"
@@ -13,16 +12,18 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/shanehull/shanehull.com/api"
+	root "github.com/shanehull/shanehull.com"
+	"github.com/shanehull/shanehull.com/internal/api"
 	"github.com/shanehull/shanehull.com/internal/pages"
 )
 
-//go:embed all:public
-var content embed.FS
+var (
+	allowedOrigin = "*"
+	serverHost    = "127.0.0.1"
+	serverPort    = "1314"
+)
 
-var allowedOrigin = "*"
-var serverHost = "127.0.0.1"
-var serverPort = "1314"
+var content = &root.Public
 
 type Page struct {
 	Title       string
@@ -37,13 +38,13 @@ func main() {
 		context.Background(), os.Interrupt, syscall.SIGTERM)
 
 	// Check if the SERVER_HOST env var is set and override
-	envHost, ok := os.LookupEnv("SH_SERVER_HOST")
+	envHost, ok := os.LookupEnv("SERVER_HOST")
 	if ok {
 		serverHost = envHost
 	}
 
-	// Check if SH_ALLOWED_ORIGIN env var is set and override
-	envOrigin, ok := os.LookupEnv("SH_ALLOWED_ORIGIN")
+	// Check if ALLOWED_ORIGIN env var is set and override
+	envOrigin, ok := os.LookupEnv("ALLOWED_ORIGIN")
 	if ok {
 		allowedOrigin = envOrigin
 	}
@@ -65,7 +66,7 @@ func main() {
 
 	// Get the pages from the gob file that was generated at build time.
 	// We'll use it in our search endpoint for the blog (later).
-	_, err := pages.PagesFromGob("build/pages.gob")
+	_, err := pages.PagesFromGob("bin/pages.gob")
 	if err != nil {
 		log.Fatal(err)
 	}

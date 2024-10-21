@@ -28,6 +28,7 @@ body {
   max-width: 768px;
   margin: auto;
   padding: 1rem;
+  padding-bottom: 4rem;
   font-family: "Space Mono", "monospace";
   font-size: 1.5rem;
   line-height: 1.2;
@@ -35,14 +36,14 @@ body {
   color: $light-text;
 
   main {
-    animation: fadeInAnimation ease 0.6s;
+    animation: fadeInAnimation ease 0.4s;
     h2 {
       padding-block: 1rem;
     }
 
     a.back-link {
-      font-size: 1.6rem;
-      padding: 1.2rem;
+      font-size: 2rem;
+      padding: 2rem;
     }
   }
 
@@ -169,30 +170,68 @@ body {
 }
 
 #quote-container {
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  animation: fadeInAnimation ease-in 1s;
+  transition: opacity 1s ease-in-out;
 
   blockquote {
-    margin: 1.2rem;
+    position: relative;
+    margin: 0.8rem;
     min-height: 16rem;
+    opacity: 1;
+    svg {
+      position: absolute;
+      left: -1rem;
+      top: -2.2rem;
+      width: 38px;
+      height: 38px;
+      z-index: 5;
+      color: #555;
+      opacity: 50%;
+    }
+    div {
+      position: relative;
+      z-index: 10;
+      font-size: 1.6rem;
+    }
   }
 
   footer {
     margin-top: 1.2rem;
-  }
-
-  button {
-    display: flex;
-    margin: auto;
-    align-self: flex-end;
+    font-size: 1.8rem;
+    font-weight: bold;
   }
 }
 
-#quote-container.htmx-swapping blockquote {
+#quote-container.htmx-swapping {
   opacity: 0;
   transition: opacity 1s ease;
+}
+
+#quote-container.htmx-added {
+  opacity: 0;
+}
+
+div.quote-button {
+  cursor: pointer;
+  padding-top: 1rem;
+  svg {
+    margin-inline: 0.6rem;
+    opacity: 90%;
+    transition: opacity 0.5s ease;
+
+    #path10 {
+      &:active {
+        opacity: 80%;
+      }
+    }
+
+    &:hover {
+      opacity: 80%;
+    }
+  }
 }
 
 div.four-oh-four {

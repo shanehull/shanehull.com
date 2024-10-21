@@ -14,5 +14,5 @@ hugo.linux
 /.hugo_build.lock
 
 # Build output
-/build/
+/bin/
 /tmp/

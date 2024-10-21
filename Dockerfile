@@ -1,25 +1,35 @@
-FROM golang:1.22-alpine as builder
+FROM golang:1.22-alpine AS builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN apk update && apk upgrade && apk add --no-cache ca-certificates hugo
+RUN apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo
+
+RUN apk update && apk upgrade && apk add --no-cache ca-certificates
 RUN update-ca-certificates
 
 RUN go install github.com/a-h/templ/cmd/templ@latest
 
-RUN GO_ENABLED=0 GOOS=linux go run cmd/build/main.go
+RUN hugo --cleanDestinationDir
+
+RUN templ generate
+
+RUN go build -o bin/main ./cmd/server/
+
+RUN go run cmd/build/main.go
 
 FROM scratch
 
-ENV SH_ALLOWED_ORIGIN="*"
-ENV SH_SERVER_HOST=""
+ENV ALLOWED_ORIGIN="*"
+ENV SERVER_HOST="127.0.0.1"
 
-COPY --from=builder /app/build/server ./build/server
-COPY --from=builder /app/build/pages.gob ./build/pages.gob
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/bin/main ./bin/main
+COPY --from=builder /app/bin/pages.gob ./bin/pages.gob
+COPY --from=builder /app/public ./static/public
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-CMD ["./build/server"]
+EXPOSE 1314
+
+CMD ["./bin/main"]

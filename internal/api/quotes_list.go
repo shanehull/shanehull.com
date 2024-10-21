@@ -15,6 +15,10 @@ var quotes = []Quote{
 		Author: "Richard P. Feynman",
 	},
 	{
+		Text:   "To decide upon the answer is not scientific. In order to make progress, one must leave the door to the unknown ajar–ajar only.",
+		Author: "Richard P. Feynman",
+	},
+	{
 		Text:   "There will be no order, only chaos.",
 		Author: "Sol Robeson",
 	},
@@ -28,6 +32,14 @@ var quotes = []Quote{
 	},
 	{
 		Text:   "Mother nature does not like overspecialisation, as it limits evolution and weakens the animals.",
+		Author: "Nassim Nicholas Taleb",
+	},
+	{
+		Text:   "You don't become completely free just by avoiding to be a slave; you also need to avoid becoming a master.",
+		Author: "Nassim Nicholas Taleb",
+	},
+	{
+		Text:   "Anything you do to optimize your work, cut some corners, or squeeze more “efficiency” out of it (and out of your life) will eventually make you dislike it.",
 		Author: "Nassim Nicholas Taleb",
 	},
 	{
@@ -87,10 +99,6 @@ var quotes = []Quote{
 		Author: "Laozi",
 	},
 	{
-		Text:   "It is better to be vaguely right than exactly wrong.",
-		Author: "Carveth Read",
-	},
-	{
 		Text:   "Everything should be made as simple as possible, but no simpler.",
 		Author: "Not Einstein",
 	},
@@ -105,5 +113,13 @@ var quotes = []Quote{
 	{
 		Text:   "In theory, there is no difference between theory and practice. But in practice, there is.",
 		Author: "Yogi Berra",
+	},
+	{
+		Text:   "The geometrician teaches me how I may avoid losing any fraction of my estates, but what I really want to learn is how to lose the lot and still keep smiling.",
+		Author: "Lucius Annaeus Seneca",
+	},
+	{
+		Text:   "It is better to be roughly right than precisely wrong.",
+		Author: "John Maynard Keynes",
 	},
 }
