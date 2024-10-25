@@ -2,9 +2,9 @@
 
 [shanehull.com](https://shanehull.com)
 
-Shane Hull's personal website built of Hugo with a twist.
+Shane Hull's personal website built on Hugo, with a twist.
 
-**Features:**
+**Pages:**
 
 - About: A little about me
 - Books: A list of (mostly) Lindy books
@@ -13,4 +13,4 @@ Shane Hull's personal website built of Hugo with a twist.
 
 **Development:**
 
-The `air` config has everything needed to build the Hugo site and serve it. It also serves some custom handlers built for htmx functionality.
+The `air` config has everything needed to build the Hugo site and serve it, along with the custom handlers for the hypermedia APIs.
