@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2](https://github.com/shanehull/shanehull.com/compare/v0.0.1...v0.0.2) (2024-11-11)
+
+
+### Bug Fixes
+
+* update books and quotes ([892ecac](https://github.com/shanehull/shanehull.com/commit/892ecac8fe4bb789f9186c1d976a9adf3c9afe8d))
+* update go image ([2f3e084](https://github.com/shanehull/shanehull.com/commit/2f3e084e8587c8f816f5a5ca00bd6765ae9915f8))
+
 ## 0.0.1 (2024-10-21)
 
 
