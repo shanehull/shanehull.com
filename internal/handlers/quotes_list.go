@@ -122,4 +122,12 @@ var quotes = []Quote{
 		Text:   "It is better to be roughly right than precisely wrong.",
 		Author: "John Maynard Keynes",
 	},
+	{
+		Text:   "All of humanity's problems stem from man's inability to sit quietly in a room alone.",
+		Author: "Blaise Pascal",
+	},
+	{
+		Text:   "Man selects only for his own good: Nature only for that of the being which she tends.",
+		Author: "Charles Darwin",
+	},
 }
