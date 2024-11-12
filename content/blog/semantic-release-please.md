@@ -57,7 +57,47 @@ Basically its: Merge to `main` > PR > Release, with the option to merge changes 
      - If it is **not a release-please branch**, the process ends here (do nothing).
      - If it **is a release-please branch**, proceed to create a release.
 
-There is an official GitHub action available for us to use, which we'll explore now.
+There is an official GitHub action available for us to use, which we'll explore shortly, but first we need to add some configuration files.
+
+## Config and Manifest Files
+
+Before we run `release-please`, we need an initial manifest file and a config file that configures one or more release targets.
+
+### Manifest File
+
+`.release-please-manifest.json`:
+
+```json
+{
+  ".": "0.0.0"
+}
+```
+
+The manifest file keeps track of the current version of each package in your repo.
+
+For our purpose, we just have one target, and that is the root directory. You can, however, configure multiple targets to support a monorepo pattern.
+
+Set it to `0.0.0` for now. The workflow will update and manage this for us once we create our first release.
+
+### Config File
+
+`release-please-config.json`:
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "go",
+  "packages": {
+    ".": {}
+  }
+}
+```
+
+Again, we just have one package, and the `release-type` is `go`. A full list of supported release types is available [here](https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#strategy-language-types-supported).
+
+Please consult the [official documentation](https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md) for more.
+
+Now let's get into the GitHub Action Workflow.
 
 ## GitHub Actions Workflow
 
@@ -85,7 +125,7 @@ jobs:
     steps:
       - name: Release Please
         id: release-please
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           release-type: go
           token: ${{secrets.GITHUB_TOKEN}}
@@ -141,7 +181,7 @@ There are no rules for when this step should run - we want it to run on every pu
 ```yaml
 - name: Release Please
   id: release-please
-  uses: google-github-actions/release-please-action@v4
+  uses: googleapis/release-please-action@v4
   with:
     release-type: go
     token: ${{secrets.GITHUB_TOKEN}}
