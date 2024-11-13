@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.3](https://github.com/shanehull/shanehull.com/compare/v0.0.2...v0.0.3) (2024-11-13)
+
+
+### Bug Fixes
+
+* code highlight styling ([646045b](https://github.com/shanehull/shanehull.com/commit/646045bef8a0846ce0f7a825a6a61626464ad654))
+* code highlight styling ([52e830c](https://github.com/shanehull/shanehull.com/commit/52e830c672c244606f4cb7e6b525094eab8eafe5))
+* code highlight styling ([f165713](https://github.com/shanehull/shanehull.com/commit/f165713470038140540a4c69b191d1272bbee3ec))
+* update release please how to ([a8f3a78](https://github.com/shanehull/shanehull.com/commit/a8f3a78a5779f0805e3e8baed01d173e63484d03))
+
 ## [0.0.2](https://github.com/shanehull/shanehull.com/compare/v0.0.1...v0.0.2) (2024-11-11)
 
 
