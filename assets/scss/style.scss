@@ -483,19 +483,17 @@ div.no-posts {
   flex-direction: column;
   justify-content: flex-start;
 
-  > h1,
-  > h2,
   > img,
   > small {
     align-self: center;
     display: block;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.2rem;
   }
 
   h1,
   h2 {
     margin-top: 2rem;
-    border-bottom: 0.2rem solid $light-icon;
+    border-bottom: 0.15rem solid $light-icon;
   }
 
   div#tags {
@@ -647,8 +645,7 @@ div.no-posts {
   .blog-container {
     h1,
     h2 {
-      margin-top: 4rem;
-      border-bottom: 0.2rem solid $dark-icon;
+      border-bottom: 0.15rem solid $dark-icon;
     }
   }
 
