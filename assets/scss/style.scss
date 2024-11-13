@@ -169,12 +169,12 @@ body {
 }
 
 .highlight {
+  margin: 0.4rem;
   pre {
     padding: 0.8rem;
     white-space: break-spaces;
-    border-radius: 0.8rem;
-    font-size: 1rem;
     word-break: break-all;
+    font-size: 1.4rem;
   }
 }
 
@@ -485,8 +485,7 @@ div.no-posts {
   > h1,
   > h2,
   > img,
-  > small,
-  > div.highlight {
+  > small {
     align-self: center;
     display: block;
     margin-bottom: 0.4rem;
