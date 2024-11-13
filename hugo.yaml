@@ -10,6 +10,8 @@ permalinks:
     pages: /:slug/
 
 markup:
+  highlight:
+    style: gruvbox
   goldmark:
     renderer:
       unsafe: true
