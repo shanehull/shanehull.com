@@ -12,6 +12,7 @@ permalinks:
 markup:
   highlight:
     style: gruvbox
+    tab-size: 2
   goldmark:
     renderer:
       unsafe: true
