@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/shanehull/shanehull.com/compare/v0.0.3...v0.0.4) (2024-11-13)
+
+
+### Bug Fixes
+
+* missing highlight config ([6eab8c1](https://github.com/shanehull/shanehull.com/commit/6eab8c10674fa0185dbd6d9f9bc17af71101bd70))
+
 ## [0.0.3](https://github.com/shanehull/shanehull.com/compare/v0.0.2...v0.0.3) (2024-11-13)
 
 
