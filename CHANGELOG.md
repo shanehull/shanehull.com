@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/shanehull/shanehull.com/compare/v0.0.4...v0.0.5) (2024-11-13)
+
+
+### Bug Fixes
+
+* blog heading styles ([d82e778](https://github.com/shanehull/shanehull.com/commit/d82e7785cddba0429290cf0c8b011110d94d3f2c))
+
 ## [0.0.4](https://github.com/shanehull/shanehull.com/compare/v0.0.3...v0.0.4) (2024-11-13)
 
 
