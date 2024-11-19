@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/shanehull/shanehull.com/compare/v0.0.5...v0.0.6) (2024-11-19)
+
+
+### Bug Fixes
+
+* keynes was an iyi ([7e3dba7](https://github.com/shanehull/shanehull.com/commit/7e3dba7e6c459ab8769529649ce32afa2c077573))
+
 ## [0.0.5](https://github.com/shanehull/shanehull.com/compare/v0.0.4...v0.0.5) (2024-11-13)
 
 
