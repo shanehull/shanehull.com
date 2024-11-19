@@ -119,8 +119,8 @@ var quotes = []Quote{
 		Author: "Lucius Annaeus Seneca",
 	},
 	{
-		Text:   "It is better to be roughly right than precisely wrong.",
-		Author: "John Maynard Keynes",
+		Text:   "It is better to be vaguely right than exactly wrong.",
+		Author: "Carveth Read",
 	},
 	{
 		Text:   "All of humanity's problems stem from man's inability to sit quietly in a room alone.",
