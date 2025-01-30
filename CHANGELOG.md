@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/shanehull/shanehull.com/compare/v0.0.6...v0.0.7) (2025-01-30)
+
+
+### Bug Fixes
+
+* templ WriteString undefined ([98e9bdf](https://github.com/shanehull/shanehull.com/commit/98e9bdfcdce73625785a238a0e57fb88a10ed2ce))
+
 ## [0.0.6](https://github.com/shanehull/shanehull.com/compare/v0.0.5...v0.0.6) (2024-11-19)
 
 
