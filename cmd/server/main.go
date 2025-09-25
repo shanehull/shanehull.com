@@ -64,12 +64,6 @@ func main() {
 
 	logger.Info("API routes allowed origin: %s\n", allowedOrigin)
 
-	// Check if ALLOWED_ORIGIN env var is set and override
-	fredKey, ok := os.LookupEnv("FRED_API_KEY")
-	if !ok {
-		logger.Info("WARNING: Fred API key not set")
-	}
-
 	mux := http.NewServeMux()
 
 	// Custom file server handler
