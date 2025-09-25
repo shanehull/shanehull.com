@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.8](https://github.com/shanehull/shanehull.com/compare/v0.0.7...v0.0.8) (2025-09-25)
+
+
+### Bug Fixes
+
+* update hugo, htmx, templ ([749f01f](https://github.com/shanehull/shanehull.com/commit/749f01f9d5806ef348445a54439efdc3efe39ed1))
+* use slog ([6c2440e](https://github.com/shanehull/shanehull.com/commit/6c2440e79d008299540898057032bc3cc9ec8b92))
+
 ## [0.0.7](https://github.com/shanehull/shanehull.com/compare/v0.0.6...v0.0.7) (2025-01-30)
 
 
