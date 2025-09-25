@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/fs"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,6 +14,7 @@ import (
 	"time"
 
 	root "github.com/shanehull/shanehull.com"
+	"github.com/shanehull/shanehull.com/internal/buildinfo"
 	"github.com/shanehull/shanehull.com/internal/handlers"
 	"github.com/shanehull/shanehull.com/internal/middleware"
 	"github.com/shanehull/shanehull.com/internal/pages"
@@ -22,6 +24,7 @@ var (
 	allowedOrigin = "*"
 	serverHost    = "127.0.0.1"
 	serverPort    = "1314"
+	logger        *slog.Logger
 )
 
 var content = &root.Public
@@ -32,6 +35,15 @@ type Page struct {
 	Content     string
 	Keywords    []string
 	Slug        string
+}
+
+func init() {
+	logger = slog.New(
+		slog.NewJSONHandler(
+			os.Stdout, nil,
+		),
+	).With(slog.String("version", buildinfo.GitTag))
+	slog.SetDefault(logger)
 }
 
 func main() {
@@ -50,7 +62,13 @@ func main() {
 		allowedOrigin = envOrigin
 	}
 
-	fmt.Printf("API routes allowed origin: %s\n", allowedOrigin)
+	logger.Info("API routes allowed origin: %s\n", allowedOrigin)
+
+	// Check if ALLOWED_ORIGIN env var is set and override
+	fredKey, ok := os.LookupEnv("FRED_API_KEY")
+	if !ok {
+		logger.Info("WARNING: Fred API key not set")
+	}
 
 	mux := http.NewServeMux()
 
@@ -73,6 +91,8 @@ func main() {
 
 	// TODO: endpoint for portfolio and blog search here
 
+	// TODO: endpoint for tools here
+
 	// Get the pages from the gob file that was generated at build time.
 	// We'll use it in our search endpoint for the blog (later).
 	_, err := pages.PagesFromGob("bin/pages.gob")
@@ -90,19 +110,19 @@ func main() {
 		}
 	}()
 
-	fmt.Printf("API Server available at %s\n", serveAt)
+	logger.Info("API Server available", "addr", serveAt)
 
 	// Wait for interrupt signal.
 	<-ctx.Done()
 
 	// Sleep to ensure graceful shutdown
-	fmt.Println("Server shutting down...")
+	logger.Info("Server shutting down...")
 	time.Sleep(5 * time.Second)
 
 	// Return to default context.
 	cancel()
 
-	fmt.Println("Server stopped")
+	logger.Info("Server stopped")
 }
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {
