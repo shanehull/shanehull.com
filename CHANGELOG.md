@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.9](https://github.com/shanehull/shanehull.com/compare/v0.0.8...v0.0.9) (2025-09-25)
+
+
+### Bug Fixes
+
+* update docker golang image ([48c9d55](https://github.com/shanehull/shanehull.com/commit/48c9d5584a23a7ebd7a817350145056b4d988783))
+* update docker golang image ([91e3929](https://github.com/shanehull/shanehull.com/commit/91e3929ed4add3a9cae2e313fd772c46ed998fd5))
+
 ## [0.0.8](https://github.com/shanehull/shanehull.com/compare/v0.0.7...v0.0.8) (2025-09-25)
 
 
