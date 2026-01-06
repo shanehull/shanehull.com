@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.0](https://github.com/shanehull/shanehull.com/compare/v0.0.9...v0.1.0) (2026-01-06)
+
+
+### Features
+
+* update quotes list and button ([4501b18](https://github.com/shanehull/shanehull.com/commit/4501b18a48ca33950d53cc98f93f3b4465fd8f99))
+* update quotes list and button ([bedca4e](https://github.com/shanehull/shanehull.com/commit/bedca4eca87d96700d5bb2a626f2936868a25994))
+
+
+### Bug Fixes
+
+* update hugo ([#51](https://github.com/shanehull/shanehull.com/issues/51)) ([f18d2c0](https://github.com/shanehull/shanehull.com/commit/f18d2c0809cb199d080ae386dc0509c372cb25bc))
+
 ## [0.0.9](https://github.com/shanehull/shanehull.com/compare/v0.0.8...v0.0.9) (2025-09-25)
 
 
