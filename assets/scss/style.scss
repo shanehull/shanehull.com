@@ -194,7 +194,7 @@ body {
     svg {
       position: absolute;
       left: -1rem;
-      top: -2.2rem;
+      top: -2rem;
       width: 38px;
       height: 38px;
       z-index: 5;
@@ -224,22 +224,47 @@ body {
   opacity: 0;
 }
 
-div.quote-button {
+.next-quote-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   cursor: pointer;
-  padding: 1rem;
-  svg {
-    margin-inline: 0.6rem;
-    opacity: 90%;
-    transition: opacity 0.5s ease;
 
-    #path10 {
-      &:active {
-        opacity: 80%;
-      }
+  font-size: 1.2rem;
+  padding: 0.2rem;
+
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+
+  .ornament {
+    font-style: normal;
+    font-size: 1.8rem;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover {
+    opacity: 0.7;
+    border-bottom-color: currentColor;
+
+    .ornament {
+      transform: rotate(15deg) translateX(3px);
     }
+  }
 
-    &:hover {
-      opacity: 80%;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .ornament {
+      color: $dark-icon;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    .ornament {
+      color: $light-icon;
     }
   }
 }
