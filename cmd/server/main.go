@@ -62,7 +62,7 @@ func main() {
 		allowedOrigin = envOrigin
 	}
 
-	logger.Info("API routes allowed origin: %s\n", allowedOrigin)
+	logger.Info(fmt.Sprintf("API routes allowed origin: %s", allowedOrigin))
 
 	mux := http.NewServeMux()
 
