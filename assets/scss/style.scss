@@ -236,24 +236,26 @@ body {
   border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
 
-  .ornament {
-    font-style: normal;
-    font-size: 1.8rem;
-    transition: transform 0.4s ease;
-  }
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.7;
+      border-bottom-color: currentColor;
 
-  &:hover {
-    opacity: 0.7;
-    border-bottom-color: currentColor;
-
-    .ornament {
-      transform: rotate(15deg) translateX(3px);
+      .ornament {
+        transform: rotate(15deg) translateX(3px);
+      }
     }
   }
 
-  &:focus,
   &:active {
-    outline: none;
+    opacity: 0.5;
+    border-bottom-color: currentColor !important;
+    transition: none;
+
+    .ornament {
+      transform: rotate(15deg) translateX(3px) scale(0.9);
+      transition: none;
+    }
   }
 
   @media (prefers-color-scheme: dark) {
