@@ -1,19 +1,17 @@
 ---
 title: 📚 Books
-description: A collection of Shane's favourite books across genres such as science, tech, investing, psychology and philosophy.
+description: A collection of my favourite books across genres such as science, tech, investing, psychology and philosophy.
 ---
 
-Some books I like.. I try to keep the list as Lindy proof as possible, but there are some modern editions mixed in that are subject to change.
+Some books I like.. I try to keep this list as Lindy as possible, but there are some modern editions mixed in that are subject to change.
 
 ### Science & Technology
 
-- **For the Love of Go** by John Arundel
 - **A Brief History of Intelligence** by Max Bennett
-- **Hypermedia** by Carson Gross
 - **The Origin of Species** by Charles Darwin
 - **Six Easy Pieces** by Richard Feynman
-- **100 Go Mistakes and How to Avoid Them** by Teiva Harsanyi
 - **A Philosophy of Software Design** by John Ousterhout
+- **The Logic of Scientific Discovery** by Karl R. Popper
 
 ### Business & Finance
 
@@ -30,5 +28,6 @@ Some books I like.. I try to keep the list as Lindy proof as possible, but there
 ### Philosophy & Other
 
 - **Tao Te Ching** by Laozi (Gia-Fu Feng and Jane English)
-- **Incerto** by Nassim Nicholas Taleb
+- **Zen and the Art of Motorcycle Maintenance** by Robert M Pirsig
 - **Letters from a Stoic** by Seneca
+- **Incerto** by Nassim Nicholas Taleb
