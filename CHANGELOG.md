@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/shanehull/shanehull.com/compare/v0.1.0...v0.1.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* allowed origins log ([#54](https://github.com/shanehull/shanehull.com/issues/54)) ([b26a337](https://github.com/shanehull/shanehull.com/commit/b26a337562cbd445d7e14f52fd33b3ba709c9815))
+* update books list ([#52](https://github.com/shanehull/shanehull.com/issues/52)) ([98ef4be](https://github.com/shanehull/shanehull.com/commit/98ef4be90dd86b5854f38def0a217cd39fa70d05))
+
 ## [0.1.0](https://github.com/shanehull/shanehull.com/compare/v0.0.9...v0.1.0) (2026-01-06)
 
 
