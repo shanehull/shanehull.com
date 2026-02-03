@@ -39,7 +39,7 @@ var quotes = []Quote{
 		Author: "Nassim Nicholas Taleb",
 	},
 	{
-		Text:   "Anything you do to optimize your work, cut some corners, or squeeze more “efficiency” out of it (and out of your life) will eventually make you dislike it.",
+		Text:   "The characteristic feature of the loser is to bemoan, in general terms, mankind's flaws, biases, contradictions, and irrationality – without exploiting them for fun and profit.",
 		Author: "Nassim Nicholas Taleb",
 	},
 	{
@@ -79,6 +79,14 @@ var quotes = []Quote{
 		Author: "M. de Voltaire",
 	},
 	{
+		Text:   "The impediment to action advances action. What stands in the way becomes the way.",
+		Author: "Marcus Aurelius",
+	},
+	{
+		Text:   "Think of yourself as dead. You have lived your life. Now take what's left and live it properly.",
+		Author: "Marcus Aurelius",
+	},
+	{
 		Text:   "Do not seek to follow in the footsteps of the wise; seek what they sought.",
 		Author: "Matsuo Basho",
 	},
@@ -105,6 +113,10 @@ var quotes = []Quote{
 	{
 		Text:   "To think is easy. To act is hard. But the hardest thing in the world is to act in accordance with your thinking.",
 		Author: "Johann Wolfgang von Goethe",
+	},
+	{
+		Text:   "The most dangerous government is the one that's closest to you.",
+		Author: "Rick Rule",
 	},
 	{
 		Text:   "Never ascribe to malice that which can be adequately explained by stupidity.",
