@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0](https://github.com/shanehull/shanehull.com/compare/v0.1.1...v0.2.0) (2026-02-03)
+
+
+### Features
+
+* update quotes ([#57](https://github.com/shanehull/shanehull.com/issues/57)) ([ac866df](https://github.com/shanehull/shanehull.com/commit/ac866dfc391c1be69691c21fdcd4721cb5e5d9fc))
+
+
+### Bug Fixes
+
+* quote refresh styling on mobile ([#55](https://github.com/shanehull/shanehull.com/issues/55)) ([a6d6678](https://github.com/shanehull/shanehull.com/commit/a6d667886cf3deddedc8194f3e02140074e9e4f8))
+
 ## [0.1.1](https://github.com/shanehull/shanehull.com/compare/v0.1.0...v0.1.1) (2026-01-07)
 
 
