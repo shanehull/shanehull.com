@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/shanehull/shanehull.com/compare/v0.3.0...v0.4.0) (2026-02-11)
+
+
+### Features
+
+* update content ([#67](https://github.com/shanehull/shanehull.com/issues/67)) ([264c44f](https://github.com/shanehull/shanehull.com/commit/264c44f5a9501bc89733710a252a9e1c2ff0efd4))
+
 ## [0.3.0](https://github.com/shanehull/shanehull.com/compare/v0.2.1...v0.3.0) (2026-02-11)
 
 
