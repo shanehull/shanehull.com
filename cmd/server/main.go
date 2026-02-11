@@ -121,7 +121,9 @@ func main() {
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		_, err := fs.Open(strings.TrimPrefix(r.URL.Path, "/"))
+		path := strings.TrimPrefix(r.URL.Path, "/")
+		path = strings.TrimSuffix(path, "/")
+		_, err := fs.Open(path)
 		if os.IsNotExist(err) {
 			// Rewrite request to use 404.html
 			r.URL.Path = "/404.html"

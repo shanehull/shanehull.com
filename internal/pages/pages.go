@@ -1,10 +1,9 @@
 package pages
 
 import (
-	"fmt"
-
 	"context"
 	"encoding/gob"
+	"fmt"
 	"os"
 
 	"github.com/gohugoio/hugo/config/allconfig"
@@ -47,7 +46,7 @@ func PagesToGob(contentDir string, gobDest string) error {
 		return err
 	}
 
-	dataFile.Close()
+	_ = dataFile.Close()
 
 	return nil
 }
@@ -64,7 +63,7 @@ func PagesFromGob(path string) ([]Page, error) {
 		return pages, err
 	}
 
-	f.Close()
+	_ = f.Close()
 
 	return pages, nil
 }
