@@ -1,0 +1,92 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="calculator-wrapper">
+    <div class="calculator-sticky-header">
+      <div class="calculator-main-display">
+        <span class="label">Market Implied Growth Rate</span>
+        <h1 id="outImpliedGrowth">0.0%</h1>
+        <div id="outVerdict" class="upside-badge">Priced for Perfection</div>
+      </div>
+    </div>
+
+    <div class="calculator-body">
+      <h3 class="calculator-section-head">Market Data</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Current Share Price ($)</label>
+          <input
+            type="number"
+            id="sharePrice"
+            value="150.00"
+            oninput="solveReverseDCF()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>EPS / FCF per Share ($)</label>
+          <input
+            type="number"
+            id="eps"
+            value="5.00"
+            oninput="solveReverseDCF()"
+          />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Assumptions</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Discount Rate (%)</label>
+          <input
+            type="number"
+            id="discount"
+            value="10"
+            oninput="solveReverseDCF()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Terminal Multiple (x)</label>
+          <input
+            type="number"
+            id="terminal"
+            value="15"
+            oninput="solveReverseDCF()"
+          />
+        </div>
+      </div>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Growth Stage (Years)</label>
+          <input
+            type="number"
+            id="years"
+            value="10"
+            oninput="solveReverseDCF()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
+<script src="{{ $shareable.RelPermalink }}"></script>
+
+{{ $script := resources.Get "js/reverse-dcf.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+
+{{ end }}

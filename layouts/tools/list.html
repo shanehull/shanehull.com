@@ -1,0 +1,40 @@
+{{ define "main" }}
+<main class="container">
+  <h2>{{ .Title }}</h2>
+
+  <p>Useful tools and calculators.</p>
+
+  {{ $pages := where .Site.RegularPages "Section" "tools" }}
+
+  {{ if gt (len $pages) 0 }}
+    <div class="tools-list-wrap">
+      <ul class="tools-list">
+        {{ range $pages }}
+        <li class="tool-card">
+          <a href="{{ .Permalink }}" class="tool-card-link">
+            <div class="tool-card-content">
+              <h2>{{ .Title }}</h2>
+              <p>{{ .Description }}</p>
+              
+              {{ if .Params.tool_type }}
+                <small>Type: {{ .Params.tool_type }}</small>
+              {{ end }}
+            </div>
+          </a>
+        </li>
+        {{ end }} 
+        </ul>
+    </div>
+
+  {{ else }}
+  
+    <div class="no-posts">
+      <p>No tools found yet.</p>
+    </div>
+
+  {{ end }} <br />
+  <div class="center-items">
+    <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link"> <- back </a>
+  </div>
+</main>
+{{ end }}

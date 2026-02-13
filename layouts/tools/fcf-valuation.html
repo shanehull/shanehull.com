@@ -1,0 +1,83 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="calculator-wrapper">
+    <div class="calculator-sticky-header">
+      <div class="calculator-stats-grid">
+        <div class="calculator-stat-item">
+          <span class="label">Annual FCF</span>
+          <span id="outFCF" class="val">$0</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label">Projected MCap</span>
+          <span id="outMCap" class="val">$0</span>
+        </div>
+      </div>
+      <div class="calculator-main-display">
+        <span class="label">Target Price</span>
+        <h1 id="outPrice">$0.00</h1>
+        <div id="outUpside" class="upside-badge">0% (0x)</div>
+      </div>
+    </div>
+
+    <div class="calculator-body">
+      <h3 class="calculator-section-head">Corporate Basis</h3>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Shares FD (M)</label>
+          <input type="number" id="shares" value="100" oninput="calculate()" />
+        </div>
+        <div class="calculator-field">
+          <label>Current Price ($)</label>
+          <input
+            type="number"
+            id="currPrice"
+            value="10.00"
+            oninput="calculate()"
+          />
+        </div>
+      </div>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Exit Multiple</label>
+          <input type="number" id="multiple" value="10" oninput="calculate()" />
+        </div>
+        <div class="calculator-field">
+          <label>Tax Rate (%)</label>
+          <input type="number" id="tax" value="25" oninput="calculate()" />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Revenue Assets</h3>
+
+      <div id="assetList"></div>
+
+      <div class="calculator-action-wrapper">
+        <button class="calculator-btn" onclick="addAsset()">+ Add Asset</button>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"> <- back to tools </a>
+  </div>
+</main>
+
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
+<script src="{{ $shareable.RelPermalink }}"></script>
+
+{{ $script := resources.Get "js/cashflow.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+
+{{ end }}
