@@ -1,0 +1,83 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="calculator-wrapper">
+    <div class="calculator-sticky-header">
+      <div class="calculator-main-display">
+        <span class="label">Max time to spend building script</span>
+        <h1 id="outTime">0 Hours</h1>
+      </div>
+    </div>
+
+    <div class="calculator-body">
+      <h3 class="calculator-section-head">Task Details</h3>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>How often do you do it?</label>
+          <select id="frequency" onchange="calculateAuto()">
+            <option value="50">50/Day</option>
+            <option value="5">5/Day</option>
+            <option value="1">Daily</option>
+            <option value="0.2">Weekly</option>
+            <option value="0.033">Monthly</option>
+            <option value="0.0027">Yearly</option>
+          </select>
+        </div>
+
+        <div class="calculator-field">
+          <label>Time saved per run</label>
+          <div style="display: flex; gap: 5px">
+            <input
+              type="number"
+              id="timeSaved"
+              value="1"
+              oninput="calculateAuto()"
+            />
+            <select
+              id="unit"
+              onchange="calculateAuto()"
+              style="border-radius: 8px; border: 1px solid #ccc"
+            >
+              <option value="1">Seconds</option>
+              <option value="60">Minutes</option>
+              <option value="3600">Hours</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Duration of Analysis (Years)</label>
+          <input
+            type="number"
+            id="duration"
+            value="5"
+            oninput="calculateAuto()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
+<script src="{{ $shareable.RelPermalink }}"></script>
+
+{{ $script := resources.Get "js/should-i-automate.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+
+{{ end }}

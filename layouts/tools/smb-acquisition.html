@@ -1,0 +1,117 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+
+  <div class="calculator-wrapper">
+    <div class="calculator-sticky-header">
+      <div class="calculator-stats-grid">
+        <div class="calculator-stat-item">
+          <span class="label">Unlevered ROIC</span>
+          <span id="outROIC" class="val">0%</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label">Payback Period</span>
+          <span id="outPayback" class="val">0 Years</span>
+        </div>
+      </div>
+      <div class="calculator-main-display">
+        <span class="label">Levered IRR (w/ Exit)</span>
+        <h1 id="outIRR">0.0%</h1>
+        <div id="outMoIC" class="upside-badge">0.0x MoIC</div>
+      </div>
+    </div>
+
+    <div class="calculator-body">
+      <h3 class="calculator-section-head">Purchase & Debt</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Purchase Price ($)</label>
+          <input
+            type="number"
+            id="price"
+            value="1000000"
+            oninput="calculateSMB()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Equity Down (%)</label>
+          <input
+            type="number"
+            id="equityPct"
+            value="50"
+            oninput="calculateSMB()"
+          />
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Interest Rate (%)</label>
+          <input
+            type="number"
+            id="intRate"
+            value="11"
+            oninput="calculateSMB()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Loan Term (Years)</label>
+          <input type="number" id="term" value="10" oninput="calculateSMB()" />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Operating Performance</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Year 1 EBITDA ($)</label>
+          <input
+            type="number"
+            id="cashflow"
+            value="250000"
+            oninput="calculateSMB()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Annual Growth (%)</label>
+          <input type="number" id="growth" value="3" oninput="calculateSMB()" />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Exit Assumptions (Optional)</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Hold Period (Years)</label>
+          <input type="number" id="hold" value="5" oninput="calculateSMB()" />
+        </div>
+        <div class="calculator-field">
+          <label>Exit Multiple (x)</label>
+          <input
+            type="number"
+            id="exitMult"
+            value="4"
+            oninput="calculateSMB()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="tool-instructions">{{ .Content }}</div>
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
+<script src="{{ $shareable.RelPermalink }}"></script>
+
+{{ $script := resources.Get "js/smb-acquisition.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+
+{{ end }}

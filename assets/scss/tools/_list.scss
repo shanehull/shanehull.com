@@ -1,0 +1,107 @@
+.tools-list-wrap {
+  min-height: 15rem;
+  position: relative;
+  margin-top: 2rem;
+
+  .tools-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.tool-card {
+  position: relative;
+  height: 100%;
+  min-height: 12rem;
+
+  border: 2px solid $light-icon;
+  border-radius: 8px;
+  background-color: darken($light-background, 5%);
+  cursor: pointer;
+
+  filter: drop-shadow(5px 6px 0 darken($light-background, 8%));
+
+  transition: all 0.3s ease-out;
+  animation: fadeInAnimation ease 1s;
+
+  &:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(5px 8px 0 darken($light-background, 8%));
+  }
+
+  .tool-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  .tool-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+
+    img {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      object-fit: contain;
+    }
+
+    h2 {
+      margin: 0.5rem 0;
+      padding: 0;
+      font-size: 1.8rem;
+      text-align: center;
+      border: none;
+    }
+
+    p {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    small {
+      margin: auto;
+      padding-top: 1rem;
+      font-size: 1rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border-color: $dark-icon;
+    background: lighten($dark-background, 5%);
+    filter: drop-shadow(5px 6px 0 lighten($dark-background, 8%));
+
+    &:hover {
+      filter: drop-shadow(5px 8px 0 lighten($dark-background, 8%));
+    }
+
+    .tool-card-content h2 {
+      color: $dark-text;
+    }
+  }
+}

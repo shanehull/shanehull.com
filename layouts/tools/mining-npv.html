@@ -1,0 +1,150 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+
+  <div class="calculator-wrapper">
+    <div class="calculator-sticky-header">
+      <div class="calculator-stats-grid">
+        <div class="calculator-stat-item">
+          <span class="label">Life of Mine</span>
+          <span id="outLife" class="val">0 Years</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label">Real Annual FCF</span>
+          <span id="outAnnualFCF" class="val">$0</span>
+        </div>
+      </div>
+      <div class="calculator-main-display">
+        <span class="label">Risk-Adjusted NPV</span>
+        <h1 id="outNPV">$0.00</h1>
+      </div>
+    </div>
+
+    <div class="calculator-body">
+      <h3 class="calculator-section-head">Production Profile</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Total Reserves (oz/lbs)</label>
+          <input
+            type="number"
+            id="reserves"
+            value="2000000"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Annual Production</label>
+          <input
+            type="number"
+            id="production"
+            value="150000"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Economics</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Commodity Price ($)</label>
+          <input
+            type="number"
+            id="price"
+            value="2000"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Stated AISC ($)</label>
+          <input
+            type="number"
+            id="cost"
+            value="1100"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Capital & Valuation</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Stated Initial Capex ($)</label>
+          <input
+            type="number"
+            id="capex"
+            value="100000000"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+        <div class="calculator-field">
+          <label>Discount Rate (%)</label>
+          <input
+            type="number"
+            id="discount"
+            value="12"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Stress Test Adjustments</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Capex Blowout (%)</label>
+          <input
+            type="number"
+            id="capexOverrun"
+            value="30"
+            oninput="calculateMineNPV()"
+          />
+          <small style="opacity: 0.6; font-size: 0.7rem"
+            >buffer for construction overruns</small
+          >
+        </div>
+        <div class="calculator-field">
+          <label>Op. Cost Inflation (%)</label>
+          <input
+            type="number"
+            id="costInflation"
+            value="10"
+            oninput="calculateMineNPV()"
+          />
+          <small style="opacity: 0.6; font-size: 0.7rem"
+            >buffer for real-world costs</small
+          >
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Tax Rate (%)</label>
+          <input
+            type="number"
+            id="tax"
+            value="25"
+            oninput="calculateMineNPV()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="tool-instructions">{{ .Content }}</div>
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
+<script src="{{ $shareable.RelPermalink }}"></script>
+
+{{ $script := resources.Get "js/mining-npv.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+
+{{ end }}

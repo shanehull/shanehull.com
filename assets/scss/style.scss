@@ -10,6 +10,8 @@ $button-color-dark: lighten($dark-background, 10%);
 $button-color-light: darken($light-background, 10%);
 
 @import "fonts";
+@import "tools/list";
+@import "tools/calculator";
 
 @keyframes fadeInAnimation {
   0% {
