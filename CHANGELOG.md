@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/shanehull/shanehull.com/compare/v0.4.0...v0.5.0) (2026-02-13)
+
+
+### Features
+
+* add calculator tools ([#71](https://github.com/shanehull/shanehull.com/issues/71)) ([445d4e5](https://github.com/shanehull/shanehull.com/commit/445d4e59ce63460365ffce08c8acea44be68bc16))
+
+
+### Bug Fixes
+
+* font files ([#69](https://github.com/shanehull/shanehull.com/issues/69)) ([92cd45f](https://github.com/shanehull/shanehull.com/commit/92cd45f72eaa47f147114dcdcdab260068c84f85))
+
 ## [0.4.0](https://github.com/shanehull/shanehull.com/compare/v0.3.0...v0.4.0) (2026-02-11)
 
 
