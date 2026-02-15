@@ -64,7 +64,6 @@ layout: "tools/[tool-name]"
             type="number"
             id="input1"
             value="100"
-            oninput="calculateMyTool()"
           />
         </div>
         <div class="calculator-field">
@@ -73,7 +72,6 @@ layout: "tools/[tool-name]"
             type="number"
             id="input2"
             value="5"
-            oninput="calculateMyTool()"
           />
         </div>
       </div>
@@ -150,10 +148,14 @@ function initMyTool() {
   // Safety check: specific ID for this tool to prevent errors on other pages
   if (!document.getElementById("input1")) return;
 
-  // 1. Run Defaults
+  // 1. Attach event listeners (CSP-compliant, no inline handlers)
+  document.getElementById("input1").addEventListener("input", calculateMyTool);
+  document.getElementById("input2").addEventListener("input", calculateMyTool);
+
+  // 2. Run Defaults
   calculateMyTool();
 
-  // 2. Enable URL Sharing (if helper exists)
+  // 3. Enable URL Sharing (if helper exists)
   if (typeof makeShareable === "function") {
     makeShareable(calculateMyTool);
   }
@@ -187,5 +189,6 @@ Do not write new CSS unless absolutely necessary. Use these existing classes:
 1.  **Duplicate IDs:** Ensure all input IDs are unique within the page.
 2.  **Hardcoded Colors:** Never use `color: black` or `white` in inline styles. Use the standard classes so Dark Mode works automatically.
 3.  **Missing `shareable.js`:** If you forget to include the shareable script in the HTML, URL params won't work.
-4.  **Inline JS:** Avoid `<script>` tags inside the HTML. Keep logic in `assets/js/`.
-5.  **Inline Styles:** Avoid inline styles in the HTML. Use the standard classes for styling or add classes via `assets/scss/tools/_calculator.scss`.
+4.  **Inline Event Handlers:** Avoid `oninput="..."` attributes in HTML. Use `addEventListener()` in your JavaScript instead (required for CSP compliance).
+5.  **Inline JS:** Avoid `<script>` tags inside the HTML. Keep logic in `assets/js/`.
+6.  **Inline Styles:** Avoid inline styles in the HTML. Use the standard classes for styling or add classes via `assets/scss/tools/_calculator.scss`.

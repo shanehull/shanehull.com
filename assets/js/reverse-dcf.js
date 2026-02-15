@@ -70,6 +70,13 @@ function calculateDCF(startEPS, growth, discount, terminalMult, years) {
 function initRevDCF() {
   if (!document.getElementById("sharePrice")) return;
 
+  // Attach event listeners (CSP-compliant, no inline handlers)
+  document.getElementById("sharePrice").addEventListener("input", solveReverseDCF);
+  document.getElementById("eps").addEventListener("input", solveReverseDCF);
+  document.getElementById("discount").addEventListener("input", solveReverseDCF);
+  document.getElementById("terminal").addEventListener("input", solveReverseDCF);
+  document.getElementById("years").addEventListener("input", solveReverseDCF);
+
   solveReverseDCF();
 
   if (typeof makeShareable === "function") {

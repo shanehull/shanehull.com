@@ -31,7 +31,7 @@
       <div class="calculator-row">
         <div class="calculator-field">
           <label>Shares FD (M)</label>
-          <input type="number" id="shares" value="100" oninput="calculate()" />
+          <input type="number" id="shares" value="100" />
         </div>
         <div class="calculator-field">
           <label>Current Price ($)</label>
@@ -39,7 +39,6 @@
             type="number"
             id="currPrice"
             value="10.00"
-            oninput="calculate()"
           />
         </div>
       </div>
@@ -47,11 +46,11 @@
       <div class="calculator-row">
         <div class="calculator-field">
           <label>Exit Multiple</label>
-          <input type="number" id="multiple" value="10" oninput="calculate()" />
+          <input type="number" id="multiple" value="10" />
         </div>
         <div class="calculator-field">
           <label>Tax Rate (%)</label>
-          <input type="number" id="tax" value="25" oninput="calculate()" />
+          <input type="number" id="tax" value="25" />
         </div>
       </div>
 
@@ -60,7 +59,7 @@
       <div id="assetList"></div>
 
       <div class="calculator-action-wrapper">
-        <button class="calculator-btn" onclick="addAsset()">+ Add Asset</button>
+        <button class="calculator-btn" id="addAssetBtn">+ Add Asset</button>
       </div>
     </div>
   </div>
