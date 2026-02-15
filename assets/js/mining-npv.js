@@ -57,6 +57,17 @@ function formatCurrency(num) {
 function initNPV() {
   if (!document.getElementById("reserves")) return;
 
+  // Attach event listeners (CSP-compliant, no inline handlers)
+  document.getElementById("reserves").addEventListener("input", calculateMineNPV);
+  document.getElementById("production").addEventListener("input", calculateMineNPV);
+  document.getElementById("price").addEventListener("input", calculateMineNPV);
+  document.getElementById("cost").addEventListener("input", calculateMineNPV);
+  document.getElementById("capex").addEventListener("input", calculateMineNPV);
+  document.getElementById("discount").addEventListener("input", calculateMineNPV);
+  document.getElementById("capexOverrun").addEventListener("input", calculateMineNPV);
+  document.getElementById("costInflation").addEventListener("input", calculateMineNPV);
+  document.getElementById("tax").addEventListener("input", calculateMineNPV);
+
   calculateMineNPV();
 
   if (typeof makeShareable === "function") {

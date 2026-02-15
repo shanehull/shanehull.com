@@ -78,6 +78,16 @@ function calculateSMB() {
 function initSMB() {
   if (!document.getElementById("price")) return;
 
+  // Attach event listeners (CSP-compliant, no inline handlers)
+  document.getElementById("price").addEventListener("input", calculateSMB);
+  document.getElementById("equityPct").addEventListener("input", calculateSMB);
+  document.getElementById("intRate").addEventListener("input", calculateSMB);
+  document.getElementById("term").addEventListener("input", calculateSMB);
+  document.getElementById("cashflow").addEventListener("input", calculateSMB);
+  document.getElementById("growth").addEventListener("input", calculateSMB);
+  document.getElementById("hold").addEventListener("input", calculateSMB);
+  document.getElementById("exitMult").addEventListener("input", calculateSMB);
+
   if (typeof toggleMode === "function") toggleMode();
   calculateSMB();
 

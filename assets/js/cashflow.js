@@ -9,32 +9,45 @@ function addAsset() {
   card.id = `asset-${assetIdCounter}`;
 
   card.innerHTML = `
-        ${assetIdCounter > 1 ? `<span class="calculator-remove-btn" onclick="removeAsset(${assetIdCounter})">✕</span>` : ""}
+        ${assetIdCounter > 1 ? `<span class="calculator-remove-btn" data-id="${assetIdCounter}">✕</span>` : ""}
         
         <div class="calculator-field" style="margin-bottom: 1rem;">
             <label>Asset Description</label>
-            <input type="text" placeholder="e.g., Gold Production" oninput="calculate()">
+            <input type="text" placeholder="e.g., Gold Production" class="asset-input">
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
                 <label>Production</label>
-                <input type="number" class="p-prod" value="100000" oninput="calculate()">
+                <input type="number" class="p-prod" value="100000">
             </div>
             <div class="calculator-field">
                 <label>Price ($)</label>
-                <input type="number" class="p-price" value="2500" oninput="calculate()">
+                <input type="number" class="p-price" value="2500">
             </div>
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
                 <label>Unit Cost ($)</label>
-                <input type="number" class="p-cost" value="1200" oninput="calculate()">
+                <input type="number" class="p-cost" value="1200">
             </div>
         </div>
     `;
   list.appendChild(card);
+  
+  // Attach event listeners to new inputs (CSP-compliant)
+  const newInputs = card.querySelectorAll(".asset-input, .p-prod, .p-price, .p-cost");
+  newInputs.forEach(input => input.addEventListener("input", calculate));
+  
+  const removeBtn = card.querySelector(".calculator-remove-btn");
+  if (removeBtn) {
+    removeBtn.addEventListener("click", () => {
+      const id = removeBtn.dataset.id;
+      removeAsset(id);
+    });
+  }
+  
   calculate();
 }
 
@@ -83,6 +96,17 @@ function formatCompact(num) {
 
 function initCashflow() {
   if (!document.getElementById("shares")) return;
+
+  // Attach event listeners to main inputs (CSP-compliant, no inline handlers)
+  document.getElementById("shares").addEventListener("input", calculate);
+  document.getElementById("currPrice").addEventListener("input", calculate);
+  document.getElementById("multiple").addEventListener("input", calculate);
+  document.getElementById("tax").addEventListener("input", calculate);
+  
+  const addAssetBtn = document.getElementById("addAssetBtn");
+  if (addAssetBtn) {
+    addAssetBtn.addEventListener("click", addAsset);
+  }
 
   const list = document.getElementById("assetList");
   if (list && list.children.length === 0) {

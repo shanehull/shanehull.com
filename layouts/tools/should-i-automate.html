@@ -20,7 +20,7 @@
       <div class="calculator-row">
         <div class="calculator-field">
           <label>How often do you do it?</label>
-          <select id="frequency" onchange="calculateAuto()">
+          <select id="frequency">
             <option value="50">50/Day</option>
             <option value="5">5/Day</option>
             <option value="1">Daily</option>
@@ -37,11 +37,9 @@
               type="number"
               id="timeSaved"
               value="1"
-              oninput="calculateAuto()"
             />
             <select
               id="unit"
-              onchange="calculateAuto()"
               style="border-radius: 8px; border: 1px solid #ccc"
             >
               <option value="1">Seconds</option>
@@ -59,7 +57,6 @@
             type="number"
             id="duration"
             value="5"
-            oninput="calculateAuto()"
           />
         </div>
       </div>
