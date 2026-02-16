@@ -10,6 +10,10 @@
   border: 1px solid rgba($light-text, 0.2);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 
+  @media (min-width: 900px) {
+    max-width: 650px;
+  }
+
   @media (prefers-color-scheme: dark) {
     background-color: lighten($dark-background, 5%);
     border-color: $dark-text;
@@ -121,7 +125,7 @@
     flex-direction: column;
 
     label {
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       opacity: 0.9;
@@ -130,7 +134,7 @@
     input,
     select {
       padding: 0.8rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       border-radius: 8px;
       border: 1px solid rgba(0, 0, 0, 0.2);
       background-color: transparent;
@@ -153,6 +157,12 @@
           border-color: $dark-icon;
           box-shadow: 0 0 0 3px rgba($dark-icon, 0.2);
         }
+      }
+    }
+
+    input[type="date"] {
+      @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
       }
     }
   }
@@ -186,6 +196,32 @@
       opacity: 0.7;
     }
   }
+
+  canvas {
+    max-height: 100%;
+    width: 100%;
+  }
+
+  table.heatmap {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      text-align: center;
+      padding: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.95rem;
+    }
+
+    th {
+      font-weight: 600;
+      color: $light-text;
+      @media (prefers-color-scheme: dark) {
+        color: $dark-text;
+      }
+    }
+  }
 }
 
 .calculator-action-wrapper {
@@ -196,4 +232,290 @@
     width: 100%;
     padding: 1rem;
   }
+}
+
+// Modal Styles
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($light-text, 0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba($dark-text, 0.6);
+  }
+
+  &.modal-visible {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.modal-content {
+  background-color: $light-background;
+  border-radius: 16px;
+  border: 1px solid rgba($light-text, 0.2);
+  box-shadow: 0 25px 50px rgba($light-text, 0.15);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: lighten($dark-background, 5%);
+    border-color: $dark-text;
+    box-shadow: 0 25px 50px rgba($dark-text, 0.4);
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: darken($light-background, 5%);
+  border-bottom: 3px solid $light-icon;
+  border-radius: 16px 16px 0 0;
+
+  @media (max-width: 600px) {
+    padding: 1.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: darken($dark-background, 2%);
+    border-bottom-color: $dark-icon;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  transition: all 0.2s ease;
+  line-height: 1;
+  margin-left: 1rem;
+  flex-shrink: 0;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.modal-body {
+  padding: 2rem;
+
+  @media (max-width: 600px) {
+    padding: 1.5rem;
+  }
+}
+
+.modal-steps {
+  list-style: decimal;
+  list-style-position: inside;
+  line-height: 1.8;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  color: inherit;
+
+  li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+
+    @media (max-width: 600px) {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    a {
+      color: $light-icon;
+      text-decoration: none;
+      font-weight: 600;
+      word-break: break-all;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+
+      @media (prefers-color-scheme: dark) {
+        color: $dark-icon;
+      }
+
+      &:hover {
+        border-bottom-color: currentColor;
+      }
+    }
+
+    code {
+      background-color: rgba(0, 0, 0, 0.08);
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      font-family: "Hack Nerd Font", monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      white-space: nowrap;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+}
+
+.modal-error {
+  background: linear-gradient(135deg, rgba($light-icon, 0.12) 0%, rgba($light-icon, 0.08) 100%);
+  border-left: 4px solid $light-icon;
+  padding: 1rem;
+  border-radius: 8px;
+  color: $light-icon;
+  font-size: 1.05rem;
+  display: none;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(135deg, rgba($dark-icon, 0.12) 0%, rgba($dark-icon, 0.08) 100%);
+    border-left-color: $dark-icon;
+    color: $dark-icon;
+  }
+
+  &.modal-error-visible {
+    display: block;
+  }
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba($light-text, 0.1);
+  background-color: rgba($light-text, 0.02);
+  text-align: right;
+  border-radius: 0 0 16px 16px;
+
+  @media (max-width: 600px) {
+    padding: 1rem 1.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border-top-color: rgba($dark-text, 0.1);
+    background-color: rgba($dark-text, 0.02);
+  }
+}
+
+// Universal Button Styles
+.btn-primary {
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: $light-icon;
+  color: $light-background;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-icon;
+    color: $dark-background;
+  }
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.btn-secondary {
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: transparent;
+  color: $light-icon;
+  border: 1.5px solid $light-icon;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+
+  @media (prefers-color-scheme: dark) {
+    color: $dark-icon;
+    border-color: $dark-icon;
+  }
+
+  &:hover {
+    background-color: rgba($light-icon, 0.1);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: rgba($dark-icon, 0.1);
+    }
+  }
+
+  &:active {
+    background-color: rgba($light-icon, 0.2);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: rgba($dark-icon, 0.2);
+    }
+  }
+}
+
+// Alias for backwards compatibility
+.modal-btn-primary {
+  @extend .btn-primary;
 }
