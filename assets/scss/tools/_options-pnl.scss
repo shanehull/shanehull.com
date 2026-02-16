@@ -1,0 +1,84 @@
+.options-pnl-hidden {
+  display: none !important;
+}
+
+.options-pnl-visible {
+  display: flex !important;
+}
+
+#tickerField {
+  position: relative;
+}
+
+.options-pnl-suggestions {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1e1e1e;
+  border: 1px solid #444;
+  border-radius: 6px;
+  z-index: 100;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+
+  &:not(:empty) {
+    display: flex;
+  }
+}
+
+.options-pnl-profit-badge {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.options-pnl-chart-container {
+  height: 350px;
+  padding: 10px;
+}
+
+.options-pnl-heatmap-card {
+  overflow-x: auto;
+}
+
+.options-pnl-heatmap-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+
+  .options-pnl-heatmap-label {
+    font-weight: bold;
+  }
+
+  select {
+    width: auto;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    color: inherit;
+    font-family: "Hack Nerd Font", monospace;
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: none;
+      border-color: $light-icon;
+      box-shadow: 0 0 0 3px rgba($light-icon, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      border-color: rgba(255, 255, 255, 0.2);
+      &:focus {
+        border-color: $dark-icon;
+        box-shadow: 0 0 0 3px rgba($dark-icon, 0.2);
+      }
+    }
+  }
+}

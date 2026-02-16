@@ -184,6 +184,31 @@ Do not write new CSS unless absolutely necessary. Use these existing classes:
 - **Input Groups:** `.calculator-field` (Handles labels, inputs, focus states)
 - **Badges:** `.upside-badge` (Green/Red text for secondary stats)
 
+### Color Variables (REQUIRED - No Hardcoded Colors)
+
+Always use the site's color variables defined in `assets/scss/style.scss`:
+
+- **Light Mode:** `$light-background`, `$light-text`, `$light-icon`
+- **Dark Mode:** `$dark-background`, `$dark-text`, `$dark-icon`
+- **Buttons:** `$button-color-dark`, `$button-color-light`
+
+**Never use hardcoded colors like `#ef4444`, `#ffffff`, `#000000`, etc.** Always include `@media (prefers-color-scheme: dark)` media queries to support both light and dark themes.
+
+Example:
+```scss
+.my-component {
+  background-color: $light-background;
+  color: $light-text;
+  border-color: $light-icon;
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-background;
+    color: $dark-text;
+    border-color: $dark-icon;
+  }
+}
+```
+
 ## 4. Common Pitfalls to Avoid
 
 1.  **Duplicate IDs:** Ensure all input IDs are unique within the page.
