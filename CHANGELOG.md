@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/shanehull/shanehull.com/compare/v0.5.0...v0.6.0) (2026-02-16)
+
+
+### Features
+
+* options pnl calculator ([#74](https://github.com/shanehull/shanehull.com/issues/74)) ([bd3c2d4](https://github.com/shanehull/shanehull.com/commit/bd3c2d456c5bce57910c0b6538fa1a5e3bea9b26))
+
+
+### Bug Fixes
+
+* avoid inline scripts ([#72](https://github.com/shanehull/shanehull.com/issues/72)) ([ad357ef](https://github.com/shanehull/shanehull.com/commit/ad357ef43c2cdf2465cc46a1971cae29e3593a7d))
+
 ## [0.5.0](https://github.com/shanehull/shanehull.com/compare/v0.4.0...v0.5.0) (2026-02-13)
 
 
