@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/shanehull/shanehull.com/compare/v0.6.0...v0.6.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* show modal on blank api key on options pnl ([#75](https://github.com/shanehull/shanehull.com/issues/75)) ([5f5bc43](https://github.com/shanehull/shanehull.com/commit/5f5bc430e2b2c4c5361bda81fb7c8d453869cf64))
+
 ## [0.6.0](https://github.com/shanehull/shanehull.com/compare/v0.5.0...v0.6.0) (2026-02-16)
 
 
