@@ -1,4 +1,6 @@
-let API_HOST = "yahoo-finance15.p.rapidapi.com";
+if (typeof API_HOST === 'undefined') {
+  var API_HOST = "yahoo-finance15.p.rapidapi.com";
+}
 let currentChain = null;
 let plChart = null;
 let searchTimeout = null;
@@ -349,8 +351,14 @@ async function fetchTickerSuggestions() {
     return;
   }
 
-  if (!apiKey) {
+  // Don't search if this is demo mode (has parentheses)
+  if (fullValue.includes("(")) {
     suggestionsEl.innerHTML = "";
+    return;
+  }
+
+  if (!apiKey) {
+    showApiKeyModal();
     return;
   }
 
@@ -547,24 +555,24 @@ function updateUiMode() {
 }
 
 function setHeatmapMode(mode) {
-  currentHeatmapMode = mode;
+   currentHeatmapMode = mode;
 
-  if (latestStrategyCalc) {
-    renderHeatmap(
-      latestStrategyCalc.S,
-      latestStrategyCalc.K,
-      latestStrategyCalc.T,
-      latestStrategyCalc.iv,
-      latestStrategyCalc.type,
-      latestStrategyCalc.side,
-      latestStrategyCalc.contracts,
-      latestStrategyCalc.lotSize,
-      latestStrategyCalc.cost,
-      latestStrategyCalc.rangePct,
-      latestStrategyCalc.entry,
-      mode,
-    );
-  }
+   if (latestStrategyCalc) {
+     renderHeatmap(
+       latestStrategyCalc.S,
+       latestStrategyCalc.K,
+       latestStrategyCalc.T,
+       latestStrategyCalc.iv,
+       latestStrategyCalc.type,
+       latestStrategyCalc.side,
+       latestStrategyCalc.contracts,
+       latestStrategyCalc.lotSize,
+       latestStrategyCalc.cost,
+       latestStrategyCalc.rangePct,
+       latestStrategyCalc.entry,
+       mode,
+     );
+   }
 }
 
 function initOptions() {
