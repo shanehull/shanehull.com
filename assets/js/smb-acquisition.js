@@ -58,14 +58,6 @@ function calculateSMB() {
   const year1NOPAT = year1OperatingProfit * (1 - corpTax);
   const roic = price > 0 ? (year1NOPAT / price) * 100 : 0;
 
-  // Year X ROIC = Year X NOPAT / Purchase Price
-  // Denominator stays constant - shows operational return independent of growth
-  // Growth flows through to ROIC proportionally (3% SDE growth = 3% ROIC growth)
-  const exitYearSDE = startSDE * Math.pow(1 + growth, hold);
-  const exitOperatingProfit = exitYearSDE - capex;
-  const exitNOPAT = exitOperatingProfit * (1 - corpTax);
-  const exitROIC = price > 0 ? (exitNOPAT / price) * 100 : 0;
-
   // Payback calculation
   let paybackYears = 0;
   let currentSDE = startSDE;
@@ -143,9 +135,6 @@ function calculateSMB() {
 
   // Update UI
   document.getElementById("outROIC").innerText = roic.toFixed(1) + "%";
-  document.getElementById("exitROICLabel").innerText =
-    "Year " + Math.round(hold) + " ROIC";
-  document.getElementById("outExitROIC").innerText = exitROIC.toFixed(1) + "%";
   document.getElementById("outPayback").innerText =
     paybackYears > 0 ? paybackYears.toFixed(1) + " Years" : ">30 Years";
   document.getElementById("outIRR").innerText = isFinite(irr)
