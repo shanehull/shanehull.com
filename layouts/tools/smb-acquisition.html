@@ -9,8 +9,12 @@
     <div class="calculator-sticky-header">
       <div class="calculator-stats-grid">
         <div class="calculator-stat-item">
-          <span class="label">Unlevered ROIC</span>
+          <span class="label">Entry ROIC</span>
           <span id="outROIC" class="val">0%</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label" id="exitROICLabel">Year 10 ROIC</span>
+          <span id="outExitROIC" class="val">0%</span>
         </div>
         <div class="calculator-stat-item">
           <span class="label">Payback Period</span>
@@ -29,29 +33,17 @@
       <div class="calculator-row">
         <div class="calculator-field">
           <label>Purchase Price ($)</label>
-          <input
-            type="number"
-            id="price"
-            value="1000000"
-          />
+          <input type="number" id="price" value="1000000" />
         </div>
         <div class="calculator-field">
           <label>Equity Down (%)</label>
-          <input
-            type="number"
-            id="equityPct"
-            value="50"
-          />
+          <input type="number" id="equityPct" value="50" />
         </div>
       </div>
       <div class="calculator-row">
         <div class="calculator-field">
           <label>Interest Rate (%)</label>
-          <input
-            type="number"
-            id="intRate"
-            value="11"
-          />
+          <input type="number" id="intRate" value="11" />
         </div>
         <div class="calculator-field">
           <label>Loan Term (Years)</label>
@@ -62,12 +54,8 @@
       <h3 class="calculator-section-head">Operating Performance</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Year 1 EBITDA ($)</label>
-          <input
-            type="number"
-            id="cashflow"
-            value="250000"
-          />
+          <label>Year 1 SDE ($)</label>
+          <input type="number" id="cashflow" value="250000" />
         </div>
         <div class="calculator-field">
           <label>Annual Growth (%)</label>
@@ -75,19 +63,33 @@
         </div>
       </div>
 
-      <h3 class="calculator-section-head">Exit Assumptions (Optional)</h3>
+      <h3 class="calculator-section-head">Operating Adjustments</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Annual Capex ($)</label>
+          <input type="number" id="capex" value="12500" />
+        </div>
+        <div class="calculator-field">
+          <label>Corporate Tax Rate (%)</label>
+          <input type="number" id="corpTax" value="25" />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Exit Assumptions</h3>
       <div class="calculator-row">
         <div class="calculator-field">
           <label>Hold Period (Years)</label>
-          <input type="number" id="hold" value="5" />
+          <input type="number" id="hold" value="10" />
         </div>
         <div class="calculator-field">
-          <label>Exit Multiple (x)</label>
-          <input
-            type="number"
-            id="exitMult"
-            value="4"
-          />
+          <label>Exit Multiple (x SDE)</label>
+          <input type="number" id="exitMult" value="4" />
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label>Capital Gains Tax Rate (%)</label>
+          <input type="number" id="gainsTax" value="23.5" />
         </div>
       </div>
     </div>
