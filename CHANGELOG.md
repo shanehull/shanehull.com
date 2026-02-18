@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.3](https://github.com/shanehull/shanehull.com/compare/v0.6.2...v0.6.3) (2026-02-18)
+
+
+### Bug Fixes
+
+* remove exit roic on smb calc ([#79](https://github.com/shanehull/shanehull.com/issues/79)) ([20e44c9](https://github.com/shanehull/shanehull.com/commit/20e44c9c1539d6a37d0b7baf62e8e7a34fb2a243))
+
 ## [0.6.2](https://github.com/shanehull/shanehull.com/compare/v0.6.1...v0.6.2) (2026-02-18)
 
 
