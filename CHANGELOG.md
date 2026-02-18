@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/shanehull/shanehull.com/compare/v0.6.1...v0.6.2) (2026-02-18)
+
+
+### Bug Fixes
+
+* realistic smb acquisition calc ([#77](https://github.com/shanehull/shanehull.com/issues/77)) ([6e18b7d](https://github.com/shanehull/shanehull.com/commit/6e18b7df1db842a3061f40a2f4e120debf0cc4e8))
+
 ## [0.6.1](https://github.com/shanehull/shanehull.com/compare/v0.6.0...v0.6.1) (2026-02-17)
 
 
