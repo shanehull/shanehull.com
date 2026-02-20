@@ -1,3 +1,4 @@
+// Package handlers implements the handlers for shanehull.com
 package handlers
 
 import "net/http"

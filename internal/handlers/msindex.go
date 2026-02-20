@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/shanehull/shanehull.com/internal/cache"
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
@@ -21,7 +22,10 @@ const (
 	equityID    = "NCBCEL"
 	networthID  = "TNWMVBSNNCB"
 	fredBaseURL = "https://api.stlouisfed.org/fred/series/observations"
+	cacheTTL    = 24 * time.Hour
 )
+
+var chartCache = cache.New()
 
 type FinancialData struct {
 	Date     time.Time
@@ -220,6 +224,36 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	showQuartiles := r.URL.Query().Has("quartiles")
 
+	// Generate cache key
+	cacheKey := fmt.Sprintf("msindex:%s:%v", rangeParam, showQuartiles)
+
+	// Check cache
+	if cached, found := chartCache.Get(cacheKey); found {
+		chartData := cached.([]templates.LineChartData)
+		options := map[string]string{
+			"mainLabel":  "Misesian Stationarity Index",
+			"yAxisLabel": "Index Value",
+		}
+		component := templates.LineChart("chart-canvas", chartData, showQuartiles, options)
+
+		buf := new(bytes.Buffer)
+		defer buf.Reset()
+
+		if err := component.Render(r.Context(), buf); err != nil {
+			log.Print("failed to render component:", err)
+			http.Error(w, "internal server error", http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.Header().Set("HX-Trigger", "initChartFromData")
+		_, err := w.Write(buf.Bytes())
+		if err != nil {
+			log.Print("failed to write response:", err)
+		}
+		return
+	}
+
 	startDate := calculateStartDate(rangeParam)
 
 	equity, err := fetchFredData(equityID, startDate)
@@ -263,6 +297,9 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Cache the result
+	chartCache.Set(cacheKey, chartData, cacheTTL)
+
 	options := map[string]string{
 		"mainLabel":  "Misesian Stationarity Index",
 		"yAxisLabel": "Index Value",
@@ -272,8 +309,8 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
 
-	if err := component.Render(r.Context(), buf); err != nil {
-		log.Print("failed to render component:", err)
+	if renderErr := component.Render(r.Context(), buf); renderErr != nil {
+		log.Print("failed to render component:", renderErr)
 		http.Error(w, "internal server error", http.StatusInternalServerError)
 		return
 	}
