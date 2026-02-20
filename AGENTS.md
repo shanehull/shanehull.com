@@ -232,9 +232,9 @@ Each chart tool requires four files:
 1.  **Content:** `content/tools/[tool-name].md` (Defines metadata & URL)
 2.  **Layout:** `layouts/tools/[tool-name].html` (HTMX-powered HTML structure—copy from msindex)
 3.  **Handler:** `internal/handlers/[tool-name].go` (Data fetching and calculation logic)
-4.  **Templ:** `internal/templates/msindex.templ` (Generic `LineChart` component—shared across all chart tools)
+4.  **Templ:** `internal/templates/linechart.templ` (Generic `LineChart` component—shared across all chart tools)
 
-The generic `LineChart` templ component (in `internal/templates/msindex.templ`) outputs chart config as `data-chart` attributes. The external `assets/js/chart-init.js` file handles all initialization and reinitializes on HTMX swaps.
+The generic `LineChart` templ component (in `internal/templates/linechart.templ`) outputs chart config as `data-chart` attributes. The external `assets/js/chart-init.js` file handles all initialization and reinitializes on HTMX swaps.
 
 ---
 
