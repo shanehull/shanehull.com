@@ -83,10 +83,13 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Wrap mux with CSP middleware
+	handler := middleware.CSP(mux)
+
 	// Run the server at
 	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
 	go func() {
-		if err := http.ListenAndServe(serveAt, mux); err != nil {
+		if err := http.ListenAndServe(serveAt, handler); err != nil {
 			log.Fatal(err)
 		}
 	}()
