@@ -1,0 +1,145 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="chart-tool-wrapper">
+    <div class="chart-controls">
+      <div class="control-group">
+        <label>Time Range:</label>
+        <div class="button-group">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="max"
+              checked
+              hx-get="/msindex/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            Max
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="50y"
+              hx-get="/msindex/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            50 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="20y"
+              hx-get="/msindex/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            20 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="10y"
+              hx-get="/msindex/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            10 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="5y"
+              hx-get="/msindex/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            5 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="1y"
+              hx-get="/msindex/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            1 Year
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            name="quartiles"
+            checked
+            hx-get="/msindex/chart"
+            hx-target="#chart-inner"
+            hx-include="[name=range]"
+            hx-swap="innerHTML"
+            hx-trigger="change"
+          />
+          Show Quartiles
+        </label>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="chart-canvas"></canvas>
+      <div
+        id="chart-inner"
+        hx-get="/msindex/chart"
+        hx-include="[name=range],[name=quartiles]"
+        hx-trigger="load"
+        hx-swap="innerHTML"
+      ></div>
+    </div>
+
+    <div
+      id="chart-downloads"
+      hx-get="/msindex/downloads"
+      hx-include="[name=range],[name=quartiles]"
+      hx-trigger="load, change from:.chart-controls input"
+      hx-swap="innerHTML"
+    ></div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.0/dist/chartjs-plugin-zoom.min.js"></script>
+
+{{ end }}

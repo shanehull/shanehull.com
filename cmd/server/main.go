@@ -73,19 +73,8 @@ func main() {
 	// Serve all hugo content (the 'public' directory) at the root url
 	mux.Handle("/", fileServerWith404(fileServer, serverRoot))
 
-	mux.HandleFunc(
-		"/quote",
-		middleware.CORS(
-			http.HandlerFunc(
-				handlers.QuoteHandler,
-			),
-			allowedOrigin,
-		),
-	)
-
-	// TODO: endpoint for portfolio and blog search here
-
-	// TODO: endpoint for tools here
+	// Register API handlers
+	registerHandlers(mux)
 
 	// Get the pages from the gob file that was generated at build time.
 	// We'll use it in our search endpoint for the blog (later).
@@ -93,8 +82,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	mux.HandleFunc("/healthz", http.HandlerFunc(handlers.HealthzHandler))
 
 	// Run the server at
 	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
@@ -117,6 +104,55 @@ func main() {
 	cancel()
 
 	logger.Info("Server stopped")
+}
+
+func registerHandlers(mux *http.ServeMux) {
+	// Quote API
+	mux.HandleFunc(
+		"/quote",
+		middleware.CORS(
+			http.HandlerFunc(handlers.QuoteHandler),
+			allowedOrigin,
+		),
+	)
+
+	// MS Index tool
+	mux.HandleFunc(
+		"/msindex/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.MSIndexHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/msindex/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.MSIndexDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/msindex/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.MSIndexDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/msindex/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.MSIndexCSVHandler),
+			allowedOrigin,
+		),
+	)
+
+	// Health check
+	mux.HandleFunc(
+		"/healthz",
+		http.HandlerFunc(handlers.HealthzHandler),
+	)
+
+	// TODO: endpoint for portfolio and blog search here
 }
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {

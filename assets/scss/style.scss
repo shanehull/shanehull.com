@@ -13,6 +13,7 @@ $button-color-light: darken($light-background, 10%);
 @import "tools/list";
 @import "tools/calculator";
 @import "tools/options-pnl";
+@import "tools/chart-tools";
 
 @keyframes fadeInAnimation {
   0% {
