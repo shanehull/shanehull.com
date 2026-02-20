@@ -1,6 +1,9 @@
 package templates
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"strings"
+)
 
 type LineChartData struct {
 	Date      string  `json:"date"`
@@ -10,10 +13,10 @@ type LineChartData struct {
 }
 
 templ LineChart(canvasId string, data []LineChartData, showQuartiles bool, options map[string]string) {
-	@templ.Raw(buildChartJS(canvasId, data, showQuartiles, options))
+	<div { buildChartDataAttributes(canvasId, data, showQuartiles, options)... }></div>
 }
 
-func buildChartJS(canvasId string, data []LineChartData, showQuartiles bool, options map[string]string) string {
+func buildChartDataAttributes(canvasId string, data []LineChartData, showQuartiles bool, options map[string]string) templ.Attributes {
 	labels := make([]string, len(data))
 	values := make([]float64, len(data))
 	q1 := make([]float64, len(data))
@@ -31,120 +34,21 @@ func buildChartJS(canvasId string, data []LineChartData, showQuartiles bool, opt
 	q1JSON, _ := json.Marshal(q1)
 	q3JSON, _ := json.Marshal(q3)
 
-	datasets := `[{
-		label: '` + options["mainLabel"] + `',
-		data: ` + string(valuesJSON) + `,
-		borderColor: '#3b82f6',
-		backgroundColor: 'rgba(59, 130, 246, 0.1)',
-		borderWidth: 2,
-		fill: true,
-		tension: 0.1,
-		pointRadius: 1
-	}`
+	// Escape options for use in JSON
+	mainLabel := strings.ReplaceAll(options["mainLabel"], `"`, `\"`)
+	yAxisLabel := strings.ReplaceAll(options["yAxisLabel"], `"`, `\"`)
+
+	datasets := `[{"label":"` + mainLabel + `","data":` + string(valuesJSON) + `,"borderColor":"#3b82f6","backgroundColor":"rgba(59, 130, 246, 0.1)","borderWidth":2,"fill":true,"tension":0.1,"pointRadius":1}`
 
 	if showQuartiles {
-		datasets += `,{
-			label: 'Q1 (25th percentile)',
-			data: ` + string(q1JSON) + `,
-			borderColor: 'rgba(200, 100, 100, 0.6)',
-			borderDash: [5, 5],
-			borderWidth: 1,
-			fill: false,
-			pointRadius: 0
-		},{
-			label: 'Q3 (75th percentile)',
-			data: ` + string(q3JSON) + `,
-			borderColor: 'rgba(100, 200, 100, 0.6)',
-			borderDash: [5, 5],
-			borderWidth: 1,
-			fill: false,
-			pointRadius: 0
-		}`
+		datasets += `,{"label":"Q1 (25th percentile)","data":` + string(q1JSON) + `,"borderColor":"rgba(200, 100, 100, 0.6)","borderDash":[5,5],"borderWidth":1,"fill":false,"pointRadius":0},{"label":"Q3 (75th percentile)","data":` + string(q3JSON) + `,"borderColor":"rgba(100, 200, 100, 0.6)","borderDash":[5,5],"borderWidth":1,"fill":false,"pointRadius":0}`
 	}
 
 	datasets += `]`
 
-	return `<script>
-(function() {
-	if (window.lineChartInstance) {
-		window.lineChartInstance.destroy();
+	configJSON := `{"labels":` + string(labelsJSON) + `,"datasets":` + datasets + `,"yAxisLabel":"` + yAxisLabel + `","canvasId":"` + canvasId + `"}`
+
+	return templ.Attributes{
+		"data-chart": configJSON,
 	}
-	var ctx = document.getElementById('` + canvasId + `').getContext('2d');
-	var isMobile = window.innerWidth < 768;
-	var legendFontSize = isMobile ? 8 : 12;
-	var tickFontSize = isMobile ? 8 : 11;
-	var titleFontSize = isMobile ? 9 : 12;
-	
-	window.lineChartInstance = new Chart(ctx, {
-		type: 'line',
-		data: {
-			labels: ` + string(labelsJSON) + `,
-			datasets: ` + datasets + `
-		},
-		options: {
-			responsive: true,
-			maintainAspectRatio: true,
-			interaction: {
-				mode: 'index',
-				intersect: false
-			},
-			plugins: {
-				legend: {
-					display: true,
-					position: 'top',
-					labels: {
-						font: {
-							size: legendFontSize
-						},
-						padding: isMobile ? 10 : 15
-					}
-				},
-				zoom: {
-					zoom: {
-						wheel: {
-							enabled: true,
-							speed: 0.05
-						},
-						pinch: {
-							enabled: true
-						},
-						mode: 'x',
-						drag: {
-							enabled: true,
-							backgroundColor: 'rgba(225,225,225,0.3)'
-						}
-					},
-					pan: {
-						enabled: false
-					}
-				}
-			},
-			scales: {
-				x: {
-					ticks: {
-						font: {
-							size: tickFontSize
-						}
-					}
-				},
-				y: {
-					ticks: {
-						font: {
-							size: tickFontSize
-						}
-					},
-					title: {
-						display: true,
-						text: '` + options["yAxisLabel"] + `',
-						font: {
-							size: titleFontSize,
-							weight: 'bold'
-						}
-					}
-				}
-			}
-		}
-	});
-})();
-</script>`
 }

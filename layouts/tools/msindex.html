@@ -126,7 +126,7 @@
       id="chart-downloads"
       hx-get="/msindex/downloads"
       hx-include="[name=range],[name=quartiles]"
-      hx-trigger="load, change from:.chart-controls input"
+      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
       hx-swap="innerHTML"
     ></div>
   </div>
@@ -141,5 +141,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.0/dist/chartjs-plugin-zoom.min.js"></script>
+
+{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
 
 {{ end }}

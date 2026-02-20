@@ -279,6 +279,7 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("HX-Trigger", "initChartFromData")
 	_, err = w.Write(buf.Bytes())
 	if err != nil {
 		log.Print("failed to write response:", err)
