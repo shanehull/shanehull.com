@@ -264,7 +264,7 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":  "Misesian Stationary Index",
+		"mainLabel":  "Misesian Stationarity Index",
 		"yAxisLabel": "Index Value",
 	}
 	component := templates.LineChart("chart-canvas", chartData, showQuartiles, options)
