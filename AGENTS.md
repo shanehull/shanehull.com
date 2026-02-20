@@ -341,7 +341,9 @@ func fetchMyData(rangeParam string, showQuartiles bool) []MyData {
 
 **File:** `layouts/tools/[tool-name].html`
 
-Copy this template exactly from `layouts/tools/msindex.html`. The layout is entirely generic and requires zero modifications:
+Copy this template exactly from `layouts/tools/msindex.html`. The layout is entirely generic and requires zero modifications.
+
+**⚠️ Important:** Do NOT include a separate htmx script tag—htmx is already loaded globally on every page via the site's base template. Including it twice causes conflicts.
 
 ```html
 {{ define "main" }}
@@ -450,7 +452,6 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
   </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 {{ end }}
