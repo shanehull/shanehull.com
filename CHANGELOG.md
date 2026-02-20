@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.0](https://github.com/shanehull/shanehull.com/compare/v0.6.3...v0.7.0) (2026-02-20)
+
+
+### Features
+
+* add in memory cache ([#87](https://github.com/shanehull/shanehull.com/issues/87)) ([ce2f5e8](https://github.com/shanehull/shanehull.com/commit/ce2f5e8e65c9e3c7e78a47f855af43194205b93b))
+* misesian stationary index chart ([#81](https://github.com/shanehull/shanehull.com/issues/81)) ([203cf79](https://github.com/shanehull/shanehull.com/commit/203cf798e012fca567803376c9e8af67593855b7))
+
+
+### Bug Fixes
+
+* add csp on server and fix for charts ([#83](https://github.com/shanehull/shanehull.com/issues/83)) ([24e96c4](https://github.com/shanehull/shanehull.com/commit/24e96c45946941fe6a6c8988a5273954de6b0664))
+* stationarity typo ([#85](https://github.com/shanehull/shanehull.com/issues/85)) ([d711cc8](https://github.com/shanehull/shanehull.com/commit/d711cc84c75fb81f85f844b5f6739472419433b0))
+
 ## [0.6.3](https://github.com/shanehull/shanehull.com/compare/v0.6.2...v0.6.3) (2026-02-18)
 
 
