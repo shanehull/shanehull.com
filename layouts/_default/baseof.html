@@ -24,6 +24,8 @@
       crossorigin="anonymous"
       defer
     ></script>
+    {{ $debug := resources.Get "js/htmx-debug.js" | minify | fingerprint }}
+    <script src="{{ $debug.RelPermalink }}" defer></script>
     {{ partial "syntax" . }}
   </head>
   <body hx-boost="true">

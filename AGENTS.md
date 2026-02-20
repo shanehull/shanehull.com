@@ -569,7 +569,7 @@ The `LineChart` templ function outputs a `<div>` element with a `data-chart` att
 
 - The templ does NOT output inline `<script>` tags
 - Chart config is passed as JSON via the `data-chart` attribute
-- `initChartFromData()` is called on page load and after each HTMX swap (via `hx-on="htmx:afterSwap: initChartFromData()"`)
+- `initChartFromData()` is called on page load and after each HTMX swap via the event listener in `chart-init.js`
 - The function destroys any existing chart instance before creating a new one
 
 Example output:
