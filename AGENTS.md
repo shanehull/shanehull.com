@@ -338,6 +338,57 @@ func fetchMyData(rangeParam string, showQuartiles bool) []MyData {
 }
 ```
 
+### Caching Chart Data
+
+For better performance, cache chart calculations using the `internal/cache` package. Example pattern for your handler:
+
+```go
+package handlers
+
+import (
+	"github.com/shanehull/shanehull.com/internal/cache"
+	"github.com/shanehull/shanehull.com/internal/templates"
+	"time"
+)
+
+const cacheTTL = 24 * time.Hour
+
+var chartCache = cache.New()
+
+func MyChartHandler(w http.ResponseWriter, r *http.Request) {
+	rangeParam := r.URL.Query().Get("range")
+	if rangeParam == "" {
+		rangeParam = "max"
+	}
+	showQuartiles := r.URL.Query().Has("quartiles")
+
+	// Generate cache key
+	cacheKey := fmt.Sprintf("mychart:%s:%v", rangeParam, showQuartiles)
+
+	// Check cache first
+	if cached, found := chartCache.Get(cacheKey); found {
+		chartData := cached.([]templates.LineChartData)
+		// Render and return cached data
+		renderChart(w, r, chartData, showQuartiles)
+		return
+	}
+
+	// Fetch and calculate data
+	data := fetchMyData(rangeParam)
+	chartData := convertToLineChartData(data, showQuartiles)
+
+	// Cache the result for 24 hours
+	chartCache.Set(cacheKey, chartData, cacheTTL)
+
+	// Render and return
+	renderChart(w, r, chartData, showQuartiles)
+}
+```
+
+**Cache key format:** `toolname:rangeParam:showQuartiles`
+**TTL:** 24 hours (configurable via constant)
+**Note:** Each unique combination of range and quartiles settings gets its own cache entry.
+
 ### Step 3: Create the Layout
 
 **File:** `layouts/tools/[tool-name].html`
