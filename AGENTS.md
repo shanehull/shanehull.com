@@ -566,14 +566,18 @@ If quartiles are not needed, set `Q1` and `Q3` to `0`.
 The `LineChart` templ function outputs a `<div>` element with a `data-chart` attribute containing JSON-serialized chart configuration. This is consumed by `assets/js/chart-init.js`.
 
 **Key Points:**
+
 - The templ does NOT output inline `<script>` tags
 - Chart config is passed as JSON via the `data-chart` attribute
-- `initChartFromData()` is called on page load and after each HTMX swap (via `hx-on="htmx:afterSwap: initChartFromData()"`)
+- `initChartFromData()` is called on page load and after each HTMX swap via the event listener in `chart-init.js`
 - The function destroys any existing chart instance before creating a new one
 
 Example output:
+
 ```html
-<div data-chart='{"labels":["2024-01","2024-02"],"datasets":[...],"yAxisLabel":"Value","canvasId":"chart-canvas"}'></div>
+<div
+  data-chart='{"labels":["2024-01","2024-02"],"datasets":[...],"yAxisLabel":"Value","canvasId":"chart-canvas"}'
+></div>
 ```
 
 ---
