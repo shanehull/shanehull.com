@@ -154,8 +154,6 @@ func registerHandlers(mux *http.ServeMux) {
 		"/healthz",
 		http.HandlerFunc(handlers.HealthzHandler),
 	)
-
-	// TODO: endpoint for portfolio and blog search here
 }
 
 func fileServerWith404(handler http.Handler, fs fs.FS) http.HandlerFunc {
