@@ -27,6 +27,60 @@ const (
 
 var chartCache = cache.New()
 
+// getOrFetchChartData returns cached chart data or fetches and caches it
+func getOrFetchChartData(rangeParam string, showQuartiles bool) ([]templates.LineChartData, error) {
+	cacheKey := fmt.Sprintf("msindex:%s:%v", rangeParam, showQuartiles)
+
+	// Check cache
+	if cached, found := chartCache.Get(cacheKey); found {
+		return cached.([]templates.LineChartData), nil
+	}
+
+	// Fetch data
+	startDate := calculateStartDate(rangeParam)
+
+	equity, err := fetchFredData(equityID, startDate)
+	if err != nil {
+		return nil, err
+	}
+
+	networth, err := fetchFredData(networthID, startDate)
+	if err != nil {
+		return nil, err
+	}
+
+	data := mergeAndCalculate(equity, networth)
+	if len(data) == 0 {
+		return nil, fmt.Errorf("no data available for the selected time range")
+	}
+
+	var q1, q3 []float64
+	if showQuartiles {
+		q1, q3 = calculateQuartiles(data)
+	}
+
+	chartData := make([]templates.LineChartData, len(data))
+	for i, d := range data {
+		q1Val := 0.0
+		q3Val := 0.0
+		if showQuartiles && i < len(q1) && i < len(q3) {
+			q1Val = q1[i]
+			q3Val = q3[i]
+		}
+		chartData[i] = templates.LineChartData{
+			Date:      d.Date.Format("2006-01-02"),
+			Value:     d.MSIndex,
+			Quartile1: q1Val,
+			Quartile3: q3Val,
+		}
+	}
+
+	// Cache the result
+	chartCache.Set(cacheKey, chartData, cacheTTL)
+
+	return chartData, nil
+}
+
 type FinancialData struct {
 	Date     time.Time
 	Equity   float64
@@ -83,31 +137,11 @@ func MSIndexCSVHandler(w http.ResponseWriter, r *http.Request) {
 
 	showQuartiles := r.URL.Query().Has("quartiles")
 
-	startDate := calculateStartDate(rangeParam)
-
-	equity, err := fetchFredData(equityID, startDate)
+	chartData, err := getOrFetchChartData(rangeParam, showQuartiles)
 	if err != nil {
-		log.Print("failed to fetch equity data:", err)
+		log.Print("failed to get chart data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
 		return
-	}
-
-	networth, err := fetchFredData(networthID, startDate)
-	if err != nil {
-		log.Print("failed to fetch networth data:", err)
-		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
-		return
-	}
-
-	data := mergeAndCalculate(equity, networth)
-	if len(data) == 0 {
-		http.Error(w, "No data available for the selected time range.", http.StatusInternalServerError)
-		return
-	}
-
-	var q1, q3 []float64
-	if showQuartiles {
-		q1, q3 = calculateQuartiles(data)
 	}
 
 	w.Header().Set("Content-Disposition", "attachment; filename=\"msindex-data.csv\"")
@@ -124,21 +158,14 @@ func MSIndexCSVHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for i, d := range data {
-		q1Val := 0.0
-		q3Val := 0.0
-		if showQuartiles && i < len(q1) && i < len(q3) {
-			q1Val = q1[i]
-			q3Val = q3[i]
-		}
-
+	for _, d := range chartData {
 		row := []string{
-			d.Date.Format("2006-01-02"),
-			fmt.Sprintf("%.6f", d.MSIndex),
+			d.Date,
+			fmt.Sprintf("%.6f", d.Value),
 		}
 
 		if showQuartiles {
-			row = append(row, fmt.Sprintf("%.6f", q1Val), fmt.Sprintf("%.6f", q3Val))
+			row = append(row, fmt.Sprintf("%.6f", d.Quartile1), fmt.Sprintf("%.6f", d.Quartile3))
 		}
 
 		if err := writer.Write(row); err != nil {
@@ -161,47 +188,11 @@ func MSIndexDataHandler(w http.ResponseWriter, r *http.Request) {
 
 	showQuartiles := r.URL.Query().Has("quartiles")
 
-	startDate := calculateStartDate(rangeParam)
-
-	equity, err := fetchFredData(equityID, startDate)
+	chartData, err := getOrFetchChartData(rangeParam, showQuartiles)
 	if err != nil {
-		log.Print("failed to fetch equity data:", err)
+		log.Print("failed to get chart data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
 		return
-	}
-
-	networth, err := fetchFredData(networthID, startDate)
-	if err != nil {
-		log.Print("failed to fetch networth data:", err)
-		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
-		return
-	}
-
-	data := mergeAndCalculate(equity, networth)
-	if len(data) == 0 {
-		http.Error(w, "No data available for the selected time range.", http.StatusInternalServerError)
-		return
-	}
-
-	var q1, q3 []float64
-	if showQuartiles {
-		q1, q3 = calculateQuartiles(data)
-	}
-
-	chartData := make([]templates.LineChartData, len(data))
-	for i, d := range data {
-		q1Val := 0.0
-		q3Val := 0.0
-		if showQuartiles && i < len(q1) && i < len(q3) {
-			q1Val = q1[i]
-			q3Val = q3[i]
-		}
-		chartData[i] = templates.LineChartData{
-			Date:      d.Date.Format("2006-01-02"),
-			Value:     d.MSIndex,
-			Quartile1: q1Val,
-			Quartile3: q3Val,
-		}
 	}
 
 	w.Header().Set("Content-Disposition", "attachment; filename=\"msindex-data.json\"")
@@ -224,81 +215,12 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	showQuartiles := r.URL.Query().Has("quartiles")
 
-	// Generate cache key
-	cacheKey := fmt.Sprintf("msindex:%s:%v", rangeParam, showQuartiles)
-
-	// Check cache
-	if cached, found := chartCache.Get(cacheKey); found {
-		chartData := cached.([]templates.LineChartData)
-		options := map[string]string{
-			"mainLabel":  "Misesian Stationarity Index",
-			"yAxisLabel": "Index Value",
-		}
-		component := templates.LineChart("chart-canvas", chartData, showQuartiles, options)
-
-		buf := new(bytes.Buffer)
-		defer buf.Reset()
-
-		if err := component.Render(r.Context(), buf); err != nil {
-			log.Print("failed to render component:", err)
-			http.Error(w, "internal server error", http.StatusInternalServerError)
-			return
-		}
-
-		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		w.Header().Set("HX-Trigger", "initChartFromData")
-		_, err := w.Write(buf.Bytes())
-		if err != nil {
-			log.Print("failed to write response:", err)
-		}
-		return
-	}
-
-	startDate := calculateStartDate(rangeParam)
-
-	equity, err := fetchFredData(equityID, startDate)
+	chartData, err := getOrFetchChartData(rangeParam, showQuartiles)
 	if err != nil {
-		log.Print("failed to fetch equity data:", err)
+		log.Print("failed to get chart data:", err)
 		renderError(w, "Unable to load chart data. Please try again later.")
 		return
 	}
-
-	networth, err := fetchFredData(networthID, startDate)
-	if err != nil {
-		log.Print("failed to fetch networth data:", err)
-		renderError(w, "Unable to load chart data. Please try again later.")
-		return
-	}
-
-	data := mergeAndCalculate(equity, networth)
-	if len(data) == 0 {
-		renderError(w, "No data available for the selected time range.")
-		return
-	}
-
-	var q1, q3 []float64
-	if showQuartiles {
-		q1, q3 = calculateQuartiles(data)
-	}
-
-	chartData := make([]templates.LineChartData, len(data))
-	for i, d := range data {
-		q1Val := 0.0
-		q3Val := 0.0
-		if showQuartiles && i < len(q1) && i < len(q3) {
-			q1Val = q1[i]
-			q3Val = q3[i]
-		}
-		chartData[i] = templates.LineChartData{
-			Date:      d.Date.Format("2006-01-02"),
-			Value:     d.MSIndex,
-			Quartile1: q1Val,
-			Quartile3: q3Val,
-		}
-	}
-
-	// Cache the result
-	chartCache.Set(cacheKey, chartData, cacheTTL)
 
 	options := map[string]string{
 		"mainLabel":  "Misesian Stationarity Index",
