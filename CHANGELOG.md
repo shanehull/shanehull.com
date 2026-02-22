@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.7.0](https://github.com/shanehull/shanehull.com/compare/v0.6.3...v0.7.0) (2026-02-22)
+
+
+### Features
+
+* add in memory cache ([#87](https://github.com/shanehull/shanehull.com/issues/87)) ([ce2f5e8](https://github.com/shanehull/shanehull.com/commit/ce2f5e8e65c9e3c7e78a47f855af43194205b93b))
+* misesian stationary index chart ([#81](https://github.com/shanehull/shanehull.com/issues/81)) ([203cf79](https://github.com/shanehull/shanehull.com/commit/203cf798e012fca567803376c9e8af67593855b7))
+* simple footer ([#88](https://github.com/shanehull/shanehull.com/issues/88)) ([ce8146a](https://github.com/shanehull/shanehull.com/commit/ce8146a89c176f3735c707e3855b5c592072cc5e))
+* update colors ([#89](https://github.com/shanehull/shanehull.com/issues/89)) ([0f2bb48](https://github.com/shanehull/shanehull.com/commit/0f2bb48ac6b03b5dfc7b481b359b8bde6d0b42b2))
+
+
+### Bug Fixes
+
+* add csp on server and fix for charts ([#83](https://github.com/shanehull/shanehull.com/issues/83)) ([24e96c4](https://github.com/shanehull/shanehull.com/commit/24e96c45946941fe6a6c8988a5273954de6b0664))
+* cache all msindex epoints ([#91](https://github.com/shanehull/shanehull.com/issues/91)) ([5d2364c](https://github.com/shanehull/shanehull.com/commit/5d2364c4fa1fee72c5141fb4fe4c456320018e6e))
+* stationarity typo ([#85](https://github.com/shanehull/shanehull.com/issues/85)) ([d711cc8](https://github.com/shanehull/shanehull.com/commit/d711cc84c75fb81f85f844b5f6739472419433b0))
+* tap hl transparent ([#90](https://github.com/shanehull/shanehull.com/issues/90)) ([4664d9d](https://github.com/shanehull/shanehull.com/commit/4664d9d093890a03bc4eb8d020638cd389163969))
+
 ## [0.6.3](https://github.com/shanehull/shanehull.com/compare/v0.6.2...v0.6.3) (2026-02-18)
 
 
