@@ -29,10 +29,13 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100dvh;
   max-width: 768px;
   margin: auto;
   padding: 1rem;
-  padding-bottom: 4rem;
   font-family:
     "Hack Nerd Font",
     ui-monospace,
@@ -704,5 +707,28 @@ div.no-posts {
         }
       }
     }
+  }
+}
+
+main {
+  flex: 1;
+}
+
+body > footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid;
+  border-color: lighten($light-text, 40%);
+  text-align: center;
+  font-size: 0.65rem;
+  color: lighten($light-text, 30%);
+
+  @media (prefers-color-scheme: dark) {
+    border-color: darken($dark-text, 30%);
+    color: darken($dark-text, 20%);
+  }
+
+  p {
+    margin: 0;
   }
 }
