@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/shanehull/shanehull.com/compare/v0.7.0...v0.7.1) (2026-02-22)
+
+
+### Bug Fixes
+
+* msindex chart initial load ([#92](https://github.com/shanehull/shanehull.com/issues/92)) ([d9f7c5d](https://github.com/shanehull/shanehull.com/commit/d9f7c5d2de603bd087f06c6ea79a6878a2c1e518))
+
 ## [0.7.0](https://github.com/shanehull/shanehull.com/compare/v0.6.3...v0.7.0) (2026-02-22)
 
 
