@@ -20,7 +20,6 @@
               checked
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
-              hx-include="[name=quartiles]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -33,7 +32,6 @@
               value="50y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
-              hx-include="[name=quartiles]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -46,7 +44,6 @@
               value="20y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
-              hx-include="[name=quartiles]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -59,7 +56,6 @@
               value="10y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
-              hx-include="[name=quartiles]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -72,7 +68,6 @@
               value="5y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
-              hx-include="[name=quartiles]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -85,7 +80,6 @@
               value="1y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
-              hx-include="[name=quartiles]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -93,7 +87,6 @@
           </label>
         </div>
       </div>
-
     </div>
 
     <div class="chart-container">
@@ -101,7 +94,7 @@
       <div
         id="chart-inner"
         hx-get="/buffett-indicator/chart"
-        hx-include="[name=range],[name=quartiles]"
+        hx-include="[name=range]"
         hx-trigger="load delay:50ms"
         hx-swap="innerHTML"
       ></div>
@@ -110,8 +103,8 @@
     <div
       id="chart-downloads"
       hx-get="/buffett-indicator/downloads"
-      hx-include="[name=range],[name=quartiles]"
-      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
+      hx-include="[name=range]"
+      hx-trigger="load, change from:[name=range]"
       hx-swap="innerHTML"
     ></div>
   </div>
