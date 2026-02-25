@@ -1,10 +1,10 @@
 package templates
 
-templ ChartDownloads(toolName string, rangeParam string, showQuartiles bool) {
+templ ChartDownloads(toolName string, rangeParam string, overlayParam string, showOverlay bool) {
 	<div class="chart-downloads">
-		if showQuartiles {
-			<a href={ templ.SafeURL("/" + toolName + "/data?range=" + rangeParam + "&quartiles=on") } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
-			<a href={ templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam + "&quartiles=on") } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
+		if showOverlay {
+			<a href={ templ.SafeURL("/" + toolName + "/data?range=" + rangeParam + "&" + overlayParam + "=on") } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
+			<a href={ templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam + "&" + overlayParam + "=on") } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
 		} else {
 			<a href={ templ.SafeURL("/" + toolName + "/data?range=" + rangeParam) } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
 			<a href={ templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam) } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>

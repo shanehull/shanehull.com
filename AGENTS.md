@@ -675,18 +675,19 @@ All chart tools use this generic data structure:
 
 ```go
 type LineChartData struct {
-	Date      string  `json:"date"`      // ISO date: "2024-01-01"
-	Value     float64 `json:"value"`     // Main metric value
-	Quartile1 float64 `json:"quartile1"` // Q1 (25th percentile)
-	Quartile3 float64 `json:"quartile3"` // Q3 (75th percentile)
+	Date      string  `json:"date"`           // ISO date: "2024-01-01"
+	Value     float64 `json:"value"`          // Main metric value
+	Quartile1 float64 `json:"quartile1,omitempty"` // Q1 (25th percentile)
+	Quartile3 float64 `json:"quartile3,omitempty"` // Q3 (75th percentile)
+	Average   float64 `json:"average,omitempty"`   // Average line
 }
 ```
 
-If quartiles are not needed, set `Q1` and `Q3` to `0`.
+Use `omitempty` to exclude fields from JSON when they're zero-valued. Only set fields that your tool needs.
 
 ---
 
-## 4. How the LineChart Templ Works
+## 5. How the LineChart Templ Works
 
 The `LineChart` templ function outputs a `<div>` element with a `data-chart` attribute containing JSON-serialized chart configuration. This is consumed by `assets/js/chart-init.js`.
 
@@ -707,7 +708,7 @@ Example output:
 
 ---
 
-## 5. Key Features (Automatic)
+## 6. Key Features (Automatic)
 
 ✅ **Dark mode support** – Uses site color variables (`$light-icon`, `$dark-icon`)  
 ✅ **HTMX interactivity** – Controls trigger API requests, swapped content reinitializes chart  
@@ -720,7 +721,7 @@ Example output:
 
 ---
 
-## 6. Download UI in Layout
+## 7. Download UI in Layout
 
 Add this section to your template to display download links that update when controls change:
 
@@ -728,22 +729,30 @@ Add this section to your template to display download links that update when con
 <div
   id="chart-downloads"
   hx-get="/[tool-name]/downloads"
-  hx-include="[name=range],[name=quartiles]"
+  hx-include="[name=range],[name=overlayParam]"
   hx-trigger="load, change from:.chart-controls input"
   hx-swap="innerHTML"
 ></div>
 ```
 
-The `/[tool-name]/downloads` handler (using the reusable `ChartDownloads` templ component) returns HTML links with proper filenames and `hx-boost="false"` to bypass HTMX. No custom code needed—just the pattern from Step 4.
+The `/[tool-name]/downloads` handler uses the reusable `ChartDownloads` templ component:
 
-## 7. Common Pitfalls to Avoid
+```go
+component := templates.ChartDownloads("[tool-name]", rangeParam, "overlayParamName", showOverlay)
+```
+
+Pass your specific overlay parameter name (e.g., "quartiles", "average") and the template handles building the correct download links.
+
+## 8. Common Pitfalls to Avoid
 
 1. **Missing FRED API key:** Store in `FRED_API_KEY` env var
-2. **Wrong query param names:** Use `range` and `quartiles` exactly (lowercase)
+2. **Wrong query param names:** Use `range` exactly (lowercase) and your custom overlay param name
 3. **Forgetting `templates.LineChart` import:** Add to handler file
 4. **Not destroying old chart:** Chart.js destruction handled in `assets/js/chart-init.js` via `window.lineChartInstance.destroy()`
 5. **Download links intercepted by HTMX:** Add `hx-boost="false"` to download links
-6. **Downloads not reflecting UI state:** Use `hx-include="[name=range],[name=quartiles]"` to send form values
+6. **Downloads not reflecting UI state:** Use `hx-include="[name=range],[name=overlayParam]"` to send form values
 7. **Trigger syntax:** Use `change from:.chart-controls input` to listen to control changes on a parent
 8. **Hardcoded endpoint URLs:** Always use relative paths like `/[tool-name]/chart`
 9. **Forgetting to include chart-init.js:** The external script is required for CSP compliance and chart initialization. It listens to `htmx:afterSwap` events automatically.
+10. **HTMX includes for missing controls:** If you remove a control (e.g., quartiles checkbox), remove it from `hx-include` attributes too. Orphaned form fields in HTMX will cause requests to fail silently.
+11. **Overlay parameter names:** Use `ChartDownloads(toolName, rangeParam, overlayParamName, showOverlay)` and pass your specific overlay parameter name (e.g., "quartiles" for msindex, "average" for buffett-indicator). The template handles building the correct download links dynamically.
