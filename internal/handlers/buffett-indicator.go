@@ -45,12 +45,24 @@ func getOrFetchBuffetData(rangeParam string, showAverage bool) ([]templates.Line
 		Units:            "lin",
 	}
 
-	marketCapData, err := fred.FetchSeries(marketCapID, opts)
+	// Fetch market cap data (in trillions)
+	marketCapOpts := &fred.FetchOptions{
+		ObservationStart: opts.ObservationStart,
+		Frequency:        opts.Frequency,
+		Units:            "lin",
+	}
+	marketCapData, err := fred.FetchSeries(marketCapID, marketCapOpts)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch %s: %w", marketCapID, err)
 	}
 
-	gdpData, err := fred.FetchSeries(gdpID, opts)
+	// Fetch GDP data (in billions)
+	gdpOpts := &fred.FetchOptions{
+		ObservationStart: opts.ObservationStart,
+		Frequency:        opts.Frequency,
+		Units:            "lin",
+	}
+	gdpData, err := fred.FetchSeries(gdpID, gdpOpts)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch %s: %w", gdpID, err)
 	}
@@ -110,7 +122,8 @@ func mergeAndCalculateBuffet(marketCap, gdp []fred.DataPoint) []BuffetData {
 	for _, mc := range marketCap {
 		dateStr := mc.Date.Format("2006-01-02")
 		if gdpValue, ok := gdpMap[dateStr]; ok && gdpValue > 0 {
-			ratio := (mc.Value / gdpValue) * 100 // as percentage
+			marketCapInBillions := mc.Value / 1000
+			ratio := (marketCapInBillions / gdpValue) * 100
 			merged = append(merged, BuffetData{
 				Date:      mc.Date,
 				MarketCap: mc.Value,
@@ -144,8 +157,8 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":    "Buffett Indicator",
-		"yAxisLabel":   "Ratio (%)",
+		"mainLabel":     "Buffett Indicator",
+		"yAxisLabel":    "Ratio (%)",
 		"showQuartiles": "false",
 	}
 	if showAverage {

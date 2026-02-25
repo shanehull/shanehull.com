@@ -17,9 +17,9 @@ import (
 )
 
 const (
-	equityID = "NCBCEL"
+	equityID   = "NCBCEL"
 	networthID = "TNWMVBSNNCB"
-	cacheTTL = 24 * time.Hour
+	cacheTTL   = 24 * time.Hour
 )
 
 var chartCache = cache.New()
@@ -104,8 +104,6 @@ type FinancialData struct {
 	NetWorth float64
 	MSIndex  float64
 }
-
-
 
 func MSIndexDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -235,10 +233,10 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":    "Misesian Stationarity Index",
-		"yAxisLabel":   "Index Value",
+		"mainLabel":     "Misesian Stationarity Index",
+		"yAxisLabel":    "Index Value",
 		"showQuartiles": "false",
-		"showAverage":  "false",
+		"showAverage":   "false",
 	}
 	if showQuartiles {
 		options["showQuartiles"] = "true"
@@ -261,8 +259,6 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print("failed to write response:", err)
 	}
 }
-
-
 
 func mergeAndCalculate(equity, networth []fred.DataPoint) []FinancialData {
 	networthMap := make(map[string]float64)
@@ -301,5 +297,3 @@ func geometricScale(data []FinancialData) {
 		data[i].MSIndex = unscaled / geoMean
 	}
 }
-
-
