@@ -8,7 +8,6 @@ import (
 	"log"
 	"math"
 	"net/http"
-	"sort"
 	"time"
 
 	"github.com/shanehull/shanehull.com/internal/cache"
@@ -56,9 +55,25 @@ func getOrFetchChartData(rangeParam string, showQuartiles bool) ([]templates.Lin
 		return nil, fmt.Errorf("no data available for the selected time range")
 	}
 
+	// Filter data by range if needed
+	startDate := charts.CalculateRangeStart(rangeParam)
+	if startDate != nil {
+		filtered := make([]FinancialData, 0)
+		for _, d := range data {
+			if d.Date.After(*startDate) || d.Date.Equal(*startDate) {
+				filtered = append(filtered, d)
+			}
+		}
+		data = filtered
+	}
+
 	var q1, q3 []float64
 	if showQuartiles {
-		q1, q3 = calculateQuartiles(data)
+		values := make([]float64, len(data))
+		for i, d := range data {
+			values[i] = d.MSIndex
+		}
+		q1, q3 = calculateQuartiles(values)
 	}
 
 	chartData := make([]templates.LineChartData, len(data))
@@ -218,8 +233,13 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":  "Misesian Stationarity Index",
-		"yAxisLabel": "Index Value",
+		"mainLabel":    "Misesian Stationarity Index",
+		"yAxisLabel":   "Index Value",
+		"showQuartiles": "false",
+		"showAverage":  "false",
+	}
+	if showQuartiles {
+		options["showQuartiles"] = "true"
 	}
 	component := templates.LineChart("chart-canvas", chartData, showQuartiles, options)
 
@@ -280,59 +300,4 @@ func geometricScale(data []FinancialData) {
 	}
 }
 
-func calculateQuartiles(data []FinancialData) ([]float64, []float64) {
-	if len(data) == 0 {
-		return nil, nil
-	}
 
-	values := make([]float64, len(data))
-	for i, d := range data {
-		values[i] = d.MSIndex
-	}
-
-	sortedValues := make([]float64, len(values))
-	copy(sortedValues, values)
-	sort.Float64s(sortedValues)
-
-	q1Val := percentile(sortedValues, 0.25)
-	q3Val := percentile(sortedValues, 0.75)
-
-	q1Slice := make([]float64, len(data))
-	q3Slice := make([]float64, len(data))
-	for i := range data {
-		q1Slice[i] = q1Val
-		q3Slice[i] = q3Val
-	}
-
-	return q1Slice, q3Slice
-}
-
-func percentile(sorted []float64, p float64) float64 {
-	if len(sorted) == 0 {
-		return 0
-	}
-	if len(sorted) == 1 {
-		return sorted[0]
-	}
-
-	index := p * float64(len(sorted)-1)
-	lower := int(index)
-	upper := lower + 1
-	weight := index - float64(lower)
-
-	if upper >= len(sorted) {
-		return sorted[lower]
-	}
-
-	return sorted[lower]*(1-weight) + sorted[upper]*weight
-}
-
-
-
-func renderError(w http.ResponseWriter, message string) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	html := `<div class="chart-error">
-		<strong>Error:</strong> ` + message + `
-	</div>`
-	w.Write([]byte(html))
-}

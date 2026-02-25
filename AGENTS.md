@@ -335,9 +335,15 @@ func MyChartHandler(w http.ResponseWriter, r *http.Request) {
 
 	// 4. Render using generic LineChart template
 	options := map[string]string{
-		"mainLabel":  "Tool Display Name",
-		"yAxisLabel": "Metric Unit",
+		"mainLabel":    "Tool Display Name",
+		"yAxisLabel":   "Metric Unit",
+		"showQuartiles": "false",
+		"showAverage":  "false",
 	}
+	if showQuartiles {
+		options["showQuartiles"] = "true"
+	}
+	// Set showAverage to "true" if your tool wants to display the average line
 	component := templates.LineChart("chart-canvas", chartData, showQuartiles, options)
 
 	buf := new(bytes.Buffer)
@@ -622,7 +628,28 @@ mux.HandleFunc(
 
 ---
 
-## 3. LineChartData Format
+## 3. Chart Overlay Options
+
+The `LineChart` template supports optional overlays via the `options` map:
+
+- **`showQuartiles`**: Set to `"true"` to display Q1 (25th percentile) and Q3 (75th percentile) lines. Defaults to `"false"`. Only shows if quartile data is provided.
+- **`showAverage`**: Set to `"true"` to display a horizontal average line. Defaults to `"false"`. Only shows if average data is provided.
+
+Example:
+```go
+options := map[string]string{
+	"mainLabel":    "My Chart",
+	"yAxisLabel":   "Values",
+	"showQuartiles": "true",  // Show quartile bands
+	"showAverage":  "true",   // Show average line
+}
+```
+
+Both overlays are optional and can be independently controlled per chart.
+
+---
+
+## 4. LineChartData Format
 
 All chart tools use this generic data structure:
 

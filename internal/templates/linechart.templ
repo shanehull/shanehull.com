@@ -8,8 +8,9 @@ import (
 type LineChartData struct {
 	Date      string  `json:"date"`
 	Value     float64 `json:"value"`
-	Quartile1 float64 `json:"quartile1"`
-	Quartile3 float64 `json:"quartile3"`
+	Quartile1 float64 `json:"quartile1,omitempty"`
+	Quartile3 float64 `json:"quartile3,omitempty"`
+	Average   float64 `json:"average,omitempty"`
 }
 
 templ LineChart(canvasId string, data []LineChartData, showQuartiles bool, options map[string]string) {
@@ -21,18 +22,21 @@ func buildChartDataAttributes(canvasId string, data []LineChartData, showQuartil
 	values := make([]float64, len(data))
 	q1 := make([]float64, len(data))
 	q3 := make([]float64, len(data))
+	avg := make([]float64, len(data))
 
 	for i, d := range data {
 		labels[i] = d.Date
 		values[i] = d.Value
 		q1[i] = d.Quartile1
 		q3[i] = d.Quartile3
+		avg[i] = d.Average
 	}
 
 	labelsJSON, _ := json.Marshal(labels)
 	valuesJSON, _ := json.Marshal(values)
 	q1JSON, _ := json.Marshal(q1)
 	q3JSON, _ := json.Marshal(q3)
+	avgJSON, _ := json.Marshal(avg)
 
 	// Escape options for use in JSON
 	mainLabel := strings.ReplaceAll(options["mainLabel"], `"`, `\"`)
@@ -40,7 +44,13 @@ func buildChartDataAttributes(canvasId string, data []LineChartData, showQuartil
 
 	datasets := `[{"label":"` + mainLabel + `","data":` + string(valuesJSON) + `,"borderColor":"#3b82f6","backgroundColor":"rgba(59, 130, 246, 0.1)","borderWidth":2,"fill":true,"tension":0.1,"pointRadius":1}`
 
-	if showQuartiles {
+	// Add average line if requested
+	if options["showAverage"] == "true" {
+		datasets += `,{"label":"Average","data":` + string(avgJSON) + `,"borderColor":"#8b5cf6","borderDash":[3,3],"borderWidth":2,"fill":false,"pointRadius":0}`
+	}
+
+	// Add quartiles if requested
+	if options["showQuartiles"] == "true" {
 		datasets += `,{"label":"Q1 (25th percentile)","data":` + string(q1JSON) + `,"borderColor":"rgba(200, 100, 100, 0.6)","borderDash":[5,5],"borderWidth":1,"fill":false,"pointRadius":0},{"label":"Q3 (75th percentile)","data":` + string(q3JSON) + `,"borderColor":"rgba(100, 200, 100, 0.6)","borderDash":[5,5],"borderWidth":1,"fill":false,"pointRadius":0}`
 	}
 
