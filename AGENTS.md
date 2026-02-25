@@ -540,7 +540,7 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
         id="chart-inner"
         hx-get="/[tool-name]/chart"
         hx-include="[name=range],[name=quartiles]"
-        hx-trigger="load delay:50ms"
+        hx-trigger="revealed"
         hx-swap="innerHTML"
       ></div>
     </div>
@@ -549,7 +549,7 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
       id="chart-downloads"
       hx-get="/[tool-name]/downloads"
       hx-include="[name=range],[name=quartiles]"
-      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
+      hx-trigger="revealed, change from:[name=range], change from:[name=quartiles]"
       hx-swap="innerHTML"
     ></div>
   </div>
@@ -756,3 +756,4 @@ Pass your specific overlay parameter name (e.g., "quartiles", "average") and the
 9. **Forgetting to include chart-init.js:** The external script is required for CSP compliance and chart initialization. It listens to `htmx:afterSwap` events automatically.
 10. **HTMX includes for missing controls:** If you remove a control (e.g., quartiles checkbox), remove it from `hx-include` attributes too. Orphaned form fields in HTMX will cause requests to fail silently.
 11. **Overlay parameter names:** Use `ChartDownloads(toolName, rangeParam, overlayParamName, showOverlay)` and pass your specific overlay parameter name (e.g., "quartiles" for msindex, "average" for buffett-indicator). The template handles building the correct download links dynamically.
+12. **Using `load` trigger with hx-boost:** Use `hx-trigger="revealed"` instead of `load` on the chart and downloads divs. The `load` event doesn't fire when pages are soft-navigated via hx-boost, causing charts to fail silently on first visit via navigation.
