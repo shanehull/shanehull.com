@@ -17,7 +17,6 @@ import (
 	"github.com/shanehull/shanehull.com/internal/buildinfo"
 	"github.com/shanehull/shanehull.com/internal/handlers"
 	"github.com/shanehull/shanehull.com/internal/middleware"
-	"github.com/shanehull/shanehull.com/internal/pages"
 )
 
 var (
@@ -75,13 +74,6 @@ func main() {
 
 	// Register API handlers
 	registerHandlers(mux)
-
-	// Get the pages from the gob file that was generated at build time.
-	// We'll use it in our search endpoint for the blog (later).
-	_, err := pages.PagesFromGob("bin/pages.gob")
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	// Wrap mux with CSP middleware
 	handler := middleware.CSP(mux)
