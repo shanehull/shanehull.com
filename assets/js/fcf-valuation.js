@@ -1,5 +1,25 @@
 let assetIdCounter = 0;
 
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
+function updateShareableURL(input) {
+  const url = new URL(window.location);
+  if (input.id) {
+    if (input.value) {
+      url.searchParams.set(input.id, input.value);
+    } else {
+      url.searchParams.delete(input.id);
+    }
+    window.history.replaceState({}, "", url);
+  }
+}
+
 function addAsset() {
   assetIdCounter++;
   const list = document.getElementById("assetList");
@@ -13,33 +33,45 @@ function addAsset() {
         
         <div class="calculator-field" style="margin-bottom: 1rem;">
             <label>Asset Description</label>
-            <input type="text" placeholder="e.g., Gold Production" class="asset-input">
+            <input type="text" placeholder="e.g., Gold Production" id="asset-${assetIdCounter}-desc" class="asset-input">
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
                 <label>Production</label>
-                <input type="number" class="p-prod" value="100000">
+                <input type="number" id="asset-${assetIdCounter}-prod" class="p-prod" value="100000">
             </div>
             <div class="calculator-field">
                 <label>Price ($)</label>
-                <input type="number" class="p-price" value="2500">
+                <input type="number" id="asset-${assetIdCounter}-price" class="p-price" value="2500">
             </div>
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
                 <label>Unit Cost ($)</label>
-                <input type="number" class="p-cost" value="1200">
+                <input type="number" id="asset-${assetIdCounter}-cost" class="p-cost" value="1200">
             </div>
         </div>
     `;
   list.appendChild(card);
-  
+
   // Attach event listeners to new inputs (CSP-compliant)
-  const newInputs = card.querySelectorAll(".asset-input, .p-prod, .p-price, .p-cost");
-  newInputs.forEach(input => input.addEventListener("input", calculate));
-  
+  const newInputs = card.querySelectorAll(
+    ".asset-input, .p-prod, .p-price, .p-cost",
+  );
+  newInputs.forEach((input) => {
+    input.addEventListener("input", calculate);
+    // Also attach URL update listeners if makeShareable is available
+    if (typeof makeShareable !== "undefined") {
+      input.addEventListener(
+        "input",
+        debounce(() => updateShareableURL(input), 300),
+      );
+      input.addEventListener("change", updateShareableURL.bind(null, input));
+    }
+  });
+
   const removeBtn = card.querySelector(".calculator-remove-btn");
   if (removeBtn) {
     removeBtn.addEventListener("click", () => {
@@ -47,7 +79,7 @@ function addAsset() {
       removeAsset(id);
     });
   }
-  
+
   calculate();
 }
 
@@ -102,7 +134,7 @@ function initCashflow() {
   document.getElementById("currPrice").addEventListener("input", calculate);
   document.getElementById("multiple").addEventListener("input", calculate);
   document.getElementById("tax").addEventListener("input", calculate);
-  
+
   const addAssetBtn = document.getElementById("addAssetBtn");
   if (addAssetBtn) {
     addAssetBtn.addEventListener("click", addAsset);
@@ -110,7 +142,21 @@ function initCashflow() {
 
   const list = document.getElementById("assetList");
   if (list && list.children.length === 0) {
-    addAsset();
+    // Check URL for asset count before creating
+    const params = new URLSearchParams(window.location.search);
+    let maxAssetId = 0;
+    for (const key of params.keys()) {
+      if (key.startsWith("asset-") && key.includes("-prod")) {
+        const id = parseInt(key.split("-")[1]);
+        maxAssetId = Math.max(maxAssetId, id);
+      }
+    }
+
+    // Create all assets that exist in URL (at least one)
+    const assetsToCreate = Math.max(1, maxAssetId);
+    for (let i = 0; i < assetsToCreate; i++) {
+      addAsset();
+    }
   } else {
     calculate();
   }

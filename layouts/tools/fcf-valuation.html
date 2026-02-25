@@ -35,11 +35,7 @@
         </div>
         <div class="calculator-field">
           <label>Current Price ($)</label>
-          <input
-            type="number"
-            id="currPrice"
-            value="10.00"
-          />
+          <input type="number" id="currPrice" value="10.00" />
         </div>
       </div>
 
@@ -73,14 +69,16 @@
   </div>
 </main>
 
-{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384" }}
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384"
+}}
 <script
   src="{{ $shareable.RelPermalink }}"
   integrity="{{ $shareable.Data.Integrity }}"
   defer
 ></script>
 
-{{ $script := resources.Get "js/cashflow.js" | minify | fingerprint "sha384" }}
+{{ $script := resources.Get "js/fcf-valuation.js" | minify | fingerprint
+"sha384" }}
 <script
   src="{{ $script.RelPermalink }}"
   integrity="{{ $script.Data.Integrity }}"
