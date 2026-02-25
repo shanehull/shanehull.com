@@ -241,7 +241,6 @@ For FRED-based chart tools, two reusable internal packages are available:
 - **`internal/fred`** – FRED API client for fetching economic data series
   - `FetchSeries(seriesID, opts)` – Fetches observations with configurable options
   - `FetchOptions` struct – Configure observation_start, observation_end, frequency, units, etc.
-  
 - **`internal/charts`** – Shared chart utilities
   - `CalculateRangeStart(rangeParam)` – Converts UI range params ("1y", "5y", "max", etc.) to date filters
 
@@ -412,6 +411,8 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
 
 **⚠️ Important:** Do NOT include a separate htmx script tag—htmx is already loaded globally on every page via the site's base template. Including it twice causes conflicts.
 
+**⚠️ Important:** Chart.js and the internal init script are automatically loaded in `baseof.html` for any page with `tool_type: "chart"`. Do NOT manually load these scripts in individual tool layouts.
+
 ```html
 {{ define "main" }}
 <main class="container">
@@ -504,11 +505,20 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
       <canvas id="chart-canvas"></canvas>
       <div
         id="chart-inner"
-        hx-get="/[tool-name]/chart?range=max&quartiles=on"
-        hx-trigger="load"
+        hx-get="/[tool-name]/chart"
+        hx-include="[name=range],[name=quartiles]"
+        hx-trigger="load delay:50ms"
         hx-swap="innerHTML"
       ></div>
     </div>
+
+    <div
+      id="chart-downloads"
+      hx-get="/[tool-name]/downloads"
+      hx-include="[name=range],[name=quartiles]"
+      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
+      hx-swap="innerHTML"
+    ></div>
   </div>
 
   <br />
@@ -518,12 +528,6 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
     <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
   </div>
 </main>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.0/dist/chartjs-plugin-zoom.min.js"></script>
-
-{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
 
 {{ end }}
 ```

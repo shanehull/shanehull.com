@@ -139,7 +139,4 @@
   </div>
 </main>
 
-{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
-
 {{ end }}
