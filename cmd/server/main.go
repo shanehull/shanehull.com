@@ -149,6 +149,36 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// Buffett Indicator tool
+	mux.HandleFunc(
+		"/buffett-indicator/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.BuffettIndicatorHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/buffett-indicator/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.BuffettIndicatorDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/buffett-indicator/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.BuffettIndicatorDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/buffett-indicator/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.BuffettIndicatorCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Health check
 	mux.HandleFunc(
 		"/healthz",
