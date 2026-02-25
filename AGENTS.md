@@ -254,6 +254,8 @@ The generic `LineChart` templ component (in `internal/templates/linechart.templ`
 
 **File:** `content/tools/[tool-name].md`
 
+**Important:** Setting `tool_type: "chart"` automatically loads Chart.js and the zoom plugin in baseof.html. Do NOT include these scripts in your layout.
+
 ```markdown
 ---
 title: "Tool Name"
@@ -503,11 +505,20 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
       <canvas id="chart-canvas"></canvas>
       <div
         id="chart-inner"
-        hx-get="/[tool-name]/chart?range=max&quartiles=on"
-        hx-trigger="load"
+        hx-get="/[tool-name]/chart"
+        hx-include="[name=range],[name=quartiles]"
+        hx-trigger="load delay:50ms"
         hx-swap="innerHTML"
       ></div>
     </div>
+
+    <div
+      id="chart-downloads"
+      hx-get="/[tool-name]/downloads"
+      hx-include="[name=range],[name=quartiles]"
+      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
+      hx-swap="innerHTML"
+    ></div>
   </div>
 
   <br />
