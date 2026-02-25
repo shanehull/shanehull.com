@@ -5,24 +5,22 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"math"
 	"net/http"
-	"os"
 	"sort"
-	"strconv"
 	"time"
 
 	"github.com/shanehull/shanehull.com/internal/cache"
+	"github.com/shanehull/shanehull.com/internal/charts"
+	"github.com/shanehull/shanehull.com/internal/fred"
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
 const (
-	equityID    = "NCBCEL"
-	networthID  = "TNWMVBSNNCB"
-	fredBaseURL = "https://api.stlouisfed.org/fred/series/observations"
-	cacheTTL    = 24 * time.Hour
+	equityID = "NCBCEL"
+	networthID = "TNWMVBSNNCB"
+	cacheTTL = 24 * time.Hour
 )
 
 var chartCache = cache.New()
@@ -37,19 +35,23 @@ func getOrFetchChartData(rangeParam string, showQuartiles bool) ([]templates.Lin
 	}
 
 	// Fetch data
-	startDate := calculateStartDate(rangeParam)
+	opts := &fred.FetchOptions{
+		ObservationStart: charts.CalculateRangeStart(rangeParam),
+		Frequency:        "q",
+		Units:            "lin",
+	}
 
-	equity, err := fetchFredData(equityID, startDate)
+	equityData, err := fred.FetchSeries(equityID, opts)
 	if err != nil {
 		return nil, err
 	}
 
-	networth, err := fetchFredData(networthID, startDate)
+	networthData, err := fred.FetchSeries(networthID, opts)
 	if err != nil {
 		return nil, err
 	}
 
-	data := mergeAndCalculate(equity, networth)
+	data := mergeAndCalculate(equityData, networthData)
 	if len(data) == 0 {
 		return nil, fmt.Errorf("no data available for the selected time range")
 	}
@@ -88,14 +90,7 @@ type FinancialData struct {
 	MSIndex  float64
 }
 
-type FredObservation struct {
-	Date  string `json:"date"`
-	Value string `json:"value"`
-}
 
-type FredResponse struct {
-	Observations []FredObservation `json:"observations"`
-}
 
 func MSIndexDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -245,65 +240,12 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func fetchFredData(seriesID string, startDate time.Time) ([]FinancialData, error) {
-	apiKey := os.Getenv("FRED_API_KEY")
-	if apiKey == "" {
-		return nil, fmt.Errorf("FRED_API_KEY environment variable not set")
-	}
 
-	startDateStr := startDate.Format("2006-01-02")
-	url := fredBaseURL + "?series_id=" + seriesID + "&api_key=" + apiKey + "&file_type=json&observation_start=" + startDateStr + "&frequency=q&units=lin"
 
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	var fredResp FredResponse
-	if err := json.Unmarshal(body, &fredResp); err != nil {
-		return nil, err
-	}
-
-	data := make([]FinancialData, 0)
-	for _, obs := range fredResp.Observations {
-		if obs.Value == "." {
-			continue
-		}
-
-		parsedDate, err := time.Parse("2006-01-02", obs.Date)
-		if err != nil {
-			continue
-		}
-
-		value, err := strconv.ParseFloat(obs.Value, 64)
-		if err != nil {
-			continue
-		}
-
-		data = append(data, FinancialData{
-			Date: parsedDate,
-		})
-
-		if seriesID == equityID {
-			data[len(data)-1].Equity = value
-		} else {
-			data[len(data)-1].NetWorth = value
-		}
-	}
-
-	return data, nil
-}
-
-func mergeAndCalculate(equity, networth []FinancialData) []FinancialData {
+func mergeAndCalculate(equity, networth []fred.DataPoint) []FinancialData {
 	networthMap := make(map[string]float64)
 	for _, nw := range networth {
-		networthMap[nw.Date.Format("2006-01-02")] = nw.NetWorth
+		networthMap[nw.Date.Format("2006-01-02")] = nw.Value
 	}
 
 	merged := make([]FinancialData, 0)
@@ -312,7 +254,7 @@ func mergeAndCalculate(equity, networth []FinancialData) []FinancialData {
 		if nwValue, ok := networthMap[dateStr]; ok {
 			merged = append(merged, FinancialData{
 				Date:     eq.Date,
-				Equity:   eq.Equity,
+				Equity:   eq.Value,
 				NetWorth: nwValue,
 			})
 		}
@@ -385,23 +327,7 @@ func percentile(sorted []float64, p float64) float64 {
 	return sorted[lower]*(1-weight) + sorted[upper]*weight
 }
 
-func calculateStartDate(rangeParam string) time.Time {
-	now := time.Now()
-	switch rangeParam {
-	case "1y":
-		return now.AddDate(-1, 0, 0)
-	case "5y":
-		return now.AddDate(-5, 0, 0)
-	case "10y":
-		return now.AddDate(-10, 0, 0)
-	case "20y":
-		return now.AddDate(-20, 0, 0)
-	case "50y":
-		return now.AddDate(-50, 0, 0)
-	default: // "max"
-		return time.Date(1952, 1, 1, 0, 0, 0, 0, time.UTC)
-	}
-}
+
 
 func renderError(w http.ResponseWriter, message string) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
