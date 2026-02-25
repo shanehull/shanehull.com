@@ -81,11 +81,19 @@ tool_type: "calculator"
   </div>
 </main>
 
-{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
-<script src="{{ $shareable.RelPermalink }}"></script>
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $shareable.RelPermalink }}"
+  integrity="{{ $shareable.Data.Integrity }}"
+  defer
+></script>
 
-{{ $script := resources.Get "js/[tool-name].js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/[tool-name].js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $script.RelPermalink }}"
+  integrity="{{ $script.Data.Integrity }}"
+  defer
+></script>
 {{ end }}
 ```
 
