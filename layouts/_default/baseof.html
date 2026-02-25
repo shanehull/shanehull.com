@@ -31,6 +31,9 @@
     {{ partial "syntax" . }}
   </head>
   <body hx-boost="true">
+    {{ if eq .Params.tool_type "chart" }}
+    {{ partial "chart-scripts" }}
+    {{ end }}
     <header>
       <div class="hero-image-container">
         <a href="/">

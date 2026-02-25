@@ -411,11 +411,10 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
 
 **⚠️ Important:** Do NOT include a separate htmx script tag—htmx is already loaded globally on every page via the site's base template. Including it twice causes conflicts.
 
-**⚠️ Important:** Use partials to load Chart.js and the internal init script instead of hardcoding them directly in the layout. This keeps templates clean and centralizes script management. See `layouts/partials/chart-scripts.html` for the shared scripts partial.
+**⚠️ Important:** Chart.js and the internal init script are automatically loaded in `baseof.html` for any page with `tool_type: "chart"`. Do NOT manually load these scripts in individual tool layouts.
 
 ```html
 {{ define "main" }}
-{{ partial "chart-scripts" }}
 <main class="container">
   <h1>{{ .Title }}</h1>
   <p class="description"><i>{{ .Description }}</i></p>
