@@ -24,8 +24,20 @@
       crossorigin="anonymous"
       defer
     ></script>
+    {{ if eq .Params.tool_type "chart" }}
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.0/dist/chartjs-plugin-zoom.min.js"
+      defer
+    ></script>
+    {{ end }}
+    {{ if eq hugo.Environment "development" }}
     {{ $debug := resources.Get "js/htmx-debug.js" | minify | fingerprint }}
     <script src="{{ $debug.RelPermalink }}" defer></script>
+    {{ end }}
     {{ partial "syntax" . }}
   </head>
   <body hx-boost="true">

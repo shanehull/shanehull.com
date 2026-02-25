@@ -255,6 +255,8 @@ The generic `LineChart` templ component (in `internal/templates/linechart.templ`
 
 **File:** `content/tools/[tool-name].md`
 
+**Important:** Setting `tool_type: "chart"` automatically loads Chart.js and the zoom plugin in baseof.html. Do NOT include these scripts in your layout.
+
 ```markdown
 ---
 title: "Tool Name"
