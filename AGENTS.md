@@ -234,6 +234,17 @@ Each chart tool requires four files:
 3.  **Handler:** `internal/handlers/[tool-name].go` (Data fetching and calculation logic)
 4.  **Templ:** `internal/templates/linechart.templ` (Generic `LineChart` component—shared across all chart tools)
 
+### Shared Packages
+
+For FRED-based chart tools, two reusable internal packages are available:
+
+- **`internal/fred`** – FRED API client for fetching economic data series
+  - `FetchSeries(seriesID, opts)` – Fetches observations with configurable options
+  - `FetchOptions` struct – Configure observation_start, observation_end, frequency, units, etc.
+  
+- **`internal/charts`** – Shared chart utilities
+  - `CalculateRangeStart(rangeParam)` – Converts UI range params ("1y", "5y", "max", etc.) to date filters
+
 The generic `LineChart` templ component (in `internal/templates/linechart.templ`) outputs chart config as `data-chart` attributes. The external `assets/js/chart-init.js` file handles all initialization and reinitializes on HTMX swaps.
 
 ---
@@ -271,11 +282,13 @@ Detailed explanation of the metric, calculation method, and data sources.
 
 The handler must:
 
-1. Parse `range` query param (default: "max", options: "1y", "5y", "10y")
+1. Parse `range` query param (default: "max", options: "1y", "5y", "10y", "20y", "50y")
 2. Parse `quartiles` query param (present = true, absent = false)
-3. Fetch data from FRED API or other source
-4. Convert to `LineChartData` format
-5. Call `templates.LineChart()`
+3. Use `internal/charts.CalculateRangeStart(rangeParam)` to get start date
+4. Use `internal/fred.FetchSeries(seriesID, opts)` to fetch FRED data
+5. Convert to `LineChartData` format
+6. Cache results using `internal/cache` for 24 hours
+7. Call `templates.LineChart()`
 
 ```go
 package handlers
