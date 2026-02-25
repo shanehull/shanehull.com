@@ -45,7 +45,7 @@ func getOrFetchBuffetData(rangeParam string, showAverage bool) ([]templates.Line
 		Units:            "lin",
 	}
 
-	// Fetch market cap data (in trillions)
+	// Fetch market cap data (in millions)
 	marketCapOpts := &fred.FetchOptions{
 		ObservationStart: opts.ObservationStart,
 		Frequency:        opts.Frequency,
