@@ -11,7 +11,7 @@ RUN update-ca-certificates
 
 RUN go install github.com/a-h/templ/cmd/templ@latest
 
-RUN hugo --cleanDestinationDir
+RUN HUGO_ENV=production hugo --cleanDestinationDir
 
 RUN templ generate
 

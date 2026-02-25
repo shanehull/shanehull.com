@@ -34,6 +34,10 @@
       defer
     ></script>
     {{ end }}
+    {{ if eq hugo.Environment "development" }}
+    {{ $debug := resources.Get "js/htmx-debug.js" | minify | fingerprint }}
+    <script src="{{ $debug.RelPermalink }}" defer></script>
+    {{ end }}
     {{ partial "syntax" . }}
   </head>
   <body hx-boost="true">
