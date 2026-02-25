@@ -414,7 +414,8 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
 **⚠️ Important:** Use partials to load Chart.js and the internal init script instead of hardcoding them directly in the layout. This keeps templates clean and centralizes script management. See `layouts/partials/chart-scripts.html` for the shared scripts partial.
 
 ```html
-{{ define "main" }} {{ partial "chart-scripts" }}
+{{ define "main" }}
+{{ partial "chart-scripts" }}
 <main class="container">
   <h1>{{ .Title }}</h1>
   <p class="description"><i>{{ .Description }}</i></p>
