@@ -9,7 +9,7 @@ Shane Hull's personal website built on Hugo, with a twist.
 - About: A little about me
 - Books: A list of (mostly) Lindy books
 - Quotes: A random quote generator for a daily nugget of wisdom
-- Blog: One day I'll actually post some thoughts..
+- Tools: Charts and calculator tools for markets and life
 
 **Development:**
 
