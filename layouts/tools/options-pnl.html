@@ -208,11 +208,24 @@
   </div>
   </main>
 
-{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint }}
-<script src="{{ $shareable.RelPermalink }}"></script>
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $shareable.RelPermalink }}"
+  integrity="{{ $shareable.Data.Integrity }}"
+  defer
+></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/chart.js"
+  integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ"
+  crossorigin="anonymous"
+  defer
+></script>
 
-{{ $script := resources.Get "js/options-pnl.js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/options-pnl.js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $script.RelPermalink }}"
+  integrity="{{ $script.Data.Integrity }}"
+  defer
+></script>
 {{ end }}
