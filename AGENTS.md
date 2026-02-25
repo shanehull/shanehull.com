@@ -1,3 +1,20 @@
+# Code Standards
+
+All Go code must pass `golangci-lint run ./...` without warnings. Key requirements:
+
+- **Error handling**: Check all error return values. Use blank identifiers `_` to explicitly ignore errors when appropriate:
+  ```go
+  _, _ = w.Write(buf.Bytes())  // Ignore write errors in error handlers
+  defer func() {
+      _ = resp.Body.Close()
+  }()
+  ```
+- **Blank imports**: Remove unused imports
+- **Unused variables**: All assigned variables must be used or discarded with `_`
+- Run linting before committing: `golangci-lint run ./...`
+
+---
+
 # Standard Operating Procedure for Calculators
 
 This document outlines the strict architecture for creating new interactive calculators in this Hugo project. All new tools **must** follow this pattern to ensure consistency, correct styling, and URL shareability.
@@ -81,14 +98,16 @@ tool_type: "calculator"
   </div>
 </main>
 
-{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384" }}
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384"
+}}
 <script
   src="{{ $shareable.RelPermalink }}"
   integrity="{{ $shareable.Data.Integrity }}"
   defer
 ></script>
 
-{{ $script := resources.Get "js/[tool-name].js" | minify | fingerprint "sha384" }}
+{{ $script := resources.Get "js/[tool-name].js" | minify | fingerprint "sha384"
+}}
 <script
   src="{{ $script.RelPermalink }}"
   integrity="{{ $script.Data.Integrity }}"
@@ -636,6 +655,7 @@ The `LineChart` template supports optional overlays via the `options` map:
 - **`showAverage`**: Set to `"true"` to display a horizontal average line. Defaults to `"false"`. Only shows if average data is provided.
 
 Example:
+
 ```go
 options := map[string]string{
 	"mainLabel":    "My Chart",

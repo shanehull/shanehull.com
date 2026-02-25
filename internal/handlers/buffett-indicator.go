@@ -188,7 +188,9 @@ func BuffettIndicatorDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Write(buf.Bytes())
+	if _, err := w.Write(buf.Bytes()); err != nil {
+		log.Print("failed to write response:", err)
+	}
 }
 
 func BuffettIndicatorCSVHandler(w http.ResponseWriter, r *http.Request) {

@@ -54,5 +54,5 @@ func renderError(w http.ResponseWriter, message string) {
 	html := `<div class="chart-error">
 		<strong>Error:</strong> ` + message + `
 	</div>`
-	w.Write([]byte(html))
+	_, _ = w.Write([]byte(html))
 }
