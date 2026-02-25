@@ -1,10 +1,18 @@
 <script
   src="https://cdn.jsdelivr.net/npm/chart.js"
+  integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ"
+  crossorigin="anonymous"
   defer
 ></script>
 <script
   src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.0/dist/chartjs-plugin-zoom.min.js"
+  integrity="sha384-oGA/F7stG6KYPOJ3KemiYwrre4dAdBOAdsG+4Ja0Uj73GWXLwAyPFVAy4nwy64lS"
+  crossorigin="anonymous"
   defer
 ></script>
-{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}" defer></script>
+{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $script.RelPermalink }}"
+  integrity="{{ $script.Data.Integrity }}"
+  defer
+></script>
