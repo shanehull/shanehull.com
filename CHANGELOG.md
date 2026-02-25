@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.8.0](https://github.com/shanehull/shanehull.com/compare/v0.7.1...v0.8.0) (2026-02-25)
+
+
+### Features
+
+* buffett indicator chart tool ([#100](https://github.com/shanehull/shanehull.com/issues/100)) ([838e472](https://github.com/shanehull/shanehull.com/commit/838e472a3ce3e98f411e7cb9d90b97d9191cc240))
+
+
+### Bug Fixes
+
+* add integrity and crossorigin to scripts ([#98](https://github.com/shanehull/shanehull.com/issues/98)) ([a867bf7](https://github.com/shanehull/shanehull.com/commit/a867bf7dd0d1e57be2b6cb47ef3876cc5f3aa391))
+* fcf valuation assets not sharable ([#106](https://github.com/shanehull/shanehull.com/issues/106)) ([e5467a4](https://github.com/shanehull/shanehull.com/commit/e5467a42ec2ec7babf9fe9f573f1d48a258ca379))
+* load chart scripts in body ([#97](https://github.com/shanehull/shanehull.com/issues/97)) ([262be54](https://github.com/shanehull/shanehull.com/commit/262be54868bcf2d5cb45b34648abbfa65aa05339))
+* remove quartiles reference on buffett ([#103](https://github.com/shanehull/shanehull.com/issues/103)) ([f697a0a](https://github.com/shanehull/shanehull.com/commit/f697a0a263424822cc3a6b49d746e81639ec4d79))
+
 ## [0.7.1](https://github.com/shanehull/shanehull.com/compare/v0.7.0...v0.7.1) (2026-02-22)
 
 
