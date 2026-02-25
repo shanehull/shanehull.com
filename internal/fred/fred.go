@@ -126,7 +126,9 @@ func FetchSeries(seriesID string, opts *FetchOptions) ([]DataPoint, error) {
 		}
 		return nil, fmt.Errorf("failed to fetch FRED series %s: %w", seriesID, err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)

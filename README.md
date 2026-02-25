@@ -1,6 +1,7 @@
 # shanehull.com
 
 [shanehull.com](https://shanehull.com)
+[![Go Report](https://goreportcard.com/badge/github.com/shanehull/shanehull.com)](https://goreportcard.com/report/github.com/shanehull/shanehull.com)
 
 Shane Hull's personal website built on Hugo, with a twist.
 

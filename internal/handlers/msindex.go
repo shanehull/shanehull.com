@@ -131,7 +131,9 @@ func MSIndexDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Write(buf.Bytes())
+	if _, err := w.Write(buf.Bytes()); err != nil {
+		log.Print("failed to write response:", err)
+	}
 }
 
 func MSIndexCSVHandler(w http.ResponseWriter, r *http.Request) {
