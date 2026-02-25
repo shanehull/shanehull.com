@@ -117,7 +117,7 @@
         id="chart-inner"
         hx-get="/msindex/chart"
         hx-include="[name=range],[name=quartiles]"
-        hx-trigger="load delay:50ms"
+        hx-trigger="revealed"
         hx-swap="innerHTML"
       ></div>
     </div>
@@ -126,7 +126,7 @@
       id="chart-downloads"
       hx-get="/msindex/downloads"
       hx-include="[name=range],[name=quartiles]"
-      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
+      hx-trigger="revealed, change from:[name=range], change from:[name=quartiles]"
       hx-swap="innerHTML"
     ></div>
   </div>
