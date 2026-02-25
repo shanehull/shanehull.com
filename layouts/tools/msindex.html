@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ partial "chart-scripts" }}
 <main class="container">
   <h1>{{ .Title }}</h1>
   <p class="description"><i>{{ .Description }}</i></p>
@@ -138,8 +139,5 @@
     <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
   </div>
 </main>
-
-{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
 
 {{ end }}

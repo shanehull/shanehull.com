@@ -241,7 +241,6 @@ For FRED-based chart tools, two reusable internal packages are available:
 - **`internal/fred`** – FRED API client for fetching economic data series
   - `FetchSeries(seriesID, opts)` – Fetches observations with configurable options
   - `FetchOptions` struct – Configure observation_start, observation_end, frequency, units, etc.
-  
 - **`internal/charts`** – Shared chart utilities
   - `CalculateRangeStart(rangeParam)` – Converts UI range params ("1y", "5y", "max", etc.) to date filters
 
@@ -254,8 +253,6 @@ The generic `LineChart` templ component (in `internal/templates/linechart.templ`
 ### Step 1: Create the Content File
 
 **File:** `content/tools/[tool-name].md`
-
-**Important:** Setting `tool_type: "chart"` automatically loads Chart.js and the zoom plugin in baseof.html. Do NOT include these scripts in your layout.
 
 ```markdown
 ---
@@ -412,8 +409,10 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
 
 **⚠️ Important:** Do NOT include a separate htmx script tag—htmx is already loaded globally on every page via the site's base template. Including it twice causes conflicts.
 
+**⚠️ Important:** Use partials to load Chart.js and the internal init script instead of hardcoding them directly in the layout. This keeps templates clean and centralizes script management. See `layouts/partials/chart-scripts.html` for the shared scripts partial.
+
 ```html
-{{ define "main" }}
+{{ define "main" }} {{ partial "chart-scripts" }}
 <main class="container">
   <h1>{{ .Title }}</h1>
   <p class="description"><i>{{ .Description }}</i></p>
@@ -518,12 +517,6 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
     <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
   </div>
 </main>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.0/dist/chartjs-plugin-zoom.min.js"></script>
-
-{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
 
 {{ end }}
 ```
