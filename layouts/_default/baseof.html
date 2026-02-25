@@ -12,7 +12,7 @@
     <meta name="description" content="{{ .Params.description }}" />
     {{- end }} {{ $style := resources.Get "scss/style.scss" |
     resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify |
-    fingerprint }}
+    fingerprint "sha384" }}
     <link
       rel="stylesheet"
       href="{{ $style.RelPermalink }}"
@@ -25,8 +25,12 @@
       defer
     ></script>
     {{ if eq hugo.Environment "development" }}
-    {{ $debug := resources.Get "js/htmx-debug.js" | minify | fingerprint }}
-    <script src="{{ $debug.RelPermalink }}" defer></script>
+    {{ $debug := resources.Get "js/htmx-debug.js" | minify | fingerprint "sha384" }}
+    <script
+      src="{{ $debug.RelPermalink }}"
+      integrity="{{ $debug.Data.Integrity }}"
+      defer
+    ></script>
     {{ end }}
     {{ partial "syntax" . }}
   </head>
