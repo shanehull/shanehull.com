@@ -20,6 +20,7 @@
               checked
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
+              hx-include="[name=average]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -32,6 +33,7 @@
               value="50y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
+              hx-include="[name=average]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -44,6 +46,7 @@
               value="20y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
+              hx-include="[name=average]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -56,6 +59,7 @@
               value="10y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
+              hx-include="[name=average]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -68,6 +72,7 @@
               value="5y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
+              hx-include="[name=average]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
@@ -80,12 +85,29 @@
               value="1y"
               hx-get="/buffett-indicator/chart"
               hx-target="#chart-inner"
+              hx-include="[name=average]"
               hx-swap="innerHTML"
               hx-trigger="change"
             />
             1 Year
           </label>
         </div>
+      </div>
+
+      <div class="control-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            name="average"
+            checked
+            hx-get="/buffett-indicator/chart"
+            hx-target="#chart-inner"
+            hx-include="[name=range]"
+            hx-swap="innerHTML"
+            hx-trigger="change"
+          />
+          Show Average
+        </label>
       </div>
     </div>
 
@@ -94,7 +116,7 @@
       <div
         id="chart-inner"
         hx-get="/buffett-indicator/chart"
-        hx-include="[name=range]"
+        hx-include="[name=range],[name=average]"
         hx-trigger="load delay:50ms"
         hx-swap="innerHTML"
       ></div>
@@ -103,8 +125,8 @@
     <div
       id="chart-downloads"
       hx-get="/buffett-indicator/downloads"
-      hx-include="[name=range]"
-      hx-trigger="load, change from:[name=range]"
+      hx-include="[name=range],[name=average]"
+      hx-trigger="load, change from:[name=range], change from:[name=average]"
       hx-swap="innerHTML"
     ></div>
   </div>

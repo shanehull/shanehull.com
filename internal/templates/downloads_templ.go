@@ -8,7 +8,7 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func ChartDownloads(toolName string, rangeParam string, showQuartiles bool) templ.Component {
+func ChartDownloads(toolName string, rangeParam string, overlayParam string, showOverlay bool) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -33,15 +33,15 @@ func ChartDownloads(toolName string, rangeParam string, showQuartiles bool) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if showQuartiles {
+		if showOverlay {
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<a href=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 templ.SafeURL
-			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data?range=" + rangeParam + "&quartiles=on"))
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data?range=" + rangeParam + "&" + overlayParam + "=on"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 6, Col: 90}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 6, Col: 101}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
@@ -54,7 +54,7 @@ func ChartDownloads(toolName string, rangeParam string, showQuartiles bool) temp
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(toolName + "-data.json")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 6, Col: 127}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 6, Col: 138}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -65,9 +65,9 @@ func ChartDownloads(toolName string, rangeParam string, showQuartiles bool) temp
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 templ.SafeURL
-			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam + "&quartiles=on"))
+			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam + "&" + overlayParam + "=on"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 7, Col: 94}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 7, Col: 105}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -80,7 +80,7 @@ func ChartDownloads(toolName string, rangeParam string, showQuartiles bool) temp
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(toolName + "-data.csv")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 7, Col: 130}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/downloads.templ`, Line: 7, Col: 141}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {

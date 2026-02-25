@@ -30,8 +30,8 @@ type BuffetData struct {
 	Ratio     float64
 }
 
-func getOrFetchBuffetData(rangeParam string, showQuartiles bool) ([]templates.LineChartData, error) {
-	cacheKey := fmt.Sprintf("buffet-indicator:%s", rangeParam)
+func getOrFetchBuffetData(rangeParam string, showAverage bool) ([]templates.LineChartData, error) {
+	cacheKey := fmt.Sprintf("buffet-indicator:%s:%v", rangeParam, showAverage)
 
 	// Check cache
 	if cached, found := buffetCache.Get(cacheKey); found {
@@ -81,12 +81,16 @@ func getOrFetchBuffetData(rangeParam string, showQuartiles bool) ([]templates.Li
 
 	chartData := make([]templates.LineChartData, len(data))
 	for i, d := range data {
+		avg := 0.0
+		if showAverage {
+			avg = avgRatio
+		}
 		chartData[i] = templates.LineChartData{
 			Date:      d.Date.Format("2006-01-02"),
 			Value:     d.Ratio,
 			Quartile1: 0,
 			Quartile3: 0,
-			Average:   avgRatio,
+			Average:   avg,
 		}
 	}
 
@@ -130,9 +134,9 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showAverage := r.URL.Query().Has("average")
 
-	chartData, err := getOrFetchBuffetData(rangeParam, showQuartiles)
+	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
 	if err != nil {
 		log.Print("failed to get chart data:", err)
 		renderError(w, "Unable to load chart data. Please try again later.")
@@ -140,10 +144,14 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":     "Buffett Indicator",
-		"yAxisLabel":    "Ratio (%)",
-		"showAverage":   "true",
+		"mainLabel":    "Buffett Indicator",
+		"yAxisLabel":   "Ratio (%)",
 		"showQuartiles": "false",
+	}
+	if showAverage {
+		options["showAverage"] = "true"
+	} else {
+		options["showAverage"] = "false"
 	}
 	component := templates.LineChart("chart-canvas", chartData, false, options)
 
@@ -151,8 +159,10 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 	defer buf.Reset()
 
 	if renderErr := component.Render(r.Context(), buf); renderErr != nil {
-		log.Print("failed to render component:", renderErr)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
+		// Suppress context canceled errors - common when client disconnects
+		if renderErr.Error() != "context canceled" {
+			log.Print("failed to render component:", renderErr)
+		}
 		return
 	}
 
@@ -175,9 +185,9 @@ func BuffettIndicatorDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showAverage := r.URL.Query().Has("average")
 
-	component := templates.ChartDownloads("buffett-indicator", rangeParam, showQuartiles)
+	component := templates.ChartDownloads("buffett-indicator", rangeParam, "average", showAverage)
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
@@ -204,9 +214,9 @@ func BuffettIndicatorCSVHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showAverage := r.URL.Query().Has("average")
 
-	chartData, err := getOrFetchBuffetData(rangeParam, showQuartiles)
+	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
 	if err != nil {
 		log.Print("failed to get chart data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
@@ -218,7 +228,10 @@ func BuffettIndicatorCSVHandler(w http.ResponseWriter, r *http.Request) {
 	writer := csv.NewWriter(w)
 	defer writer.Flush()
 
-	header := []string{"date", "buffett_indicator", "average"}
+	header := []string{"date", "buffett_indicator"}
+	if showAverage {
+		header = append(header, "average")
+	}
 	if err := writer.Write(header); err != nil {
 		log.Print("failed to write CSV header:", err)
 		return
@@ -228,7 +241,10 @@ func BuffettIndicatorCSVHandler(w http.ResponseWriter, r *http.Request) {
 		row := []string{
 			d.Date,
 			fmt.Sprintf("%.6f", d.Value),
-			fmt.Sprintf("%.6f", d.Average),
+		}
+
+		if showAverage {
+			row = append(row, fmt.Sprintf("%.6f", d.Average))
 		}
 
 		if err := writer.Write(row); err != nil {
@@ -249,9 +265,9 @@ func BuffettIndicatorDataHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showAverage := r.URL.Query().Has("average")
 
-	chartData, err := getOrFetchBuffetData(rangeParam, showQuartiles)
+	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
 	if err != nil {
 		log.Print("failed to get chart data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
