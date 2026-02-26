@@ -32,24 +32,24 @@ function addAsset() {
         ${assetIdCounter > 1 ? `<span class="calculator-remove-btn" data-id="${assetIdCounter}">✕</span>` : ""}
         
         <div class="calculator-field" style="margin-bottom: 1rem;">
-            <label>Asset Description</label>
+            <label for="asset-${assetIdCounter}-desc">Asset Description</label>
             <input type="text" placeholder="e.g., Gold Production" id="asset-${assetIdCounter}-desc" class="asset-input">
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
-                <label>Production</label>
+                <label for="asset-${assetIdCounter}-prod">Production</label>
                 <input type="number" id="asset-${assetIdCounter}-prod" class="p-prod" value="100000">
             </div>
             <div class="calculator-field">
-                <label>Price ($)</label>
+                <label for="asset-${assetIdCounter}-price">Price ($)</label>
                 <input type="number" id="asset-${assetIdCounter}-price" class="p-price" value="2500">
             </div>
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
-                <label>Unit Cost ($)</label>
+                <label for="asset-${assetIdCounter}-cost">Unit Cost ($)</label>
                 <input type="number" id="asset-${assetIdCounter}-cost" class="p-cost" value="1200">
             </div>
         </div>

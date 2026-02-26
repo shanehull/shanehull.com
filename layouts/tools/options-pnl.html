@@ -5,6 +5,8 @@
   <hr />
   <br />
 
+  <div class="tool-instructions">{{ .Content }}</div>
+
   <div class="calculator-wrapper">
     <div class="calculator-sticky-header">
       <div class="calculator-stats-grid">
@@ -39,14 +41,14 @@
       <h3 class="calculator-section-head">Configuration</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Input Mode</label>
+          <label for="inputMode">Input Mode</label>
           <select id="inputMode">
             <option value="search">Ticker Search (API)</option>
             <option value="manual">Manual Input</option>
           </select>
         </div>
         <div class="calculator-field options-pnl-visible" id="apiKeyField">
-          <label>RapidAPI Key (Yahoo Finance) <a href="https://rapidapi.com/sparior/api" target="_blank" style="font-size: 0.85em; text-decoration: none;">→ get free key</a></label>
+          <label for="apiKey">RapidAPI Key (Yahoo Finance) <a href="https://rapidapi.com/sparior/api" target="_blank" style="font-size: 0.85em; text-decoration: none;">→ get free key</a></label>
           <input type="password" id="apiKey" placeholder="Paste Key Here..." data-no-share />
         </div>
       </div>
@@ -54,7 +56,7 @@
       <h3 class="calculator-section-head">Underlying Asset</h3>
       <div class="calculator-row">
         <div class="calculator-field options-pnl-visible" id="tickerField">
-          <label>Ticker Symbol</label>
+          <label for="ticker">Ticker Symbol</label>
           <input type="text" id="ticker" placeholder="e.g. AAPL" value="AAPL (Demo)" />
           <div
            id="suggestions"
@@ -62,7 +64,7 @@
           ></div>
         </div>
         <div class="calculator-field">
-          <label>Underlying Price ($)</label>
+          <label for="currentPrice">Underlying Price ($)</label>
           <input type="number" id="currentPrice" value="150" step="0.01" />
         </div>
       </div>
@@ -70,14 +72,14 @@
       <h3 class="calculator-section-head">Option Strategy</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Position</label>
+          <label for="sideSelect">Position</label>
           <select id="sideSelect">
             <option value="long">Buy (Long)</option>
             <option value="short">Sell (Short)</option>
           </select>
         </div>
         <div class="calculator-field">
-          <label>Type</label>
+          <label for="typeSelect">Type</label>
           <select id="typeSelect">
             <option value="call">Call</option>
             <option value="put">Put</option>
@@ -87,26 +89,26 @@
 
       <div class="calculator-row">
         <div class="calculator-field options-pnl-visible" id="expirySelectWrapper">
-          <label>Expiration</label>
+          <label for="expirySelect">Expiration</label>
           <select id="expirySelect"></select>
         </div>
         <div
          class="calculator-field options-pnl-hidden"
          id="expiryManualWrapper"
         >
-          <label>Expiration Date</label>
+          <label for="expiryInputManual">Expiration Date</label>
           <input type="date" id="expiryInputManual" />
         </div>
 
         <div class="calculator-field options-pnl-visible" id="strikeSelectWrapper">
-          <label>Strike Price</label>
+          <label for="strikeSelect">Strike Price</label>
           <select id="strikeSelect"></select>
         </div>
         <div
          class="calculator-field options-pnl-hidden"
          id="strikeManualWrapper"
         >
-          <label>Strike Price ($)</label>
+          <label for="strikeInputManual">Strike Price ($)</label>
           <input type="number" id="strikeInputManual" value="150" />
         </div>
       </div>
@@ -114,7 +116,7 @@
       <h3 class="calculator-section-head">Pricing & Greeks</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Contract Price ($)</label>
+          <label for="contractPrice">Contract Price ($)</label>
           <input
             type="number"
             id="contractPrice"
@@ -122,25 +124,25 @@
           />
         </div>
         <div class="calculator-field">
-          <label>Implied Volatility (%)</label>
+          <label for="ivInput">Implied Volatility (%)</label>
           <input type="number" id="ivInput" value="30" step="0.1" />
         </div>
       </div>
 
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Contracts</label>
+          <label for="contracts">Contracts</label>
           <input type="number" id="contracts" value="1" min="1" />
         </div>
         <div class="calculator-field">
-          <label>Units Per Contract</label>
+          <label for="lotSize">Units Per Contract</label>
           <input type="number" id="lotSize" value="100" min="1" />
         </div>
       </div>
 
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Chart Range (+/- %)</label>
+          <label for="chartRange">Chart Range (+/- %)</label>
           <input type="number" id="chartRange" value="20" />
         </div>
       </div>
@@ -165,8 +167,6 @@
     </div>
   </div>
 
-  <br />
-  <div class="tool-instructions">{{ .Content }}</div>
   <br />
   <hr />
   <br />
