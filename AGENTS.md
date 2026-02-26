@@ -471,7 +471,7 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
               hx-target="#chart-inner"
               hx-include="[name=quartiles]"
               hx-swap="innerHTML"
-              hx-trigger="change"
+              hx-trigger="load, change"
             />
             Max
           </label>
@@ -536,20 +536,14 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
 
     <div class="chart-container">
       <canvas id="chart-canvas"></canvas>
-      <div
-        id="chart-inner"
-        hx-get="/[tool-name]/chart"
-        hx-include="[name=range],[name=quartiles]"
-        hx-trigger="revealed"
-        hx-swap="innerHTML"
-      ></div>
+      <div id="chart-inner"></div>
     </div>
 
     <div
       id="chart-downloads"
       hx-get="/[tool-name]/downloads"
       hx-include="[name=range],[name=quartiles]"
-      hx-trigger="revealed, change from:[name=range], change from:[name=quartiles]"
+      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
       hx-swap="innerHTML"
     ></div>
   </div>
@@ -756,4 +750,4 @@ Pass your specific overlay parameter name (e.g., "quartiles", "average") and the
 9. **Forgetting to include chart-init.js:** The external script is required for CSP compliance and chart initialization. It listens to `htmx:afterSwap` events automatically.
 10. **HTMX includes for missing controls:** If you remove a control (e.g., quartiles checkbox), remove it from `hx-include` attributes too. Orphaned form fields in HTMX will cause requests to fail silently.
 11. **Overlay parameter names:** Use `ChartDownloads(toolName, rangeParam, overlayParamName, showOverlay)` and pass your specific overlay parameter name (e.g., "quartiles" for msindex, "average" for buffett-indicator). The template handles building the correct download links dynamically.
-12. **Using `load` trigger with hx-boost:** Use `hx-trigger="revealed"` instead of `load` on the chart and downloads divs. The `load` event doesn't fire when pages are soft-navigated via hx-boost, causing charts to fail silently on first visit via navigation.
+12. **hx-boost navigation:** Add `hx-trigger="load, change"` to the default "max" radio button for the chart, and `hx-trigger="load, change from:..."` on the downloads div. These elements are always in the DOM, so `load` fires on both hard refreshes and hx-boost navigation.

@@ -22,7 +22,7 @@
               hx-target="#chart-inner"
               hx-include="[name=average]"
               hx-swap="innerHTML"
-              hx-trigger="change"
+              hx-trigger="load, change"
             />
             Max
           </label>
@@ -113,20 +113,14 @@
 
     <div class="chart-container">
       <canvas id="chart-canvas"></canvas>
-      <div
-        id="chart-inner"
-        hx-get="/buffett-indicator/chart"
-        hx-include="[name=range],[name=average]"
-        hx-trigger="revealed"
-        hx-swap="innerHTML"
-      ></div>
+      <div id="chart-inner"></div>
     </div>
 
     <div
       id="chart-downloads"
       hx-get="/buffett-indicator/downloads"
       hx-include="[name=range],[name=average]"
-      hx-trigger="revealed, change from:[name=range], change from:[name=average]"
+      hx-trigger="load, change from:[name=range], change from:[name=average]"
       hx-swap="innerHTML"
     ></div>
   </div>
