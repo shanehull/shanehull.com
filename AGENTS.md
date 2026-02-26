@@ -1,3 +1,41 @@
+# Stylesheet Architecture
+
+## Overview
+
+- **`assets/scss/style.scss`** - All site styles (loaded on every page) ~25 KiB
+  - Contains color and theme variables at the top
+  - Imports tool-specific styles and fonts
+
+## File Structure
+
+```
+assets/scss/
+  _fonts.scss              ← Font declarations
+  style.scss               ← Main stylesheet with variables at top
+  tools/
+    _calculator.scss       ← Imported by style.scss
+    _chart-tools.scss      ← Imported by style.scss
+    _options-pnl.scss      ← Imported by style.scss
+    _list.scss             ← Imported by style.scss
+```
+
+## Color Variables
+
+Defined at the top of `style.scss`:
+
+- Light mode: `$light-background`, `$light-text`, `$light-icon`
+- Dark mode: `$dark-background`, `$dark-text`, `$dark-icon`
+- Buttons: `$button-color-dark`, `$button-color-light`
+
+## When Creating New Tool Styles
+
+1. Create `assets/scss/tools/_newtool.scss`
+2. Import it in `assets/scss/style.scss`
+3. Use color variables (defined in style.scss)
+4. Follow dark mode pattern: `@media (prefers-color-scheme: dark) { ... }`
+
+---
+
 # Code Standards
 
 ## Go

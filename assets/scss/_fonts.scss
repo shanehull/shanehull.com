@@ -17,7 +17,7 @@
   }
   /* hack-nerd-font-italic */
   @font-face {
-    font-display: swap;
+    font-display: optional;
     font-family: 'Hack Nerd Font';
     font-style: italic;
     font-weight: 400;
@@ -33,7 +33,7 @@
   }
   /* hack-nerd-font-bold-italic */
   @font-face {
-    font-display: swap;
+    font-display: optional;
     font-family: 'Hack Nerd Font';
     font-style: italic;
     font-weight: 700;
