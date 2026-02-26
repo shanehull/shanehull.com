@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/shanehull/shanehull.com/compare/v0.9.0...v0.9.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* delay load charts ([#118](https://github.com/shanehull/shanehull.com/issues/118)) ([f65afff](https://github.com/shanehull/shanehull.com/commit/f65afff09ce37c4f5333e3ee1dd6d024e4a84d11))
+
 ## [0.9.0](https://github.com/shanehull/shanehull.com/compare/v0.8.1...v0.9.0) (2026-02-26)
 
 
