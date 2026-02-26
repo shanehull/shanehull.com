@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.9.0](https://github.com/shanehull/shanehull.com/compare/v0.8.1...v0.9.0) (2026-02-26)
+
+
+### Features
+
+* dcf growth exit model ([#113](https://github.com/shanehull/shanehull.com/issues/113)) ([c176e99](https://github.com/shanehull/shanehull.com/commit/c176e99b43500cd974d3ebb0aaa3e41bd31d49ca))
+
+
+### Bug Fixes
+
+* label form field violations ([#115](https://github.com/shanehull/shanehull.com/issues/115)) ([6168ba6](https://github.com/shanehull/shanehull.com/commit/6168ba67def3a74e7714bdc0d178489417eef363))
+* reduce load times ([#117](https://github.com/shanehull/shanehull.com/issues/117)) ([4eba4a7](https://github.com/shanehull/shanehull.com/commit/4eba4a75028a424a1522b5f557ed0493cbc1c1d2))
+
 ## [0.8.1](https://github.com/shanehull/shanehull.com/compare/v0.8.0...v0.8.1) (2026-02-26)
 
 
