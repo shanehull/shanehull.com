@@ -1,5 +1,7 @@
 # Code Standards
 
+## Go
+
 All Go code must pass `golangci-lint run ./...` without warnings. Key requirements:
 
 - **Error handling**: Check all error return values. Use blank identifiers `_` to explicitly ignore errors when appropriate:
@@ -11,7 +13,18 @@ All Go code must pass `golangci-lint run ./...` without warnings. Key requiremen
   ```
 - **Blank imports**: Remove unused imports
 - **Unused variables**: All assigned variables must be used or discarded with `_`
+- **Formatting**: Run `gofmt` on all edited files before committing
 - Run linting before committing: `golangci-lint run ./...`
+
+## JavaScript
+
+All JavaScript files are formatted with Prettier. Key rules:
+
+- **Single quotes**: Use single quotes for strings
+- **Semicolons**: Include semicolons at end of statements
+- **Indentation**: 2 spaces
+- **Format before committing**: Run Prettier on all `assets/js/*.js` files
+- **Configuration**: Prettier via none-ls with `--single-quote` flag
 
 ---
 

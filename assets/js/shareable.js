@@ -19,7 +19,7 @@ function makeShareable(calculateCallback) {
   inputs.forEach((input) => {
     // Skip inputs marked with data-no-share
     if (input.hasAttribute("data-no-share")) return;
-    
+
     if (input.id && params.has(input.id)) {
       const val = params.get(input.id);
       if (input.type === "checkbox" || input.type === "radio") {
@@ -45,7 +45,7 @@ function makeShareable(calculateCallback) {
     inputs.forEach((input) => {
       // Skip inputs marked with data-no-share
       if (input.hasAttribute("data-no-share")) return;
-      
+
       if (!input.id) return;
 
       if (input.type === "checkbox") {

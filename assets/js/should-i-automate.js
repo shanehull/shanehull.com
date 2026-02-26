@@ -34,7 +34,9 @@ function initAuto() {
   if (!document.getElementById("frequency")) return;
 
   // Attach event listeners (CSP-compliant, no inline handlers)
-  document.getElementById("frequency").addEventListener("change", calculateAuto);
+  document
+    .getElementById("frequency")
+    .addEventListener("change", calculateAuto);
   document.getElementById("timeSaved").addEventListener("input", calculateAuto);
   document.getElementById("unit").addEventListener("change", calculateAuto);
   document.getElementById("duration").addEventListener("input", calculateAuto);

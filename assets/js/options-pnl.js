@@ -1,4 +1,4 @@
-if (typeof API_HOST === 'undefined') {
+if (typeof API_HOST === "undefined") {
   var API_HOST = "yahoo-finance15.p.rapidapi.com";
 }
 let currentChain = null;
@@ -363,7 +363,8 @@ async function fetchTickerSuggestions() {
   }
 
   // Show loading state
-  suggestionsEl.innerHTML = '<div style="padding: 0.5rem; text-align: center; color: inherit;">Searching...</div>';
+  suggestionsEl.innerHTML =
+    '<div style="padding: 0.5rem; text-align: center; color: inherit;">Searching...</div>';
 
   try {
     const res = await fetch(
@@ -376,7 +377,8 @@ async function fetchTickerSuggestions() {
 
     if (!res.ok) {
       if (res.status === 429) {
-        suggestionsEl.innerHTML = '<div style="padding: 0.75rem; color: #ef4444; text-align: center; font-size: 0.9rem;">API quota exceeded. Upgrade at RapidAPI.</div>';
+        suggestionsEl.innerHTML =
+          '<div style="padding: 0.75rem; color: #ef4444; text-align: center; font-size: 0.9rem;">API quota exceeded. Upgrade at RapidAPI.</div>';
       } else {
         suggestionsEl.innerHTML = "";
       }
@@ -555,24 +557,24 @@ function updateUiMode() {
 }
 
 function setHeatmapMode(mode) {
-   currentHeatmapMode = mode;
+  currentHeatmapMode = mode;
 
-   if (latestStrategyCalc) {
-     renderHeatmap(
-       latestStrategyCalc.S,
-       latestStrategyCalc.K,
-       latestStrategyCalc.T,
-       latestStrategyCalc.iv,
-       latestStrategyCalc.type,
-       latestStrategyCalc.side,
-       latestStrategyCalc.contracts,
-       latestStrategyCalc.lotSize,
-       latestStrategyCalc.cost,
-       latestStrategyCalc.rangePct,
-       latestStrategyCalc.entry,
-       mode,
-     );
-   }
+  if (latestStrategyCalc) {
+    renderHeatmap(
+      latestStrategyCalc.S,
+      latestStrategyCalc.K,
+      latestStrategyCalc.T,
+      latestStrategyCalc.iv,
+      latestStrategyCalc.type,
+      latestStrategyCalc.side,
+      latestStrategyCalc.contracts,
+      latestStrategyCalc.lotSize,
+      latestStrategyCalc.cost,
+      latestStrategyCalc.rangePct,
+      latestStrategyCalc.entry,
+      mode,
+    );
+  }
 }
 
 function initOptions() {
