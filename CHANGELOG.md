@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.8.1](https://github.com/shanehull/shanehull.com/compare/v0.8.0...v0.8.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* buffet indicator mc units ([#108](https://github.com/shanehull/shanehull.com/issues/108)) ([0413838](https://github.com/shanehull/shanehull.com/commit/04138389c63eb5874de8832ff4c37003b088473b))
+* hx-swap pattern via buttons ([#111](https://github.com/shanehull/shanehull.com/issues/111)) ([1d1b5eb](https://github.com/shanehull/shanehull.com/commit/1d1b5eb89e8b052c93a9ab6810eb80de95930b67))
+* use reveal as hx trigger on charts ([#110](https://github.com/shanehull/shanehull.com/issues/110)) ([8920477](https://github.com/shanehull/shanehull.com/commit/8920477364df184ab8708a281265b39793fc0324))
+
 ## [0.8.0](https://github.com/shanehull/shanehull.com/compare/v0.7.1...v0.8.0) (2026-02-25)
 
 
