@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-      - '!release-please--branches--main'
 
 permissions:
   contents: read
@@ -13,6 +12,7 @@ jobs:
   Lint:
     name: Lint
     runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.head_ref, 'release-please--branches--') }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v4
