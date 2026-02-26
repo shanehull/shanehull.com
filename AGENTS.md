@@ -69,24 +69,40 @@ tool_type: "calculator"
 **File:** `layouts/tools/[tool-name].html`
 **Critical:** Use the standard CSS classes (`calculator-wrapper`, `calculator-row`, `calculator-field`) to inherit the site's theme automatically.
 
+**Layout structure:**
+1. `<h1>{{ .Title }}</h1>` – Page title only
+2. `<div class="tool-instructions">{{ .Content }}</div>` – Instructions from markdown
+3. `<div class="calculator-wrapper">` – Calculator container
+4. Sticky header with results
+5. Calculator body with inputs
+
+**Sticky header structure:**
+- Use `calculator-stats-grid` with `calculator-stat-item` for secondary metrics
+- Use `calculator-main-display` for primary result with optional `upside-badge` for status
+
 ```html
 {{ define "main" }}
 <main class="container">
   <h1>{{ .Title }}</h1>
-  <p class="description"><i>{{ .Description }}</i></p>
-  <hr />
-  <br />
+  <div class="tool-instructions">{{ .Content }}</div>
 
   <div class="calculator-wrapper">
     <div class="calculator-sticky-header">
+      <div class="calculator-stats-grid">
+        <div class="calculator-stat-item">
+          <span class="label">Secondary Metric</span>
+          <span id="outSecondary" class="val">$0.00</span>
+        </div>
+      </div>
       <div class="calculator-main-display">
         <span class="label">Primary Result</span>
         <h1 id="outResult">$0.00</h1>
+        <div id="outStatus" class="upside-badge">0%</div>
       </div>
     </div>
 
     <div class="calculator-body">
-      <h3 class="calculator-section-head">1. Input Section Name</h3>
+      <h3 class="calculator-section-head">Input Section Name</h3>
 
       <div class="calculator-row">
         <div class="calculator-field">
@@ -213,8 +229,8 @@ Do not write new CSS unless absolutely necessary. Use these existing classes:
 - **Wrapper:** `.calculator-wrapper` (Handles dark mode, shadows, and borders)
 - **Header:** `.calculator-sticky-header` (Keeps results visible on mobile)
 - **Result Text:** `.calculator-main-display h1` (Big text, auto-adapts color)
-- **Section Headers:** `.calculator-section-head` (Uppercase, dividers)
-- **Input Groups:** `.calculator-field` (Handles labels, inputs, focus states)
+- **Section Headers:** `.calculator-section-head` (Plain text, no numbering. E.g., "Assumptions" not "1. Assumptions")
+- **Input Groups:** `.calculator-field` (Handles labels, inputs, focus states). **Every `<label>` must have a `for` attribute matching the input's `id`**
 - **Badges:** `.upside-badge` (Green/Red text for secondary stats)
 
 ### Color Variables (REQUIRED - No Hardcoded Colors)

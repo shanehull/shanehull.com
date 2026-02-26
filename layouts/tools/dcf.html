@@ -1,0 +1,93 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="calculator-wrapper">
+    <div class="calculator-sticky-header">
+      <div class="calculator-stats-grid">
+        <div class="calculator-stat-item">
+          <span class="label">PV of Cash Flows</span>
+          <span id="outPVCashFlows" class="val">$0.00</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label">Exit Value</span>
+          <span id="outPVExit" class="val">$0.00</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label">Expected Return</span>
+          <span id="outExpectedReturn" class="val">0.00% p/year</span>
+        </div>
+      </div>
+      <div class="calculator-main-display">
+        <span class="label">Intrinsic Value</span>
+        <h1 id="outIntrinsicValue">$0.00</h1>
+        <div id="outUpsideDownside" class="upside-badge">0.00%</div>
+      </div>
+    </div>
+
+    <div class="calculator-body">
+      <h3 class="calculator-section-head">Valuation Assumptions</h3>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="initialFCF">Initial FCF per Share ($)</label>
+          <input type="number" id="initialFCF" value="2.50" step="0.01" />
+        </div>
+        <div class="calculator-field">
+          <label for="growthRate">Growth Rate (%)</label>
+          <input type="number" id="growthRate" value="10" step="0.1" />
+        </div>
+      </div>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="discountRate">Discount Rate / WACC (%)</label>
+          <input type="number" id="discountRate" value="10" step="0.1" />
+        </div>
+        <div class="calculator-field">
+          <label for="yearsToExit">Years to Exit</label>
+          <input type="number" id="yearsToExit" value="5" step="1" min="1" />
+        </div>
+      </div>
+
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="exitMultiple">Exit Multiple (x FCF)</label>
+          <input type="number" id="exitMultiple" value="15" step="0.5" />
+        </div>
+        <div class="calculator-field">
+          <label for="currentPrice">Current Price per Share ($)</label>
+          <input type="number" id="currentPrice" value="50" step="0.01" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384"
+}}
+<script
+  src="{{ $shareable.RelPermalink }}"
+  integrity="{{ $shareable.Data.Integrity }}"
+  defer
+></script>
+
+{{ $script := resources.Get "js/dcf.js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $script.RelPermalink }}"
+  integrity="{{ $script.Data.Integrity }}"
+  defer
+></script>
+{{ end }}
