@@ -4,8 +4,7 @@ on:
   pull_request:
     branches:
       - main
-    branches_ignore:
-      - release-please--branches--main
+      - '!release-please--branches--main'
 
 permissions:
   contents: read
