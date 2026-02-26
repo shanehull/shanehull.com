@@ -4,6 +4,7 @@
   <p class="description"><i>{{ .Description }}</i></p>
   <hr />
   <br />
+
   <div class="tool-instructions">{{ .Content }}</div>
 
   <div class="calculator-wrapper">
@@ -30,22 +31,22 @@
 
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Shares FD (M)</label>
+          <label for="shares">Shares FD (M)</label>
           <input type="number" id="shares" value="100" />
         </div>
         <div class="calculator-field">
-          <label>Current Price ($)</label>
+          <label for="currPrice">Current Price ($)</label>
           <input type="number" id="currPrice" value="10.00" />
         </div>
       </div>
 
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Exit Multiple</label>
+          <label for="multiple">Exit Multiple</label>
           <input type="number" id="multiple" value="10" />
         </div>
         <div class="calculator-field">
-          <label>Tax Rate (%)</label>
+          <label for="tax">Tax Rate (%)</label>
           <input type="number" id="tax" value="25" />
         </div>
       </div>

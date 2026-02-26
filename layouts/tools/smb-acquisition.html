@@ -5,6 +5,8 @@
   <hr />
   <br />
 
+  <div class="tool-instructions">{{ .Content }}</div>
+
   <div class="calculator-wrapper">
     <div class="calculator-sticky-header">
       <div class="calculator-stats-grid">
@@ -28,21 +30,21 @@
       <h3 class="calculator-section-head">Purchase & Debt</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Purchase Price ($)</label>
+          <label for="price">Purchase Price ($)</label>
           <input type="number" id="price" value="1000000" />
         </div>
         <div class="calculator-field">
-          <label>Equity Down (%)</label>
+          <label for="equityPct">Equity Down (%)</label>
           <input type="number" id="equityPct" value="50" />
         </div>
       </div>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Interest Rate (%)</label>
+          <label for="intRate">Interest Rate (%)</label>
           <input type="number" id="intRate" value="11" />
         </div>
         <div class="calculator-field">
-          <label>Loan Term (Years)</label>
+          <label for="term">Loan Term (Years)</label>
           <input type="number" id="term" value="10" />
         </div>
       </div>
@@ -50,11 +52,11 @@
       <h3 class="calculator-section-head">Operating Performance</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Year 1 SDE ($)</label>
+          <label for="cashflow">Year 1 SDE ($)</label>
           <input type="number" id="cashflow" value="250000" />
         </div>
         <div class="calculator-field">
-          <label>Annual Growth (%)</label>
+          <label for="growth">Annual Growth (%)</label>
           <input type="number" id="growth" value="3" />
         </div>
       </div>
@@ -62,11 +64,11 @@
       <h3 class="calculator-section-head">Operating Adjustments</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Annual Capex ($)</label>
+          <label for="capex">Annual Capex ($)</label>
           <input type="number" id="capex" value="12500" />
         </div>
         <div class="calculator-field">
-          <label>Corporate Tax Rate (%)</label>
+          <label for="corpTax">Corporate Tax Rate (%)</label>
           <input type="number" id="corpTax" value="25" />
         </div>
       </div>
@@ -74,25 +76,23 @@
       <h3 class="calculator-section-head">Exit Assumptions</h3>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Hold Period (Years)</label>
+          <label for="hold">Hold Period (Years)</label>
           <input type="number" id="hold" value="10" />
         </div>
         <div class="calculator-field">
-          <label>Exit Multiple (x SDE)</label>
+          <label for="exitMult">Exit Multiple (x SDE)</label>
           <input type="number" id="exitMult" value="4" />
         </div>
       </div>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label>Capital Gains Tax Rate (%)</label>
+          <label for="gainsTax">Capital Gains Tax Rate (%)</label>
           <input type="number" id="gainsTax" value="23.5" />
         </div>
       </div>
     </div>
   </div>
 
-  <br />
-  <div class="tool-instructions">{{ .Content }}</div>
   <br />
   <hr />
   <br />
