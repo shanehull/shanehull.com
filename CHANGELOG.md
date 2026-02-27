@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0](https://github.com/shanehull/shanehull.com/compare/v0.9.1...v0.10.0) (2026-02-27)
+
+
+### Features
+
+* rich structuring for smb acquisitions ([#121](https://github.com/shanehull/shanehull.com/issues/121)) ([5a820fd](https://github.com/shanehull/shanehull.com/commit/5a820fdd65a299f1ed44a24251c84673ef1446b3))
+
+
+### Bug Fixes
+
+* permanent home criteria and content ([#123](https://github.com/shanehull/shanehull.com/issues/123)) ([62b5ab5](https://github.com/shanehull/shanehull.com/commit/62b5ab5e063385a669d3f7732c39d10613939935))
+
 ## [0.9.1](https://github.com/shanehull/shanehull.com/compare/v0.9.0...v0.9.1) (2026-02-26)
 
 
