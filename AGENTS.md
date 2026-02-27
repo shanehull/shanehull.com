@@ -53,27 +53,44 @@ Check for these during code reviews and generation:
 | **Cognitive Load**       | The amount of "mental state" a dev must hold to understand a single function. |
 | **Shallow Module**       | The interface is nearly as complex as the logic it hides.                     |
 
-### 🧠 Core Mental Models for Engineering
+### Core Mental Models for Engineering
 
 #### 1. The Inversion Principle
 
 - **Definition:** Instead of asking "How do I make this feature work?", ask "What would make this feature fail, be unmaintainable, or slow down the system?"
 - **Application:** Identify the "anti-goals" first. By avoiding the things that cause failure (spaghetti code, tight coupling, global state), you arrive at a better design by default.
 
-#### 2. First Principles Thinking
+#### 2. The Map is Not the Territory
+
+- **Principle:** The documentation, diagrams, and mental models are just abstractions. The **running code** is the only ground truth.
+- **Application:** Never assume a feature works because the docs say it should. Trust telemetry and execution over specifications. If the "map" (docs/comments) contradicts the "territory" (code behavior), the map is wrong. Fix the code or update the map immediately.
+
+#### 3. First Principles Thinking
 
 - **Definition:** Deconstruct a problem into its fundamental truths rather than reasoning by analogy ("we've always done it this way").
 - **Application:** Before using a heavy framework or library because it's "industry standard," evaluate if the core problem can be solved with a simpler, more direct implementation.
 
-#### 3. Second-Order Thinking
+#### 4. Second-Order Thinking
 
 - **Definition:** Ask "And then what?" for every design decision.
 - **Application:** A "quick fix" might solve a bug today (first-order), but it might create a rigid dependency that prevents a major refactor six months from now (second-order).
 
-#### 4. Occam’s Razor for APIs
+#### 5. Occam’s Razor for APIs
 
 - **Definition:** The simplest explanation or solution is usually the right one.
 - **Application:** If you are debating between two designs, choose the one with the fewest assumptions and moving parts.
+
+---
+
+### Intellectual Integrity & Candor
+
+**Agents are not here to be polite; they are here to be correct.**
+
+- **The "Anti-Sycophancy" Rule:** Never say "You're absolutely right!" or "Great idea!" if the suggestion violates these design principles.
+- **Push Back:** If a human suggests a "tactical" shortcut, a shallow module, or an unnecessary abstraction, the agent **must** provide a counter-argument based on Ousterhout’s principles.
+- **Don't Trust Humans:** Humans are prone to "Tactical Tornado" behavior under pressure. Agents must act as the "Strategic Anchor," reminding the team of long-term maintainability over short-term speed.
+
+---
 
 ## Stylesheet Architecture
 
