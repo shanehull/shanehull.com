@@ -1,4 +1,18 @@
 /**
+ * SMB Acquisition Financial Model
+ *
+ * Assumptions & Limitations:
+ * - Linear SDE growth (compounded annually)
+ * - Constant annual CapEx (not tax-deductible)
+ * - No depreciation/amortization tax shields
+ * - No working capital adjustments
+ * - No transaction fees or earnouts
+ * - Full debt payoff at exit (no refinance)
+ * - Debt service is standard amortization (not interest-only)
+ * - Exit gains taxed at capital gains rate
+ */
+
+/**
  * IRR Solver using Newton-Raphson method
  * Finds the discount rate where NPV = 0
  */
@@ -27,12 +41,57 @@ function solveIRR(cashflows) {
   return rate; // Return best guess if doesn't converge
 }
 
+function updateFinancingEquation() {
+  const equity = parseFloat(document.getElementById("equityPct").value) || 0;
+  const bank = parseFloat(document.getElementById("bankDebtPct").value) || 0;
+  const seller =
+    parseFloat(document.getElementById("sellerDebtPct").value) || 0;
+  const total = equity + bank + seller;
+
+  const equationEl = document.getElementById("financingEquation");
+  const equation = `Equity ${equity}% + Bank ${bank}% + Seller ${seller}% = ${total}%`;
+  equationEl.innerText = equation;
+
+  // Green if equals 100%, red if less than 100%
+  if (total === 100) {
+    equationEl.style.color = "#16a34a";
+  } else if (total < 100) {
+    equationEl.style.color = "#ef4444";
+  } else {
+    // Exceeds 100% - also red
+    equationEl.style.color = "#ef4444";
+  }
+}
+
 function calculateSMB() {
+  // Check if financing structure equals 100%
+  const equityInput =
+    parseFloat(document.getElementById("equityPct").value) || 0;
+  const bankInput =
+    parseFloat(document.getElementById("bankDebtPct").value) || 0;
+  const sellerInput =
+    parseFloat(document.getElementById("sellerDebtPct").value) || 0;
+  const total = equityInput + bankInput + sellerInput;
+
+  // If structure doesn't equal 100%, show dashes
+  if (total !== 100) {
+    document.getElementById("outROIC").innerText = "--";
+    document.getElementById("outPayback").innerText = "--";
+    document.getElementById("outIRR").innerText = "--";
+    document.getElementById("outMoIC").innerText = "--";
+    return;
+  }
+
   const price = parseFloat(document.getElementById("price").value) || 0;
-  const equityPct =
-    parseFloat(document.getElementById("equityPct").value) / 100;
-  const intRate = parseFloat(document.getElementById("intRate").value) / 100;
-  const term = parseFloat(document.getElementById("term").value) || 0;
+  const equityPct = equityInput / 100;
+  const bankDebtPct = bankInput / 100;
+  const sellerDebtPct = sellerInput / 100;
+  const bankRate = parseFloat(document.getElementById("bankRate").value) / 100;
+  const bankTerm = parseFloat(document.getElementById("bankTerm").value) || 0;
+  const sellerRate =
+    parseFloat(document.getElementById("sellerRate").value) / 100;
+  const sellerTerm =
+    parseFloat(document.getElementById("sellerTerm").value) || 0;
   const startSDE = parseFloat(document.getElementById("cashflow").value) || 0;
   const growth = parseFloat(document.getElementById("growth").value) / 100;
   const hold = parseFloat(document.getElementById("hold").value) || 5;
@@ -41,16 +100,30 @@ function calculateSMB() {
   const corpTax = parseFloat(document.getElementById("corpTax").value) / 100;
   const gainsTax = parseFloat(document.getElementById("gainsTax").value) / 100;
 
-  const debt = price * (1 - equityPct);
+  const bankDebt = price * bankDebtPct;
+  const sellerDebt = price * sellerDebtPct;
   const equity = price * equityPct;
 
-  // Debt service calculation
-  let annualDebtService = 0;
-  if (intRate > 0 && term > 0) {
-    annualDebtService = (debt * intRate) / (1 - Math.pow(1 + intRate, -term));
-  } else if (term > 0) {
-    annualDebtService = debt / term;
+  // Bank debt service calculation
+  let annualBankDebtService = 0;
+  if (bankRate > 0 && bankTerm > 0) {
+    annualBankDebtService =
+      (bankDebt * bankRate) / (1 - Math.pow(1 + bankRate, -bankTerm));
+  } else if (bankTerm > 0) {
+    annualBankDebtService = bankDebt / bankTerm;
   }
+
+  // Seller debt service calculation
+  let annualSellerDebtService = 0;
+  if (sellerRate > 0 && sellerTerm > 0) {
+    annualSellerDebtService =
+      (sellerDebt * sellerRate) / (1 - Math.pow(1 + sellerRate, -sellerTerm));
+  } else if (sellerTerm > 0) {
+    annualSellerDebtService = sellerDebt / sellerTerm;
+  }
+
+  const totalAnnualDebtService =
+    annualBankDebtService + annualSellerDebtService;
 
   // Calculate true ROIC with accumulated invested capital
   // Year 1 ROIC
@@ -62,23 +135,35 @@ function calculateSMB() {
   let paybackYears = 0;
   let currentSDE = startSDE;
   let cumulativeEquityReturn = 0;
+  let trackingBankDebt = bankDebt;
+  let trackingSellerDebt = sellerDebt;
 
   for (let i = 1; i <= 30; i++) {
-    let interestPaid = 0;
-    let principalPaid = 0;
+    // Bank debt interest and principal for this year
+    const bankInterestPaid =
+      i <= bankTerm && trackingBankDebt > 0 ? trackingBankDebt * bankRate : 0;
+    const bankPrincipalPaid =
+      i <= bankTerm ? annualBankDebtService - bankInterestPaid : 0;
+    trackingBankDebt = Math.max(0, trackingBankDebt - bankPrincipalPaid);
 
-    // Calculate interest on remaining debt
-    let remainingDebt = debt;
-    for (let j = 1; j < i; j++) {
-      principalPaid = annualDebtService - remainingDebt * intRate;
-      remainingDebt = Math.max(0, remainingDebt - principalPaid);
-    }
-    interestPaid = i <= term ? remainingDebt * intRate : 0;
+    // Seller debt interest and principal for this year
+    const sellerInterestPaid =
+      i <= sellerTerm && trackingSellerDebt > 0
+        ? trackingSellerDebt * sellerRate
+        : 0;
+    const sellerPrincipalPaid =
+      i <= sellerTerm ? annualSellerDebtService - sellerInterestPaid : 0;
+    trackingSellerDebt = Math.max(0, trackingSellerDebt - sellerPrincipalPaid);
 
-    let taxableIncome = currentSDE - interestPaid - capex;
+    const totalInterestPaid = bankInterestPaid + sellerInterestPaid;
+    let debtServiceThisYear = 0;
+    if (i <= bankTerm) debtServiceThisYear += annualBankDebtService;
+    if (i <= sellerTerm) debtServiceThisYear += annualSellerDebtService;
+
+    // Taxable income: SDE - interest (capex is not deductible)
+    let taxableIncome = currentSDE - totalInterestPaid;
     let taxPayment = Math.max(0, taxableIncome * corpTax);
-    let flowToEquity =
-      currentSDE - (i <= term ? annualDebtService : 0) - capex - taxPayment;
+    let flowToEquity = currentSDE - debtServiceThisYear - capex - taxPayment;
 
     cumulativeEquityReturn += flowToEquity;
     if (paybackYears === 0 && cumulativeEquityReturn >= equity) {
@@ -93,28 +178,46 @@ function calculateSMB() {
   const cashflows = [-equity]; // Initial investment (negative)
   currentSDE = startSDE;
   let totalPreTaxCF = 0;
-  let remainingDebt = debt;
-  let principalPaid = 0;
+  let remainingBankDebt = bankDebt;
+  let remainingSellerDebt = sellerDebt;
+  let bankPrincipalPaid = 0;
+  let sellerPrincipalPaid = 0;
 
   for (let i = 1; i <= hold; i++) {
-    // Calculate debt balance at end of year i
-    let yearlyDebtService = i <= term ? annualDebtService : 0;
-    let interestPaid = intRate > 0 ? remainingDebt * intRate : 0;
-    principalPaid = yearlyDebtService - interestPaid;
-    remainingDebt = Math.max(0, remainingDebt - principalPaid);
+    // Calculate debt balances at end of year i
+    let yearlyBankDebtService = i <= bankTerm ? annualBankDebtService : 0;
+    let yearlySellerDebtService = i <= sellerTerm ? annualSellerDebtService : 0;
 
-    let taxableIncome = currentSDE - interestPaid - capex;
+    let bankInterestPaid = bankRate > 0 ? remainingBankDebt * bankRate : 0;
+    bankPrincipalPaid = yearlyBankDebtService - bankInterestPaid;
+    remainingBankDebt = Math.max(0, remainingBankDebt - bankPrincipalPaid);
+
+    let sellerInterestPaid =
+      sellerRate > 0 ? remainingSellerDebt * sellerRate : 0;
+    sellerPrincipalPaid = yearlySellerDebtService - sellerInterestPaid;
+    remainingSellerDebt = Math.max(
+      0,
+      remainingSellerDebt - sellerPrincipalPaid,
+    );
+
+    const totalInterestPaid = bankInterestPaid + sellerInterestPaid;
+    const totalDebtService = yearlyBankDebtService + yearlySellerDebtService;
+
+    // Taxable income: EBITDA - interest (capex is not deductible, only interest)
+    let taxableIncome = currentSDE - totalInterestPaid;
     let taxPayment = Math.max(0, taxableIncome * corpTax);
-    let afterTaxCF = currentSDE - yearlyDebtService - capex - taxPayment;
+    // After-tax cashflow: pay debt service and capex after taxes
+    let afterTaxCF = currentSDE - totalDebtService - capex - taxPayment;
 
     if (i === hold) {
       // Exit year: add exit proceeds
       const exitValue = currentSDE * exitMult;
-      const gainOnSale = Math.max(0, exitValue - remainingDebt - price);
+      const totalRemainingDebt = remainingBankDebt + remainingSellerDebt;
+      const gainOnSale = Math.max(0, exitValue - totalRemainingDebt - price);
       const gainsTaxPayment = gainOnSale * gainsTax;
       const exitProceeds = Math.max(
         0,
-        exitValue - remainingDebt - gainsTaxPayment,
+        exitValue - totalRemainingDebt - gainsTaxPayment,
       );
       afterTaxCF += exitProceeds;
     }
@@ -126,12 +229,19 @@ function calculateSMB() {
 
   // Calculate IRR and MoIC from cashflows
   const irr = solveIRR(cashflows) * 100;
-  const moic =
-    cashflows[cashflows.length - 1] > 0
-      ? -cashflows[0] > 0
-        ? (cashflows.reduce((a, b) => a + b) - cashflows[0]) / -cashflows[0] + 1
-        : 0
-      : 0;
+  // MoIC = (total distributions) / (initial equity investment)
+  // cashflows[0] is negative (equity invested), remaining are returns
+  const totalDistributions =
+    cashflows.reduce((a, b) => a + b, 0) - cashflows[0];
+  const moic = -cashflows[0] > 0 ? totalDistributions / -cashflows[0] + 1 : 0;
+
+  // Calculate leverage ratios
+  const entryDebt = bankDebt + sellerDebt;
+  const entryLeverage = startSDE > 0 ? entryDebt / startSDE : 0;
+
+  const exitSDE = startSDE * Math.pow(1 + growth, hold);
+  const exitLeverage =
+    exitSDE > 0 ? (remainingBankDebt + remainingSellerDebt) / exitSDE : 0;
 
   // Update UI
   document.getElementById("outROIC").innerText = roic.toFixed(1) + "%";
@@ -141,6 +251,10 @@ function calculateSMB() {
     ? irr.toFixed(1) + "%"
     : "0%";
   document.getElementById("outMoIC").innerText = moic.toFixed(2) + "x MoIC";
+  document.getElementById("outEntryLeverage").innerText =
+    entryLeverage.toFixed(2) + "x";
+  document.getElementById("outExitLeverage").innerText =
+    exitLeverage.toFixed(2) + "x";
 }
 
 function initSMB() {
@@ -148,9 +262,30 @@ function initSMB() {
 
   // Attach event listeners (CSP-compliant, no inline handlers)
   document.getElementById("price").addEventListener("input", calculateSMB);
+
+  // Financing structure inputs update equation and trigger calculation
+  document
+    .getElementById("equityPct")
+    .addEventListener("input", updateFinancingEquation);
+  document
+    .getElementById("bankDebtPct")
+    .addEventListener("input", updateFinancingEquation);
+  document
+    .getElementById("sellerDebtPct")
+    .addEventListener("input", updateFinancingEquation);
+
   document.getElementById("equityPct").addEventListener("input", calculateSMB);
-  document.getElementById("intRate").addEventListener("input", calculateSMB);
-  document.getElementById("term").addEventListener("input", calculateSMB);
+  document
+    .getElementById("bankDebtPct")
+    .addEventListener("input", calculateSMB);
+  document
+    .getElementById("sellerDebtPct")
+    .addEventListener("input", calculateSMB);
+
+  document.getElementById("bankRate").addEventListener("input", calculateSMB);
+  document.getElementById("bankTerm").addEventListener("input", calculateSMB);
+  document.getElementById("sellerRate").addEventListener("input", calculateSMB);
+  document.getElementById("sellerTerm").addEventListener("input", calculateSMB);
   document.getElementById("cashflow").addEventListener("input", calculateSMB);
   document.getElementById("growth").addEventListener("input", calculateSMB);
   document.getElementById("hold").addEventListener("input", calculateSMB);
@@ -160,6 +295,7 @@ function initSMB() {
   document.getElementById("gainsTax").addEventListener("input", calculateSMB);
 
   if (typeof toggleMode === "function") toggleMode();
+  updateFinancingEquation();
   calculateSMB();
 
   if (typeof makeShareable === "function") {
