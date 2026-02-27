@@ -19,15 +19,37 @@
           <span id="outPayback" class="val">0 Years</span>
         </div>
       </div>
+      <div class="calculator-stats-grid">
+        <div class="calculator-stat-item">
+          <span class="label">Entry Debt/SDE</span>
+          <span id="outEntryLeverage" class="val">0.0x</span>
+        </div>
+        <div class="calculator-stat-item">
+          <span class="label">Exit Debt/SDE</span>
+          <span id="outExitLeverage" class="val">0.0x</span>
+        </div>
+      </div>
       <div class="calculator-main-display">
         <span class="label">Levered IRR (w/ Exit)</span>
         <h1 id="outIRR">0.0%</h1>
         <div id="outMoIC" class="upside-badge">0.0x MoIC</div>
       </div>
+      <div
+        style="
+          text-align: center;
+          margin-top: 1rem;
+          font-size: 0.95rem;
+          font-weight: 600;
+        "
+      >
+        <span id="financingEquation"
+          >Equity 30% + Bank 50% + Seller 20% = 100%</span
+        >
+      </div>
     </div>
 
     <div class="calculator-body">
-      <h3 class="calculator-section-head">Purchase & Debt</h3>
+      <h3 class="calculator-section-head">Purchase & Financing</h3>
       <div class="calculator-row">
         <div class="calculator-field">
           <label for="price">Purchase Price ($)</label>
@@ -35,17 +57,42 @@
         </div>
         <div class="calculator-field">
           <label for="equityPct">Equity Down (%)</label>
-          <input type="number" id="equityPct" value="50" />
+          <input type="number" id="equityPct" value="30" />
+        </div>
+      </div>
+      <h3 class="calculator-section-head">Bank Debt</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="bankDebtPct">Bank Debt (% of Price)</label>
+          <input type="number" id="bankDebtPct" value="50" />
+        </div>
+        <div class="calculator-field">
+          <label for="bankRate">Interest Rate (%)</label>
+          <input type="number" id="bankRate" value="11" />
         </div>
       </div>
       <div class="calculator-row">
         <div class="calculator-field">
-          <label for="intRate">Interest Rate (%)</label>
-          <input type="number" id="intRate" value="11" />
+          <label for="bankTerm">Loan Term (Years)</label>
+          <input type="number" id="bankTerm" value="10" />
+        </div>
+      </div>
+
+      <h3 class="calculator-section-head">Seller Financing</h3>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="sellerDebtPct">Seller Debt (% of Price)</label>
+          <input type="number" id="sellerDebtPct" value="20" />
         </div>
         <div class="calculator-field">
-          <label for="term">Loan Term (Years)</label>
-          <input type="number" id="term" value="10" />
+          <label for="sellerRate">Interest Rate (%)</label>
+          <input type="number" id="sellerRate" value="8" />
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="sellerTerm">Loan Term (Years)</label>
+          <input type="number" id="sellerTerm" value="5" />
         </div>
       </div>
 
@@ -81,7 +128,7 @@
         </div>
         <div class="calculator-field">
           <label for="exitMult">Exit Multiple (x SDE)</label>
-          <input type="number" id="exitMult" value="4" />
+          <input type="number" id="exitMult" value="3" />
         </div>
       </div>
       <div class="calculator-row">
@@ -101,14 +148,16 @@
   </div>
 </main>
 
-{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384" }}
+{{ $shareable := resources.Get "js/shareable.js" | minify | fingerprint "sha384"
+}}
 <script
   src="{{ $shareable.RelPermalink }}"
   integrity="{{ $shareable.Data.Integrity }}"
   defer
 ></script>
 
-{{ $script := resources.Get "js/smb-acquisition.js" | minify | fingerprint "sha384" }}
+{{ $script := resources.Get "js/smb-acquisition.js" | minify | fingerprint
+"sha384" }}
 <script
   src="{{ $script.RelPermalink }}"
   integrity="{{ $script.Data.Integrity }}"
