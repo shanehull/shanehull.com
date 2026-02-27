@@ -1,12 +1,89 @@
-# Stylesheet Architecture
+# Agents Guidelines for This Repository
 
-## Overview
+## Engineering Principles: A Philosophy of Software Design
+
+To maintain high velocity and low technical debt, all agents (human or AI) must adhere to the principles outlined in _A Philosophy of Software Design_ by John Ousterhout. Our primary goal is **Complexity Management**.
+
+---
+
+### 1. Strategic vs. Tactical Programming
+
+- **Strategic Mindset:** Working code is not enough. The primary goal is a great design. High-quality design is a proactive investment that prevents future slowdowns.
+- **Avoid Tactical Tornadoes:** Do not take shortcuts to finish a feature faster if it introduces complexity. A "quick fix" is often a permanent debt.
+
+### 2. Modules Should Be Deep
+
+- **Deep Modules:** The best modules provide powerful functionality through a simple, narrow interface. They hide significant implementation complexity.
+- **Shallow Modules:** Avoid modules where the interface is complex relative to the small amount of work it performs.
+- **Goal:** Maximize the _benefit_ of the module while minimizing its _cost_ (interface complexity).
+
+### 3. Information Hiding
+
+- **Encapsulation:** Each module should encapsulate specific design decisions.
+- **Information Leakage:** This occurs when a design decision is reflected in multiple modules. If changing one class requires changing another, the design is leaking.
+- **Pull Complexity Downwards:** It is better for a module's implementation to be complex than for its interface to be complex. The **developer of the module** should suffer complexity so the **users of the module** don't have to.
+
+### 4. General-Purpose vs. Special-Purpose
+
+- **"Somewhat General-Purpose":** Design modules to be flexible enough to handle current needs and potential near-future needs without being overly tied to a single specific use case.
+- **Clean API:** A general-purpose interface is usually simpler and deeper than a specialized one.
+
+### 5. Define Errors Out of Existence
+
+- **Minimize Exceptions:** Exceptions contribute significantly to complexity. Design APIs so that "edge cases" are handled naturally by the normal flow (e.g., returning an empty list instead of throwing `null` or an error).
+
+### 6. Comments and Documentation
+
+- **Describe what is NOT obvious:** Comments should capture information that was in the mind of the designer but isn't clear from the code itself.
+- **Different Levels:**
+  - **Interface:** Describe the _intent_ and _results_, not the implementation.
+  - **Implementation:** Explain _what_ the code is doing and _why_, specifically for complex logic.
+
+---
+
+### Design Red Flags
+
+Check for these during code reviews and generation:
+
+| Red Flag                 | Description                                                                   |
+| :----------------------- | :---------------------------------------------------------------------------- |
+| **Information Leakage**  | A change in one place requires coordinated changes elsewhere.                 |
+| **Temporal Coupling**    | Methods must be called in a specific order that isn't enforced by the API.    |
+| **Pass-Through Methods** | A method does nothing but call another method with a similar signature.       |
+| **Cognitive Load**       | The amount of "mental state" a dev must hold to understand a single function. |
+| **Shallow Module**       | The interface is nearly as complex as the logic it hides.                     |
+
+### 🧠 Core Mental Models for Engineering
+
+#### 1. The Inversion Principle
+
+- **Definition:** Instead of asking "How do I make this feature work?", ask "What would make this feature fail, be unmaintainable, or slow down the system?"
+- **Application:** Identify the "anti-goals" first. By avoiding the things that cause failure (spaghetti code, tight coupling, global state), you arrive at a better design by default.
+
+#### 2. First Principles Thinking
+
+- **Definition:** Deconstruct a problem into its fundamental truths rather than reasoning by analogy ("we've always done it this way").
+- **Application:** Before using a heavy framework or library because it's "industry standard," evaluate if the core problem can be solved with a simpler, more direct implementation.
+
+#### 3. Second-Order Thinking
+
+- **Definition:** Ask "And then what?" for every design decision.
+- **Application:** A "quick fix" might solve a bug today (first-order), but it might create a rigid dependency that prevents a major refactor six months from now (second-order).
+
+#### 4. Occam’s Razor for APIs
+
+- **Definition:** The simplest explanation or solution is usually the right one.
+- **Application:** If you are debating between two designs, choose the one with the fewest assumptions and moving parts.
+
+## Stylesheet Architecture
+
+### Overview
 
 - **`assets/scss/style.scss`** - All site styles (loaded on every page) ~25 KiB
   - Contains color and theme variables at the top
   - Imports tool-specific styles and fonts
 
-## File Structure
+### File Structure
 
 ```
 assets/scss/
@@ -19,7 +96,7 @@ assets/scss/
     _list.scss             ← Imported by style.scss
 ```
 
-## Color Variables
+### Color Variables
 
 Defined at the top of `style.scss`:
 
@@ -27,7 +104,7 @@ Defined at the top of `style.scss`:
 - Dark mode: `$dark-background`, `$dark-text`, `$dark-icon`
 - Buttons: `$button-color-dark`, `$button-color-light`
 
-## When Creating New Tool Styles
+### When Creating New Tool Styles
 
 1. Create `assets/scss/tools/_newtool.scss`
 2. Import it in `assets/scss/style.scss`
@@ -36,9 +113,9 @@ Defined at the top of `style.scss`:
 
 ---
 
-# Code Standards
+## Code Standards
 
-## Go
+### Go
 
 All Go code must pass `golangci-lint run ./...` without warnings. Key requirements:
 
@@ -54,7 +131,7 @@ All Go code must pass `golangci-lint run ./...` without warnings. Key requiremen
 - **Formatting**: Run `gofmt` on all edited files before committing
 - Run linting before committing: `golangci-lint run ./...`
 
-## JavaScript
+### JavaScript
 
 All JavaScript files are formatted with Prettier. Key rules:
 
@@ -66,11 +143,11 @@ All JavaScript files are formatted with Prettier. Key rules:
 
 ---
 
-# Standard Operating Procedure for Calculators
+## Standard Operating Procedure for Calculators
 
 This document outlines the strict architecture for creating new interactive calculators in this Hugo project. All new tools **must** follow this pattern to ensure consistency, correct styling, and URL shareability.
 
-## 1. File Structure
+### 1. File Structure
 
 Each calculator requires exactly four files in these specific locations:
 
@@ -81,9 +158,9 @@ Each calculator requires exactly four files in these specific locations:
 
 ---
 
-## 2. Step-by-Step Implementation Guide
+### 2. Step-by-Step Implementation Guide
 
-### Step 1: Create the Content File
+#### Step 1: Create the Content File
 
 **File:** `content/tools/[tool-name].md`
 This defines the page title, description, and layout link.
@@ -97,17 +174,18 @@ layout: "tools/[tool-name]"
 tool_type: "calculator"
 ---
 
-### Instructions
+#### Instructions
 
 (Optional) Markdown content here appears below the calculator as a user guide.
 ```
 
-### Step 2: Create the Layout (HTML)
+#### Step 2: Create the Layout (HTML)
 
 **File:** `layouts/tools/[tool-name].html`
 **Critical:** Use the standard CSS classes (`calculator-wrapper`, `calculator-row`, `calculator-field`) to inherit the site's theme automatically.
 
 **Layout structure:**
+
 1. `<h1>{{ .Title }}</h1>` – Page title only
 2. `<div class="tool-instructions">{{ .Content }}</div>` – Instructions from markdown
 3. `<div class="calculator-wrapper">` – Calculator container
@@ -115,6 +193,7 @@ tool_type: "calculator"
 5. Calculator body with inputs
 
 **Sticky header structure:**
+
 - Use `calculator-stats-grid` with `calculator-stat-item` for secondary metrics
 - Use `calculator-main-display` for primary result with optional `upside-badge` for status
 
@@ -183,7 +262,7 @@ tool_type: "calculator"
 {{ end }}
 ```
 
-### Step 3: Create the Logic (JavaScript)
+#### Step 3: Create the Logic (JavaScript)
 
 **File:** `assets/js/[tool-name].js`
 **Requirement:** Must include the Universal Loader pattern to handle URL parameters and navigation states.
@@ -258,7 +337,7 @@ if (document.readyState === "loading") {
 
 ---
 
-## 3. Style Guidelines (SCSS)
+### 3. Style Guidelines (SCSS)
 
 **File:** `assets/scss/tools/_calculator.scss`
 
@@ -271,7 +350,7 @@ Do not write new CSS unless absolutely necessary. Use these existing classes:
 - **Input Groups:** `.calculator-field` (Handles labels, inputs, focus states). **Every `<label>` must have a `for` attribute matching the input's `id`**
 - **Badges:** `.upside-badge` (Green/Red text for secondary stats)
 
-### Color Variables (REQUIRED - No Hardcoded Colors)
+#### Color Variables (REQUIRED - No Hardcoded Colors)
 
 Always use the site's color variables defined in `assets/scss/style.scss`:
 
@@ -297,7 +376,7 @@ Example:
 }
 ```
 
-## 4. Common Pitfalls to Avoid
+### 4. Common Pitfalls to Avoid
 
 1.  **Duplicate IDs:** Ensure all input IDs are unique within the page.
 2.  **Hardcoded Colors:** Never use `color: black` or `white` in inline styles. Use the standard classes so Dark Mode works automatically.
@@ -308,18 +387,18 @@ Example:
 
 ---
 
-# Standard Operating Procedure for Chart Tools
+## Standard Operating Procedure for Chart Tools
 
 Chart tools are reusable, interactive line charts with optional quartile bands. These tools use HTMX for interactivity and Chart.js for rendering. The `LineChart` templ component outputs data attributes that are consumed by an external JavaScript file—this approach ensures CSP compliance without inline scripts.
 
-## CSP Compliance
+### CSP Compliance
 
 ✅ **No inline event handlers** – Use `hx-trigger` attributes instead of `onclick`  
 ✅ **No inline styles** – Use CSS classes from `_chart-tools.scss`  
 ✅ **No inline scripts** – Chart initialization via external `assets/js/chart-init.js`  
 ✅ **Data-driven rendering** – Chart.js setup passed via `data-chart` attributes
 
-## 1. File Structure
+### 1. File Structure
 
 Each chart tool requires four files:
 
@@ -328,7 +407,7 @@ Each chart tool requires four files:
 3.  **Handler:** `internal/handlers/[tool-name].go` (Data fetching and calculation logic)
 4.  **Templ:** `internal/templates/linechart.templ` (Generic `LineChart` component—shared across all chart tools)
 
-### Shared Packages
+#### Shared Packages
 
 For FRED-based chart tools, two reusable internal packages are available:
 
@@ -342,9 +421,9 @@ The generic `LineChart` templ component (in `internal/templates/linechart.templ`
 
 ---
 
-## 2. Step-by-Step Implementation Guide
+### 2. Step-by-Step Implementation Guide
 
-### Step 1: Create the Content File
+#### Step 1: Create the Content File
 
 **File:** `content/tools/[tool-name].md`
 
@@ -358,7 +437,7 @@ layout: "[tool-name]"
 tool_type: "chart"
 ---
 
-### About [Tool Name]
+#### About [Tool Name]
 
 Detailed explanation of the metric, calculation method, and data sources.
 
@@ -369,7 +448,7 @@ Detailed explanation of the metric, calculation method, and data sources.
 - Frequency: Quarterly
 ```
 
-### Step 2: Create the Handler
+#### Step 2: Create the Handler
 
 **File:** `internal/handlers/[tool-name].go`
 
@@ -452,7 +531,7 @@ func fetchMyData(rangeParam string, showQuartiles bool) []MyData {
 }
 ```
 
-### Caching Chart Data
+#### Caching Chart Data
 
 For better performance, cache chart calculations using the `internal/cache` package. Example pattern for your handler:
 
@@ -503,7 +582,7 @@ func MyChartHandler(w http.ResponseWriter, r *http.Request) {
 **TTL:** 24 hours (configurable via constant)
 **Note:** Each unique combination of range and quartiles settings gets its own cache entry.
 
-### Step 3: Create the Layout
+#### Step 3: Create the Layout
 
 **File:** `layouts/tools/[tool-name].html`
 
@@ -626,7 +705,7 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
 {{ end }}
 ```
 
-### Step 4: Create Download Handlers
+#### Step 4: Create Download Handlers
 
 You need three handlers: one for the chart rendering, one for generating download links, and two for returning data (JSON and CSV).
 
@@ -658,7 +737,7 @@ func MyChartDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 
 **Data Handlers** (JSON and CSV) follow the same pattern as the chart handler—fetch data, accept `range` and `quartiles` params, and return files with proper headers.
 
-### Step 5: Register the Handlers
+#### Step 5: Register the Handlers
 
 **File:** `cmd/server/main.go`
 
@@ -708,7 +787,7 @@ mux.HandleFunc(
 
 ---
 
-## 3. Chart Overlay Options
+### 3. Chart Overlay Options
 
 The `LineChart` template supports optional overlays via the `options` map:
 
@@ -730,7 +809,7 @@ Both overlays are optional and can be independently controlled per chart.
 
 ---
 
-## 4. LineChartData Format
+### 4. LineChartData Format
 
 All chart tools use this generic data structure:
 
@@ -748,7 +827,7 @@ Use `omitempty` to exclude fields from JSON when they're zero-valued. Only set f
 
 ---
 
-## 5. How the LineChart Templ Works
+### 5. How the LineChart Templ Works
 
 The `LineChart` templ function outputs a `<div>` element with a `data-chart` attribute containing JSON-serialized chart configuration. This is consumed by `assets/js/chart-init.js`.
 
@@ -769,7 +848,7 @@ Example output:
 
 ---
 
-## 6. Key Features (Automatic)
+### 6. Key Features (Automatic)
 
 ✅ **Dark mode support** – Uses site color variables (`$light-icon`, `$dark-icon`)  
 ✅ **HTMX interactivity** – Controls trigger API requests, swapped content reinitializes chart  
@@ -782,7 +861,7 @@ Example output:
 
 ---
 
-## 7. Download UI in Layout
+### 7. Download UI in Layout
 
 Add this section to your template to display download links that update when controls change:
 
@@ -804,7 +883,7 @@ component := templates.ChartDownloads("[tool-name]", rangeParam, "overlayParamNa
 
 Pass your specific overlay parameter name (e.g., "quartiles", "average") and the template handles building the correct download links.
 
-## 8. Common Pitfalls to Avoid
+### 8. Common Pitfalls to Avoid
 
 1. **Missing FRED API key:** Store in `FRED_API_KEY` env var
 2. **Wrong query param names:** Use `range` exactly (lowercase) and your custom overlay param name
