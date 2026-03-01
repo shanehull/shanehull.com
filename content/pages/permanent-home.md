@@ -13,7 +13,7 @@ build:
 
 I am a Melbourne-based software engineer with a decade of experience at the intersection of engineering and operations.
 
-My goal is to transition from short-term "fixer" to long-term ownership. I am looking to acquire resilient, profitable operations and ensure their success for decades to come.
+My goal is to transition from short-term "fixer" to long-term ownership. I am looking to acquire a resilient, profitable operation and ensure its success for decades to come.
 
 ## My approach
 
@@ -29,11 +29,12 @@ I am an individual, not a private equity firm or a business broker. I am focused
 
 ## What I am looking for
 
-I am looking for quality acquisitions that meet the following criteria:
+I am looking for a quality business that meets the following criteria:
 
 - **Financials:** Consistently profitable with a history of stable, verifiable cash flows (typically $500k – $3M+ SDE).
-- **Industry:** Essential niches—specifically logic-heavy B2B services, vertical market software (VMS), and tech-enabled industrial operations.
+- **Industry:** Essential niches—specifically logic-heavy B2B products or services, vertical market software (VMS), and tech-enabled industrial operations.
 - **Customer Base:** High retention, low concentration, and steady, recurring B2B demand.
+- **The Opportunity:** A strong, established foundation that is ready to be future-proofed through technological modernisation, digitised workflows, or operational improvements.
 - **Transition:** I am flexible on the timeline. I care deeply about who takes over the keys and want to see the business thrive long after the handover.
 
 ---
