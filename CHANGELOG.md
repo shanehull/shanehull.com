@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.11.0](https://github.com/shanehull/shanehull.com/compare/v0.10.0...v0.11.0) (2026-03-03)
+
+
+### Features
+
+* add content to body of calcs ([#125](https://github.com/shanehull/shanehull.com/issues/125)) ([fdad79b](https://github.com/shanehull/shanehull.com/commit/fdad79b04ac4157cac1a302ac44f3f81131338ac))
+* additional dcf model options ([#128](https://github.com/shanehull/shanehull.com/issues/128)) ([03abb93](https://github.com/shanehull/shanehull.com/commit/03abb93a66cc680fdf6b4436fe889c802fd73d0b))
+
+
+### Bug Fixes
+
+* permanent home criteria ([#127](https://github.com/shanehull/shanehull.com/issues/127)) ([5b1fbcc](https://github.com/shanehull/shanehull.com/commit/5b1fbccb3a0597e5fc57e089e47af47f72192593))
+
 ## [0.10.0](https://github.com/shanehull/shanehull.com/compare/v0.9.1...v0.10.0) (2026-02-27)
 
 
