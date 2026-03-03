@@ -10,11 +10,11 @@
   <div class="calculator-wrapper">
     <div class="calculator-sticky-header">
       <div class="calculator-stats-grid">
-        <div class="calculator-stat-item">
-          <span class="label">PV of Cash Flows</span>
+        <div class="calculator-stat-item" id="pvFlowsItem">
+          <span class="label" id="pvFlowsLabel">PV of Cash Flows</span>
           <span id="outPVCashFlows" class="val">$0.00</span>
         </div>
-        <div class="calculator-stat-item">
+        <div class="calculator-stat-item" id="exitValueItem">
           <span class="label">Exit Value</span>
           <span id="outPVExit" class="val">$0.00</span>
         </div>
@@ -31,38 +31,128 @@
     </div>
 
     <div class="calculator-body">
-      <h3 class="calculator-section-head">Valuation Assumptions</h3>
+      <h3 class="calculator-section-head">Model Type</h3>
 
-      <div class="calculator-row">
-        <div class="calculator-field">
-          <label for="initialFCF">Initial FCF per Share ($)</label>
-          <input type="number" id="initialFCF" value="2.50" step="0.01" />
-        </div>
-        <div class="calculator-field">
-          <label for="growthRate">Growth Rate (%)</label>
-          <input type="number" id="growthRate" value="10" step="0.1" />
-        </div>
+      <div class="calculator-row" style="gap: 2rem;">
+        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500;">
+          <input
+            type="radio"
+            id="modelExit"
+            name="dcfModel"
+            value="exit"
+            checked
+            style="cursor: pointer;"
+          />
+          Exit Multiple
+        </label>
+        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500;">
+          <input
+            type="radio"
+            id="modelPerpetual"
+            name="dcfModel"
+            value="perpetual"
+            style="cursor: pointer;"
+          />
+          Perpetual Growth
+        </label>
+        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500;">
+          <input
+            type="radio"
+            id="modelDDM"
+            name="dcfModel"
+            value="ddm"
+            style="cursor: pointer;"
+          />
+          Dividend Discount
+        </label>
       </div>
 
+      <h3 class="calculator-section-head">Valuation Assumptions</h3>
+
+      <!-- Shared inputs (common to all models) -->
       <div class="calculator-row">
         <div class="calculator-field">
           <label for="discountRate">Discount Rate / WACC (%)</label>
           <input type="number" id="discountRate" value="10" step="0.1" />
         </div>
         <div class="calculator-field">
-          <label for="yearsToExit">Years to Exit</label>
-          <input type="number" id="yearsToExit" value="5" step="1" min="1" />
+          <label for="currentPrice">Price per Share ($)</label>
+          <input type="number" id="currentPrice" value="40" step="0.01" />
         </div>
       </div>
 
-      <div class="calculator-row">
-        <div class="calculator-field">
-          <label for="exitMultiple">Exit Multiple (x FCF)</label>
-          <input type="number" id="exitMultiple" value="15" step="0.5" />
+      <!-- Exit Multiple Model Inputs -->
+      <div id="exitSection">
+        <div class="calculator-row">
+          <div class="calculator-field">
+            <label for="initialFCF">FCF per Share ($)</label>
+            <input type="number" id="initialFCF" value="2.50" step="0.01" />
+          </div>
+          <div class="calculator-field">
+            <label for="growthRate">Growth Rate (%)</label>
+            <input type="number" id="growthRate" value="10" step="0.1" />
+          </div>
         </div>
-        <div class="calculator-field">
-          <label for="currentPrice">Current Price per Share ($)</label>
-          <input type="number" id="currentPrice" value="50" step="0.01" />
+
+        <div class="calculator-row">
+          <div class="calculator-field">
+            <label for="yearsToExit">Years to Terminal</label>
+            <input type="number" id="yearsToExit" value="5" step="1" min="1" />
+          </div>
+          <div class="calculator-field">
+            <label for="exitMultiple">Exit Multiple (x FCF)</label>
+            <input type="number" id="exitMultiple" value="15" step="0.5" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Perpetual Growth Model Inputs -->
+      <div id="perpetualSection" style="display: none;">
+        <div class="calculator-row">
+          <div class="calculator-field">
+            <label for="initialFCF">FCF per Share ($)</label>
+            <input type="number" id="initialFCF" value="3.00" step="0.01" />
+          </div>
+          <div class="calculator-field">
+            <label for="growthRate">Growth Rate (%)</label>
+            <input type="number" id="growthRate" value="8" step="0.1" />
+          </div>
+        </div>
+
+        <div class="calculator-row">
+          <div class="calculator-field">
+            <label for="yearsToExit">Years to Terminal</label>
+            <input type="number" id="yearsToExit" value="5" step="1" min="1" />
+          </div>
+          <div class="calculator-field">
+            <label for="perpetualGrowthRate">Terminal Growth Rate (%)</label>
+            <input type="number" id="perpetualGrowthRate" value="2" step="0.1" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Dividend Discount Model Inputs -->
+      <div id="ddmSection" style="display: none;">
+        <div class="calculator-row">
+          <div class="calculator-field">
+            <label for="initialDividend">Dividend per Share ($)</label>
+            <input type="number" id="initialDividend" value="2.50" step="0.01" />
+          </div>
+          <div class="calculator-field">
+            <label for="growthRate">Growth Rate (%)</label>
+            <input type="number" id="growthRate" value="5" step="0.1" />
+          </div>
+        </div>
+
+        <div class="calculator-row">
+          <div class="calculator-field">
+            <label for="yearsToExit">Years to Terminal</label>
+            <input type="number" id="yearsToExit" value="5" step="1" min="1" />
+          </div>
+          <div class="calculator-field">
+            <label for="perpetualGrowthRate">Terminal Growth Rate (%)</label>
+            <input type="number" id="perpetualGrowthRate" value="2" step="0.1" />
+          </div>
         </div>
       </div>
     </div>
