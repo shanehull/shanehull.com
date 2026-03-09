@@ -19,13 +19,13 @@ function calculateDCF() {
  */
 function calculateDCFExit() {
   const initialFCF =
-    parseFloat(document.getElementById("initialFCF").value) || 0;
+    parseFloat(document.getElementById("exitInitialFCF").value) || 0;
   const growthRate =
-    parseFloat(document.getElementById("growthRate").value) / 100 || 0;
+    parseFloat(document.getElementById("exitGrowthRate").value) / 100 || 0;
   const discountRate =
     parseFloat(document.getElementById("discountRate").value) / 100 || 0;
   const yearsToExit =
-    parseInt(document.getElementById("yearsToExit").value) || 1;
+    parseInt(document.getElementById("exitYearsToExit").value) || 1;
   const exitMultiple =
     parseFloat(document.getElementById("exitMultiple").value) || 0;
   const currentPrice =
@@ -49,12 +49,8 @@ function calculateDCFExit() {
   // Intrinsic value
   const intrinsicValue = pvCashFlows + pvExit;
 
-  // Expected return: growth rate + FCF yield
-  let expectedReturn = 0;
-  if (currentPrice > 0) {
-    const fcfYield = initialFCF / currentPrice;
-    expectedReturn = growthRate + fcfYield;
-  }
+  // Expected return: IRR of cash flows
+  let expectedReturn = calculateIRR(currentPrice, initialFCF, growthRate, yearsToExit, terminalValue);
 
   // Upside/Downside
   const upsideDownside = (intrinsicValue - currentPrice) / currentPrice;
@@ -89,13 +85,13 @@ function calculateDCFExit() {
  */
 function calculateDCFPerpetual() {
   const initialFCF =
-    parseFloat(document.getElementById("initialFCF").value) || 0;
+    parseFloat(document.getElementById("perpetualInitialFCF").value) || 0;
   const growthRate =
-    parseFloat(document.getElementById("growthRate").value) / 100 || 0;
-  const yearsToExit =
-    parseInt(document.getElementById("yearsToExit").value) || 1;
-  const perpetualGrowthRate =
     parseFloat(document.getElementById("perpetualGrowthRate").value) / 100 || 0;
+  const yearsToExit =
+    parseInt(document.getElementById("perpetualYearsToExit").value) || 1;
+  const perpetualGrowthRate =
+    parseFloat(document.getElementById("perpetualTerminalGrowthRate").value) / 100 || 0;
   const discountRate =
     parseFloat(document.getElementById("discountRate").value) / 100 || 0;
   const currentPrice =
@@ -127,12 +123,16 @@ function calculateDCFPerpetual() {
   // Intrinsic value
   const intrinsicValue = pvCashFlows + pvTerminalValue;
 
-  // Expected return: growth rate + FCF yield (simplified)
-  let expectedReturn = 0;
-  if (currentPrice > 0) {
-    const fcfYield = initialFCF / currentPrice;
-    expectedReturn = growthRate + fcfYield;
-  }
+  // Terminal value at end of explicit period (before discounting)
+  const terminalValueAtEnd =
+    discountRate > perpetualGrowthRate
+      ? (initialFCF * Math.pow(1 + growthRate, yearsToExit) *
+          (1 + perpetualGrowthRate)) /
+        (discountRate - perpetualGrowthRate)
+      : 0;
+
+  // Expected return: IRR of cash flows
+  let expectedReturn = calculateIRR(currentPrice, initialFCF, growthRate, yearsToExit, terminalValueAtEnd);
 
   // Upside/Downside
   const upsideDownside = (intrinsicValue - currentPrice) / currentPrice;
@@ -170,13 +170,13 @@ function calculateDCFPerpetual() {
  */
 function calculateDDM() {
   const initialDividend =
-    parseFloat(document.getElementById("initialDividend").value) || 0;
+    parseFloat(document.getElementById("ddmInitialDividend").value) || 0;
   const growthRate =
-    parseFloat(document.getElementById("growthRate").value) / 100 || 0;
+    parseFloat(document.getElementById("ddmGrowthRate").value) / 100 || 0;
   const yearsToExit =
-    parseInt(document.getElementById("yearsToExit").value) || 1;
+    parseInt(document.getElementById("ddmYearsToExit").value) || 1;
   const terminalGrowthRate =
-    parseFloat(document.getElementById("perpetualGrowthRate").value) / 100 || 0;
+    parseFloat(document.getElementById("ddmTerminalGrowthRate").value) / 100 || 0;
   const discountRate =
     parseFloat(document.getElementById("discountRate").value) / 100 || 0;
   const currentPrice =
@@ -208,12 +208,16 @@ function calculateDDM() {
   // Intrinsic value
   const intrinsicValue = pvDividends + pvTerminalValue;
 
-  // Expected return: growth rate + dividend yield
-  let expectedReturn = 0;
-  if (currentPrice > 0) {
-    const dividendYield = initialDividend / currentPrice;
-    expectedReturn = growthRate + dividendYield;
-  }
+  // Terminal value at end of explicit period (before discounting)
+  const terminalValueAtEnd =
+    discountRate > terminalGrowthRate
+      ? (initialDividend * Math.pow(1 + growthRate, yearsToExit) *
+          (1 + terminalGrowthRate)) /
+        (discountRate - terminalGrowthRate)
+      : 0;
+
+  // Expected return: IRR of dividends
+  let expectedReturn = calculateIRR(currentPrice, initialDividend, growthRate, yearsToExit, terminalValueAtEnd);
 
   // Upside/Downside
   const upsideDownside = (intrinsicValue - currentPrice) / currentPrice;
@@ -243,6 +247,48 @@ function calculateDDM() {
   } else {
     document.getElementById("outIntrinsicValue").style.color = "";
   }
+}
+
+/**
+ * Calculate IRR using Newton-Raphson method
+ * Solves: -initialInvestment + sum(cf_t / (1+r)^t) = 0
+ */
+function calculateIRR(initialInvestment, initialCashFlow, growthRate, yearsToExit, terminalValue) {
+  if (initialInvestment <= 0) return 0;
+
+  // Build cash flow array
+  const cashFlows = [-initialInvestment];
+  for (let i = 1; i <= yearsToExit; i++) {
+    const cf = initialCashFlow * Math.pow(1 + growthRate, i - 1);
+    if (i === yearsToExit) {
+      cashFlows.push(cf + terminalValue);
+    } else {
+      cashFlows.push(cf);
+    }
+  }
+
+  // Newton-Raphson method to find IRR
+  let rate = growthRate; // Initial guess
+  for (let iteration = 0; iteration < 100; iteration++) {
+    let npv = 0;
+    let npvDerivative = 0;
+
+    for (let t = 0; t < cashFlows.length; t++) {
+      const discountFactor = Math.pow(1 + rate, t);
+      npv += cashFlows[t] / discountFactor;
+      if (t > 0) {
+        npvDerivative -= (t * cashFlows[t]) / Math.pow(1 + rate, t + 1);
+      }
+    }
+
+    if (Math.abs(npv) < 0.01) break; // Converged
+    if (Math.abs(npvDerivative) < 1e-10) break; // Avoid division by zero
+
+    rate = rate - npv / npvDerivative;
+    if (rate < -0.99) rate = -0.99; // Prevent negative infinity
+  }
+
+  return rate;
 }
 
 // Helper: Currency Formatting
@@ -298,7 +344,7 @@ function toggleDCFModel() {
  * 3. URL Parameter Sharing (shareable.js)
  */
 function initDCF() {
-  if (!document.getElementById("initialFCF")) return;
+  if (!document.getElementById("exitInitialFCF")) return;
 
   // Restore model selection from URL params (before shareable processes other inputs)
   const params = new URLSearchParams(window.location.search);
@@ -325,13 +371,13 @@ function initDCF() {
     .addEventListener("change", toggleDCFModel);
 
   // Exit model listeners
-  document.getElementById("initialFCF").addEventListener("input", calculateDCF);
-  document.getElementById("growthRate").addEventListener("input", calculateDCF);
+  document.getElementById("exitInitialFCF").addEventListener("input", calculateDCF);
+  document.getElementById("exitGrowthRate").addEventListener("input", calculateDCF);
   document
     .getElementById("discountRate")
     .addEventListener("input", calculateDCF);
   document
-    .getElementById("yearsToExit")
+    .getElementById("exitYearsToExit")
     .addEventListener("input", calculateDCF);
   document
     .getElementById("exitMultiple")
@@ -342,12 +388,30 @@ function initDCF() {
 
   // Perpetual model listeners
   document
+    .getElementById("perpetualInitialFCF")
+    .addEventListener("input", calculateDCF);
+  document
     .getElementById("perpetualGrowthRate")
+    .addEventListener("input", calculateDCF);
+  document
+    .getElementById("perpetualYearsToExit")
+    .addEventListener("input", calculateDCF);
+  document
+    .getElementById("perpetualTerminalGrowthRate")
     .addEventListener("input", calculateDCF);
 
   // DDM model listeners
   document
-    .getElementById("initialDividend")
+    .getElementById("ddmInitialDividend")
+    .addEventListener("input", calculateDCF);
+  document
+    .getElementById("ddmGrowthRate")
+    .addEventListener("input", calculateDCF);
+  document
+    .getElementById("ddmYearsToExit")
+    .addEventListener("input", calculateDCF);
+  document
+    .getElementById("ddmTerminalGrowthRate")
     .addEventListener("input", calculateDCF);
 
   // Load from URL params, then ensure model sections match selection
