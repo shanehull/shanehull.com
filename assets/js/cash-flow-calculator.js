@@ -8,17 +8,7 @@ function debounce(func, wait) {
   };
 }
 
-function updateShareableURL(input) {
-  const url = new URL(window.location);
-  if (input.id) {
-    if (input.value) {
-      url.searchParams.set(input.id, input.value);
-    } else {
-      url.searchParams.delete(input.id);
-    }
-    window.history.replaceState({}, "", url);
-  }
-}
+let initComplete = false;
 
 function addAsset() {
   assetIdCounter++;
@@ -62,14 +52,6 @@ function addAsset() {
   );
   newInputs.forEach((input) => {
     input.addEventListener("input", calculate);
-    // Also attach URL update listeners if makeShareable is available
-    if (typeof makeShareable !== "undefined") {
-      input.addEventListener(
-        "input",
-        debounce(() => updateShareableURL(input), 300),
-      );
-      input.addEventListener("change", updateShareableURL.bind(null, input));
-    }
   });
 
   const removeBtn = card.querySelector(".calculator-remove-btn");
@@ -94,7 +76,8 @@ function calculate() {
   const currPrice = parseFloat(document.getElementById("currPrice").value) || 0;
   const multiple = parseFloat(document.getElementById("multiple").value) || 0;
   const tax = (parseFloat(document.getElementById("tax").value) || 0) / 100;
-  const dilution = (parseFloat(document.getElementById("dilution").value) || 0) / 100;
+  const dilution =
+    (parseFloat(document.getElementById("dilution").value) || 0) / 100;
 
   let totalGrossFCF = 0;
 
@@ -143,27 +126,29 @@ function initCashflow() {
     addAssetBtn.addEventListener("click", addAsset);
   }
 
-  const list = document.getElementById("assetList");
-  if (list && list.children.length === 0) {
-    // Check URL for asset count before creating
-    const params = new URLSearchParams(window.location.search);
-    let maxAssetId = 0;
-    for (const key of params.keys()) {
-      if (key.startsWith("asset-") && key.includes("-prod")) {
-        const id = parseInt(key.split("-")[1]);
-        maxAssetId = Math.max(maxAssetId, id);
-      }
+  // Restore assets from URL if they exist
+  const params = new URLSearchParams(window.location.search);
+  let maxAssetId = 0;
+  for (const key of params.keys()) {
+    if (key.startsWith("asset-") && key.includes("-prod")) {
+      const id = parseInt(key.split("-")[1]);
+      maxAssetId = Math.max(maxAssetId, id);
     }
-
-    // Create all assets that exist in URL (at least one)
-    const assetsToCreate = Math.max(1, maxAssetId);
-    for (let i = 0; i < assetsToCreate; i++) {
-      addAsset();
-    }
-  } else {
-    calculate();
   }
 
+  // Create assets: either restore from URL or create 1 default
+  const assetsToCreate = Math.max(1, maxAssetId);
+  for (let i = 0; i < assetsToCreate; i++) {
+    addAsset();
+  }
+
+  // Run initial calculation
+  calculate();
+
+  // Mark initialization complete - from now on, URL updates on user input
+  initComplete = true;
+
+  // Use universal makeShareable for URL management
   if (typeof makeShareable === "function") {
     makeShareable(calculate);
   }
