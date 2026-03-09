@@ -94,6 +94,7 @@ function calculate() {
   const currPrice = parseFloat(document.getElementById("currPrice").value) || 0;
   const multiple = parseFloat(document.getElementById("multiple").value) || 0;
   const tax = (parseFloat(document.getElementById("tax").value) || 0) / 100;
+  const dilution = (parseFloat(document.getElementById("dilution").value) || 0) / 100;
 
   let totalGrossFCF = 0;
 
@@ -108,7 +109,8 @@ function calculate() {
 
   const netFCF = totalGrossFCF * (1 - tax);
   const mCap = netFCF * multiple;
-  const targetPrice = shares > 0 ? mCap / shares : 0;
+  const dilutedShares = shares * (1 + dilution);
+  const targetPrice = dilutedShares > 0 ? mCap / dilutedShares : 0;
   const upsidePct =
     currPrice > 0 ? ((targetPrice - currPrice) / currPrice) * 100 : 0;
   const upsideX = currPrice > 0 ? targetPrice / currPrice : 0;
@@ -134,6 +136,7 @@ function initCashflow() {
   document.getElementById("currPrice").addEventListener("input", calculate);
   document.getElementById("multiple").addEventListener("input", calculate);
   document.getElementById("tax").addEventListener("input", calculate);
+  document.getElementById("dilution").addEventListener("input", calculate);
 
   const addAssetBtn = document.getElementById("addAssetBtn");
   if (addAssetBtn) {

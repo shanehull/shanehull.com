@@ -51,6 +51,13 @@
         </div>
       </div>
 
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="dilution">Dilution (%)</label>
+          <input type="number" id="dilution" value="0" />
+        </div>
+      </div>
+
       <h3 class="calculator-section-head">Revenue Assets</h3>
 
       <div id="assetList"></div>
@@ -78,7 +85,7 @@
   defer
 ></script>
 
-{{ $script := resources.Get "js/fcf-valuation.js" | minify | fingerprint
+{{ $script := resources.Get "js/cash-flow-calculator.js" | minify | fingerprint
 "sha384" }}
 <script
   src="{{ $script.RelPermalink }}"
