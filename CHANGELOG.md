@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.11.1](https://github.com/shanehull/shanehull.com/compare/v0.11.0...v0.11.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* cash flow calc naming and dilution ([#129](https://github.com/shanehull/shanehull.com/issues/129)) ([1f438c7](https://github.com/shanehull/shanehull.com/commit/1f438c7aa5a8549f28f22c41826bc60a9fe9883c))
+* dcf model selection ([#131](https://github.com/shanehull/shanehull.com/issues/131)) ([7dde8f6](https://github.com/shanehull/shanehull.com/commit/7dde8f60b3e5f269b60afe6720818481fd9b769b))
+* make sharable init guards ([#132](https://github.com/shanehull/shanehull.com/issues/132)) ([0b8f233](https://github.com/shanehull/shanehull.com/commit/0b8f23372b4e4080944372552b1b892d60919c41))
+
 ## [0.11.0](https://github.com/shanehull/shanehull.com/compare/v0.10.0...v0.11.0) (2026-03-03)
 
 
