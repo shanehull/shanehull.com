@@ -416,7 +416,7 @@ Here are some of the primary concerns:
 - **Difficulty in managing permissions:** Managing permissions and access controls in the default namespace can be complex and error-prone, as it involves granting or revoking permissions for a large number of resources.
 - **Limited visibility:** It can be challenging to monitor and track resource usage in the default namespace, making it difficult to identify and address potential security issues.
 
-At Annalise.ai and across the industry, a namespace per app is generally accepted.
+A namespace per app is the generally accepted standard.
 
 **Do**
 
