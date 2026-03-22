@@ -76,7 +76,7 @@ function calculateOptions() {
   const userPrice = parseFloat(document.getElementById("contractPrice").value);
   let contractPrice = fairValue;
 
-  if (!isNaN(userPrice) && userPrice > 0) {
+  if (!isNaN(userPrice) && userPrice >= 0) {
     contractPrice = userPrice;
   } else {
     document.getElementById("contractPrice").value = fairValue.toFixed(2);
