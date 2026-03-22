@@ -1,5 +1,5 @@
 ---
-title: The Seriousness of Playing
+title: The Seriousness of Play
 date: 2026-03-06
 description: On ergodic traps, the eternal recurrence, and why the heaviest burden requires the lightest spirit.
 tags:
