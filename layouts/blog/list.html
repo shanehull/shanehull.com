@@ -19,7 +19,21 @@
 
   <div class="blog-list-wrap">
     <ul class="blog-list">
-      {{ range .Pages }} {{ partial "post.html" . }} {{ end }}
+      {{ range .Pages }}
+      <li class="blog-card">
+        <a
+          href="{{ .RelPermalink }}"
+          class="blog-card-link"
+          aria-label="Link to blog post {{.Title}}"
+        >
+          <div class="blog-card-content">
+            <h2>{{ .Title }}</h2>
+            <p>{{ .Description }}</p>
+            <small>{{ .Date.Format "January 2, 2006" }}</small>
+          </div>
+        </a>
+      </li>
+      {{ end }}
     </ul>
   </div>
 

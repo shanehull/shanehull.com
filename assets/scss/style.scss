@@ -10,6 +10,12 @@ $light-icon: #d65d0e;
 $button-color-dark: lighten($dark-background, 10%);
 $button-color-light: darken($light-background, 10%);
 
+// Code block colors
+$code-light-background: #f5f5f5;
+$code-dark-background: #272822;
+$code-light-border: #d5d5d5;
+$code-dark-border: #3e3d32;
+
 @import "fonts";
 @import "tools/list";
 @import "tools/calculator";
@@ -227,7 +233,7 @@ body {
       width: 38px;
       height: 38px;
       z-index: 5;
-      color: #555;
+      color: darken($light-text, 40%);
       opacity: 50%;
     }
     div {
@@ -356,10 +362,19 @@ h1 {
 
 h2 {
   font-size: 2.3rem;
+  font-weight: 700;
 }
 
 h3 {
+  font-size: 1.9rem;
+  color: darken($light-text, 5%);
+  font-weight: 600;
+}
+
+h4 {
   font-size: 1.6rem;
+  color: darken($light-text, 15%);
+  font-weight: 500;
 }
 
 p,
@@ -370,19 +385,23 @@ ol {
 
 a {
   text-decoration: none;
-  transition: color 0.3s ease;
-  color: $light-icon;
+  transition: all 0.3s ease;
+  color: $light-text;
+  border-bottom: 1px dotted $light-text;
 
   &:hover {
-    color: lighten($light-icon, 50%);
+    color: $light-icon;
+    border-bottom-color: $light-icon;
   }
 
   &:visited {
-    color: darken($light-icon, 20%);
+    color: $light-text;
+    border-bottom-color: $light-text;
   }
 
   &:visited:hover {
-    color: $light-text;
+    color: $light-icon;
+    border-bottom-color: $light-icon;
   }
 }
 
@@ -403,7 +422,61 @@ a.unchanging-link {
   }
 }
 
-a {
+// Remove dotted underline from custom-styled links
+a.back-link,
+a.unchanging-link,
+.hero-image-container a,
+.social-list a,
+.pagination-nav a,
+.tool-card a {
+  border-bottom: none;
+  color: $light-icon;
+
+  &:hover {
+    color: lighten($light-icon, 50%);
+  }
+
+  &:visited {
+    color: darken($light-icon, 20%);
+  }
+
+  &:visited:hover {
+    color: $light-text;
+  }
+}
+
+// Card links reset text color to inherit for nested elements
+a.tool-card-link,
+a.blog-card-link {
+  border-bottom: none;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:visited:hover {
+    color: inherit;
+  }
+}
+
+// List layout links keep text color, no hover change
+ul.list-layout-list a {
+  border-bottom: none;
+  color: $light-text;
+
+  &:hover {
+    color: $light-text;
+  }
+
+  &:visited {
+    color: $light-text;
+  }
+
   &:visited:hover {
     color: $light-text;
   }
@@ -411,30 +484,38 @@ a {
 
 // Style for the blog list container
 .blog-list-wrap {
-  min-height: 44rem;
+  min-height: 15rem;
   position: relative;
+  margin-top: 2rem;
 
   .blog-list {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     padding: 0;
     margin: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
 // Style for individual blog cards
 .blog-card {
-  width: calc(45% - 20px); // Adjust the width as per your design
-  height: 18rem;
-  margin: 0.7rem;
+  position: relative;
+  height: 100%;
+  min-height: 15rem;
+
   border: 2px solid $light-icon;
   border-radius: 8px;
   background-color: darken($light-background, 5%);
   cursor: pointer;
-  position: relative;
+
   filter: drop-shadow(5px 6px 0 darken($light-background, 8%));
+
   transition: all 0.3s ease-out;
   animation: fadeInAnimation ease 1s;
 
@@ -444,7 +525,12 @@ a {
   }
 
   .blog-card-link {
+    text-decoration: none;
     color: inherit;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 
     &:hover {
       color: inherit;
@@ -453,41 +539,34 @@ a {
 
   // Blog card content
   .blog-card-content {
-    height: 18rem;
-    margin: 0.5rem;
-    padding: 0.2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
+    height: 100%;
 
     // Post title
     h2 {
+      margin: 0.5rem 0;
       padding: 0;
       font-size: 1.6rem;
       text-align: center;
-      margin: 0.5rem;
     }
 
     small {
+      margin: auto;
+      padding-top: 1rem;
       font-size: 1rem;
+      opacity: 0.7;
       text-align: center;
-      margin-bottom: 0.4rem;
-    }
-
-    img {
-      display: block;
-      width: 60px;
-      height: 60px;
-      margin-bottom: 0.4rem;
-      border-radius: 4rem;
     }
 
     p {
-      margin: 0;
+      margin: 0.5rem 0;
       font-size: 1.2rem;
       text-align: center;
-      margin: 0.5rem;
+      flex-grow: 1;
     }
   }
 }
@@ -539,13 +618,11 @@ div.no-posts {
   > small {
     align-self: center;
     display: block;
-    margin-bottom: 0.2rem;
   }
 
   h1,
   h2 {
     margin-top: 2rem;
-    border-bottom: 0.15rem solid $light-icon;
   }
 
   div#tags {
@@ -565,16 +642,48 @@ div.no-posts {
     margin-block: 1rem;
   }
 
+
+
+  #TableOfContents {
+    padding-block: 2rem;
+  }
+
+  blockquote {
+    border-left: 1px solid lighten($light-text, 30%);
+    padding-left: 1rem;
+    margin-left: 0;
+    padding-block: 0.5rem;
+    color: darken($light-text, 10%);
+    font-style: italic;
+  }
+
   div {
     max-width: 98%;
   }
 
   code {
-    background-color: #272822;
-    padding: 0.15rem 0.2rem;
+    background-color: $code-light-background;
+    padding: 0.2rem 0.6rem;
     margin: 0;
     font-size: 85%;
     border-radius: 0.4rem;
+    border: 1px solid $code-light-border;
+  }
+
+  pre {
+    background-color: $code-light-background;
+    border: 1px solid $code-light-border;
+    border-radius: 0.4rem;
+    padding: 1.2rem;
+    overflow-x: auto;
+
+    code {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+      color: inherit;
+    }
   }
 }
 
@@ -597,6 +706,14 @@ div.no-posts {
     font-size: 2rem;
   }
 
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
   img.hero-image {
     height: 96px;
   }
@@ -609,7 +726,7 @@ div.no-posts {
     width: 100%; // Full width for mobile
 
     .blog-card-content {
-      padding: 0.4rem;
+      padding: 0.8rem;
     }
   }
 
@@ -620,6 +737,14 @@ div.no-posts {
 
 // dark mode media query
 @media (prefers-color-scheme: dark) {
+  h3 {
+    color: lighten($dark-text, 5%);
+  }
+
+  h4 {
+    color: lighten($dark-text, 15%);
+  }
+
   body {
     background-color: $dark-background;
     color: $dark-text;
@@ -629,29 +754,33 @@ div.no-posts {
     filter: invert(100%);
   }
 
-  a.unchanging-link {
-    color: $dark-icon;
-
-    &:hover {
-      color: lighten($dark-icon, 50%);
-    }
-
-    &:visited {
-      color: $dark-icon;
-    }
-
-    &:visited:hover {
-      color: $dark-text;
-    }
-  }
-
   a {
-    &:visited:hover {
+    color: $dark-text;
+    border-bottom-color: $dark-text;
+
+    &:hover {
+      color: $dark-icon;
+      border-bottom-color: $dark-icon;
+    }
+
+    &:visited {
       color: $dark-text;
+      border-bottom-color: $dark-text;
+    }
+
+    &:visited:hover {
+      color: $dark-icon;
+      border-bottom-color: $dark-icon;
     }
   }
 
-  .pagination-nav a {
+  a.back-link,
+  a.unchanging-link,
+  .hero-image-container a,
+  .social-list a,
+  .pagination-nav a,
+  .tool-card a {
+    border-bottom: none;
     color: $dark-icon;
 
     &:hover {
@@ -660,6 +789,43 @@ div.no-posts {
 
     &:visited {
       color: $dark-icon;
+    }
+
+    &:visited:hover {
+      color: $dark-text;
+    }
+  }
+
+  // Card links reset text color to inherit for nested elements
+  a.tool-card-link,
+  a.blog-card-link {
+    border-bottom: none;
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+    }
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:visited:hover {
+      color: inherit;
+    }
+  }
+
+  // List layout links keep text color, no hover change
+  ul.list-layout-list a {
+    border-bottom: none;
+    color: $dark-text;
+
+    &:hover {
+      color: $dark-text;
+    }
+
+    &:visited {
+      color: $dark-text;
     }
 
     &:visited:hover {
@@ -686,7 +852,7 @@ div.no-posts {
 
   .blog-card {
     border: 2px solid $dark-icon;
-    background: lighten($dark-background, 5%);
+    background-color: lighten($dark-background, 5%);
     filter: drop-shadow(5px 6px 0 lighten($dark-background, 8%));
 
     &:hover {
@@ -695,9 +861,19 @@ div.no-posts {
   }
 
   .blog-container {
-    h1,
-    h2 {
-      border-bottom: 0.15rem solid $dark-icon;
+    blockquote {
+      border-left-color: darken($dark-text, 30%);
+      color: lighten($dark-text, 10%);
+    }
+
+    code {
+      background-color: $code-dark-background;
+      border-color: $code-dark-border;
+    }
+
+    pre {
+      background-color: $code-dark-background;
+      border-color: $code-dark-border;
     }
   }
 
