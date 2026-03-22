@@ -2,7 +2,6 @@
 title: Semantic Release (Please)
 date: 2024-02-10
 description: Using release-please to automate software releases with Semantic Commits (without the bloat).
-featured_image: /release-please.webp
 tags:
   - tech
   - how-to
@@ -23,17 +22,14 @@ Basically its: Merge to `main` > PR > Release, with the option to merge changes 
 **Workflow for Merging a Feature Branch**
 
 1. **The Release-Please Job is Triggered**:
-
    - The process begins when the 'release-please' job is triggered on a merge to the branch you want to release from.
 
 2. **Checking for Feature/Fix Commits**:
-
    - Determine if there are any 'feature' or 'fix' commits.
      - If there are **no feature/fix commits**, the process stops here (do nothing).
      - If there **are feature/fix commits**, proceed to the next step.
 
 3. **Handling the Release Pull Request (PR)**:
-
    - Check for the existence of an existing branch + PR for a release. This is a special branch created by the tool.
      - If an **existing release PR is found**:
        - Update the changelog in the branch and the PR description with notes on latest feature/fix changes.
@@ -49,7 +45,6 @@ Basically its: Merge to `main` > PR > Release, with the option to merge changes 
 **Workflow for Merging a Release Branch**
 
 1. **The Release-Please Job is Triggered**:
-
    - Similar to the feature branch, this process starts when the 'release-please' job is triggered for a release branch.
 
 2. **Determining Branch Type**:

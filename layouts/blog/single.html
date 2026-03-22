@@ -1,15 +1,13 @@
 {{ define "main" }}
 <main class="container blog-container">
   <h1>{{ .Title }}</h1>
-  <small class="date">Published: {{.Date.Format "2006-01-02" }}</small>
-  <img
-    src="/blog/images/{{ .Params.featured_image }}"
-    width="260px"
-    height="260px"
-    alt="{{ .Title }}"
-  />
   <p class="description"><i>{{.Description }}</i></p>
-  <hr />
+  <p class="date"
+    >{{.Date.Format "January 2, 2006" }} -
+    <a href="https://shanehull.com">Shane Hull</a></small
+  >
+  {{ .TableOfContents }}
+  <br />
   <br />
   <!--<div id="tags">-->
   <!--<p>-->
@@ -20,7 +18,6 @@
   <!--</div>-->
   {{ .Content }}
   <br />
-  <hr />
   <br />
   <div class="center-items">
     <a href="/blog/" class="unchanging-link back-link"> <- back </a>
