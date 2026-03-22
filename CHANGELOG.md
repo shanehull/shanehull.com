@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.0](https://github.com/shanehull/shanehull.com/compare/v0.11.1...v0.12.0) (2026-03-22)
+
+
+### Features
+
+* add old blog posts ([#133](https://github.com/shanehull/shanehull.com/issues/133)) ([1817f6d](https://github.com/shanehull/shanehull.com/commit/1817f6de709ff0fd4b17604940f1a60d9996a57c))
+
+
+### Bug Fixes
+
+* issues updating contract price ([#135](https://github.com/shanehull/shanehull.com/issues/135)) ([732f7e4](https://github.com/shanehull/shanehull.com/commit/732f7e4680d46461d57b26a7a2b6f9875e2c0874))
+* update deps ([#137](https://github.com/shanehull/shanehull.com/issues/137)) ([7e70ce5](https://github.com/shanehull/shanehull.com/commit/7e70ce577bf81062a19f80cdc680dcec04d70b6c))
+
 ## [0.11.1](https://github.com/shanehull/shanehull.com/compare/v0.11.0...v0.11.1) (2026-03-09)
 
 
