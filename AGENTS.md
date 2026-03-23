@@ -393,6 +393,35 @@ Example:
 }
 ```
 
+#### Mode Selection Pattern
+
+When a calculator offers multiple modes or models, use a dropdown `<select>` element rather than radio buttons. Dropdowns integrate seamlessly with the calculator UI and save space.
+
+**✓ Correct:**
+
+```html
+<div class="calculator-field">
+  <label for="inputMode">Input Mode</label>
+  <select id="inputMode">
+    <option value="manual" selected>Manual Input</option>
+    <option value="search">Ticker Search (API)</option>
+  </select>
+</div>
+```
+
+**✗ Avoid:** Radio buttons take up unnecessary horizontal space and break the visual consistency of the calculator layout.
+
+In JavaScript, retrieve the dropdown value with:
+
+```javascript
+const mode = document.getElementById("inputMode").value;
+
+// Listen for changes
+document
+  .getElementById("inputMode")
+  .addEventListener("change", handleModeChange);
+```
+
 ### 4. Common Pitfalls to Avoid
 
 1.  **Duplicate IDs:** Ensure all input IDs are unique within the page.
