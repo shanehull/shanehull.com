@@ -33,38 +33,15 @@
     <div class="calculator-body">
       <h3 class="calculator-section-head">Model Type</h3>
 
-      <div class="calculator-row" style="gap: 2rem;">
-        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500;">
-          <input
-            type="radio"
-            id="modelExit"
-            name="dcfModel"
-            value="exit"
-            checked
-            style="cursor: pointer;"
-          />
-          Exit Multiple
-        </label>
-        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500;">
-          <input
-            type="radio"
-            id="modelPerpetual"
-            name="dcfModel"
-            value="perpetual"
-            style="cursor: pointer;"
-          />
-          Perpetual Growth
-        </label>
-        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500;">
-          <input
-            type="radio"
-            id="modelDDM"
-            name="dcfModel"
-            value="ddm"
-            style="cursor: pointer;"
-          />
-          Dividend Discount
-        </label>
+      <div class="calculator-row">
+        <div class="calculator-field">
+          <label for="dcfModel">DCF Model</label>
+          <select id="dcfModel">
+            <option value="exit" selected>Exit Multiple</option>
+            <option value="perpetual">Perpetual Growth</option>
+            <option value="ddm">Dividend Discount</option>
+          </select>
+        </div>
       </div>
 
       <h3 class="calculator-section-head">Valuation Assumptions</h3>

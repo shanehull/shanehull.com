@@ -3,7 +3,7 @@
  * Handles exit multiple, 2-stage growth, and dividend discount models
  */
 function calculateDCF() {
-  const modelType = document.querySelector('input[name="dcfModel"]:checked').value;
+  const modelType = document.getElementById("dcfModel").value;
 
   if (modelType === "exit") {
     calculateDCFExit();
@@ -314,7 +314,7 @@ function formatPercent(num) {
  * Toggle visibility between model sections
  */
 function toggleDCFModel() {
-  const modelType = document.querySelector('input[name="dcfModel"]:checked').value;
+  const modelType = document.getElementById("dcfModel").value;
   
   document.getElementById("exitSection").style.display = 
     modelType === "exit" ? "block" : "none";
@@ -350,24 +350,12 @@ function initDCF() {
   const params = new URLSearchParams(window.location.search);
   if (params.has("dcfModel")) {
     const modelValue = params.get("dcfModel");
-    if (modelValue === "perpetual") {
-      document.getElementById("modelPerpetual").checked = true;
-    } else if (modelValue === "ddm") {
-      document.getElementById("modelDDM").checked = true;
-    } else {
-      document.getElementById("modelExit").checked = true;
-    }
+    document.getElementById("dcfModel").value = modelValue;
   }
 
-  // Model selection listeners
+  // Model selection listener
   document
-    .getElementById("modelExit")
-    .addEventListener("change", toggleDCFModel);
-  document
-    .getElementById("modelPerpetual")
-    .addEventListener("change", toggleDCFModel);
-  document
-    .getElementById("modelDDM")
+    .getElementById("dcfModel")
     .addEventListener("change", toggleDCFModel);
 
   // Exit model listeners
