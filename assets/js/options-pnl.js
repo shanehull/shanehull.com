@@ -73,13 +73,15 @@ function calculateOptions() {
 
   const fairValue = BlackScholes(type, S, K, T, r, iv);
 
-  const userPrice = parseFloat(document.getElementById("contractPrice").value);
+  const contractPriceInput = document.getElementById("contractPrice");
+  const userPriceStr = contractPriceInput.value;
+  const userPrice = parseFloat(userPriceStr);
   let contractPrice = fairValue;
 
-  if (!isNaN(userPrice) && userPrice >= 0) {
+  if (!isNaN(userPrice) && userPrice >= 0.01) {
     contractPrice = userPrice;
-  } else {
-    document.getElementById("contractPrice").value = fairValue.toFixed(2);
+  } else if (userPriceStr === "") {
+    contractPriceInput.value = fairValue.toFixed(2);
   }
 
   const totalEntry = contractPrice * lotSize * contracts;
