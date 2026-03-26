@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.1](https://github.com/shanehull/shanehull.com/compare/v0.12.0...v0.12.1) (2026-03-26)
+
+
+### Bug Fixes
+
+* options pnl contract price input ([#143](https://github.com/shanehull/shanehull.com/issues/143)) ([a262a6a](https://github.com/shanehull/shanehull.com/commit/a262a6a87c5c5176170972b8e56a2a02422e955f))
+* update smb acquisiton calc defaults ([#142](https://github.com/shanehull/shanehull.com/issues/142)) ([fb61192](https://github.com/shanehull/shanehull.com/commit/fb611923eea08118edd8d7f2d90360e6ff7733a0))
+* use dropdown for dcf model select ([#139](https://github.com/shanehull/shanehull.com/issues/139)) ([37a3d75](https://github.com/shanehull/shanehull.com/commit/37a3d75277cb21c4e84a4cbc1e5b3fca3f14dd89))
+
 ## [0.12.0](https://github.com/shanehull/shanehull.com/compare/v0.11.1...v0.12.0) (2026-03-22)
 
 
