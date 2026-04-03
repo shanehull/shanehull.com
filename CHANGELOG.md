@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.2](https://github.com/shanehull/shanehull.com/compare/v0.12.1...v0.12.2) (2026-04-03)
+
+
+### Bug Fixes
+
+* dcf math ([#145](https://github.com/shanehull/shanehull.com/issues/145)) ([13cafc1](https://github.com/shanehull/shanehull.com/commit/13cafc1f58014d63e757f403e1fc4d3e3b4072b7))
+
 ## [0.12.1](https://github.com/shanehull/shanehull.com/compare/v0.12.0...v0.12.1) (2026-03-26)
 
 
