@@ -35,7 +35,7 @@ function calculateDCFExit() {
 
   // Calculate PV of cash flows for each year in the holding period
   for (let i = 0; i < yearsToExit; i++) {
-    const fcf = initialFCF * Math.pow(1 + growthRate, i);
+    const fcf = initialFCF * Math.pow(1 + growthRate, i + 1);
     const discountFactor = Math.pow(1 + discountRate, i + 1);
     pvCashFlows += fcf / discountFactor;
   }
@@ -50,7 +50,7 @@ function calculateDCFExit() {
   const intrinsicValue = pvCashFlows + pvExit;
 
   // Expected return: IRR of cash flows
-  let expectedReturn = calculateIRR(currentPrice, initialFCF, growthRate, yearsToExit, terminalValue);
+  let expectedReturn = calculateIRR(currentPrice, initialFCF * (1 + growthRate), growthRate, yearsToExit, terminalValue);
 
   // Upside/Downside
   const upsideDownside = (intrinsicValue - currentPrice) / currentPrice;
@@ -101,7 +101,7 @@ function calculateDCFPerpetual() {
 
   // Calculate PV of cash flows during explicit period
   for (let i = 0; i < yearsToExit; i++) {
-    const fcf = initialFCF * Math.pow(1 + growthRate, i);
+    const fcf = initialFCF * Math.pow(1 + growthRate, i + 1);
     const discountFactor = Math.pow(1 + discountRate, i + 1);
     pvCashFlows += fcf / discountFactor;
   }
@@ -132,7 +132,7 @@ function calculateDCFPerpetual() {
       : 0;
 
   // Expected return: IRR of cash flows
-  let expectedReturn = calculateIRR(currentPrice, initialFCF, growthRate, yearsToExit, terminalValueAtEnd);
+  let expectedReturn = calculateIRR(currentPrice, initialFCF * (1 + growthRate), growthRate, yearsToExit, terminalValueAtEnd);
 
   // Upside/Downside
   const upsideDownside = (intrinsicValue - currentPrice) / currentPrice;
@@ -186,7 +186,7 @@ function calculateDDM() {
 
   // Calculate PV of dividends during explicit period
   for (let i = 0; i < yearsToExit; i++) {
-    const dividend = initialDividend * Math.pow(1 + growthRate, i);
+    const dividend = initialDividend * Math.pow(1 + growthRate, i + 1);
     const discountFactor = Math.pow(1 + discountRate, i + 1);
     pvDividends += dividend / discountFactor;
   }
@@ -217,7 +217,7 @@ function calculateDDM() {
       : 0;
 
   // Expected return: IRR of dividends
-  let expectedReturn = calculateIRR(currentPrice, initialDividend, growthRate, yearsToExit, terminalValueAtEnd);
+  let expectedReturn = calculateIRR(currentPrice, initialDividend * (1 + growthRate), growthRate, yearsToExit, terminalValueAtEnd);
 
   // Upside/Downside
   const upsideDownside = (intrinsicValue - currentPrice) / currentPrice;
@@ -268,7 +268,7 @@ function calculateIRR(initialInvestment, initialCashFlow, growthRate, yearsToExi
   }
 
   // Newton-Raphson method to find IRR
-  let rate = growthRate; // Initial guess
+  let rate = 0.10; // Initial guess (10% is a safe, standard starting guess)
   for (let iteration = 0; iteration < 100; iteration++) {
     let npv = 0;
     let npvDerivative = 0;
