@@ -33,14 +33,29 @@ function addAsset() {
             </div>
             <div class="calculator-field">
                 <label for="asset-${assetIdCounter}-price">Price ($)</label>
-                <input type="number" id="asset-${assetIdCounter}-price" class="p-price" value="2500">
+                <input type="number" id="asset-${assetIdCounter}-price" class="p-price" value="3500">
             </div>
         </div>
         
         <div class="calculator-row">
             <div class="calculator-field">
-                <label for="asset-${assetIdCounter}-cost">Unit Cost ($)</label>
+                <label for="asset-${assetIdCounter}-cost">Unit Cost (AISC $)</label>
                 <input type="number" id="asset-${assetIdCounter}-cost" class="p-cost" value="1200">
+            </div>
+            <div class="calculator-field">
+                <label for="asset-${assetIdCounter}-royalty">Royalty (%)</label>
+                <input type="number" id="asset-${assetIdCounter}-royalty" class="p-royalty" value="0">
+            </div>
+        </div>
+
+        <div class="calculator-row">
+            <div class="calculator-field">
+                <label for="asset-${assetIdCounter}-stream-pct">Stream (%)</label>
+                <input type="number" id="asset-${assetIdCounter}-stream-pct" class="p-stream-pct" value="0">
+            </div>
+            <div class="calculator-field">
+                <label for="asset-${assetIdCounter}-stream-price">Stream Price ($)</label>
+                <input type="number" id="asset-${assetIdCounter}-stream-price" class="p-stream-price" value="0">
             </div>
         </div>
     `;
@@ -48,7 +63,7 @@ function addAsset() {
 
   // Attach event listeners to new inputs (CSP-compliant)
   const newInputs = card.querySelectorAll(
-    ".asset-input, .p-prod, .p-price, .p-cost",
+    ".asset-input, .p-prod, .p-price, .p-cost, .p-royalty, .p-stream-pct, .p-stream-price",
   );
   newInputs.forEach((input) => {
     input.addEventListener("input", calculate);
@@ -78,6 +93,7 @@ function calculate() {
   const tax = (parseFloat(document.getElementById("tax").value) || 0) / 100;
   const dilution =
     (parseFloat(document.getElementById("dilution").value) || 0) / 100;
+  const ga = (parseFloat(document.getElementById("ga").value) || 0) * 1000000;
 
   let totalGrossFCF = 0;
 
@@ -87,22 +103,33 @@ function calculate() {
     const prod = parseFloat(card.querySelector(".p-prod").value) || 0;
     const price = parseFloat(card.querySelector(".p-price").value) || 0;
     const cost = parseFloat(card.querySelector(".p-cost").value) || 0;
-    totalGrossFCF += (price - cost) * prod;
+    const royalty = (parseFloat(card.querySelector(".p-royalty").value) || 0) / 100;
+    const streamPct = (parseFloat(card.querySelector(".p-stream-pct").value) || 0) / 100;
+    const streamPrice = parseFloat(card.querySelector(".p-stream-price").value) || 0;
+
+    // Realized Price Before Royalty = (unstreamed portion * spot) + (streamed portion * stream price)
+    const realizedBeforeRoyalty =
+      price * (1 - streamPct) + streamPrice * streamPct;
+
+    // Final Realized Price = (Total Realized Revenue) * (1 - Royalty)
+    const finalRealizedPrice = realizedBeforeRoyalty * (1 - royalty);
+
+    totalGrossFCF += (finalRealizedPrice - cost) * prod;
   });
 
-  const netFCF = totalGrossFCF * (1 - tax);
+  const netFCF = (totalGrossFCF - ga) * (1 - tax);
   const mCap = netFCF * multiple;
   const dilutedShares = shares * (1 + dilution);
   const targetPrice = dilutedShares > 0 ? mCap / dilutedShares : 0;
   const upsidePct =
     currPrice > 0 ? ((targetPrice - currPrice) / currPrice) * 100 : 0;
-  const upsideX = currPrice > 0 ? targetPrice / currPrice : 0;
+  const upsideX = currPrice > 0 ? (targetPrice - currPrice) / currPrice : 0;
 
   document.getElementById("outFCF").innerText = formatCompact(netFCF);
   document.getElementById("outMCap").innerText = formatCompact(mCap);
   document.getElementById("outPrice").innerText = "$" + targetPrice.toFixed(2);
   document.getElementById("outUpside").innerText =
-    `${upsidePct.toLocaleString(undefined, { maximumFractionDigits: 0 })}% (${upsideX.toFixed(1)}x)`;
+    `${upsidePct.toLocaleString(undefined, { maximumFractionDigits: 0 })}% (+${upsideX.toFixed(2)}x)`;
 }
 
 function formatCompact(num) {
@@ -120,6 +147,7 @@ function initCashflow() {
   document.getElementById("multiple").addEventListener("input", calculate);
   document.getElementById("tax").addEventListener("input", calculate);
   document.getElementById("dilution").addEventListener("input", calculate);
+  document.getElementById("ga").addEventListener("input", calculate);
 
   const addAssetBtn = document.getElementById("addAssetBtn");
   if (addAssetBtn) {

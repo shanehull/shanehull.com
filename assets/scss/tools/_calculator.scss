@@ -188,6 +188,10 @@
     cursor: pointer;
     color: $light-icon;
     font-weight: bold;
+    font-size: 1.4rem;
+    padding: 0.4rem;
+    line-height: 1;
+
     @media (prefers-color-scheme: dark) {
       color: $dark-icon;
     }
