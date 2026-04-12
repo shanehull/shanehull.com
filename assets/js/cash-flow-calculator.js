@@ -103,9 +103,12 @@ function calculate() {
     const prod = parseFloat(card.querySelector(".p-prod").value) || 0;
     const price = parseFloat(card.querySelector(".p-price").value) || 0;
     const cost = parseFloat(card.querySelector(".p-cost").value) || 0;
-    const royalty = (parseFloat(card.querySelector(".p-royalty").value) || 0) / 100;
-    const streamPct = (parseFloat(card.querySelector(".p-stream-pct").value) || 0) / 100;
-    const streamPrice = parseFloat(card.querySelector(".p-stream-price").value) || 0;
+    const royalty =
+      (parseFloat(card.querySelector(".p-royalty").value) || 0) / 100;
+    const streamPct =
+      (parseFloat(card.querySelector(".p-stream-pct").value) || 0) / 100;
+    const streamPrice =
+      parseFloat(card.querySelector(".p-stream-price").value) || 0;
 
     // Realized Price Before Royalty = (unstreamed portion * spot) + (streamed portion * stream price)
     const realizedBeforeRoyalty =
