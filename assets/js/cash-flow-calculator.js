@@ -126,7 +126,7 @@ function calculate() {
   const targetPrice = dilutedShares > 0 ? mCap / dilutedShares : 0;
   const upsidePct =
     currPrice > 0 ? ((targetPrice - currPrice) / currPrice) * 100 : 0;
-  const upsideX = currPrice > 0 ? (targetPrice - currPrice) / currPrice : 0;
+  const upsideX = currPrice > 0 ? targetPrice / currPrice : 0;
 
   document.getElementById("outFCF").innerText = formatCompact(netFCF);
   document.getElementById("outMCap").innerText = formatCompact(mCap);
