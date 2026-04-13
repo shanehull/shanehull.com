@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.3](https://github.com/shanehull/shanehull.com/compare/v0.12.2...v0.12.3) (2026-04-13)
+
+
+### Bug Fixes
+
+* account for royalties and g and a ([#148](https://github.com/shanehull/shanehull.com/issues/148)) ([ebf203a](https://github.com/shanehull/shanehull.com/commit/ebf203a71d5e75db01a43e84d01d0ed8b1c1de69))
+* cf calc profit multiple ([#150](https://github.com/shanehull/shanehull.com/issues/150)) ([12ce652](https://github.com/shanehull/shanehull.com/commit/12ce652b57fedc951bffb660cfa5ad802848ff60))
+
 ## [0.12.2](https://github.com/shanehull/shanehull.com/compare/v0.12.1...v0.12.2) (2026-04-03)
 
 
