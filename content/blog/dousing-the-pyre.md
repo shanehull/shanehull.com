@@ -16,7 +16,7 @@ Real Estate cycles are just capital cycles. We are facing a necessary deleveragi
 
 ## The Capital Cycle
 
-Capital cycle theory offers a rational, bottom-up explanation of market cycles. Unlike the 18.6-year real estate cycle, it focuses on supply-side dynamics rather than arbitrary timeframes. Crucially, capital cycles interact with debt cycles. In Australia, it's the latter that's being weaponised to delay the former.
+Capital cycle theory offers a rational, bottom-up explanation of market cycles. Unlike the 18.6-year real estate cycle, it tracks how capital flows drive supply responses rather than relying on arbitrary timeframes. Crucially, capital cycles interact with debt cycles. In Australia, it's the latter that's being weaponised to delay the former.
 
 Under normal capital cycle theory, the mechanics are brutal but rational:
 
