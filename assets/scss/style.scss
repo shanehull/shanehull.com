@@ -484,9 +484,10 @@ ul.list-layout-list a {
 
 // Style for the blog list container
 .blog-list-wrap {
-  min-height: 15rem;
   position: relative;
   margin-top: 2rem;
+  margin-bottom: 2rem;
+  z-index: 1;
 
   .blog-list {
     list-style: none;
@@ -575,10 +576,13 @@ ul.list-layout-list a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 10;
+  margin-top: 2rem;
 
   a {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
 
   .pagination-action-wrapper {
@@ -714,12 +718,8 @@ div.no-posts {
     font-size: 1.4rem;
   }
 
-  img.hero-image {
+img.hero-image {
     height: 96px;
-  }
-
-  .blog-list-wrap {
-    min-height: 16rem;
   }
 
   .blog-card {
