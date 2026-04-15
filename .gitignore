@@ -17,3 +17,6 @@ hugo.linux
 /bin/
 /tmp/
 /bin/
+
+# MacOS bs
+**/.DS_Store

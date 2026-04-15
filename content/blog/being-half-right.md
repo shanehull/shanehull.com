@@ -35,7 +35,7 @@ Being wrong is against our instincts. We don't like to lose. We'd much rather ho
 
 Evolution programmed us this way for a reason. To survive in the wild, you needed a high "hit rate" on reality. If you were wrong about the rustle in the grass, you were eaten. Your brain developed a panic button called negative valence. A physical, gut-wrenching aversion to pain.
 
-<img src="/blog/images/first-brain-valence-system-max-bannett.png" alt="A diagram of the 'first brain'" width="300" />
+<img src="/blog/images/first-brain-valence-system-max-bennett.webp" alt="A diagram of the 'first brain'" width="300" />
 
 Daniel Kahneman and Amos Tversky called this "Loss Aversion." They showed that the pain of losing $1,000 is twice as powerful as the joy of gaining $1,000.
 
