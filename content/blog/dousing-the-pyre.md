@@ -1,6 +1,6 @@
 ---
 title: Dousing the Pyre
-date: 2026-04-14
+date: 2026-04-15
 description: On the sovereign arson of Australian Real Estate and why a correction could lead to enormous financial repression.
 tags:
   - markets
