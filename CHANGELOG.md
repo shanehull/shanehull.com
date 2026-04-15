@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.13.0](https://github.com/shanehull/shanehull.com/compare/v0.12.3...v0.13.0) (2026-04-15)
+
+
+### Features
+
+* dousing the pyre blog post ([#152](https://github.com/shanehull/shanehull.com/issues/152)) ([c51a53e](https://github.com/shanehull/shanehull.com/commit/c51a53e17de7a8409c20171ed0fa96e4193edf1e))
+
+
+### Bug Fixes
+
+* card styles ([#157](https://github.com/shanehull/shanehull.com/issues/157)) ([07638dd](https://github.com/shanehull/shanehull.com/commit/07638ddf97f9d225bd3ceece19c3b9cf09025e8c))
+* quote svg color ([#156](https://github.com/shanehull/shanehull.com/issues/156)) ([a7c5299](https://github.com/shanehull/shanehull.com/commit/a7c52998eb5f611accab187b8492faa50d711753))
+* update dousing pyre date ([#154](https://github.com/shanehull/shanehull.com/issues/154)) ([1cac7d0](https://github.com/shanehull/shanehull.com/commit/1cac7d09e62be0e59f51e2d24f70fc63c42c0a69))
+* wording for capital cycle theory ([#155](https://github.com/shanehull/shanehull.com/issues/155)) ([81d9fc6](https://github.com/shanehull/shanehull.com/commit/81d9fc64f938e69e0eaf52ba23384967cd3e909b))
+
 ## [0.12.3](https://github.com/shanehull/shanehull.com/compare/v0.12.2...v0.12.3) (2026-04-13)
 
 
