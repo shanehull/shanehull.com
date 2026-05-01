@@ -821,3 +821,13 @@ Pass your specific overlay parameter name (e.g., "quartiles", "average") and the
 10. **HTMX includes for missing controls:** If you remove a control (e.g., quartiles checkbox), remove it from `hx-include` attributes too. Orphaned form fields in HTMX will cause requests to fail silently.
 11. **Overlay parameter names:** Use `ChartDownloads(toolName, rangeParam, overlayParamName, showOverlay)` and pass your specific overlay parameter name (e.g., "quartiles" for msindex, "average" for buffett-indicator). The template handles building the correct download links dynamically.
 12. **hx-boost navigation:** Add `hx-trigger="load delay:200ms, change"` to the default "max" radio button for the chart, and `hx-trigger="load, change from:..."` on the downloads div. These elements are always in the DOM, so `load` fires on both hard refreshes and hx-boost navigation. The 200ms delay ensures `chart-init.js` has loaded and registered the `htmx:afterSwap` listener before the trigger fires, preventing race conditions on slow mobile connections.
+
+---
+
+## Updating Dependencies
+
+**CDN JS libs** (htmx, chart.js, chartjs-plugin-zoom): update version + SRI hash in the script tag (`layouts/partials/chart-scripts.html` or `layouts/_default/baseof.html`) AND the CSP header (`internal/middleware/csp.go`). Compute `sha384` hash: `curl -sL "<url>" | openssl dgst -sha384 -binary | openssl base64 -A`.
+
+**Go modules:** `go get <module>@<version> && go mod tidy`.
+
+**GitHub Actions:** bump version tags in `.github/workflows/*.yaml`. Check latest tag: `curl -sL https://api.github.com/repos/<owner>/<repo>/releases/latest | python3 -c "import sys,json; print(json.load(sys.stdin)['tag_name'])"`.
