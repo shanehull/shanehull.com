@@ -46,8 +46,9 @@ func init() {
 }
 
 func main() {
-	ctx, cancel := signal.NotifyContext(
+	ctx, stop := signal.NotifyContext(
 		context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
 
 	// Check if the SERVER_HOST env var is set and override
 	envHost, ok := os.LookupEnv("SERVER_HOST")
@@ -78,27 +79,26 @@ func main() {
 	// Wrap mux with CSP middleware
 	handler := middleware.CSP(mux)
 
-	// Run the server at
+	// Run the server
 	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)
+	srv := http.Server{Addr: serveAt, Handler: handler}
 	go func() {
-		if err := http.ListenAndServe(serveAt, handler); err != nil {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatal(err)
 		}
 	}()
 
 	logger.Info("API Server available", "addr", serveAt)
 
-	// Wait for interrupt signal.
+	// Wait for interrupt signal, then gracefully shut down
 	<-ctx.Done()
-
-	// Sleep to ensure graceful shutdown
-	logger.Info("Server shutting down...")
-	time.Sleep(5 * time.Second)
-
-	// Return to default context.
-	cancel()
-
-	logger.Info("Server stopped")
+	logger.Info("shutting down")
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(shutdownCtx); err != nil {
+		logger.Error("forced shutdown", "error", err)
+	}
+	logger.Info("server stopped")
 }
 
 func registerHandlers(mux *http.ServeMux) {
