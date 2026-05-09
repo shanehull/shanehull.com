@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.1](https://github.com/shanehull/shanehull.com/compare/v0.13.0...v0.13.1) (2026-05-09)
+
+
+### Bug Fixes
+
+* **deps:** update htmx, chartjs-plugin-zoom, hugo, golangci-lint, release-please, and pin chart.js ([#158](https://github.com/shanehull/shanehull.com/issues/158)) ([175696b](https://github.com/shanehull/shanehull.com/commit/175696bf45e0bcd2bdd0c356c397fa044e80c50c))
+* replace shutdown hack with http.Server.Shutdown() ([#160](https://github.com/shanehull/shanehull.com/issues/160)) ([36b13e9](https://github.com/shanehull/shanehull.com/commit/36b13e980189996518fd83f6d92acc6ac6368e82))
+
 ## [0.13.0](https://github.com/shanehull/shanehull.com/compare/v0.12.3...v0.13.0) (2026-04-15)
 
 
