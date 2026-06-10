@@ -1,7 +1,7 @@
 ---
 title: Dousing the Pyre
 date: 2026-04-15
-description: On the sovereign arson of Australian Real Estate and why a correction could lead to enormous financial repression.
+description: On the sovereign arson of Australian Real Estate and why a correction could lead to enormous monetisation of bad housing debt.
 tags:
   - markets
   - distortion
@@ -81,4 +81,4 @@ We are watching the total financialisation of shelter, where the government cann
 
 But why should we be surprised? This is a feature, not a bug. The state has made housing a political asset that cannot be marked-to-market because deflation threatens their survival.
 
-Having doused the market in bad debts, the state opens the doors to financial repression on an enormous scale, allowing them to transfer their egregious interest obligations onto the taxpayer in a sly manner. The final act of sovereign arson.
+Having doused the market in bad debts, the state opens the doors to monetisation on an enormous scale, allowing them to transfer their egregious interest obligations onto the taxpayer in a sly manner. The final act of sovereign arson.
