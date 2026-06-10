@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.2](https://github.com/shanehull/shanehull.com/compare/v0.13.1...v0.13.2) (2026-06-10)
+
+
+### Bug Fixes
+
+* re-trigger release after deps bump ([#162](https://github.com/shanehull/shanehull.com/issues/162)) ([890591a](https://github.com/shanehull/shanehull.com/commit/890591aa9d12d5874dca92329de44beabaea27f2))
+
 ## [0.13.1](https://github.com/shanehull/shanehull.com/compare/v0.13.0...v0.13.1) (2026-05-09)
 
 
