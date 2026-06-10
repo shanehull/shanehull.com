@@ -826,7 +826,7 @@ Pass your specific overlay parameter name (e.g., "quartiles", "average") and the
 
 ## Updating Dependencies
 
-**CDN JS libs** (htmx, chart.js, chartjs-plugin-zoom): update version + SRI hash in the script tag (`layouts/partials/chart-scripts.html` or `layouts/_default/baseof.html`) AND the CSP header (`internal/middleware/csp.go`). Compute `sha384` hash: `curl -sL "<url>" | openssl dgst -sha384 -binary | openssl base64 -A`.
+**CDN JS libs** (htmx, chart.js, chartjs-plugin-zoom): update version + SRI hash in the canonical partial (`layouts/partials/chart-js.html` for chart.js, `layouts/partials/chart-scripts.html` for the chart plugin bundle) AND the CSP header (`internal/middleware/csp.go`). All chart.js consumers must use `{{ partial "chart-js.html" . }}` — never inline the CDN URL. Compute `sha384` hash: `curl -sL "<url>" | openssl dgst -sha384 -binary | openssl base64 -A`.
 
 **Go modules:** `go get <module>@<version> && go mod tidy`.
 
