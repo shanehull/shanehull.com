@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.3](https://github.com/shanehull/shanehull.com/compare/v0.13.2...v0.13.3) (2026-06-10)
+
+
+### Bug Fixes
+
+* **blog:** dousing the pyre wording ([#164](https://github.com/shanehull/shanehull.com/issues/164)) ([f415cb8](https://github.com/shanehull/shanehull.com/commit/f415cb8c94c4e1c09e295b308c28e6cb3576e84a))
+
 ## [0.13.2](https://github.com/shanehull/shanehull.com/compare/v0.13.1...v0.13.2) (2026-06-10)
 
 
