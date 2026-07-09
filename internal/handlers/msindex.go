@@ -116,7 +116,7 @@ func MSIndexDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	component := templates.ChartDownloads("msindex", rangeParam, "quartiles", showQuartiles)
 
@@ -145,7 +145,7 @@ func MSIndexCSVHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	chartData, err := getOrFetchChartData(rangeParam, showQuartiles)
 	if err != nil {
@@ -196,7 +196,7 @@ func MSIndexDataHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	chartData, err := getOrFetchChartData(rangeParam, showQuartiles)
 	if err != nil {
@@ -223,7 +223,7 @@ func MSIndexHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	chartData, err := getOrFetchChartData(rangeParam, showQuartiles)
 	if err != nil {

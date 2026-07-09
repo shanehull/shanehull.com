@@ -5,9 +5,15 @@
   crossorigin="anonymous"
   defer
 ></script>
-{{ $script := resources.Get "js/chart-init.js" | minify | fingerprint "sha384" }}
+{{ $chartInit := resources.Get "js/chart-init.js" | minify | fingerprint "sha384" }}
 <script
-  src="{{ $script.RelPermalink }}"
-  integrity="{{ $script.Data.Integrity }}"
+  src="{{ $chartInit.RelPermalink }}"
+  integrity="{{ $chartInit.Data.Integrity }}"
+  defer
+></script>
+{{ $chartShareable := resources.Get "js/chart-shareable.js" | minify | fingerprint "sha384" }}
+<script
+  src="{{ $chartShareable.RelPermalink }}"
+  integrity="{{ $chartShareable.Data.Integrity }}"
   defer
 ></script>

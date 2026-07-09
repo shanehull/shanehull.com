@@ -379,7 +379,7 @@ Detailed explanation of the metric, calculation method, and data sources.
 The handler must:
 
 1. Parse `range` query param (default: "max", options: "1y", "5y", "10y", "20y", "50y")
-2. Parse `quartiles` query param (present = true, absent = false)
+2. Parse overlay query param using `r.URL.Query().Get("quartiles") == "on"` (or `"average"`). Returns true when param is `"on"`, false for `"off"` or absent.
 3. Use `internal/charts.CalculateRangeStart(rangeParam)` to get start date
 4. Use `internal/fred.FetchSeries(seriesID, opts)` to fetch FRED data
 5. Convert to `LineChartData` format
@@ -406,7 +406,7 @@ func MyChartHandler(w http.ResponseWriter, r *http.Request) {
 	if rangeParam == "" {
 		rangeParam = "max"
 	}
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	// 2. Fetch data (implement your data fetching logic)
 	data := fetchMyData(rangeParam, showQuartiles)
@@ -477,7 +477,7 @@ func MyChartHandler(w http.ResponseWriter, r *http.Request) {
 	if rangeParam == "" {
 		rangeParam = "max"
 	}
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	// Generate cache key
 	cacheKey := fmt.Sprintf("mychart:%s:%v", rangeParam, showQuartiles)
@@ -541,7 +541,7 @@ Copy this template exactly from `layouts/tools/msindex.html`. The layout is enti
               hx-target="#chart-inner"
               hx-include="[name=quartiles]"
               hx-swap="innerHTML"
-              hx-trigger="load, change"
+              hx-trigger="load delay:200ms, change"
             />
             Max
           </label>
@@ -641,7 +641,7 @@ func MyChartDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	if rangeParam == "" {
 		rangeParam = "max"
 	}
-	showQuartiles := r.URL.Query().Has("quartiles")
+	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	// Use the reusable templ component - just pass your tool name
 	component := templates.ChartDownloads("[tool-name]", rangeParam, showQuartiles)
@@ -782,6 +782,7 @@ Example output:
 ✅ **Chart destruction/recreation** – Handles HTMX swaps correctly  
 ✅ **Responsive design** – Works on mobile and desktop  
 ✅ **CSP compliant** – No inline scripts, all JS external
+✅ **URL param sharing** – Controls sync to browser URL via `chart-shareable.js`, loaded in `chart-scripts.html` partial. URLs like `/tools/msindex/?range=5y&quartiles=on` restore chart state on load. Overlay params use explicit `on`/`off` values (not just presence/absence), and Go handlers check `r.URL.Query().Get("param") == "on"`.
 
 ---
 
