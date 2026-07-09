@@ -146,7 +146,7 @@ func RealInterestRateHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	chartData, err := getOrFetchRealRateData(rangeParam, showAverage)
 	if err != nil {
@@ -196,7 +196,7 @@ func RealInterestRateDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	component := templates.ChartDownloads("real-interest-rate", rangeParam, "average", showAverage)
 
@@ -225,7 +225,7 @@ func RealInterestRateCSVHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	chartData, err := getOrFetchRealRateData(rangeParam, showAverage)
 	if err != nil {
@@ -276,7 +276,7 @@ func RealInterestRateDataHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	chartData, err := getOrFetchRealRateData(rangeParam, showAverage)
 	if err != nil {

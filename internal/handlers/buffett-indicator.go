@@ -147,7 +147,7 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
 	if err != nil {
@@ -198,7 +198,7 @@ func BuffettIndicatorDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	component := templates.ChartDownloads("buffett-indicator", rangeParam, "average", showAverage)
 
@@ -227,7 +227,7 @@ func BuffettIndicatorCSVHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
 	if err != nil {
@@ -278,7 +278,7 @@ func BuffettIndicatorDataHandler(w http.ResponseWriter, r *http.Request) {
 		rangeParam = "max"
 	}
 
-	showAverage := r.URL.Query().Has("average")
+	showAverage := r.URL.Query().Get("average") == "on"
 
 	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
 	if err != nil {
