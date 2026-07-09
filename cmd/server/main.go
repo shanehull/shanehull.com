@@ -171,6 +171,36 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// Real Interest Rate tool
+	mux.HandleFunc(
+		"/real-interest-rate/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.RealInterestRateHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/real-interest-rate/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.RealInterestRateDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/real-interest-rate/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.RealInterestRateDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/real-interest-rate/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.RealInterestRateCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Health check
 	mux.HandleFunc(
 		"/healthz",
