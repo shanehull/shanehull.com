@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/shanehull/shanehull.com/compare/v0.14.0...v0.15.0) (2026-07-09)
+
+
+### Features
+
+* URL param sharing for chart tools ([#170](https://github.com/shanehull/shanehull.com/issues/170)) ([4bbe43f](https://github.com/shanehull/shanehull.com/commit/4bbe43f3f267ad30861c550a946c5caf4967146c))
+
 ## [0.14.0](https://github.com/shanehull/shanehull.com/compare/v0.13.3...v0.14.0) (2026-07-09)
 
 
