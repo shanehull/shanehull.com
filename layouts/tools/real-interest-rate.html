@@ -1,0 +1,136 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+  <br />
+
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="chart-tool-wrapper">
+    <div class="chart-controls">
+      <div class="control-group">
+        <label>Time Range:</label>
+        <div class="button-group">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="max"
+              checked
+              hx-get="/real-interest-rate/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=average]"
+              hx-swap="innerHTML"
+              hx-trigger="load delay:200ms, change"
+            />
+            Max
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="50y"
+              hx-get="/real-interest-rate/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=average]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            50 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="20y"
+              hx-get="/real-interest-rate/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=average]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            20 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="10y"
+              hx-get="/real-interest-rate/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=average]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            10 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="5y"
+              hx-get="/real-interest-rate/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=average]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            5 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="1y"
+              hx-get="/real-interest-rate/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=average]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            1 Year
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            name="average"
+            checked
+            hx-get="/real-interest-rate/chart"
+            hx-target="#chart-inner"
+            hx-include="[name=range]"
+            hx-swap="innerHTML"
+            hx-trigger="change"
+          />
+          Show Average
+        </label>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="chart-canvas"></canvas>
+      <div id="chart-inner"></div>
+    </div>
+
+    <div
+      id="chart-downloads"
+      hx-get="/real-interest-rate/downloads"
+      hx-include="[name=range],[name=average]"
+      hx-trigger="load, change from:[name=range], change from:[name=average]"
+      hx-swap="innerHTML"
+    ></div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+  <div class="center-items">
+    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
+  </div>
+</main>
+
+{{ end }}
