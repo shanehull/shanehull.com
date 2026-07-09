@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.0](https://github.com/shanehull/shanehull.com/compare/v0.13.3...v0.14.0) (2026-07-09)
+
+
+### Features
+
+* add real interest rate chart tool ([#168](https://github.com/shanehull/shanehull.com/issues/168)) ([5fd1d2e](https://github.com/shanehull/shanehull.com/commit/5fd1d2e71dd341e71e48bcc2568be2db2adc1583))
+* replace books page with Goodreads social link ([#166](https://github.com/shanehull/shanehull.com/issues/166)) ([4015dee](https://github.com/shanehull/shanehull.com/commit/4015deed3f2f33c910ecbd1970fbeb5ce3af637b))
+
 ## [0.13.3](https://github.com/shanehull/shanehull.com/compare/v0.13.2...v0.13.3) (2026-06-10)
 
 
