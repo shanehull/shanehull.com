@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0](https://github.com/shanehull/shanehull.com/compare/v0.14.0...v1.0.0) (2026-08-05)
+
+
+### Features
+
+* complete site redesign, Inter typography, quotes page, build version footer ([#172](https://github.com/shanehull/shanehull.com/issues/172)) ([a112fab](https://github.com/shanehull/shanehull.com/commit/a112fabe6f3fbfa0730b8e7d4748ec9213d9f0a1))
+* URL param sharing for chart tools ([#170](https://github.com/shanehull/shanehull.com/issues/170)) ([4bbe43f](https://github.com/shanehull/shanehull.com/commit/4bbe43f3f267ad30861c550a946c5caf4967146c))
+
 ## [0.14.0](https://github.com/shanehull/shanehull.com/compare/v0.13.3...v0.14.0) (2026-07-09)
 
 
