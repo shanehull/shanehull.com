@@ -1,3 +1,4 @@
+(function () {
 let assetIdCounter = 0;
 
 function debounce(func, wait) {
@@ -190,3 +191,4 @@ if (document.readyState === "loading") {
 } else {
   initCashflow();
 }
+})();

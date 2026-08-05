@@ -1,3 +1,4 @@
+(function () {
 function debounce(func, wait) {
   let timeout;
   return function (...args) {
@@ -187,3 +188,5 @@ function makeShareable(calculateCallback) {
     shareableInitializing = false;
   }, 0);
 }
+window.makeShareable = makeShareable;
+})();
