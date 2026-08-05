@@ -2,10 +2,8 @@
 <main class="container">
   <h2>{{ .Title }}</h2>
   {{ .Content }}
-  <div class="center-items">
-    <a href="{{ .Site.BaseURL }}" class="unchanging-link back-link">
-      <- back
-    </a>
-  </div>
+  <nav class="back-nav">
+    <a href="/" class="back-link">&larr; Home</a>
+  </nav>
 </main>
 {{ end }}

@@ -3,7 +3,6 @@
   <h1>{{ .Title }}</h1>
   <p class="description"><i>{{ .Description }}</i></p>
   <hr />
-  <br />
 
   <div class="tool-instructions">{{ .Content }}</div>
 
@@ -167,12 +166,9 @@
     </div>
   </div>
 
-  <br />
-  <hr />
-  <br />
-  <div class="center-items">
-    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
-  </div>
+  <nav class="back-nav">
+    <a href="/tools/" class="back-link">&larr; Tools</a>
+  </nav>
 
   <!-- API Key Modal -->
   <div id="apiKeyModal" class="modal-overlay">

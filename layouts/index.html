@@ -1,0 +1,32 @@
+{{ define "main" }}
+<main class="container">
+  <p class="index-tagline">{{ .Site.Params.Description }}</p>
+
+  <ul class="index-nav">
+    <li>
+      <a href="/about/">
+        <span>About</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a href="/blog/">
+        <span>Blog</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a href="/tools/">
+        <span>Tools</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a href="/quotes/">
+        <span>Quotes</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </li>
+  </ul>
+</main>
+{{ end }}

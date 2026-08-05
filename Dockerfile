@@ -11,11 +11,14 @@ RUN update-ca-certificates
 
 RUN go install github.com/a-h/templ/cmd/templ@latest
 
+ARG BUILD_VERSION=dev
+ENV HUGO_BUILD_VERSION=${BUILD_VERSION}
+
 RUN HUGO_ENV=production hugo --cleanDestinationDir
 
 RUN templ generate
 
-RUN go build -o bin/main ./cmd/server/
+RUN go build -ldflags="-X 'main.version=${GIT_TAG}'" -o bin/main ./cmd/server/
 
 FROM scratch
 

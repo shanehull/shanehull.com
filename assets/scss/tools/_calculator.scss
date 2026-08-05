@@ -3,21 +3,19 @@
   width: 100%;
   max-width: 550px;
   margin: 0 auto;
-  border-radius: 16px;
-  overflow: hidden;
 
-  background-color: #ffffff;
-  border: 1px solid rgba($light-text, 0.2);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background-color: $light-background;
+  border: 1px solid rgba($light-text, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 
   @media (min-width: 900px) {
     max-width: 650px;
   }
 
   @media (prefers-color-scheme: dark) {
-    background-color: lighten($dark-background, 5%);
-    border-color: $dark-text;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    background-color: $dark-background;
+    border-color: rgba($dark-text, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -171,7 +169,6 @@
 .calculator-dynamic-card {
   background-color: rgba(0, 0, 0, 0.03);
   padding: 1.5rem;
-  border-radius: 12px;
   margin-bottom: 1.5rem;
   position: relative;
   border: 1px dashed rgba(0, 0, 0, 0.1);
@@ -456,7 +453,28 @@
   }
 }
 
-// Modal button alias - uses btn-primary from style.scss
 .modal-btn-primary {
-  @extend .btn-primary;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: $light-icon;
+  color: $light-background;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-icon;
+    color: $dark-background;
+  }
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
 }

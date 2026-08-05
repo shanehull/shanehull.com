@@ -16,14 +16,19 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #1e1e1e;
-  border: 1px solid #444;
+  background: darken($light-background, 3%);
+  border: 1px solid rgba($light-text, 0.15);
   border-radius: 6px;
   z-index: 100;
   width: 100%;
   max-height: 200px;
   overflow-y: auto;
   margin-top: 0.5rem;
+
+  @media (prefers-color-scheme: dark) {
+    background: lighten($dark-background, 5%);
+    border-color: rgba($dark-text, 0.15);
+  }
 
   &:not(:empty) {
     display: flex;

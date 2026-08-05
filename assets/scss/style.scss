@@ -1,11 +1,11 @@
 // Color and theme variables
-$dark-background: #19191a;
+$dark-background: #1a1b1e;
 $dark-text: #e5dfd7;
-$dark-icon: #fe8019;
+$dark-icon: #cc8850;
 
-$light-background: #ebeaea;
+$light-background: #f5f2ed;
 $light-text: #3a3432;
-$light-icon: #d65d0e;
+$light-icon: #b86e3b;
 
 $button-color-dark: lighten($dark-background, 10%);
 $button-color-light: darken($light-background, 10%);
@@ -15,6 +15,16 @@ $code-light-background: #f5f5f5;
 $code-dark-background: #272822;
 $code-light-border: #d5d5d5;
 $code-dark-border: #3e3d32;
+
+// Ensures every clickable element shows a pointer cursor
+a,
+button,
+[role="button"],
+input[type="submit"],
+.blog-card,
+.tool-card {
+  cursor: pointer !important;
+}
 
 @import "fonts";
 @import "tools/list";
@@ -48,29 +58,26 @@ body {
   margin: auto;
   padding: 1rem;
   font-family:
-    "Hack Nerd Font",
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    Liberation Mono,
-    Courier New,
-    monospace;
-  font-size: 1rem;
-  line-height: 1.2;
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
   background-color: $light-background;
   color: $light-text;
 
   main {
     animation: fadeInAnimation ease 0.4s;
+    transition: opacity 0.15s ease;
     h2 {
       padding-block: 1rem;
-    }
-
-    a.back-link {
-      font-size: 1.8rem;
-      padding: 4rem;
     }
   }
 
@@ -86,8 +93,8 @@ body {
     padding-block: 1rem;
 
     .hero-image-container {
-      padding-top: 4rem;
-      padding-bottom: 2rem;
+      padding-top: 2rem;
+      padding-bottom: 1rem;
     }
 
     .title-socials-container {
@@ -178,134 +185,186 @@ body {
     }
   }
 
-  // general class to center child items
-  .center-items {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  // clean text link nav styles
+  .index-nav {
+    list-style: none;
+    padding: 2rem 0 0;
+    margin: 0;
+    border-top: 1px solid rgba($light-text, 0.08);
+
+    @media (prefers-color-scheme: dark) {
+      border-top-color: rgba($dark-text, 0.08);
+    }
+
+    li {
+      padding: 0.5rem 0;
+      animation: fadeInAnimation ease 1s;
+
+      a {
+        font-family: "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 1.4rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        border-bottom: none;
+        cursor: pointer;
+        color: $light-text;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: $light-icon;
+        }
+
+        .arrow {
+          color: $light-icon;
+          font-size: 1.1rem;
+          transition: transform 0.2s ease;
+        }
+      }
+
+      &:hover .arrow {
+        transform: translateX(2px);
+      }
+    }
   }
 }
 
-// Primary button style
-.btn-primary {
-  padding: 0.9rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: $light-icon;
-  color: $light-background;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  -webkit-tap-highlight-color: transparent;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $dark-icon;
-    color: $dark-background;
-  }
-
-  &:hover {
-    opacity: 0.85;
-  }
-
-  &:active {
-    opacity: 0.7;
-  }
-}
-
-#quote-container {
-  padding-top: 1.2rem;
+.quotes-page {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  transition: opacity 1s ease-in-out;
-
-  blockquote {
-    position: relative;
-    margin: 0.8rem;
-    min-height: 12rem;
-    opacity: 1;
-    svg {
-      position: absolute;
-      left: -1rem;
-      top: -2rem;
-      width: 38px;
-      height: 38px;
-      z-index: 5;
-      color: darken($light-text, 10%);
-      opacity: 20%;
-
-      @media (prefers-color-scheme: dark) {
-        color: lighten($dark-text, 10%);
-      }
-    }
-    div {
-      position: relative;
-      z-index: 10;
-      font-size: 1.4rem;
-    }
-  }
-
-  footer {
-    margin-top: 1.2rem;
-    font-size: 1.6rem;
-    font-weight: bold;
-  }
-}
-
-#quote-container.htmx-swapping {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-#quote-container.htmx-added {
-  opacity: 0;
-}
-
-.next-quote-action {
-  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  cursor: pointer;
+  padding: 3rem 0 2rem;
 
-  font-size: 1.2rem;
-  padding: 0.2rem;
+  .quote-svg {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 2rem;
+    opacity: 0.18;
+    color: $light-text;
+    flex-shrink: 0;
 
-  border-bottom: 1px solid transparent;
-  transition: all 0.3s ease;
+    @media (prefers-color-scheme: dark) {
+      color: $dark-text;
+    }
+  }
 
-  @media (hover: hover) {
-    &:hover {
-      opacity: 0.7;
-      border-bottom-color: currentColor;
+  #quote-container {
+    width: 100%;
+    min-height: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease-in-out;
+    overflow: hidden;
 
-      .ornament {
-        transform: rotate(15deg) translateX(3px);
+    blockquote {
+      position: relative;
+      margin: 0;
+      max-width: 48rem;
+      text-align: center;
+
+      div {
+        font-size: 1.7rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: $light-text;
+
+        @media (prefers-color-scheme: dark) {
+          color: $dark-text;
+        }
+      }
+
+      footer {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-top: 1.8rem;
+        opacity: 0.55;
+        color: $light-text;
+
+        @media (prefers-color-scheme: dark) {
+          color: $dark-text;
+        }
       }
     }
   }
 
-  &:active {
-    opacity: 0.5;
-    border-bottom-color: currentColor !important;
-    transition: none;
+  #quote-container.htmx-swapping {
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+  }
 
-    .ornament {
-      transform: rotate(15deg) translateX(3px) scale(0.9);
-      transition: none;
+  #quote-container.htmx-added {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  .quotes-action {
+    margin-top: 2.5rem;
+  }
+
+  .quotes-refresh {
+    font-family: "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    color: rgba($light-text, 0.35);
+    transition: color 0.25s ease, opacity 0.2s ease;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+
+    &.htmx-request {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    &:hover {
+      color: $light-icon;
+      border-bottom-color: $light-icon;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: rgba($dark-text, 0.35);
+
+      &:hover {
+        color: $dark-icon;
+        border-bottom-color: $dark-icon;
+      }
     }
   }
+}
+
+.back-nav {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid rgba($light-text, 0.08);
 
   @media (prefers-color-scheme: dark) {
-    .ornament {
-      color: $dark-icon;
-    }
+    border-top-color: rgba($dark-text, 0.08);
   }
 
-  @media (prefers-color-scheme: light) {
-    .ornament {
+  .back-link {
+    font-family: "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-bottom: none;
+    color: rgba($light-text, 0.5);
+    transition: color 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
       color: $light-icon;
+      opacity: 1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: rgba($dark-text, 0.5);
+
+      &:hover {
+        color: $dark-icon;
+        opacity: 1;
+      }
     }
   }
 }
@@ -356,17 +415,19 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Open Sans", "sans-serif";
+  font-family: "Inter", sans-serif;
   margin: 3.5rem 0 0.6rem;
+  line-height: 1.3;
 }
 
 h1 {
   font-size: 3.2rem;
+  font-weight: 600;
 }
 
 h2 {
   font-size: 2.3rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h3 {
@@ -378,17 +439,13 @@ h3 {
 h4 {
   font-size: 1.6rem;
   color: darken($light-text, 15%);
-  font-weight: 500;
+  font-weight: 400;
 }
 
-p,
-ul,
-ol {
-  font-size: 1.6rem;
-}
-
+// Headings define their own sizes; body text inherits from body
 a {
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   color: $light-text;
   border-bottom: 1px dotted $light-text;
@@ -427,7 +484,6 @@ a.unchanging-link {
 }
 
 // Remove dotted underline from custom-styled links
-a.back-link,
 a.unchanging-link,
 .hero-image-container a,
 .social-list a,
@@ -435,6 +491,7 @@ a.unchanging-link,
 .tool-card a {
   border-bottom: none;
   color: $light-icon;
+  cursor: pointer;
 
   &:hover {
     color: lighten($light-icon, 50%);
@@ -454,6 +511,7 @@ a.tool-card-link,
 a.blog-card-link {
   border-bottom: none;
   color: inherit;
+  cursor: pointer;
 
   &:hover {
     color: inherit;
@@ -472,6 +530,7 @@ a.blog-card-link {
 ul.list-layout-list a {
   border-bottom: none;
   color: $light-text;
+  cursor: pointer;
 
   &:hover {
     color: $light-text;
@@ -483,6 +542,47 @@ ul.list-layout-list a {
 
   &:visited:hover {
     color: $light-text;
+  }
+}
+
+.site-title a {
+  border-bottom: none;
+  color: $light-text;
+  cursor: pointer;
+
+  h1 {
+    color: inherit;
+    font-weight: 400;
+  }
+
+  &:hover,
+  &:visited,
+  &:visited:hover {
+    color: $light-text;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &,
+    &:hover,
+    &:visited,
+    &:visited:hover {
+      color: $dark-text;
+    }
+  }
+}
+
+.index-tagline {
+  font-style: italic;
+  margin-bottom: 1.8rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba($light-text, 0.08);
+  margin: 1.5rem 0;
+
+  @media (prefers-color-scheme: dark) {
+    border-top-color: rgba($dark-text, 0.08);
   }
 }
 
@@ -514,19 +614,16 @@ ul.list-layout-list a {
   height: 100%;
   min-height: 15rem;
 
-  border: 2px solid $light-icon;
-  border-radius: 8px;
-  background-color: darken($light-background, 5%);
+  border: 1px solid rgba($light-text, 0.12);
+  border-radius: 0;
+  background-color: transparent;
   cursor: pointer;
 
-  filter: drop-shadow(5px 6px 0 darken($light-background, 8%));
-
-  transition: transform 0.2s ease-out;
+  transition: border-color 0.2s ease;
   animation: fadeInAnimation ease 1s;
 
   &:hover {
-    transform: translateY(-1px);
-    filter: drop-shadow(5px 7px 0 darken($light-background, 8%));
+    border-color: $light-icon;
   }
 
   .blog-card-link {
@@ -542,7 +639,6 @@ ul.list-layout-list a {
     }
   }
 
-  // Blog card content
   .blog-card-content {
     padding: 1.5rem;
     display: flex;
@@ -551,11 +647,10 @@ ul.list-layout-list a {
     justify-content: flex-start;
     height: 100%;
 
-    // Post title
     h2 {
       margin: 0.5rem 0;
       padding: 0;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       text-align: center;
     }
 
@@ -563,13 +658,14 @@ ul.list-layout-list a {
       margin: auto;
       padding-top: 1rem;
       font-size: 1rem;
-      opacity: 0.7;
+      opacity: 0.55;
       text-align: center;
     }
 
     p {
       margin: 0.5rem 0;
       font-size: 1.2rem;
+      opacity: 0.7;
       text-align: center;
       flex-grow: 1;
     }
@@ -651,7 +747,27 @@ div.no-posts {
   }
 
   #TableOfContents {
-    padding-block: 2rem;
+    padding-block: 1rem;
+    font-size: 1.3rem;
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      padding-block: 0.2rem;
+    }
+
+    a {
+      border-bottom: none;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   blockquote {
@@ -668,6 +784,7 @@ div.no-posts {
   }
 
   code {
+    font-family: "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     background-color: $code-light-background;
     padding: 0.2rem 0.6rem;
     margin: 0;
@@ -694,12 +811,6 @@ div.no-posts {
 }
 
 @media (max-width: 768px) {
-  p,
-  ol,
-  ul {
-    font-size: 1.3rem;
-  }
-
   ul.list-layout-list {
     font-size: 1.6rem;
   }
@@ -720,15 +831,30 @@ div.no-posts {
     font-size: 1.4rem;
   }
 
-  img.hero-image {
-    height: 96px;
-  }
-
   .blog-card {
-    width: 100%; // Full width for mobile
+    width: 100%;
 
     .blog-card-content {
       padding: 0.8rem;
+    }
+  }
+
+  .quotes-page {
+    padding: 2rem 0 1.5rem;
+
+    .quote-svg {
+      width: 26px;
+      height: 26px;
+      margin-bottom: 1.5rem;
+    }
+
+    #quote-container blockquote div {
+      font-size: 1.5rem;
+    }
+
+    #quote-container blockquote footer {
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
     }
   }
 
@@ -747,7 +873,7 @@ div.no-posts {
     color: lighten($dark-text, 15%);
   }
 
-  body {
+body {
     background-color: $dark-background;
     color: $dark-text;
   }
@@ -776,7 +902,6 @@ div.no-posts {
     }
   }
 
-  a.back-link,
   a.unchanging-link,
   .hero-image-container a,
   .social-list a,
@@ -784,6 +909,7 @@ div.no-posts {
   .tool-card a {
     border-bottom: none;
     color: $dark-icon;
+    cursor: pointer;
 
     &:hover {
       color: lighten($dark-icon, 50%);
@@ -803,6 +929,7 @@ div.no-posts {
   a.blog-card-link {
     border-bottom: none;
     color: inherit;
+    cursor: pointer;
 
     &:hover {
       color: inherit;
@@ -821,6 +948,7 @@ div.no-posts {
   ul.list-layout-list a {
     border-bottom: none;
     color: $dark-text;
+    cursor: pointer;
 
     &:hover {
       color: $dark-text;
@@ -832,6 +960,18 @@ div.no-posts {
 
     &:visited:hover {
       color: $dark-text;
+    }
+  }
+
+  main .index-nav li a {
+    color: $dark-text;
+
+    &:hover {
+      color: $dark-icon;
+    }
+
+    .arrow {
+      color: $dark-icon;
     }
   }
 
@@ -853,12 +993,11 @@ div.no-posts {
   }
 
   .blog-card {
-    border: 2px solid $dark-icon;
-    background-color: lighten($dark-background, 5%);
-    filter: drop-shadow(5px 6px 0 lighten($dark-background, 8%));
+    border-color: rgba($dark-text, 0.12);
+    background-color: transparent;
 
     &:hover {
-      filter: drop-shadow(5px 7px 0 lighten($dark-background, 8%));
+      border-color: $dark-icon;
     }
   }
 
@@ -910,14 +1049,31 @@ main {
   flex: 1;
 }
 
+main.htmx-swapping {
+  opacity: 0;
+}
+
 body > footer {
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid;
   border-color: lighten($light-text, 40%);
   text-align: center;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   color: lighten($light-text, 30%);
+
+  .build-version {
+    display: block;
+    font-family: "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    opacity: 0.35;
+    color: $light-text;
+
+    @media (prefers-color-scheme: dark) {
+      color: $dark-text;
+    }
+  }
 
   @media (prefers-color-scheme: dark) {
     border-color: darken($dark-text, 30%);
