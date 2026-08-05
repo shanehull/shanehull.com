@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/shanehull/shanehull.com/compare/v1.0.0...v1.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* long max-age for images and fonts, immutable only for hashed assets ([#175](https://github.com/shanehull/shanehull.com/issues/175)) ([2ae2425](https://github.com/shanehull/shanehull.com/commit/2ae24256875e3bd59b1f0c5206d2647fd1b866b0))
+* only cache fingerprinted assets as immutable ([#173](https://github.com/shanehull/shanehull.com/issues/173)) ([32533cf](https://github.com/shanehull/shanehull.com/commit/32533cfb36112dc4e37b1dae7930f3522b384505))
+
 ## [1.0.0](https://github.com/shanehull/shanehull.com/compare/v0.14.0...v1.0.0) (2026-08-05)
 
 
