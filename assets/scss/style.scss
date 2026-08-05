@@ -97,6 +97,12 @@ body {
       padding-bottom: 1rem;
     }
 
+    .hero-image {
+      width: 150px;
+      height: auto;
+      aspect-ratio: 5 / 4;
+    }
+
     .title-socials-container {
       display: flex;
       justify-content: space-between;
@@ -1067,12 +1073,6 @@ body > footer {
     font-family: "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.95rem;
     margin-top: 0.4rem;
-    opacity: 0.35;
-    color: $light-text;
-
-    @media (prefers-color-scheme: dark) {
-      color: $dark-text;
-    }
   }
 
   @media (prefers-color-scheme: dark) {
