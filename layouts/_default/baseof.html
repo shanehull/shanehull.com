@@ -50,11 +50,13 @@
     {{ partial "chart-scripts" }}
     {{ end }}
     <header>
+      {{ $bull := resources.Get "images/bull.webp" | fingerprint "sha384" }}
       <div class="hero-image-container">
         <a href="/">
           <img
             class="hero-image"
-            src="/images/bull.webp"
+            src="{{ $bull.RelPermalink }}"
+            integrity="{{ $bull.Data.Integrity }}"
             width="500"
             height="400"
             alt="Renaissance-style illustration of a bull."
