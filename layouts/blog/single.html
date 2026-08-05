@@ -1,26 +1,15 @@
 {{ define "main" }}
 <main class="container blog-container">
-  <h1>{{ .Title }}</h1>
-  <p class="description"><i>{{.Description }}</i></p>
-  <p class="date"
-    >{{.Date.Format "January 2, 2006" }} -
-    <a href="https://shanehull.com">Shane Hull</a></small
-  >
+  <h2>{{ .Title }}</h2>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <p class="date">
+    {{ .Date.Format "January 2, 2006" }} —
+    <a href="https://shanehull.com">Shane Hull</a>
+  </p>
   {{ .TableOfContents }}
-  <br />
-  <br />
-  <!--<div id="tags">-->
-  <!--<p>-->
-  <!--{{ range .Params.tags }}-->
-  <!--[><a href="/blog/tags/{{. }}">{{. }}</a><]-->
-  <!--{{ end }}-->
-  <!--</p>-->
-  <!--</div>-->
   {{ .Content }}
-  <br />
-  <br />
-  <div class="center-items">
-    <a href="/blog/" class="unchanging-link back-link"> <- back </a>
-  </div>
+  <nav class="back-nav">
+    <a href="/blog/" class="back-link">&larr; Blog</a>
+  </nav>
 </main>
 {{ end }}

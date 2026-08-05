@@ -6,11 +6,22 @@
     <title>
       {{ .Site.Title }}{{ if ne .Kind "home" }} | {{ .Title }}{{ end }}
     </title>
+    {{- $desc := "" -}}
     {{- if .IsHome -}}
-    <meta name="description" content="{{ site.Params.description }}" />
+      {{- $desc = site.Params.description -}}
     {{- else -}}
-    <meta name="description" content="{{ .Params.description }}" />
-    {{- end }} {{ $style := resources.Get "scss/style.scss" |
+      {{- $desc = .Params.description -}}
+    {{- end -}}
+    <meta name="description" content="{{ $desc }}" />
+    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+    <meta property="og:description" content="{{ $desc }}" />
+    <meta property="og:type" content="{{ if eq .Type "blog" }}article{{ else }}website{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+    <meta name="twitter:description" content="{{ $desc }}" />
+    {{ $style := resources.Get "scss/style.scss" |
     resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify |
     fingerprint "sha384" }}
     <link
@@ -44,16 +55,16 @@
           <img
             class="hero-image"
             src="/images/bull.webp"
-            width="auto"
-            height="120px"
-            alt="Pixel-art image of a bull."
+            width="500"
+            height="400"
+            alt="Renaissance-style illustration of a bull."
             fetchpriority="high"
           />
         </a>
       </div>
       <div class="title-socials-container">
         <div class="site-title">
-          <h1>{{ .Site.Title }}</h1>
+          <a href="/"><h1>{{ .Site.Title }}</h1></a>
         </div>
         <div class="social-div">
           <ul class="social-list">
@@ -104,6 +115,8 @@
     {{ block "main" . }}{{ end }}
     <footer>
       <p>&copy; {{ now.Year }} Shane Hull. All rights reserved.</p>
+      {{- $version := os.Getenv "HUGO_BUILD_VERSION" | default "dev" -}}
+      <span class="build-version">{{ $version }}</span>
     </footer>
   </body>
 </html>

@@ -76,8 +76,8 @@ func main() {
 	// Register API handlers
 	registerHandlers(mux)
 
-	// Wrap mux with CSP middleware
-	handler := middleware.CSP(mux)
+	// Wrap mux with CSP and cache headers middleware
+	handler := middleware.CSP(middleware.Cache(mux))
 
 	// Run the server
 	serveAt := fmt.Sprintf("%s:%s", serverHost, serverPort)

@@ -1,3 +1,4 @@
+(function () {
 if (typeof API_HOST === "undefined") {
   var API_HOST = "yahoo-finance15.p.rapidapi.com";
 }
@@ -725,3 +726,4 @@ if (document.readyState === "loading") {
 }
 
 document.addEventListener("htmx:afterSwap", initOptions);
+})();

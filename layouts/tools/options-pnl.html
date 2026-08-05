@@ -3,7 +3,6 @@
   <h1>{{ .Title }}</h1>
   <p class="description"><i>{{ .Description }}</i></p>
   <hr />
-  <br />
 
   <div class="tool-instructions">{{ .Content }}</div>
 
@@ -156,7 +155,7 @@
       <div class="calculator-dynamic-card options-pnl-heatmap-card">
        <div class="options-pnl-heatmap-controls">
           <span class="label options-pnl-heatmap-label">P&L Heatmap</span>
-          <select id="heatmapMode" onchange="setHeatmapMode(this.value)">
+          <select id="heatmapMode">
             <option value="dollar">$ P&L</option>
             <option value="percent">% Return</option>
             <option value="value">Contract Value</option>
@@ -167,12 +166,9 @@
     </div>
   </div>
 
-  <br />
-  <hr />
-  <br />
-  <div class="center-items">
-    <a href="/tools/" class="unchanging-link back-link"><- back to tools</a>
-  </div>
+  <nav class="back-nav">
+    <a href="/tools/" class="back-link">&larr; Tools</a>
+  </nav>
 
   <!-- API Key Modal -->
   <div id="apiKeyModal" class="modal-overlay">

@@ -1,5 +1,5 @@
 ---
-title: 🏠 Permanent Home
+title: Permanent Home
 description: A permanent home for your business.
 noindex: true
 sitemap:
@@ -42,7 +42,7 @@ I am looking for a quality business that meets the following criteria:
 If you have built a durable business and are considering a succession plan, I would welcome a confidential conversation.
 
 <div style="text-align: center; margin: 4rem 0 3rem;">
-<img src="/images/profile.webp" alt="Shane Hull" width="100" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" />
+<img src="/images/profile.webp" alt="Shane Hull" width="100" height="100" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" />
 </div>
 
 Email me at <a href="mailto:hello@shanehull.com">hello@shanehull.com</a> or reach out on <a href="https://www.linkedin.com/in/shanehull0" target="_blank" rel="noopener">LinkedIn</a>.
