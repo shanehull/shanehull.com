@@ -18,7 +18,7 @@ RUN HUGO_ENV=production hugo --cleanDestinationDir
 
 RUN templ generate
 
-RUN go build -ldflags="-X 'main.version=${GIT_TAG}'" -o bin/main ./cmd/server/
+RUN go build -ldflags="-X 'github.com/shanehull/shanehull.com/internal/buildinfo.GitTag=${BUILD_VERSION}'" -o bin/main ./cmd/server/
 
 FROM scratch
 
