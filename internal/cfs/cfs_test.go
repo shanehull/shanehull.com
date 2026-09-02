@@ -37,7 +37,7 @@ func buildXLSX(sheetName string, serials []float64, indexes []float64) []byte {
 	sheet.WriteString(`<row r="1"><c r="A1"><v>0</v></c></row><row r="2"><c r="A2"><v>0</v></c></row>`)
 	for i := range serials {
 		row := i + 3
-		sheet.WriteString(fmt.Sprintf(`<row r="%d"><c r="A%d"><v>%f</v></c><c r="B%d"><v>%f</v></c></row>`, row, row, serials[i], row, indexes[i]))
+		fmt.Fprintf(&sheet, `<row r="%d"><c r="A%d"><v>%f</v></c><c r="B%d"><v>%f</v></c></row>`, row, row, serials[i], row, indexes[i])
 	}
 	sheet.WriteString(`</sheetData></worksheet>`)
 	write("xl/worksheets/sheet1.xml", sheet.String())
@@ -93,7 +93,7 @@ func TestFetchM4Index(t *testing.T) {
 			http.NotFound(w, r)
 			return
 		}
-		w.Write(xlsx)
+		_, _ = w.Write(xlsx)
 	}))
 	defer srv.Close()
 

@@ -42,7 +42,7 @@ func TestFetchMonthlyOrderAndSkipNulls(t *testing.T) {
 		if got := r.URL.Query().Get("range"); got != "max" {
 			t.Errorf("range = %q, want max", got)
 		}
-		fmt.Fprint(w, chartJSON(ts, closes))
+		_, _ = fmt.Fprint(w, chartJSON(ts, closes))
 	}))
 	defer srv.Close()
 
@@ -70,7 +70,7 @@ func TestFetchMonthlyOrderAndSkipNulls(t *testing.T) {
 
 func TestFetchMonthlyAPISetsErrorField(t *testing.T) {
 	client := newTestServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `{"chart":{"result":[],"error":{"code":"Not Found"}}}`)
+		_, _ = fmt.Fprint(w, `{"chart":{"result":[],"error":{"code":"Not Found"}}}`)
 	}))
 	if _, err := client.FetchMonthly("GC=F"); err == nil || !strings.Contains(err.Error(), "Not Found") {
 		t.Errorf("expected API error mentioning Not Found, got %v", err)
@@ -88,7 +88,7 @@ func TestFetchMonthlyBadStatus(t *testing.T) {
 
 func TestFetchMonthlyEmptyResult(t *testing.T) {
 	client := newTestServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `{"chart":{"result":[],"error":null}}`)
+		_, _ = fmt.Fprint(w, `{"chart":{"result":[],"error":null}}`)
 	}))
 	if _, err := client.FetchMonthly("GC=F"); err == nil {
 		t.Error("expected error for empty result")
@@ -97,7 +97,7 @@ func TestFetchMonthlyEmptyResult(t *testing.T) {
 
 func TestFetchMonthlyNoQuoteData(t *testing.T) {
 	client := newTestServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[]}}],"error":null}}`)
+		_, _ = fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[]}}],"error":null}}`)
 	}))
 	if _, err := client.FetchMonthly("GC=F"); err == nil {
 		t.Error("expected error for missing quote data")
@@ -106,7 +106,7 @@ func TestFetchMonthlyNoQuoteData(t *testing.T) {
 
 func TestFetchMonthlyNoPrices(t *testing.T) {
 	client := newTestServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[{"close":[null]}]}}],"error":null}}`)
+		_, _ = fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[{"close":[null]}]}}],"error":null}}`)
 	}))
 	if _, err := client.FetchMonthly("GC=F"); err == nil {
 		t.Error("expected error when every price is null")
@@ -115,7 +115,7 @@ func TestFetchMonthlyNoPrices(t *testing.T) {
 
 func TestFetchMonthlyMalformedBody(t *testing.T) {
 	client := newTestServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `not json at all`)
+		_, _ = fmt.Fprint(w, `not json at all`)
 	}))
 	if _, err := client.FetchMonthly("GC=F"); err == nil {
 		t.Error("expected parse error")
@@ -137,7 +137,7 @@ func TestFetchMonthlyEscapesSymbol(t *testing.T) {
 	var gotPath string
 	client := newTestServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		gotPath = r.URL.Path
-		fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[{"close":[50]}]}}],"error":null}}`)
+		_, _ = fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[{"close":[50]}]}}],"error":null}}`)
 	}))
 	if _, err := client.FetchMonthly("GC=F"); err != nil {
 		t.Fatalf("FetchMonthly: %v", err)
@@ -151,7 +151,7 @@ func TestFetchMonthlyEscapesSymbol(t *testing.T) {
 
 func TestWithHTTPClientApplies(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[{"close":[50]}]}}],"error":null}}`)
+		_, _ = fmt.Fprint(w, `{"chart":{"result":[{"timestamp":[1],"indicators":{"quote":[{"close":[50]}]}}],"error":null}}`)
 	}))
 	defer srv.Close()
 

@@ -35,13 +35,13 @@ type gdpCountry struct {
 }
 
 var gdpCountries = []gdpCountry{
-	{Code: "us", Name: "United States", Series: "QUSGAN770A", Color: "#3b82f6"},
-	{Code: "cn", Name: "China", Series: "QCNGAN770A", Color: "#ef4444"},
-	{Code: "jp", Name: "Japan", Series: "QJPGAN770A", Color: "#d946ef"},
-	{Code: "de", Name: "Germany", Series: "QDEGAN770A", Color: "#f59e0b"},
-	{Code: "gb", Name: "United Kingdom", Series: "QGBGAN770A", Color: "#10b981"},
-	{Code: "in", Name: "India", Series: "QINGAN770A", Color: "#06b6d4"},
-	{Code: "au", Name: "Australia", Series: "QAUGAN770A", Color: "#8b5cf6"},
+	{Code: "us", Name: "US", Series: "QUSGAN770A", Color: "#3b82f6"},
+	{Code: "cn", Name: "CN", Series: "QCNGAN770A", Color: "#ef4444"},
+	{Code: "jp", Name: "JP", Series: "QJPGAN770A", Color: "#d946ef"},
+	{Code: "de", Name: "DE", Series: "QDEGAN770A", Color: "#f59e0b"},
+	{Code: "gb", Name: "GB", Series: "QGBGAN770A", Color: "#10b981"},
+	{Code: "in", Name: "IN", Series: "QINGAN770A", Color: "#06b6d4"},
+	{Code: "au", Name: "AU", Series: "QAUGAN770A", Color: "#8b5cf6"},
 }
 
 func findGdpCountry(code string) *gdpCountry {
