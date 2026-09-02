@@ -87,8 +87,8 @@ func buildMultiChartDataAttributes(canvasId string, labels []string, series []Mu
 }
 
 // MultiChartDownloads renders JSON and CSV download links for a multi-series
-// tool, carrying the current range and selected countries in the query string.
-func MultiChartDownloads(toolName string, rangeParam string, countries []string) templ.Component {
+// tool, carrying the current range and selected series in the query string.
+func MultiChartDownloads(toolName string, rangeParam string, series []string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -114,9 +114,9 @@ func MultiChartDownloads(toolName string, rangeParam string, countries []string)
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 templ.SafeURL
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data?" + buildMultiQuery(rangeParam, countries)))
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data?" + buildMultiQuery(rangeParam, series)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 52, Col: 93}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 52, Col: 90}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -129,7 +129,7 @@ func MultiChartDownloads(toolName string, rangeParam string, countries []string)
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(toolName + "-data.json")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 52, Col: 130}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 52, Col: 127}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {
@@ -140,9 +140,9 @@ func MultiChartDownloads(toolName string, rangeParam string, countries []string)
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 templ.SafeURL
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data.csv?" + buildMultiQuery(rangeParam, countries)))
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("/" + toolName + "/data.csv?" + buildMultiQuery(rangeParam, series)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 53, Col: 97}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 53, Col: 94}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -155,7 +155,7 @@ func MultiChartDownloads(toolName string, rangeParam string, countries []string)
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(toolName + "-data.csv")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 53, Col: 133}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/multichart.templ`, Line: 53, Col: 130}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
@@ -169,9 +169,9 @@ func MultiChartDownloads(toolName string, rangeParam string, countries []string)
 	})
 }
 
-func buildMultiQuery(rangeParam string, countries []string) string {
+func buildMultiQuery(rangeParam string, series []string) string {
 	parts := []string{"range=" + rangeParam}
-	for _, c := range countries {
+	for _, c := range series {
 		parts = append(parts, c+"=on")
 	}
 	return strings.Join(parts, "&")

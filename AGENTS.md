@@ -849,22 +849,21 @@ type MultiLineChartSeries struct {
 component := templates.MultiLineChart("chart-canvas", labels, series, "Debt divided by gold market value")
 ```
 
-### Country toggles
+### Legend toggles
 
-- Wrap every control (range radios and country checkboxes) in `<div class="chart-controls" id="chart-controls">`.
-- Point every `hx-include` at `#chart-controls` so each request carries the range plus every country.
-- One checkbox per country, named after its code (`us`, `cn`, ...), `checked` by default, with `hx-get="/[tool-name]/chart"` and `hx-trigger="change"`.
-- Use the `.country-group` / `.country-label` pill styles in `assets/scss/tools/_chart-tools.scss`.
-- Resolve the selection server-side with `selectedCodes(r)`: a country is in when its code equals `"on"`. Default to all countries when none are selected so the chart never renders empty.
-- Cache key format: `toolname:rangeParam:countries`.
+There are no per-series controls in the layout. Chart.js legends already click-to-hide each dataset, so every series is always rendered server-side and hidden or shown from the legend. The only control is the range radio group.
+
+- Point every `hx-include` at `#chart-controls` (the range radios) so each request carries the current range.
+- The handler renders the full configured series set; a line is only plotted when it carries data in its array.
+- Cache key format: `toolname:rangeParam`.
 
 ### Downloads
 
-`MultiChartDownloads(toolName, rangeParam, countries)` renders JSON/CSV links carrying the current range and `=on` country params. The data and CSV handlers return wide format: JSON objects `{"date": "...", "us": 1.2, ...}` and one CSV column per selected country, omitting nil quarters.
+`MultiChartDownloads(toolName, rangeParam, series)` renders JSON/CSV links carrying the current range. The data and CSV handlers return wide format: JSON objects `{"date": "...", "a": 1.2, "b": 2.0}` and one CSV column per configured series, omitting nil quarters.
 
 ### Reference implementation
 
-`internal/handlers/debt-gdp.go`. Countries are a data-driven slice of structs binding code, name, BIS series and chart color. The BIS general-government series are percent-of-GDP, so the value is plotted directly with no currency conversion. `internal/yahoo` covers the live-price leg for tools that need one.
+`internal/handlers/debt-gdp.go`. The handler drives series from a data slice binding a code, name, source series and chart color; for debt-gdp the series are seven countries. The BIS general-government series are percent-of-GDP, so the value is plotted directly with no currency conversion. `internal/yahoo` covers the live-price leg for tools that need one.
 
 ---
 
