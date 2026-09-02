@@ -29,6 +29,19 @@
             <input
               type="radio"
               name="range"
+              value="50y"
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            50 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
               value="20y"
               hx-get="/debt-gdp/chart"
               hx-target="#chart-inner"
