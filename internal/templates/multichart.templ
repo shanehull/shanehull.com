@@ -46,17 +46,17 @@ func buildMultiChartDataAttributes(canvasId string, labels []string, series []Mu
 }
 
 // MultiChartDownloads renders JSON and CSV download links for a multi-series
-// tool, carrying the current range and selected countries in the query string.
-templ MultiChartDownloads(toolName string, rangeParam string, countries []string) {
+// tool, carrying the current range and selected series in the query string.
+templ MultiChartDownloads(toolName string, rangeParam string, series []string) {
 	<div class="chart-downloads">
-		<a href={ templ.SafeURL("/" + toolName + "/data?" + buildMultiQuery(rangeParam, countries)) } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
-		<a href={ templ.SafeURL("/" + toolName + "/data.csv?" + buildMultiQuery(rangeParam, countries)) } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
+		<a href={ templ.SafeURL("/" + toolName + "/data?" + buildMultiQuery(rangeParam, series)) } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
+		<a href={ templ.SafeURL("/" + toolName + "/data.csv?" + buildMultiQuery(rangeParam, series)) } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
 	</div>
 }
 
-func buildMultiQuery(rangeParam string, countries []string) string {
+func buildMultiQuery(rangeParam string, series []string) string {
 	parts := []string{"range=" + rangeParam}
-	for _, c := range countries {
+	for _, c := range series {
 		parts = append(parts, c+"=on")
 	}
 	return strings.Join(parts, "&")

@@ -109,63 +109,6 @@
     }
   }
 
-  .country-group {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .country-label {
-    display: inline-block;
-    cursor: pointer;
-    padding: 7px 11px;
-    font-size: 0.8rem;
-    border-radius: 6px;
-    border: 1px solid rgba($light-icon, 0.3);
-    transition: all 0.2s ease;
-    color: $light-text;
-    user-select: none;
-    font-weight: 500;
-    background-color: transparent;
-
-    @media (min-width: 768px) {
-      padding: 10px 16px;
-      font-size: 1rem;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      color: $dark-text;
-      border-color: rgba($dark-icon, 0.3);
-    }
-
-    input[type="checkbox"] {
-      display: none;
-    }
-
-    &:hover {
-      background-color: rgba($light-icon, 0.08);
-      border-color: rgba($light-icon, 0.6);
-
-      @media (prefers-color-scheme: dark) {
-        background-color: rgba($dark-icon, 0.08);
-        border-color: rgba($dark-icon, 0.6);
-      }
-    }
-
-    &:has(input:checked) {
-      background-color: rgba($light-icon, 0.2);
-      color: $light-icon;
-      border-color: $light-icon;
-      font-weight: 600;
-
-      @media (prefers-color-scheme: dark) {
-        background-color: rgba($dark-icon, 0.2);
-        color: $dark-icon;
-        border-color: $dark-icon;
-      }
-    }
-  }
-
   .checkbox-label {
     display: inline-flex;
     align-items: center;
