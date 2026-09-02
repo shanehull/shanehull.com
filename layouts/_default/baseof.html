@@ -43,11 +43,20 @@
       defer
     ></script>
     {{ end }}
+    {{ $backLink := resources.Get "js/back-link.js" | minify | fingerprint "sha384" }}
+    <script
+      src="{{ $backLink.RelPermalink }}"
+      integrity="{{ $backLink.Data.Integrity }}"
+      defer
+    ></script>
     {{ partial "syntax" . }}
   </head>
   <body hx-boost="true">
     {{ if eq .Params.tool_type "chart" }}
     {{ partial "chart-scripts" }}
+    {{ end }}
+    {{ if .Params.math }}
+    {{ partial "latex" . }}
     {{ end }}
     <header>
       {{ $bull := resources.Get "images/bull.webp" | fingerprint "sha384" }}

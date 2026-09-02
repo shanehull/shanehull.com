@@ -594,6 +594,7 @@ hr {
 
 // Style for the blog list container
 .blog-list-wrap {
+  min-height: 49rem; // 3 rows of cards (6 items on the 2-col grid) + gaps
   position: relative;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -611,6 +612,12 @@ hr {
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
+  }
+
+  // Reserve a full page on one column so boost-pagination cannot resize the
+  // page. Same floor as .tools-list-wrap.
+  @media (max-width: 768px) {
+    min-height: 100rem; // 6 cards + gaps
   }
 }
 

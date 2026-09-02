@@ -329,7 +329,7 @@ Each chart tool requires four files:
 1.  **Content:** `content/tools/[tool-name].md` (Defines metadata & URL)
 2.  **Layout:** `layouts/tools/[tool-name].html` (HTMX-powered HTML structure—copy from msindex)
 3.  **Handler:** `internal/handlers/[tool-name].go` (Data fetching and calculation logic)
-4.  **Templ:** `internal/templates/linechart.templ` (Generic `LineChart` component—shared across all chart tools)
+4.  **Templ:** `internal/templates/linechart.templ` (single-series `LineChart`) or `internal/templates/multichart.templ` (multi-series `MultiLineChart`) — shared across chart tools
 
 #### Shared Packages
 
@@ -341,7 +341,13 @@ For FRED-based chart tools, two reusable internal packages are available:
 - **`internal/charts`** – Shared chart utilities
   - `CalculateRangeStart(rangeParam)` – Converts UI range params ("1y", "5y", "max", etc.) to date filters
 
-The generic `LineChart` templ component (in `internal/templates/linechart.templ`) outputs chart config as `data-chart` attributes. The external `assets/js/chart-init.js` file handles all initialization and reinitializes on HTMX swaps.
+Additional sources:
+
+- **`internal/yahoo`** – Stateless client for the public Yahoo Finance chart API. `New(opts...)` with `WithBaseURL`/`WithHTTPClient`; `FetchMonthly(symbol)` returns `[]PricePoint`. Used as the live gold-price tail (GC=F) and for live price series generally. Covered by httptest-based unit tests.
+- **`internal/cfs`** – Client for the Center for Financial Stability Divisia workbook. CFS ships only XLSX, so `FetchM4Index()` downloads and parses the file at runtime (zip + XML). Covered by httptest-based unit tests.
+- **`internal/data`** – `go:embed` data assets (e.g. `GoldPriceCSV`, World Bank Pink Sheet gold, 1960-2024). Series that end before today are extended at runtime by callers from a live source scaled to the embedded level. `.air.toml` watches `csv` so edits rebuild.
+
+The generic `LineChart` templ component (in `internal/templates/linechart.templ`) outputs chart config as `data-chart` attributes. Multi-series tools use `MultiLineChart` and `MultiChartDownloads` from `internal/templates/multichart.templ`. The external `assets/js/chart-init.js` file handles all initialization and reinitializes on HTMX swaps.
 
 ---
 
@@ -825,9 +831,58 @@ Pass your specific overlay parameter name (e.g., "quartiles", "average") and the
 
 ---
 
+## Multi-Series Chart Tools
+
+Use this pattern when a chart stacks two or more independent lines the user can toggle on and off (e.g. the debt-gdp tool comparing countries). Render with `MultiLineChart`; single-series tools keep `LineChart`.
+
+### Data model
+
+The handler builds one shared, sorted `labels` slice plus one `[]*float64` per series, aligned by index. `nil` renders as a gap in the line.
+
+```go
+type MultiLineChartSeries struct {
+	Label  string
+	Color  string
+	Values []*float64
+}
+
+component := templates.MultiLineChart("chart-canvas", labels, series, "Debt divided by gold market value")
+```
+
+### Country toggles
+
+- Wrap every control (range radios and country checkboxes) in `<div class="chart-controls" id="chart-controls">`.
+- Point every `hx-include` at `#chart-controls` so each request carries the range plus every country.
+- One checkbox per country, named after its code (`us`, `cn`, ...), `checked` by default, with `hx-get="/[tool-name]/chart"` and `hx-trigger="change"`.
+- Use the `.country-group` / `.country-label` pill styles in `assets/scss/tools/_chart-tools.scss`.
+- Resolve the selection server-side with `selectedCodes(r)`: a country is in when its code equals `"on"`. Default to all countries when none are selected so the chart never renders empty.
+- Cache key format: `toolname:rangeParam:countries`.
+
+### Downloads
+
+`MultiChartDownloads(toolName, rangeParam, countries)` renders JSON/CSV links carrying the current range and `=on` country params. The data and CSV handlers return wide format: JSON objects `{"date": "...", "us": 1.2, ...}` and one CSV column per selected country, omitting nil quarters.
+
+### Reference implementation
+
+`internal/handlers/debt-gdp.go`. Countries are a data-driven slice of structs binding code, name, BIS series and chart color. The BIS general-government series are percent-of-GDP, so the value is plotted directly with no currency conversion. `internal/yahoo` covers the live-price leg for tools that need one.
+
+---
+
+## Rendering Math (KaTeX)
+
+To typeset LaTeX on a page, set `math: true` in the content frontmatter. `baseof.html` then includes `layouts/partials/latex.html`, which loads KaTeX (CSS, core, auto-render) with SRI hashes plus the site's `assets/js/katex-init.js` bootstrap.
+
+- Write math in markdown as `$$...$$`. goldmark has no math extension, so delimiters pass through as text for auto-render.
+- `katex-init.js` calls `renderMathInElement` on `DOMContentLoaded` and after every `htmx:afterSwap`, so math survives hx-boost navigation. Delimiters are configured there. No inline scripts (CSP compliant).
+- Upgrading KaTeX means updating the SRI hashes in the partial AND the KaTeX origins in `internal/middleware/csp.go` (`script-src`).
+
+---
+
 ## Updating Dependencies
 
-**CDN JS libs** (htmx, chart.js, chartjs-plugin-zoom): update version + SRI hash in the canonical partial (`layouts/partials/chart-js.html` for chart.js, `layouts/partials/chart-scripts.html` for the chart plugin bundle) AND the CSP header (`internal/middleware/csp.go`). All chart.js consumers must use `{{ partial "chart-js.html" . }}` — never inline the CDN URL. Compute `sha384` hash: `curl -sL "<url>" | openssl dgst -sha384 -binary | openssl base64 -A`.
+**CDN JS libs** (htmx, chart.js, chartjs-plugin-zoom, KaTeX): update version + SRI hash in the canonical partial (`layouts/partials/chart-js.html` for chart.js, `layouts/partials/chart-scripts.html` for the chart plugin bundle, `layouts/partials/latex.html` for KaTeX CSS/core/auto-render) AND the CSP header (`internal/middleware/csp.go`). All chart.js consumers must use `{{ partial "chart-js.html" . }}` — never inline the CDN URL. Compute `sha384` hash: `curl -sL "<url>" | openssl dgst -sha384 -binary | openssl base64 -A`.
+
+**Embedded data assets** (`internal/data/*.csv`): snapshots embedded at build time. Refresh any series that is not self-updating: re-download the source (e.g. the Center for Financial Stability Divisia M4 workbook), regenerate the CSV into `internal/data/`, and rebuild. `.air.toml` watches `csv`, so edits trigger a rebuild automatically. Sources that publish only as XLS with no API (CFS Divisia M4) are embedded for this reason; series with a live end (gold price) are extended at runtime from a live source scaled to the embedded level.
 
 **Go modules:** `go get <module>@<version> && go mod tidy`.
 

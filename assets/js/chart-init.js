@@ -73,6 +73,7 @@ function initChartFromData() {
             },
           },
           y: {
+            type: config.yAxisType || "linear",
             ticks: {
               font: {
                 size: tickFontSize,

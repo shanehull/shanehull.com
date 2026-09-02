@@ -1,0 +1,63 @@
+package templates
+
+import (
+	"encoding/json"
+	"strings"
+)
+
+// MultiLineChartSeries is one dataset in a multi-series line chart.
+// Values is aligned to the shared labels slice; use nil for missing quarters,
+// which renders as a gap in the line.
+type MultiLineChartSeries struct {
+	Label  string
+	Color  string
+	Values []*float64
+}
+
+// MultiLineChart renders a line chart with one dataset per series. The chart
+// config is serialized into a data-chart attribute consumed by
+// assets/js/chart-init.js, keeping the page CSP compliant. logScale selects a
+// logarithmic y-axis, useful when series span orders of magnitude.
+templ MultiLineChart(canvasId string, labels []string, series []MultiLineChartSeries, yAxisLabel string, logScale bool) {
+	<div { buildMultiChartDataAttributes(canvasId, labels, series, yAxisLabel, logScale)... }></div>
+}
+
+func buildMultiChartDataAttributes(canvasId string, labels []string, series []MultiLineChartSeries, yAxisLabel string, logScale bool) templ.Attributes {
+	labelsJSON, _ := json.Marshal(labels)
+
+	datasets := make([]string, 0, len(series))
+	for _, s := range series {
+		valuesJSON, _ := json.Marshal(s.Values)
+		label := strings.ReplaceAll(s.Label, `"`, `\"`)
+		datasets = append(datasets, `{"label":"`+label+`","data":`+string(valuesJSON)+`,"borderColor":"`+s.Color+`","backgroundColor":"rgba(0, 0, 0, 0)","borderWidth":1.5,"tension":0.1,"pointRadius":1,"fill":false}`)
+	}
+
+	yAxisType := "linear"
+	if logScale {
+		yAxisType = "logarithmic"
+	}
+
+	label := strings.ReplaceAll(yAxisLabel, `"`, `\"`)
+	configJSON := `{"labels":` + string(labelsJSON) + `,"datasets":[` + strings.Join(datasets, ",") + `],"yAxisLabel":"` + label + `","yAxisType":"` + yAxisType + `","canvasId":"` + canvasId + `"}`
+
+	return templ.Attributes{
+		"data-chart": configJSON,
+	}
+}
+
+// MultiChartDownloads renders JSON and CSV download links for a multi-series
+// tool, carrying the current range and selected countries in the query string.
+templ MultiChartDownloads(toolName string, rangeParam string, countries []string) {
+	<div class="chart-downloads">
+		<a href={ templ.SafeURL("/" + toolName + "/data?" + buildMultiQuery(rangeParam, countries)) } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
+		<a href={ templ.SafeURL("/" + toolName + "/data.csv?" + buildMultiQuery(rangeParam, countries)) } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
+	</div>
+}
+
+func buildMultiQuery(rangeParam string, countries []string) string {
+	parts := []string{"range=" + rangeParam}
+	for _, c := range countries {
+		parts = append(parts, c+"=on")
+	}
+	return strings.Join(parts, "&")
+}
