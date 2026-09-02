@@ -1,0 +1,200 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <div class="chart-tool-wrapper">
+    <div class="chart-controls" id="chart-controls">
+      <div class="control-group">
+        <label>Time Range:</label>
+        <div class="button-group">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="max"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="load delay:200ms, change"
+            />
+            Max
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="20y"
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            20 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="10y"
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            10 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="5y"
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            5 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="1y"
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            1 Year
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Countries:</label>
+        <div class="country-group">
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="us"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            United States
+          </label>
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="cn"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            China
+          </label>
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="jp"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            Japan
+          </label>
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="de"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            Germany
+          </label>
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="gb"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            United Kingdom
+          </label>
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="in"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            India
+          </label>
+          <label class="country-label">
+            <input
+              type="checkbox"
+              name="au"
+              checked
+              hx-get="/debt-gdp/chart"
+              hx-target="#chart-inner"
+              hx-include="#chart-controls"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            Australia
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="chart-canvas"></canvas>
+      <div id="chart-inner"></div>
+    </div>
+
+    <div
+      id="chart-downloads"
+      hx-get="/debt-gdp/downloads"
+      hx-include="#chart-controls"
+      hx-trigger="load, change from:#chart-controls input"
+      hx-swap="innerHTML"
+    ></div>
+  </div>
+
+  <nav class="back-nav">
+    <a href="/tools/" class="back-link">&larr; Tools</a>
+  </nav>
+</main>
+
+{{ end }}

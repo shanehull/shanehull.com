@@ -201,6 +201,66 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// Debt to GDP tool
+	mux.HandleFunc(
+		"/debt-gdp/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.DebtGDPHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/debt-gdp/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.DebtGDPDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/debt-gdp/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.DebtGDPDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/debt-gdp/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.DebtGDPCSVHandler),
+			allowedOrigin,
+		),
+	)
+
+	// Divisia M4 to Gold tool
+	mux.HandleFunc(
+		"/m4-gold/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4GoldHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/m4-gold/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4GoldDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/m4-gold/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4GoldDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/m4-gold/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4GoldCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Health check
 	mux.HandleFunc(
 		"/healthz",

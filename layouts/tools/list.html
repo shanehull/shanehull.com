@@ -6,12 +6,15 @@
 
   {{ $pages := where .Site.RegularPages "Section" "tools" }}
 
-  {{ if gt (len $pages) 0 }}
+  {{ $paginator := .Paginate $pages }}
+  {{ with $paginator }}
+
+  {{ if gt .TotalPages 0 }}
     <div class="tools-list-wrap">
       <ul class="tools-list">
-        {{ range $pages }}
+        {{ range .Pages }}
         <li class="tool-card">
-          <a href="{{ .Permalink }}" class="tool-card-link">
+          <a href="{{ .RelPermalink }}" class="tool-card-link">
             <div class="tool-card-content">
               <h2>{{ .Title }}</h2>
               <p>{{ .Description }}</p>
@@ -32,6 +35,9 @@
       <p>No tools found yet.</p>
     </div>
 
+  {{ end }}
+
+  {{ partial "pagination.html" (dict "paginator" $paginator) }}
   {{ end }}
   <nav class="back-nav">
     <a href="/" class="back-link">&larr; Home</a>
