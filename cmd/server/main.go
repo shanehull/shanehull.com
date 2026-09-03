@@ -261,6 +261,36 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// Public Spending to GDP tool
+	mux.HandleFunc(
+		"/spending-gdp/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.SpendingGDPHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/spending-gdp/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.SpendingGDPDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/spending-gdp/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.SpendingGDPDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/spending-gdp/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.SpendingGDPCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Health check
 	mux.HandleFunc(
 		"/healthz",
