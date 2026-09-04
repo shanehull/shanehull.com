@@ -20,4 +20,4 @@ Read the excess line against zero. It is positive when money creation outruns re
 
 - Divisia M4: Center for Financial Stability, monthly index, sampled to the quarter and compared year over year
 - Productivity: BLS `OPHNFB`, quarterly output-per-hour index
-- Frequency: Quarterly, from 1968
+- Frequency: Quarterly, from 1968. Each quarterly point is the year-over-year change.
