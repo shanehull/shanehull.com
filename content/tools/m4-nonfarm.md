@@ -12,14 +12,12 @@ $$
 \text{Excess}=\text{Divisia M4 growth}-\text{nonfarm productivity growth}
 $$
 
-**Divisia M4 growth** is the annualized single-quarter change in the Center for Financial Stability Divisia M4 index, the broadest honest money aggregate, which survives through the institutional layer that M3 missed before the Federal Reserve discontinued it in 2006.
+**Divisia M4 growth** is the year-over-year change in the Center for Financial Stability Divisia M4 index, the broadest honest money aggregate, which survives through the institutional layer that M3 missed before the Federal Reserve discontinued it in 2006.
 
-**Nonfarm productivity growth** is the annualized single-quarter change in output per hour for the nonfarm business sector (FRED `PRS85006092`).
+**Nonfarm productivity growth** is the year-over-year change in output per hour for the nonfarm business sector (FRED `OPHNFB`, index 2017 = 100). Computing both legs year over year is the honest yearly measure, because averaging single-quarter annualized rates is not the same as compounding.
 
-Read the excess line against zero. It is positive when money creation outruns real output per hour, the tailwind for hard assets. It was sharply positive in 1971, in the 2008 crisis and the 2020 to 2021 money burst, and negative over the 1980s productivity boom.
-
-The chart plots the trailing four-quarter average of the excess, so a single extreme quarter cannot flatten the rest of the line. The raw single-quarter values are in the data downloads.
+Read the excess line against zero. It is positive when money creation outruns real output per hour, the tailwind for hard assets. It was sharply positive in 1971, in the 2008 crisis and the 2020 to 2021 money burst, and negative over the 1980s productivity boom. The component growth rates are in the data downloads.
 
 - Divisia M4: Center for Financial Stability, monthly index
-- Productivity: BLS `PRS85006092`, quarterly
-- Frequency: Quarterly, from 1967
+- Productivity: BLS `OPHNFB`, quarterly index
+- Frequency: Quarterly, from 1968

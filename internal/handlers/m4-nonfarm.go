@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math"
 	"net/http"
 	"sort"
 	"strings"
@@ -26,7 +25,7 @@ import (
 // When money grows faster than productivity the excess line is positive.
 
 const (
-	productivityID = "PRS85006092" // Nonfarm output per hour, % change at annual rate
+	productivityID = "OPHNFB" // Nonfarm output per hour, index 2017=100
 	m4NonfarmTTL   = 24 * time.Hour
 )
 
@@ -34,36 +33,46 @@ var m4NonfarmCache = cache.New()
 
 type m4NonfarmPoint struct {
 	Date    time.Time
-	Money   float64 // Divisia M4 annualized quarterly growth (%)
-	Product float64 // Nonfarm productivity, % change at annual rate
+	Money   float64 // Divisia M4 year-over-year growth (%)
+	Product float64 // Nonfarm productivity year-over-year growth (%)
 	Excess  float64 // Money - Product
 }
 
 // buildM4Nonfarm aligns quarterly productivity observations with the Divisia
-// M4 index and computes both growth rates on the same annual-rate basis.
+// M4 index and computes both on the same year-over-year basis: each series
+// against its level four quarters earlier. Averaging quarterly annualized
+// rates would not equal compounding, so year-over-year is the honest yearly
+// measure and is smooth enough that a single covid quarter cannot flatten the
+// chart.
 func buildM4Nonfarm(m4 []cfs.Point, prod []fred.DataPoint) []m4NonfarmPoint {
 	m4ByMonth := make(map[string]float64, len(m4))
 	for _, p := range m4 {
 		m4ByMonth[p.Date.Format("2006-01")] = p.Index
 	}
 
+	prodByDate := make(map[string]float64, len(prod))
+	for _, p := range prod {
+		prodByDate[p.Date.Format("2006-01-02")] = p.Value
+	}
+
 	points := make([]m4NonfarmPoint, 0, len(prod))
 	for _, p := range prod {
-		qEnd := time.Date(p.Date.Year(), p.Date.Month()+2, 1, 0, 0, 0, 0, time.UTC)
-		prevEnd := qEnd.AddDate(0, -3, 0)
+		d := p.Date
 
-		now, ok1 := m4ByMonth[qEnd.Format("2006-01")]
-		prev, ok2 := m4ByMonth[prevEnd.Format("2006-01")]
-		if !ok1 || !ok2 || prev <= 0 {
+		now, ok1 := m4ByMonth[d.Format("2006-01")]
+		prevY, ok2 := m4ByMonth[d.AddDate(-1, 0, 0).Format("2006-01")]
+		prodPrev, ok3 := prodByDate[d.AddDate(0, -12, 0).Format("2006-01-02")]
+		if !ok1 || !ok2 || !ok3 || prevY <= 0 || prodPrev <= 0 {
 			continue
 		}
 
-		money := (math.Pow(now/prev, 4) - 1) * 100
+		money := (now/prevY - 1) * 100
+		product := (p.Value/prodPrev - 1) * 100
 		points = append(points, m4NonfarmPoint{
-			Date:    p.Date,
+			Date:    d,
 			Money:   money,
-			Product: p.Value,
-			Excess:  money - p.Value,
+			Product: product,
+			Excess:  money - product,
 		})
 	}
 
@@ -76,23 +85,6 @@ type m4NonfarmResult struct {
 	Money   []*float64
 	Product []*float64
 	Excess  []*float64
-	Smooth  []*float64 // 4-quarter trailing average of the excess
-}
-
-// smoothExcess returns a trailing four-quarter average of the excess, nil for
-// the first three quarters, so a single extreme quarter (2020) cannot flatten
-// the rest of the line.
-func smoothExcess(excess []*float64) []*float64 {
-	smooth := make([]*float64, len(excess))
-	for i := 3; i < len(excess); i++ {
-		sum := 0.0
-		for j := i - 3; j <= i; j++ {
-			sum += *excess[j]
-		}
-		value := sum / 4
-		smooth[i] = &value
-	}
-	return smooth
 }
 
 func getM4Nonfarm(rangeParam string) (*m4NonfarmResult, error) {
@@ -132,7 +124,6 @@ func getM4Nonfarm(rangeParam string) (*m4NonfarmResult, error) {
 	if len(result.Labels) == 0 {
 		return nil, fmt.Errorf("no data available for the selected time range")
 	}
-	result.Smooth = smoothExcess(result.Excess)
 
 	m4NonfarmCache.Set(cacheKey, result, m4NonfarmTTL)
 	return result, nil
@@ -163,18 +154,15 @@ func M4NonfarmHandler(w http.ResponseWriter, r *http.Request) {
 
 	chartData := make([]templates.LineChartData, 0, len(result.Labels))
 	for i, label := range result.Labels {
-		if result.Smooth[i] == nil {
-			continue
-		}
 		chartData = append(chartData, templates.LineChartData{
 			Date:  label,
-			Value: *result.Smooth[i],
+			Value: *result.Excess[i],
 		})
 	}
 
 	options := map[string]string{
-		"mainLabel":     "Excess: M4 growth minus productivity (4-qtr avg)",
-		"yAxisLabel":    "Percentage points",
+		"mainLabel":     "Excess: M4 growth minus productivity (YoY)",
+		"yAxisLabel":    "Percentage points (year over year)",
 		"showQuartiles": "false",
 		"showAverage":   "false",
 	}
