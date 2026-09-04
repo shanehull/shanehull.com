@@ -18,6 +18,6 @@ $$
 
 Read the excess line against zero. It is positive when money creation outruns real output per hour, the tailwind for hard assets. It was sharply positive in 1971, in the 2008 crisis and the 2020 to 2021 money burst, and negative over the 1980s productivity boom. The component growth rates are in the data downloads.
 
-- Divisia M4: Center for Financial Stability, monthly index
-- Productivity: BLS `OPHNFB`, quarterly index
+- Divisia M4: Center for Financial Stability, monthly index, sampled to the quarter and compared year over year
+- Productivity: BLS `OPHNFB`, quarterly output-per-hour index
 - Frequency: Quarterly, from 1968
