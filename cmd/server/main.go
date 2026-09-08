@@ -291,6 +291,36 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// M4 to Nonfarm Productivity tool
+	mux.HandleFunc(
+		"/m4-nonfarm/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4NonfarmHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/m4-nonfarm/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4NonfarmDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/m4-nonfarm/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4NonfarmDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/m4-nonfarm/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.M4NonfarmCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Health check
 	mux.HandleFunc(
 		"/healthz",
