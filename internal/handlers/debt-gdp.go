@@ -99,22 +99,32 @@ func getDebtGdpMatrix(rangeParam string, codes []string) ([]string, map[string][
 		Units:            "lin",
 	}
 
+	// Fetch every country's series concurrently; FRED latency dominates here,
+	// so parallel round trips shrink the cold-cache load to roughly one call.
+	seriesByCode, fetchErrs := fetchAll(len(codes), func(i int) ([]fred.DataPoint, error) {
+		code := codes[i]
+		def := findGdpCountry(code)
+		if def == nil {
+			return nil, nil
+		}
+		o := *opts // FetchSeries mutates the options it is given
+		return fred.FetchSeries(def.Series, &o)
+	})
+
 	countrySeries := make(map[string]map[string]float64, len(codes))
 	quarterSet := make(map[string]time.Time)
 
-	for _, code := range codes {
+	for i, code := range codes {
 		def := findGdpCountry(code)
 		if def == nil {
 			continue
 		}
-
-		series, err := fred.FetchSeries(def.Series, opts)
-		if err != nil {
-			return nil, nil, fmt.Errorf("failed to fetch %s for %s: %w", def.Series, def.Name, err)
+		if fetchErrs[i] != nil {
+			return nil, nil, fmt.Errorf("failed to fetch %s for %s: %w", def.Series, def.Name, fetchErrs[i])
 		}
 
 		ratios := make(map[string]float64)
-		for _, d := range series {
+		for _, d := range seriesByCode[i] {
 			dateKey := d.Date.Format("2006-01-02")
 			ratios[dateKey] = d.Value
 			quarterSet[dateKey] = d.Date

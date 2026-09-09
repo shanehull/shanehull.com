@@ -49,14 +49,24 @@ func getOrFetchRealRateData(rangeParam string, showAverage bool) ([]templates.Li
 		Units:            "lin",
 	}
 
-	tbillData, err := fred.FetchSeries(tbillID, opts)
+	tbillData, cpiData, err := fetchTwo(
+		func() ([]fred.DataPoint, error) {
+			data, err := fred.FetchSeries(tbillID, opts)
+			if err != nil {
+				return nil, fmt.Errorf("failed to fetch %s: %w", tbillID, err)
+			}
+			return data, nil
+		},
+		func() ([]fred.DataPoint, error) {
+			data, err := fred.FetchSeries(cpiID, cpiOpts)
+			if err != nil {
+				return nil, fmt.Errorf("failed to fetch %s: %w", cpiID, err)
+			}
+			return data, nil
+		},
+	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to fetch %s: %w", tbillID, err)
-	}
-
-	cpiData, err := fred.FetchSeries(cpiID, cpiOpts)
-	if err != nil {
-		return nil, fmt.Errorf("failed to fetch %s: %w", cpiID, err)
+		return nil, err
 	}
 
 	cpiMap := make(map[string]float64)

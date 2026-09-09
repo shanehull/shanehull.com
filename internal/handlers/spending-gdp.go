@@ -68,18 +68,24 @@ func getSpendingMatrix(rangeParam string) ([]string, map[string][]*float64, erro
 	rangeStart := charts.CalculateRangeStart(rangeParam)
 	client := wb.New()
 
+	// Fetch every country concurrently; World Bank latency dominates the cold
+	// load, so parallel round trips shrink it to roughly one call.
+	seriesByCode, fetchErrs := fetchAll(len(spendCountries), func(i int) ([]wb.Point, error) {
+		def := spendCountries[i]
+		return client.FetchIndicator(def.WBISO, spendIndicator)
+	})
+
 	countrySeries := make(map[string]map[string]float64, len(spendCountries))
 	yearSet := make(map[string]time.Time)
 
-	for _, def := range spendCountries {
-		series, err := client.FetchIndicator(def.WBISO, spendIndicator)
-		if err != nil {
-			log.Print("failed to fetch spending for", def.Name, ":", err)
+	for i, def := range spendCountries {
+		if fetchErrs[i] != nil {
+			log.Print("failed to fetch spending for", def.Name, ":", fetchErrs[i])
 			continue
 		}
 
 		ratios := make(map[string]float64)
-		for _, d := range series {
+		for _, d := range seriesByCode[i] {
 			if rangeStart != nil && d.Date.Before(*rangeStart) {
 				continue
 			}
