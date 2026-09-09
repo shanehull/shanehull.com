@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.0](https://github.com/shanehull/shanehull.com/compare/v1.0.1...v1.1.0) (2026-09-09)
+
+
+### Features
+
+* add 50-year range to debt-gdp and m4-gold charts ([#179](https://github.com/shanehull/shanehull.com/issues/179)) ([e6ad2f6](https://github.com/shanehull/shanehull.com/commit/e6ad2f6fa57fc087a669ba102bba092a7b94db27))
+* add debt-to-GDP and Divisia money-to-gold chart tools ([#176](https://github.com/shanehull/shanehull.com/issues/176)) ([88df527](https://github.com/shanehull/shanehull.com/commit/88df527e819251a2bcf30fa8978bf1f407054187))
+* add M4 to nonfarm productivity excess chart ([#182](https://github.com/shanehull/shanehull.com/issues/182)) ([0a8aabd](https://github.com/shanehull/shanehull.com/commit/0a8aabda6a3e1b4bb20d3c9ff83efe695204d988))
+* add public spending to GDP chart tool ([#181](https://github.com/shanehull/shanehull.com/issues/181)) ([6e1b077](https://github.com/shanehull/shanehull.com/commit/6e1b07740c196f79b451c9f3eb525a04eeed1cd6))
+* rely on chart legend toggles and drop redundant country buttons ([#180](https://github.com/shanehull/shanehull.com/issues/180)) ([e889d27](https://github.com/shanehull/shanehull.com/commit/e889d2798c29c14250d4ac39c1d924bf23209051))
+
 ## [1.0.1](https://github.com/shanehull/shanehull.com/compare/v1.0.0...v1.0.1) (2026-08-05)
 
 
