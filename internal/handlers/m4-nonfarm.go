@@ -93,15 +93,19 @@ func getM4Nonfarm(rangeParam string) (*m4NonfarmResult, error) {
 		return cached.(*m4NonfarmResult), nil
 	}
 
-	m4, err := fetchM4Index()
+	opts := &fred.FetchOptions{Frequency: "q", Units: "lin"}
+	m4, prod, err := fetchTwo(
+		func() ([]cfs.Point, error) { return fetchM4Index() },
+		func() ([]fred.DataPoint, error) {
+			data, err := fred.FetchSeries(productivityID, opts)
+			if err != nil {
+				return nil, fmt.Errorf("failed to fetch %s: %w", productivityID, err)
+			}
+			return data, nil
+		},
+	)
 	if err != nil {
 		return nil, err
-	}
-
-	opts := &fred.FetchOptions{Frequency: "q", Units: "lin"}
-	prod, err := fred.FetchSeries(productivityID, opts)
-	if err != nil {
-		return nil, fmt.Errorf("failed to fetch %s: %w", productivityID, err)
 	}
 
 	points := buildM4Nonfarm(m4, prod)

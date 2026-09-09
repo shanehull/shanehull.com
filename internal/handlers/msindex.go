@@ -39,13 +39,13 @@ func getOrFetchChartData(rangeParam string, showQuartiles bool) ([]templates.Lin
 		Frequency:        "q",
 		Units:            "lin",
 	}
+	equityOpts := *opts
+	networthOpts := *opts
 
-	equityData, err := fred.FetchSeries(equityID, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	networthData, err := fred.FetchSeries(networthID, opts)
+	equityData, networthData, err := fetchTwo(
+		func() ([]fred.DataPoint, error) { return fred.FetchSeries(equityID, &equityOpts) },
+		func() ([]fred.DataPoint, error) { return fred.FetchSeries(networthID, &networthOpts) },
+	)
 	if err != nil {
 		return nil, err
 	}

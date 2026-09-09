@@ -184,13 +184,12 @@ func getM4Gold(rangeParam string) ([]templates.LineChartData, error) {
 		return cached.([]templates.LineChartData), nil
 	}
 
-	gold, err := loadGoldPriceSeries()
+	gold, m4, err := fetchTwo(
+		func() ([]goldPricePoint, error) { return loadGoldPriceSeries() },
+		func() ([]cfs.Point, error) { return fetchM4Index() },
+	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to load gold price: %w", err)
-	}
-	m4, err := fetchM4Index()
-	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to load chart sources: %w", err)
 	}
 
 	points := mergeM4Gold(m4, gold)

@@ -3,7 +3,46 @@ package handlers
 import (
 	"net/http"
 	"sort"
+	"sync"
 )
+
+// fetchTwo runs two fetches of different result types concurrently and
+// returns the first error, if any.
+func fetchTwo[A, B any](fetchA func() (A, error), fetchB func() (B, error)) (A, B, error) {
+	var a A
+	var b B
+	var errA error
+	var errB error
+
+	var wg sync.WaitGroup
+	wg.Go(func() {
+		a, errA = fetchA()
+	})
+	wg.Go(func() {
+		b, errB = fetchB()
+	})
+	wg.Wait()
+	if errA != nil {
+		return a, b, errA
+	}
+	return a, b, errB
+}
+
+// fetchAll runs fetch for each index concurrently and returns the results in
+// order, along with each index's error. Callers decide how to treat partial
+// failures.
+func fetchAll[T any](n int, fetch func(i int) (T, error)) ([]T, []error) {
+	results := make([]T, n)
+	errs := make([]error, n)
+	var wg sync.WaitGroup
+	for i := 0; i < n; i++ {
+		wg.Go(func() {
+			results[i], errs[i] = fetch(i)
+		})
+	}
+	wg.Wait()
+	return results, errs
+}
 
 // percentile calculates the percentile value from a sorted slice
 func percentile(sorted []float64, p float64) float64 {

@@ -45,26 +45,36 @@ func getOrFetchBuffetData(rangeParam string, showAverage bool) ([]templates.Line
 		Units:            "lin",
 	}
 
-	// Fetch market cap data (in millions)
+	// Fetch market cap and GDP concurrently; FRED latency dominates the cold
+	// load, so parallel round trips roughly halve it.
 	marketCapOpts := &fred.FetchOptions{
 		ObservationStart: opts.ObservationStart,
 		Frequency:        opts.Frequency,
 		Units:            "lin",
 	}
-	marketCapData, err := fred.FetchSeries(marketCapID, marketCapOpts)
-	if err != nil {
-		return nil, fmt.Errorf("failed to fetch %s: %w", marketCapID, err)
-	}
-
-	// Fetch GDP data (in billions)
 	gdpOpts := &fred.FetchOptions{
 		ObservationStart: opts.ObservationStart,
 		Frequency:        opts.Frequency,
 		Units:            "lin",
 	}
-	gdpData, err := fred.FetchSeries(gdpID, gdpOpts)
+	marketCapData, gdpData, err := fetchTwo(
+		func() ([]fred.DataPoint, error) {
+			data, err := fred.FetchSeries(marketCapID, marketCapOpts)
+			if err != nil {
+				return nil, fmt.Errorf("failed to fetch %s: %w", marketCapID, err)
+			}
+			return data, nil
+		},
+		func() ([]fred.DataPoint, error) {
+			data, err := fred.FetchSeries(gdpID, gdpOpts)
+			if err != nil {
+				return nil, fmt.Errorf("failed to fetch %s: %w", gdpID, err)
+			}
+			return data, nil
+		},
+	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to fetch %s: %w", gdpID, err)
+		return nil, err
 	}
 
 	data := mergeAndCalculateBuffet(marketCapData, gdpData)
