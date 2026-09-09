@@ -345,6 +345,7 @@ Additional sources:
 
 - **`internal/yahoo`** – Stateless client for the public Yahoo Finance chart API. `New(opts...)` with `WithBaseURL`/`WithHTTPClient`; `FetchMonthly(symbol)` returns `[]PricePoint`. Used as the live gold-price tail (GC=F) and for live price series generally. Covered by httptest-based unit tests.
 - **`internal/cfs`** – Client for the Center for Financial Stability Divisia workbook. CFS ships only XLSX, so `FetchM4Index()` downloads and parses the file at runtime (zip + XML). Covered by httptest-based unit tests.
+- **`internal/wb`** – Client for the World Bank indicator API. `FetchIndicator(country, indicator)` returns annual `[]Point`, e.g. general government expense as a share of GDP (`GC.XPN.TOTL.GD.ZS`). Covered by httptest-based unit tests.
 - **`internal/data`** – `go:embed` data assets (e.g. `GoldPriceCSV`, World Bank Pink Sheet gold, 1960-2024). Series that end before today are extended at runtime by callers from a live source scaled to the embedded level. `.air.toml` watches `csv` so edits rebuild.
 
 The generic `LineChart` templ component (in `internal/templates/linechart.templ`) outputs chart config as `data-chart` attributes. Multi-series tools use `MultiLineChart` and `MultiChartDownloads` from `internal/templates/multichart.templ`. The external `assets/js/chart-init.js` file handles all initialization and reinitializes on HTMX swaps.
