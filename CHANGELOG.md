@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/shanehull/shanehull.com/compare/v1.1.0...v1.1.1) (2026-09-11)
+
+
+### Performance Improvements
+
+* fetch chart data concurrently across all tools ([#183](https://github.com/shanehull/shanehull.com/issues/183)) ([f44d12f](https://github.com/shanehull/shanehull.com/commit/f44d12f7170ab56d2e71e6bb3f3da24afc117378))
+
 ## [1.1.0](https://github.com/shanehull/shanehull.com/compare/v1.0.1...v1.1.0) (2026-09-09)
 
 
