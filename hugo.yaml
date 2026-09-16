@@ -18,6 +18,18 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - "$$"
+              - "$$"
+            - - "\\["
+              - "\\]"
+          inline:
+            - - "\\("
+              - "\\)"
 
 params:
   description: Turning over rocks in Go and markets.
