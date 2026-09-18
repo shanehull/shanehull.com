@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/shanehull/shanehull.com/compare/v1.1.1...v1.1.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* pass math blocks through goldmark for KaTeX ([#186](https://github.com/shanehull/shanehull.com/issues/186)) ([ff1bcc6](https://github.com/shanehull/shanehull.com/commit/ff1bcc6731d0868bd3e88147f66ebe88b15eccab))
+
 ## [1.1.1](https://github.com/shanehull/shanehull.com/compare/v1.1.0...v1.1.1) (2026-09-11)
 
 
