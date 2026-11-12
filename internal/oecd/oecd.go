@@ -58,8 +58,18 @@ func New(opts ...Option) *Client {
 // FetchHousePriceIndex returns the nominal house price index for a country
 // (2015 = 100), quarterly and oldest first.
 func (c *Client) FetchHousePriceIndex(ctx context.Context, country string) ([]Point, error) {
+	return c.fetchMeasure(ctx, country, "HPI")
+}
+
+// FetchPriceToRent returns the nominal house price to rent ratio for a country
+// (2015 = 100), quarterly and oldest first.
+func (c *Client) FetchPriceToRent(ctx context.Context, country string) ([]Point, error) {
+	return c.fetchMeasure(ctx, country, "HPI_RPI")
+}
+
+func (c *Client) fetchMeasure(ctx context.Context, country, measure string) ([]Point, error) {
 	endpoint := c.baseURL + "/OECD.ECO.MPD,DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES,1.0/" +
-		url.PathEscape(country) + ".Q.HPI.?format=csvfile"
+		url.PathEscape(country) + ".Q." + measure + ".?format=csvfile"
 
 	body, err := c.get(ctx, endpoint)
 	if err != nil {
@@ -67,10 +77,10 @@ func (c *Client) FetchHousePriceIndex(ctx context.Context, country string) ([]Po
 	}
 	points, err := parsePeriodValueCSV(body)
 	if err != nil {
-		return nil, fmt.Errorf("parse OECD house price index: %w", err)
+		return nil, fmt.Errorf("parse OECD %s: %w", measure, err)
 	}
 	if len(points) == 0 {
-		return nil, fmt.Errorf("no OECD house price observations for %s", country)
+		return nil, fmt.Errorf("no OECD %s observations for %s", measure, country)
 	}
 	return points, nil
 }
