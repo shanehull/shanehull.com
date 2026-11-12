@@ -153,7 +153,7 @@ func qDetrend(points []qPoint) []qPoint {
 	return out
 }
 
-func qRatioControls(r *http.Request) (rangeParam string, detrended bool) {
+func qRatioControls(r *http.Request) (rangeParam string, detrended, showQuartiles bool) {
 	rangeParam = r.URL.Query().Get("range")
 	if rangeParam == "" {
 		rangeParam = "max"
@@ -169,12 +169,13 @@ func qRatioControls(r *http.Request) (rangeParam string, detrended bool) {
 			break
 		}
 	}
-	return rangeParam, detrended
+	return rangeParam, detrended, r.URL.Query().Get("quartiles") == "on"
 }
 
 // qRatioSeries converts the stored ratio into chart rows for the selected range
-// and detrending choice.
-func qRatioSeries(points []qPoint, rangeParam string, detrended bool) []templates.LineChartData {
+// and detrending choice. Quartiles are the 25th and 75th percentiles of the
+// displayed range.
+func qRatioSeries(points []qPoint, rangeParam string, detrended, showQuartiles bool) []templates.LineChartData {
 	if detrended {
 		points = qDetrend(points)
 	}
@@ -190,6 +191,18 @@ func qRatioSeries(points []qPoint, rangeParam string, detrended bool) []template
 			Value: p.Value,
 		})
 	}
+
+	if showQuartiles && len(data) > 0 {
+		values := make([]float64, len(data))
+		for i, d := range data {
+			values[i] = d.Value
+		}
+		q1, q3 := calculateQuartiles(values)
+		for i := range data {
+			data[i].Quartile1 = q1[i]
+			data[i].Quartile3 = q3[i]
+		}
+	}
 	return data
 }
 
@@ -200,7 +213,7 @@ func HousingQRatioHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rangeParam, detrended := qRatioControls(r)
+	rangeParam, detrended, showQuartiles := qRatioControls(r)
 	points, err := loadQRatio(r.Context())
 	if err != nil {
 		log.Print("failed to get housing q ratio data:", err)
@@ -208,7 +221,7 @@ func HousingQRatioHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := qRatioSeries(points, rangeParam, detrended)
+	data := qRatioSeries(points, rangeParam, detrended, showQuartiles)
 	if len(data) == 0 {
 		renderError(w, "No Q ratio data in the selected time range.")
 		return
@@ -224,8 +237,11 @@ func HousingQRatioHandler(w http.ResponseWriter, r *http.Request) {
 		options["mainLabel"] = "Q ratio, raw"
 		options["yAxisLabel"] = "Equity / replacement cost"
 	}
+	if showQuartiles {
+		options["showQuartiles"] = "true"
+	}
 
-	component := templates.LineChart("chart-canvas", data, false, options)
+	component := templates.LineChart("chart-canvas", data, showQuartiles, options)
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
@@ -249,9 +265,10 @@ func HousingQRatioDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rangeParam, detrended := qRatioControls(r)
+	rangeParam, detrended, showQuartiles := qRatioControls(r)
 	component := templates.ChartDownloads("housing-q-ratio", rangeParam, map[string]string{
-		"detrend": templates.Param(detrended),
+		"detrend":   templates.Param(detrended),
+		"quartiles": templates.Param(showQuartiles),
 	})
 
 	buf := new(bytes.Buffer)
@@ -275,7 +292,7 @@ func HousingQRatioDataHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rangeParam, detrended := qRatioControls(r)
+	rangeParam, detrended, showQuartiles := qRatioControls(r)
 	points, err := loadQRatio(r.Context())
 	if err != nil {
 		log.Print("failed to get housing q ratio data:", err)
@@ -285,7 +302,7 @@ func HousingQRatioDataHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.Header().Set("Content-Disposition", "attachment; filename=\"housing-q-ratio-data.json\"")
-	if err := json.NewEncoder(w).Encode(qRatioSeries(points, rangeParam, detrended)); err != nil {
+	if err := json.NewEncoder(w).Encode(qRatioSeries(points, rangeParam, detrended, showQuartiles)); err != nil {
 		log.Print("failed to encode JSON:", err)
 	}
 }
@@ -297,7 +314,7 @@ func HousingQRatioCSVHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rangeParam, detrended := qRatioControls(r)
+	rangeParam, detrended, showQuartiles := qRatioControls(r)
 	points, err := loadQRatio(r.Context())
 	if err != nil {
 		log.Print("failed to get housing q ratio data:", err)
@@ -311,12 +328,20 @@ func HousingQRatioCSVHandler(w http.ResponseWriter, r *http.Request) {
 	writer := csv.NewWriter(w)
 	defer writer.Flush()
 
-	if err := writer.Write([]string{"date", "q"}); err != nil {
+	header := []string{"date", "q"}
+	if showQuartiles {
+		header = append(header, "quartile1", "quartile3")
+	}
+	if err := writer.Write(header); err != nil {
 		log.Print("failed to write CSV header:", err)
 		return
 	}
-	for _, row := range qRatioSeries(points, rangeParam, detrended) {
-		if err := writer.Write([]string{row.Date, fmt.Sprintf("%.6f", row.Value)}); err != nil {
+	for _, row := range qRatioSeries(points, rangeParam, detrended, showQuartiles) {
+		cells := []string{row.Date, fmt.Sprintf("%.6f", row.Value)}
+		if showQuartiles {
+			cells = append(cells, fmt.Sprintf("%.6f", row.Quartile1), fmt.Sprintf("%.6f", row.Quartile3))
+		}
+		if err := writer.Write(cells); err != nil {
 			log.Print("failed to write CSV row:", err)
 			return
 		}

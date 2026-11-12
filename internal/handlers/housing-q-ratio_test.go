@@ -55,19 +55,19 @@ func TestQDetrend(t *testing.T) {
 }
 
 func TestQRatioControls(t *testing.T) {
-	rangeParam, detrended := qRatioControls(httptest.NewRequest("GET", "/housing-q-ratio/chart", nil))
-	if rangeParam != "max" || !detrended {
-		t.Fatalf("defaults = %q %v, want max true", rangeParam, detrended)
+	rangeParam, detrended, showQuartiles := qRatioControls(httptest.NewRequest("GET", "/housing-q-ratio/chart", nil))
+	if rangeParam != "max" || !detrended || showQuartiles {
+		t.Fatalf("defaults = %q %v %v, want max true false", rangeParam, detrended, showQuartiles)
 	}
 
-	req := httptest.NewRequest("GET", "/housing-q-ratio/chart?range=10y&detrend=off", nil)
-	rangeParam, detrended = qRatioControls(req)
-	if rangeParam != "10y" || detrended {
-		t.Fatalf("params = %q %v, want 10y false", rangeParam, detrended)
+	req := httptest.NewRequest("GET", "/housing-q-ratio/chart?range=10y&detrend=off&quartiles=on", nil)
+	rangeParam, detrended, showQuartiles = qRatioControls(req)
+	if rangeParam != "10y" || detrended || !showQuartiles {
+		t.Fatalf("params = %q %v %v, want 10y false true", rangeParam, detrended, showQuartiles)
 	}
 
 	req = httptest.NewRequest("GET", "/housing-q-ratio/chart?detrend=on", nil)
-	_, detrended = qRatioControls(req)
+	_, detrended, _ = qRatioControls(req)
 	if !detrended {
 		t.Fatal("detrend=on should keep detrending")
 	}
@@ -75,7 +75,7 @@ func TestQRatioControls(t *testing.T) {
 	// The checked box and its off fallback both post; order must not matter.
 	for _, query := range []string{"detrend=on&detrend=off", "detrend=off&detrend=on"} {
 		req = httptest.NewRequest("GET", "/housing-q-ratio/chart?"+query, nil)
-		_, detrended = qRatioControls(req)
+		_, detrended, _ = qRatioControls(req)
 		if !detrended {
 			t.Fatalf("%s should keep detrending", query)
 		}
@@ -88,10 +88,10 @@ func TestQRatioSeriesRangeFilter(t *testing.T) {
 		{Date: now.AddDate(-10, 0, 0), Value: 1},
 		{Date: now.AddDate(-1, 0, 0), Value: 2},
 	}
-	if got := qRatioSeries(points, "max", false); len(got) != 2 {
+	if got := qRatioSeries(points, "max", false, false); len(got) != 2 {
 		t.Fatalf("max range: want 2 rows, got %d", len(got))
 	}
-	if got := qRatioSeries(points, "5y", false); len(got) != 1 {
+	if got := qRatioSeries(points, "5y", false, false); len(got) != 1 {
 		t.Fatalf("5y range: want 1 row, got %d", len(got))
 	}
 }
@@ -104,13 +104,42 @@ func TestQRatioSeriesDetrendsFullHistory(t *testing.T) {
 		{Date: now.AddDate(-6, 0, 0), Value: 3},
 		{Date: now.AddDate(-3, 0, 0), Value: 4},
 	}
-	full := qRatioSeries(points, "max", true)
-	short := qRatioSeries(points, "5y", true)
+	full := qRatioSeries(points, "max", true, false)
+	short := qRatioSeries(points, "5y", true, false)
 	if len(short) == 0 {
 		t.Fatal("want rows in the short range")
 	}
 	last := short[len(short)-1]
 	if last.Value != full[len(full)-1].Value {
 		t.Fatalf("detrended value changed with range: %v vs %v", last.Value, full[len(full)-1].Value)
+	}
+}
+
+func TestQRatioSeriesQuartiles(t *testing.T) {
+	now := time.Now()
+	points := []qPoint{
+		{Date: now.AddDate(-12, 0, 0), Value: 1},
+		{Date: now.AddDate(-9, 0, 0), Value: 2},
+		{Date: now.AddDate(-6, 0, 0), Value: 3},
+		{Date: now.AddDate(-3, 0, 0), Value: 4},
+	}
+	data := qRatioSeries(points, "max", false, true)
+	if len(data) != 4 {
+		t.Fatalf("want 4 rows, got %d", len(data))
+	}
+	// Quartiles are constant across the series and bracket the middle values.
+	wantQ1 := 1.75
+	wantQ3 := 3.25
+	for i, row := range data {
+		if row.Quartile1 != wantQ1 || row.Quartile3 != wantQ3 {
+			t.Fatalf("row %d quartiles = %v/%v, want %v/%v", i, row.Quartile1, row.Quartile3, wantQ1, wantQ3)
+		}
+	}
+
+	// Without the flag the rows carry no quartiles.
+	for _, row := range qRatioSeries(points, "max", false, false) {
+		if row.Quartile1 != 0 || row.Quartile3 != 0 {
+			t.Fatalf("unexpected quartiles when disabled: %+v", row)
+		}
 	}
 }

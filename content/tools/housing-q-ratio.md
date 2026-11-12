@@ -24,6 +24,8 @@ That leaves an oscillator centred near one. Untick "Detrended" to plot the raw r
 
 The detrending mean is built from the history available to that date. The series begins in 1990, well short of a full housing cycle, so the mean reflects the sample so far rather than a complete cycle and the earliest readings are the least settled.
 
+The quartile lines mark the 25th and 75th percentiles of the selected range, so the current reading can be read against its own recent distribution.
+
 **Data Sources**
 
 - Australian Bureau of Statistics, Australian National Accounts: Finance and Wealth (5232.0), household balance sheet, Table 35, columns "Residential land and dwellings" and "Non-financial - Produced - Fixed assets - Dwellings"

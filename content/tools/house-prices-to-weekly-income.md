@@ -14,6 +14,8 @@ The numerator is the Organisation for Economic Co-operation and Development nomi
 
 The level is index points per dollar of weekly earnings, so the absolute value is not a price. Read it against its own history: the shape shows whether housing is stretched relative to the income that services it.
 
+The quartile lines mark the 25th and 75th percentiles of the selected range, so the current reading can be read against its own recent distribution.
+
 **Data Sources**
 
 - Organisation for Economic Co-operation and Development, nominal house price index for Australia
