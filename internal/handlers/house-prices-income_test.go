@@ -19,32 +19,32 @@ func TestIncomeAsOf(t *testing.T) {
 	}
 }
 
-func TestWeeklyIncomeControls(t *testing.T) {
-	rangeParam, showQuartiles := weeklyIncomeControls(httptest.NewRequest("GET", "/house-prices-to-weekly-income/chart", nil))
+func TestPriceToIncomeControls(t *testing.T) {
+	rangeParam, showQuartiles := priceToIncomeControls(httptest.NewRequest("GET", "/house-prices-to-income/chart", nil))
 	if rangeParam != "max" || showQuartiles {
 		t.Fatalf("defaults = %q %v, want max false", rangeParam, showQuartiles)
 	}
-	rangeParam, showQuartiles = weeklyIncomeControls(httptest.NewRequest("GET", "/house-prices-to-weekly-income/chart?range=20y&quartiles=on", nil))
+	rangeParam, showQuartiles = priceToIncomeControls(httptest.NewRequest("GET", "/house-prices-to-income/chart?range=20y&quartiles=on", nil))
 	if rangeParam != "20y" || !showQuartiles {
 		t.Fatalf("params = %q %v, want 20y true", rangeParam, showQuartiles)
 	}
 }
 
-func TestWeeklyIncomeSeriesRangeFilter(t *testing.T) {
+func TestPriceToIncomeSeriesRangeFilter(t *testing.T) {
 	now := time.Now()
 	points := []incomePoint{
 		{Date: now.AddDate(-10, 0, 0), Value: 0.05},
 		{Date: now.AddDate(-1, 0, 0), Value: 0.10},
 	}
-	if got := weeklyIncomeSeries(points, "max", false); len(got) != 2 {
+	if got := priceToIncomeSeries(points, "max", false); len(got) != 2 {
 		t.Fatalf("max range: want 2 rows, got %d", len(got))
 	}
-	if got := weeklyIncomeSeries(points, "5y", false); len(got) != 1 {
+	if got := priceToIncomeSeries(points, "5y", false); len(got) != 1 {
 		t.Fatalf("5y range: want 1 row, got %d", len(got))
 	}
 }
 
-func TestWeeklyIncomeSeriesQuartiles(t *testing.T) {
+func TestPriceToIncomeSeriesQuartiles(t *testing.T) {
 	now := time.Now()
 	points := []incomePoint{
 		{Date: now.AddDate(-12, 0, 0), Value: 1},
@@ -52,7 +52,7 @@ func TestWeeklyIncomeSeriesQuartiles(t *testing.T) {
 		{Date: now.AddDate(-6, 0, 0), Value: 3},
 		{Date: now.AddDate(-3, 0, 0), Value: 4},
 	}
-	data := weeklyIncomeSeries(points, "max", true)
+	data := priceToIncomeSeries(points, "max", true)
 	wantQ1 := 1.75
 	wantQ3 := 3.25
 	for i, row := range data {
