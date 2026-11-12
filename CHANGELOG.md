@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/shanehull/shanehull.com/compare/v1.1.2...v1.2.0) (2026-11-12)
+
+
+### Features
+
+* adjust for federal debt on the Buffett Indicator ([#189](https://github.com/shanehull/shanehull.com/issues/189)) ([938def8](https://github.com/shanehull/shanehull.com/commit/938def8c5e0e5b71e51ce3b076edec4ca0b461a0))
+
+
+### Bug Fixes
+
+* pin templ CLI to the go.mod version in Docker ([#191](https://github.com/shanehull/shanehull.com/issues/191)) ([001fa0d](https://github.com/shanehull/shanehull.com/commit/001fa0db1532937e62fef19a2051f6f48deab23f))
+
 ## [1.1.2](https://github.com/shanehull/shanehull.com/compare/v1.1.1...v1.1.2) (2026-09-16)
 
 
