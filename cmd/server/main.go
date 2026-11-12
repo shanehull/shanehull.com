@@ -291,6 +291,36 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// House prices to rent tool
+	mux.HandleFunc(
+		"/house-prices-to-rent/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesToRentHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/house-prices-to-rent/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesToRentDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/house-prices-to-rent/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesToRentDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/house-prices-to-rent/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesToRentCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Divisia M4 to Gold tool
 	mux.HandleFunc(
 		"/m4-gold/chart",
