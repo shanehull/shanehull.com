@@ -18,6 +18,7 @@ import (
 const (
 	marketCapID    = "NCBEILQ027S"
 	gdpID          = "GDP"
+	federalDebtID  = "GFDEBTN"
 	buffetCacheTTL = 24 * time.Hour
 )
 
@@ -27,57 +28,40 @@ type BuffetData struct {
 	Date      time.Time
 	MarketCap float64
 	GDP       float64
+	Debt      float64
 	Ratio     float64
 }
 
-func getOrFetchBuffetData(rangeParam string, showAverage bool) ([]templates.LineChartData, error) {
-	cacheKey := fmt.Sprintf("buffet-indicator:%s:%v", rangeParam, showAverage)
+func getOrFetchBuffetData(rangeParam string, showAverage, includeDebt bool) ([]templates.LineChartData, error) {
+	cacheKey := fmt.Sprintf("buffet-indicator:%s:%v:%v", rangeParam, showAverage, includeDebt)
 
 	// Check cache
 	if cached, found := buffetCache.Get(cacheKey); found {
 		return cached.([]templates.LineChartData), nil
 	}
 
-	// Fetch data
-	opts := &fred.FetchOptions{
-		ObservationStart: charts.CalculateRangeStart(rangeParam),
-		Frequency:        "q",
-		Units:            "lin",
+	// Fetch the series concurrently; FRED latency dominates the cold load, so
+	// parallel round trips keep it to one round trip's wait.
+	series := []string{marketCapID, gdpID, federalDebtID}
+	results, errs := fetchAll(len(series), func(i int) ([]fred.DataPoint, error) {
+		opts := &fred.FetchOptions{
+			ObservationStart: charts.CalculateRangeStart(rangeParam),
+			Frequency:        "q",
+			Units:            "lin",
+		}
+		data, err := fred.FetchSeries(series[i], opts)
+		if err != nil {
+			return nil, fmt.Errorf("failed to fetch %s: %w", series[i], err)
+		}
+		return data, nil
+	})
+	for _, err := range errs {
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	// Fetch market cap and GDP concurrently; FRED latency dominates the cold
-	// load, so parallel round trips roughly halve it.
-	marketCapOpts := &fred.FetchOptions{
-		ObservationStart: opts.ObservationStart,
-		Frequency:        opts.Frequency,
-		Units:            "lin",
-	}
-	gdpOpts := &fred.FetchOptions{
-		ObservationStart: opts.ObservationStart,
-		Frequency:        opts.Frequency,
-		Units:            "lin",
-	}
-	marketCapData, gdpData, err := fetchTwo(
-		func() ([]fred.DataPoint, error) {
-			data, err := fred.FetchSeries(marketCapID, marketCapOpts)
-			if err != nil {
-				return nil, fmt.Errorf("failed to fetch %s: %w", marketCapID, err)
-			}
-			return data, nil
-		},
-		func() ([]fred.DataPoint, error) {
-			data, err := fred.FetchSeries(gdpID, gdpOpts)
-			if err != nil {
-				return nil, fmt.Errorf("failed to fetch %s: %w", gdpID, err)
-			}
-			return data, nil
-		},
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	data := mergeAndCalculateBuffet(marketCapData, gdpData)
+	data := mergeAndCalculateBuffet(results[0], results[1], results[2], includeDebt)
 	if len(data) == 0 {
 		return nil, fmt.Errorf("no data available for the selected time range")
 	}
@@ -122,25 +106,44 @@ func getOrFetchBuffetData(rangeParam string, showAverage bool) ([]templates.Line
 	return chartData, nil
 }
 
-func mergeAndCalculateBuffet(marketCap, gdp []fred.DataPoint) []BuffetData {
+func mergeAndCalculateBuffet(
+	marketCap, gdp, debt []fred.DataPoint,
+	includeDebt bool,
+) []BuffetData {
 	gdpMap := make(map[string]float64)
 	for _, g := range gdp {
 		gdpMap[g.Date.Format("2006-01-02")] = g.Value
 	}
 
+	debtMap := make(map[string]float64)
+	for _, d := range debt {
+		debtMap[d.Date.Format("2006-01-02")] = d.Value
+	}
+
 	merged := make([]BuffetData, 0)
 	for _, mc := range marketCap {
 		dateStr := mc.Date.Format("2006-01-02")
-		if gdpValue, ok := gdpMap[dateStr]; ok && gdpValue > 0 {
-			marketCapInBillions := mc.Value / 1000
-			ratio := (marketCapInBillions / gdpValue) * 100
-			merged = append(merged, BuffetData{
-				Date:      mc.Date,
-				MarketCap: mc.Value,
-				GDP:       gdpValue,
-				Ratio:     ratio,
-			})
+		gdpValue, ok := gdpMap[dateStr]
+		if !ok || gdpValue <= 0 {
+			continue
 		}
+
+		debtValue, hasDebt := debtMap[dateStr]
+		numerator := mc.Value / 1000
+		if includeDebt {
+			if !hasDebt {
+				continue
+			}
+			numerator += debtValue / 1000
+		}
+
+		merged = append(merged, BuffetData{
+			Date:      mc.Date,
+			MarketCap: mc.Value,
+			GDP:       gdpValue,
+			Debt:      debtValue,
+			Ratio:     (numerator / gdpValue) * 100,
+		})
 	}
 
 	return merged
@@ -158,16 +161,22 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	showAverage := r.URL.Query().Get("average") == "on"
+	showDebt := r.URL.Query().Get("debt") == "on"
 
-	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
+	chartData, err := getOrFetchBuffetData(rangeParam, showAverage, showDebt)
 	if err != nil {
 		log.Print("failed to get chart data:", err)
 		renderError(w, "Unable to load chart data. Please try again later.")
 		return
 	}
 
+	mainLabel := "Buffett Indicator"
+	if showDebt {
+		mainLabel = "Buffett Indicator (incl. federal debt)"
+	}
+
 	options := map[string]string{
-		"mainLabel":     "Buffett Indicator",
+		"mainLabel":     mainLabel,
 		"yAxisLabel":    "Ratio (%)",
 		"showQuartiles": "false",
 	}
@@ -209,9 +218,11 @@ func BuffettIndicatorDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	showAverage := r.URL.Query().Get("average") == "on"
+	showDebt := r.URL.Query().Get("debt") == "on"
 
 	component := templates.ChartDownloads("buffett-indicator", rangeParam, map[string]string{
 		"average": templates.Param(showAverage),
+		"debt":    templates.Param(showDebt),
 	})
 
 	buf := new(bytes.Buffer)
@@ -240,8 +251,9 @@ func BuffettIndicatorCSVHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	showAverage := r.URL.Query().Get("average") == "on"
+	showDebt := r.URL.Query().Get("debt") == "on"
 
-	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
+	chartData, err := getOrFetchBuffetData(rangeParam, showAverage, showDebt)
 	if err != nil {
 		log.Print("failed to get chart data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
@@ -291,8 +303,9 @@ func BuffettIndicatorDataHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	showAverage := r.URL.Query().Get("average") == "on"
+	showDebt := r.URL.Query().Get("debt") == "on"
 
-	chartData, err := getOrFetchBuffetData(rangeParam, showAverage)
+	chartData, err := getOrFetchBuffetData(rangeParam, showAverage, showDebt)
 	if err != nil {
 		log.Print("failed to get chart data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
