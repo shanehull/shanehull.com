@@ -7,7 +7,10 @@ math: true
 ---
 
 $$
-\text{Price to rent index}_t = 100 \times \frac{\text{nominal house price index}_t / \text{rent index}_t}{\text{1996 value}}
+\begin{gathered}
+\text{Price to rent index}_t = \\
+100 \times \frac{\text{nominal house price index}_t / \text{rent index}_t}{\text{1996 value}}
+\end{gathered}
 $$
 
 The numerator is the Organisation for Economic Co-operation and Development nominal house price index for Australia, 2015 = 100. The denominator is the OECD rent price index for Australia. The ratio is the inverse of the gross rental yield. A higher index means more years of gross rent to buy the dwelling.
