@@ -81,7 +81,7 @@ The income measure needs about 20 years of flat prices, or a 30% fall and 10 yea
 
 Nominal throughout. In the ladder, income and rents are held at their current levels; the time estimates state their growth assumptions. The exercise measures distance in today's prices.
 
-The exercise assumes these multiples are a useful anchor. Whether they are is up to you.
+The exercise assumes these multiples are a useful anchor, not that they must revert. The trough is a reference point, not a target. The likely mechanism is debt: the multiple compresses when credit stops expanding or becomes more expensive.
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
