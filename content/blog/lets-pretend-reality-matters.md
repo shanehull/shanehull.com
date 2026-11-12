@@ -37,6 +37,10 @@ The gross measure is the usual long-run comparison. A net cap rate after vacancy
 
 Price-to-income is at its series high. Price-to-rent is about 6% below its 2022 peak. Both sit near the top of their history.
 
+## Why the old relationship
+
+The pre-2000 multiples are the reference because the rules changed after that period. Financial deregulation and the credit boom let household debt grow much faster than income from the 1990s. Negative gearing and the 50% capital gains tax discount (from 1999) made investment property more attractive. Lower nominal interest rates raised the price a given income could service. These changes stretched the relationship between prices, income and rent. The exercise uses the pre-2000 relationship because it is the last period before the stretch. That is the sense in which it is reality. It is the old regime. It is not a natural constant.
+
 ## The destinations
 
 Price-to-income needs a 50% fall to its 1996 trough and a 57% fall to its 1983 low. Price-to-rent needs a 63% fall to its 1996 trough.
