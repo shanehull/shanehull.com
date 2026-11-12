@@ -10,9 +10,9 @@ tags:
   - mean-reversion
 ---
 
-The exercise prices a reversion. It does not forecast one. It assumes valuation matters, even though the last three decades say otherwise. The question is how far Australian housing prices would have to fall to return to a realistic valuation.
+The exercise prices a reversion. It does not forecast one. It assumes valuation multiples matter, even though the last three decades say otherwise. The question is how far Australian housing prices would have to fall to reach the multiples at the 1996 trough and the 1983 low.
 
-Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. Both sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
+Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. Both are relative valuation multiples. They compare the price with earnings, not with an intrinsic value. They sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
 
 ## The measures
 
@@ -81,7 +81,7 @@ The income measure needs about 20 years of flat prices, or a 30% fall and 10 yea
 
 Nominal throughout. In the ladder, income and rents are held at their current levels; the time estimates state their growth assumptions. The exercise measures distance in today's prices.
 
-The exercise assumes valuation matters. Whether it does is up to you.
+The exercise assumes these multiples are a useful anchor. Whether they are is up to you.
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
