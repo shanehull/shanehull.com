@@ -1,0 +1,107 @@
+{{ define "main" }}
+<main class="container">
+  <h1>{{ .Title }}</h1>
+  <p class="description"><i>{{ .Description }}</i></p>
+  <hr />
+
+  <div class="chart-tool-wrapper">
+    <div class="chart-controls" hx-indicator="#chart-spinner">
+      <div class="control-group">
+        <label>Time Range:</label>
+        <div class="button-group">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="max"
+              checked
+              hx-get="/house-prices-to-rent/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="load delay:200ms, change"
+            />
+            Max
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="20y"
+              hx-get="/house-prices-to-rent/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            20 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="10y"
+              hx-get="/house-prices-to-rent/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            10 Year
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="range"
+              value="5y"
+              hx-get="/house-prices-to-rent/chart"
+              hx-target="#chart-inner"
+              hx-include="[name=quartiles]"
+              hx-swap="innerHTML"
+              hx-trigger="change"
+            />
+            5 Year
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            name="quartiles"
+            checked
+            hx-get="/house-prices-to-rent/chart"
+            hx-target="#chart-inner"
+            hx-include="[name=range]"
+            hx-swap="innerHTML"
+            hx-trigger="change"
+          />
+          Show Quartiles
+        </label>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="chart-canvas"></canvas>
+      <div id="chart-inner"></div>
+      <div id="chart-spinner" class="chart-spinner" aria-hidden="true"></div>
+    </div>
+
+    <div
+      id="chart-downloads"
+      hx-get="/house-prices-to-rent/downloads"
+      hx-include="[name=range],[name=quartiles]"
+      hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
+      hx-swap="innerHTML"
+    ></div>
+  </div>
+
+  <div class="tool-instructions">{{ .Content }}</div>
+
+  <nav class="back-nav">
+    <a href="/tools/" class="back-link">&larr; Tools</a>
+  </nav>
+</main>
+
+{{ end }}

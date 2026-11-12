@@ -1,6 +1,9 @@
 package oecd
 
 import (
+	"context"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 	"time"
 )
@@ -21,6 +24,26 @@ func TestParsePeriod(t *testing.T) {
 	}
 	if _, err := parsePeriod("nonsense"); err == nil {
 		t.Fatal("expected an error for a nonsense period")
+	}
+}
+
+func TestFetchPriceToRent(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/OECD.ECO.MPD,DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES,1.0/AUS.Q.HPI_RPI." {
+			t.Fatalf("unexpected path: %s", r.URL.Path)
+		}
+		_, _ = w.Write([]byte("REF_AREA,TIME_PERIOD,OBS_VALUE\n" +
+			"AUS,2025-Q1,130\n" +
+			"AUS,2025-Q2,131\n"))
+	}))
+	defer server.Close()
+
+	points, err := New(WithBaseURL(server.URL)).FetchPriceToRent(context.Background(), "AUS")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(points) != 2 || points[1].Value != 131 {
+		t.Fatalf("unexpected points: %+v", points)
 	}
 }
 
