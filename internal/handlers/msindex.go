@@ -118,7 +118,9 @@ func MSIndexDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 
 	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
-	component := templates.ChartDownloads("msindex", rangeParam, "quartiles", showQuartiles)
+	component := templates.ChartDownloads("msindex", rangeParam, map[string]string{
+		"quartiles": templates.Param(showQuartiles),
+	})
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()

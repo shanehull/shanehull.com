@@ -208,7 +208,9 @@ func RealInterestRateDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 
 	showAverage := r.URL.Query().Get("average") == "on"
 
-	component := templates.ChartDownloads("real-interest-rate", rangeParam, "average", showAverage)
+	component := templates.ChartDownloads("real-interest-rate", rangeParam, map[string]string{
+		"average": templates.Param(showAverage),
+	})
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()

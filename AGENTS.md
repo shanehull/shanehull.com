@@ -651,7 +651,9 @@ func MyChartDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	showQuartiles := r.URL.Query().Get("quartiles") == "on"
 
 	// Use the reusable templ component - just pass your tool name
-	component := templates.ChartDownloads("[tool-name]", rangeParam, showQuartiles)
+	component := templates.ChartDownloads("[tool-name]", rangeParam, map[string]string{
+		"quartiles": templates.Param(showQuartiles),
+	})
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
@@ -810,10 +812,12 @@ Add this section to your template to display download links that update when con
 The `/[tool-name]/downloads` handler uses the reusable `ChartDownloads` templ component:
 
 ```go
-component := templates.ChartDownloads("[tool-name]", rangeParam, "overlayParamName", showOverlay)
+component := templates.ChartDownloads("[tool-name]", rangeParam, map[string]string{
+	"quartiles": templates.Param(showQuartiles),
+})
 ```
 
-Pass your specific overlay parameter name (e.g., "quartiles", "average") and the template handles building the correct download links.
+Pass every control that should carry into the download URL. `templates.Param` emits the explicit `on`/`off` value, so handlers can check `== "on"`. Keys are encoded in sorted order, so a given state always produces the same links.
 
 ### 8. Common Pitfalls to Avoid
 
@@ -827,7 +831,7 @@ Pass your specific overlay parameter name (e.g., "quartiles", "average") and the
 8. **Hardcoded endpoint URLs:** Always use relative paths like `/[tool-name]/chart`
 9. **Forgetting to include chart-init.js:** The external script is required for CSP compliance and chart initialization. It listens to `htmx:afterSwap` events automatically.
 10. **HTMX includes for missing controls:** If you remove a control (e.g., quartiles checkbox), remove it from `hx-include` attributes too. Orphaned form fields in HTMX will cause requests to fail silently.
-11. **Overlay parameter names:** Use `ChartDownloads(toolName, rangeParam, overlayParamName, showOverlay)` and pass your specific overlay parameter name (e.g., "quartiles" for msindex, "average" for buffett-indicator). The template handles building the correct download links dynamically.
+11. **Overlay parameter names:** Use `ChartDownloads(toolName, rangeParam, params)` and pass a map of every control that should carry into the download URL (e.g., `{"quartiles": templates.Param(showQuartiles)}` for msindex). The template builds the links dynamically, including all params plus the current range.
 12. **hx-boost navigation:** Add `hx-trigger="load delay:200ms, change"` to the default "max" radio button for the chart, and `hx-trigger="load, change from:..."` on the downloads div. These elements are always in the DOM, so `load` fires on both hard refreshes and hx-boost navigation. The 200ms delay ensures `chart-init.js` has loaded and registered the `htmx:afterSwap` listener before the trigger fires, preventing race conditions on slow mobile connections.
 
 ---

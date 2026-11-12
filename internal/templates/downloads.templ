@@ -1,13 +1,30 @@
 package templates
 
-templ ChartDownloads(toolName string, rangeParam string, overlayParam string, showOverlay bool) {
+import "net/url"
+
+// ChartDownloads renders JSON and CSV download links carrying the current
+// control state. Keys are encoded in sorted order so a given state always
+// produces the same links.
+templ ChartDownloads(toolName string, rangeParam string, params map[string]string) {
 	<div class="chart-downloads">
-		if showOverlay {
-			<a href={ templ.SafeURL("/" + toolName + "/data?range=" + rangeParam + "&" + overlayParam + "=on") } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
-			<a href={ templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam + "&" + overlayParam + "=on") } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
-		} else {
-			<a href={ templ.SafeURL("/" + toolName + "/data?range=" + rangeParam) } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
-			<a href={ templ.SafeURL("/" + toolName + "/data.csv?range=" + rangeParam) } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
-		}
+		<a href={ templ.SafeURL(downloadURL(toolName, "/data", rangeParam, params)) } download={ toolName + "-data.json" } class="download-btn" hx-boost="false">JSON</a>
+		<a href={ templ.SafeURL(downloadURL(toolName, "/data.csv", rangeParam, params)) } download={ toolName + "-data.csv" } class="download-btn" hx-boost="false">CSV</a>
 	</div>
+}
+
+// Param maps a boolean control to its on/off query value, matching the
+// explicit values written by chart-shareable.js.
+func Param(on bool) string {
+	if on {
+		return "on"
+	}
+	return "off"
+}
+
+func downloadURL(toolName, path, rangeParam string, params map[string]string) string {
+	query := url.Values{"range": {rangeParam}}
+	for name, value := range params {
+		query.Set(name, value)
+	}
+	return "/" + toolName + path + "?" + query.Encode()
 }
