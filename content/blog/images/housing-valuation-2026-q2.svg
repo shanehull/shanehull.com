@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="920" viewBox="0 0 900 920" role="img" aria-labelledby="title desc">
+  <title id="title">Australian housing valuation</title>
+  <desc id="desc">Data to June 2026 (2026-Q2). Dashed lines mark the 25th and 75th percentiles of the full history.</desc>
+  <style>text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .bg { fill: #f5f2ed; }
+    .heading { fill: #3a3432; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .subhead { fill: #6b7280; font-size: 13px; }
+    .panel-title { fill: #3a3432; font-size: 15px; font-weight: 600; }
+    .latest { fill: #3a3432; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .plot { fill: none; stroke: rgba(75, 85, 99, 0.18); }
+    .grid { stroke: rgba(75, 85, 99, 0.15); stroke-width: 1; }
+    .tick { fill: #6b7280; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .line { fill: none; stroke: #3b82f6; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+    .quartile { stroke-width: 1; stroke-dasharray: 5 5; }
+    .quartile.q1 { stroke: #c86464; }
+    .quartile.q3 { stroke: #64a864; }
+    .quartile-label { font-size: 12px; }
+    .quartile-label.q1 { fill: #c86464; }
+    .quartile-label.q3 { fill: #64a864; }
+    .row-label { fill: #3a3432; font-size: 14px; font-weight: 600; }
+    .row-detail { fill: #6b7280; font-size: 12px; }
+    .stem { stroke: #9aa6b8; stroke-width: 2; }
+    .stem.accent { stroke: #b86e3b; }
+    .dot { fill: #3b82f6; }
+    .dot.accent { fill: #b86e3b; }
+    .fall { fill: #3a3432; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .foot { fill: #6b7280; font-size: 12px; }
+
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1a1b1e; }
+      .heading, .panel-title, .latest, .row-label, .fall { fill: #e5dfd7; }
+      .subhead, .tick, .row-detail, .foot { fill: #9ca3af; }
+      .plot { stroke: rgba(209, 213, 219, 0.2); }
+      .grid { stroke: rgba(209, 213, 219, 0.15); }
+      .quartile.q1 { stroke: #f87171; }
+      .quartile.q3 { stroke: #4ade80; }
+      .quartile-label.q1 { fill: #f87171; }
+      .quartile-label.q3 { fill: #4ade80; }
+      .stem { stroke: #6b7280; }
+      .stem.accent { stroke: #cc8850; }
+      .dot.accent { fill: #cc8850; }
+    }</style>
+
+  <rect width="900" height="920" class="bg"/>
+  <text x="78" y="38" class="heading">Australian housing valuation</text>
+  <text x="78" y="62" class="subhead">Data to June 2026 (2026-Q2). Dashed lines mark the 25th and 75th percentiles of the full history.</text>
+<g>
+    <text x="78" y="88" class="panel-title">Price to weekly income</text>
+    <text x="768" y="88" class="latest" text-anchor="end">0.112</text>
+
+    <rect x="78" y="118" width="690" height="186" class="plot"/>
+    <line x1="78" y1="304.0" x2="768" y2="304.0" class="grid"/>
+    <text x="68" y="308.0" class="tick" text-anchor="end">0.041</text>
+    <line x1="78" y1="211.0" x2="768" y2="211.0" class="grid"/>
+    <text x="68" y="215.0" class="tick" text-anchor="end">0.079</text>
+    <line x1="78" y1="118.0" x2="768" y2="118.0" class="grid"/>
+    <text x="68" y="122.0" class="tick" text-anchor="end">0.117</text>
+    <text x="78.0" y="326" class="tick" text-anchor="middle">1990</text>
+    <text x="268.3" y="326" class="tick" text-anchor="middle">2000</text>
+    <text x="458.7" y="326" class="tick" text-anchor="middle">2010</text>
+    <text x="649.1" y="326" class="tick" text-anchor="middle">2020</text>
+    <text x="763.3" y="326" class="tick" text-anchor="middle">2026</text>
+    <line x1="78" y1="182.6" x2="768" y2="182.6" class="quartile q3"/>
+    <line x1="78" y1="236.3" x2="768" y2="236.3" class="quartile q1"/>
+    <text x="778" y="186.6" class="quartile-label q3">75th</text>
+    <text x="778" y="240.3" class="quartile-label q1">25th</text>
+    <path d="M173.2,287.0 L177.9,288.3 L182.6,289.5 L187.4,289.5 L192.2,290.7 L196.9,289.7 L201.7,291.2 L206.5,290.9 L211.3,290.9 L216.0,289.7 L220.7,288.7 L225.5,286.6 L230.3,286.6 L235.0,284.6 L239.7,284.6 L244.5,282.9 L249.3,282.2 L254.0,279.8 L258.7,278.3 L263.5,274.9 L268.3,272.5 L273.1,270.0 L277.8,273.9 L282.6,271.5 L287.4,269.8 L292.1,265.7 L296.8,262.0 L301.6,257.4 L306.4,253.8 L311.1,245.3 L315.9,241.4 L320.7,236.3 L325.5,233.8 L330.2,225.6 L334.9,221.0 L339.7,215.1 L344.5,218.8 L349.2,221.4 L354.0,221.7 L358.8,219.7 L363.6,223.1 L368.2,222.7 L373.0,228.0 L377.8,225.6 L382.6,225.6 L387.3,220.2 L392.0,220.7 L396.8,218.5 L401.6,219.3 L406.3,212.2 L411.0,209.5 L415.8,203.2 L420.6,204.4 L425.4,207.4 L430.1,213.4 L434.9,216.8 L439.7,221.4 L444.4,214.9 L449.1,207.6 L453.9,198.1 L458.7,198.9 L463.4,195.7 L468.2,201.5 L473.0,201.8 L477.8,206.6 L482.4,208.8 L487.2,214.4 L492.0,217.3 L496.8,218.5 L501.5,218.8 L506.3,221.2 L511.1,218.5 L515.8,221.2 L520.5,217.6 L525.3,215.9 L530.1,209.8 L534.9,207.4 L539.6,204.7 L544.3,202.7 L549.1,200.1 L553.9,196.4 L558.6,188.2 L563.3,184.0 L568.1,185.2 L572.9,185.7 L577.7,182.6 L582.4,181.1 L587.2,173.3 L592.0,167.5 L596.7,163.9 L601.4,166.3 L606.2,165.8 L611.0,168.5 L615.7,170.7 L620.5,176.3 L625.2,183.3 L630.0,192.1 L634.7,193.8 L639.5,189.9 L644.3,183.3 L649.1,182.3 L653.8,186.5 L658.6,191.6 L663.3,186.7 L668.1,170.2 L672.8,155.1 L677.6,145.6 L682.4,135.7 L687.2,135.7 L691.9,139.3 L696.6,148.8 L701.4,150.7 L706.2,156.3 L710.9,150.7 L715.6,149.0 L720.4,144.7 L725.2,146.4 L730.0,142.5 L734.7,148.1 L739.5,145.2 L744.3,147.8 L749.0,143.9 L753.7,141.5 L758.5,134.5 L763.3,130.8 " class="line"/>
+  </g>
+<g>
+    <text x="78" y="360" class="panel-title">Q ratio, raw</text>
+    <text x="768" y="360" class="latest" text-anchor="end">3.01</text>
+
+    <rect x="78" y="390" width="690" height="186" class="plot"/>
+    <line x1="78" y1="576.0" x2="768" y2="576.0" class="grid"/>
+    <text x="68" y="580.0" class="tick" text-anchor="end">1.59</text>
+    <line x1="78" y1="483.0" x2="768" y2="483.0" class="grid"/>
+    <text x="68" y="487.0" class="tick" text-anchor="end">2.44</text>
+    <line x1="78" y1="390.0" x2="768" y2="390.0" class="grid"/>
+    <text x="68" y="394.0" class="tick" text-anchor="end">3.28</text>
+    <text x="78.0" y="598" class="tick" text-anchor="middle">1990</text>
+    <text x="268.3" y="598" class="tick" text-anchor="middle">2000</text>
+    <text x="458.7" y="598" class="tick" text-anchor="middle">2010</text>
+    <text x="649.1" y="598" class="tick" text-anchor="middle">2020</text>
+    <text x="763.3" y="598" class="tick" text-anchor="middle">2026</text>
+    <line x1="78" y1="486.3" x2="768" y2="486.3" class="quartile q3"/>
+    <line x1="78" y1="543.2" x2="768" y2="543.2" class="quartile q1"/>
+    <text x="778" y="490.3" class="quartile-label q3">75th</text>
+    <text x="778" y="547.2" class="quartile-label q1">25th</text>
+    <path d="M78.0,545.5 L82.7,545.2 L87.4,549.5 L92.2,551.2 L97.0,549.0 L101.7,548.9 L106.5,545.5 L111.3,545.9 L116.0,550.6 L120.8,548.9 L125.5,549.0 L130.3,549.2 L135.1,553.9 L139.8,553.1 L144.6,553.8 L149.4,551.8 L154.1,548.0 L158.8,549.6 L163.6,549.2 L168.4,551.0 L173.2,555.2 L177.9,555.3 L182.6,560.0 L187.4,563.2 L192.2,562.1 L196.9,558.7 L201.7,558.9 L206.5,549.0 L211.3,548.3 L216.0,542.6 L220.7,537.1 L225.5,543.1 L230.3,544.9 L235.0,543.2 L239.7,542.4 L244.5,543.7 L249.3,537.5 L254.0,540.3 L258.7,533.4 L263.5,527.0 L268.3,532.6 L273.1,537.1 L277.8,544.5 L282.6,550.6 L287.4,545.9 L292.1,545.4 L296.8,536.1 L301.6,538.1 L306.4,534.8 L311.1,524.2 L315.9,514.3 L320.7,518.8 L325.5,515.1 L330.2,507.9 L334.9,502.1 L339.7,499.9 L344.5,501.9 L349.2,507.5 L354.0,508.4 L358.8,509.2 L363.6,512.6 L368.2,515.9 L373.0,518.9 L377.8,518.2 L382.6,514.0 L387.3,510.2 L392.0,510.6 L396.8,507.4 L401.6,502.9 L406.3,499.6 L411.0,492.3 L415.8,489.9 L420.6,497.8 L425.4,508.3 L430.1,519.4 L434.9,542.1 L439.7,544.5 L444.4,535.8 L449.1,521.9 L453.9,502.0 L458.7,490.6 L463.4,497.6 L468.2,500.5 L473.0,502.5 L477.8,507.2 L482.4,509.7 L487.2,522.2 L492.0,525.7 L496.8,526.2 L501.5,526.7 L506.3,530.9 L511.1,525.7 L515.8,524.5 L520.5,522.3 L525.3,519.6 L530.1,511.5 L534.9,510.4 L539.6,508.7 L544.3,507.9 L549.1,501.5 L553.9,498.2 L558.6,488.7 L563.3,485.7 L568.1,487.6 L572.9,492.0 L577.7,488.5 L582.4,485.9 L587.2,475.7 L592.0,472.0 L596.7,467.6 L601.4,472.5 L606.2,468.1 L611.0,472.2 L615.7,478.4 L620.5,485.7 L625.2,492.7 L630.0,502.2 L634.7,501.0 L639.5,488.4 L644.3,479.0 L649.1,476.4 L653.8,480.8 L658.6,473.3 L663.3,459.6 L668.1,443.9 L672.8,432.6 L677.6,416.4 L682.4,402.8 L687.2,408.3 L691.9,423.8 L696.6,447.1 L701.4,454.7 L706.2,461.3 L710.9,457.0 L715.6,457.4 L720.4,451.4 L725.2,449.9 L730.0,445.1 L734.7,447.4 L739.5,442.0 L744.3,442.4 L749.0,436.2 L753.7,430.3 L758.5,416.7 L763.3,414.0 L768.0,420.2 " class="line"/>
+  </g>
+<g>
+    <text x="78" y="632" class="panel-title">Q ratio, detrended</text>
+    <text x="768" y="632" class="latest" text-anchor="end">1.37</text>
+
+    <rect x="78" y="662" width="690" height="186" class="plot"/>
+    <line x1="78" y1="848.0" x2="768" y2="848.0" class="grid"/>
+    <text x="68" y="852.0" class="tick" text-anchor="end">0.89</text>
+    <line x1="78" y1="755.0" x2="768" y2="755.0" class="grid"/>
+    <text x="68" y="759.0" class="tick" text-anchor="end">1.22</text>
+    <line x1="78" y1="662.0" x2="768" y2="662.0" class="grid"/>
+    <text x="68" y="666.0" class="tick" text-anchor="end">1.55</text>
+    <text x="78.0" y="870" class="tick" text-anchor="middle">1990</text>
+    <text x="268.3" y="870" class="tick" text-anchor="middle">2000</text>
+    <text x="458.7" y="870" class="tick" text-anchor="middle">2010</text>
+    <text x="649.1" y="870" class="tick" text-anchor="middle">2020</text>
+    <text x="763.3" y="870" class="tick" text-anchor="middle">2026</text>
+    <line x1="78" y1="761.5" x2="768" y2="761.5" class="quartile q3"/>
+    <line x1="78" y1="812.5" x2="768" y2="812.5" class="quartile q1"/>
+    <text x="778" y="765.5" class="quartile-label q3">75th</text>
+    <text x="778" y="816.5" class="quartile-label q1">25th</text>
+    <path d="M78.0,817.9 L82.7,817.7 L87.4,821.7 L92.2,822.5 L97.0,819.1 L101.7,818.8 L106.5,814.5 L111.3,815.5 L116.0,821.6 L120.8,819.0 L125.5,819.1 L130.3,819.3 L135.1,825.2 L139.8,823.6 L144.6,824.3 L149.4,821.2 L154.1,815.9 L158.8,818.2 L163.6,817.6 L168.4,820.0 L173.2,825.5 L177.9,825.3 L182.6,831.4 L187.4,835.2 L192.2,833.0 L196.9,827.9 L201.7,827.7 L206.5,813.7 L211.3,812.9 L216.0,805.2 L220.7,798.1 L225.5,806.9 L230.3,809.7 L235.0,807.6 L239.7,806.8 L244.5,808.9 L249.3,800.6 L254.0,805.0 L258.7,795.8 L263.5,787.6 L268.3,796.1 L273.1,802.8 L277.8,813.3 L282.6,821.7 L287.4,815.2 L292.1,814.5 L296.8,801.9 L301.6,805.0 L306.4,800.7 L311.1,786.6 L315.9,773.7 L320.7,780.8 L325.5,776.5 L330.2,767.5 L334.9,760.8 L339.7,758.9 L344.5,762.7 L349.2,771.2 L354.0,773.3 L358.8,775.1 L363.6,780.4 L368.2,785.5 L373.0,790.0 L377.8,789.4 L382.6,784.4 L387.3,779.9 L392.0,781.0 L396.8,777.4 L401.6,772.1 L406.3,768.5 L411.0,759.7 L415.8,757.4 L420.6,768.6 L425.4,783.0 L430.1,798.0 L434.9,827.7 L439.7,830.6 L444.4,819.1 L449.1,801.0 L453.9,775.5 L458.7,761.3 L463.4,771.1 L468.2,775.4 L473.0,778.4 L477.8,785.0 L482.4,788.7 L487.2,805.1 L492.0,809.8 L496.8,810.5 L501.5,811.2 L506.3,816.7 L511.1,810.0 L515.8,808.5 L520.5,805.8 L525.3,802.5 L530.1,792.2 L534.9,791.2 L539.6,789.2 L544.3,788.5 L549.1,780.7 L553.9,776.8 L558.6,765.1 L563.3,761.9 L568.1,764.8 L572.9,771.0 L577.7,767.0 L582.4,764.3 L587.2,752.0 L592.0,747.9 L596.7,743.1 L601.4,750.0 L606.2,745.3 L611.0,751.1 L615.7,759.4 L620.5,769.1 L625.2,778.2 L630.0,790.4 L634.7,789.2 L639.5,773.7 L644.3,762.5 L649.1,759.8 L653.8,765.8 L658.6,756.9 L663.3,740.7 L668.1,722.0 L672.8,709.0 L677.6,690.1 L682.4,674.8 L687.2,682.9 L691.9,702.9 L696.6,732.1 L701.4,742.0 L706.2,750.6 L710.9,745.9 L715.6,747.0 L720.4,740.5 L725.2,739.3 L730.0,734.1 L734.7,737.6 L739.5,731.8 L744.3,733.0 L749.0,726.3 L753.7,720.0 L758.5,704.7 L763.3,702.4 L768.0,710.7 " class="line"/>
+  </g>
+
+  <text x="78" y="898" class="foot">Source: OECD nominal house price index, ABS average weekly earnings and household balance sheet, RBA housing credit.</text>
+</svg>

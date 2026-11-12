@@ -1,0 +1,1142 @@
+{
+  "title": "Australian housing valuation data",
+  "asOf": {
+    "priceToIncome": "2026-Q1",
+    "q": "2026-Q2"
+  },
+  "generated": "2026-11-12",
+  "definitions": {
+    "priceToIncome": "OECD nominal house price index for Australia divided by ABS average weekly earnings, all employees, persons. The numerator is an index, so the level is index points per dollar of weekly earnings.",
+    "qRatio": "Residential land at market plus dwellings at replacement cost, less housing credit outstanding against it, divided by the current replacement cost of the dwellings. The numerator is a mixed balance sheet value. A raw Q of 1 is the theoretical mark where the balance sheet equity equals dwelling replacement cost; it is not an empirical fair value.",
+    "detrendedQ": "The raw Q divided by its running geometric mean, using every observation to that date.",
+    "ladder": "Each row holds earnings, housing credit and replacement costs at their current levels and moves only the price of the dwelling stock. The 0% row uses the latest reading for each measure."
+  },
+  "sources": [
+    {
+      "id": "oecd.au.hpi",
+      "name": "OECD nominal house price index for Australia, 2015 = 100",
+      "url": "https://sdmx.oecd.org/public/rest/data/OECD.ECO.MPD,DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES,1.0/AUS.Q.HPI.?format=csvfile"
+    },
+    {
+      "id": "abs.au.awe",
+      "name": "ABS average weekly earnings, all employees, persons",
+      "url": "https://data.api.abs.gov.au/rest/data/ABS,AWE,1.0.0/1.1.3.7.TOT.10.AUS.S?format=jsondata"
+    },
+    {
+      "id": "abs.au.housing_value",
+      "name": "ABS household balance sheet, 5232.0 Table 35, residential land and dwellings",
+      "url": "https://www.abs.gov.au/statistics/economy/national-accounts/australian-national-accounts-finance-and-wealth/latest-release"
+    },
+    {
+      "id": "abs.au.dwelling_replacement",
+      "name": "ABS household balance sheet, 5232.0 Table 35, dwellings at replacement cost",
+      "url": "https://www.abs.gov.au/statistics/economy/national-accounts/australian-national-accounts-finance-and-wealth/latest-release"
+    },
+    {
+      "id": "rba.housing_credit",
+      "name": "RBA D2, owner-occupier plus investor housing credit",
+      "url": "https://www.rba.gov.au/statistics/tables/csv/d2-data.csv"
+    }
+  ],
+  "series": [
+    {
+      "quarter": "1990-Q1",
+      "date": "1990-01-01",
+      "price_to_income": null,
+      "q_raw": 1.870154,
+      "q_detrended": 1
+    },
+    {
+      "quarter": "1990-Q2",
+      "date": "1990-04-01",
+      "price_to_income": null,
+      "q_raw": 1.872462,
+      "q_detrended": 1.000617
+    },
+    {
+      "quarter": "1990-Q3",
+      "date": "1990-07-01",
+      "price_to_income": null,
+      "q_raw": 1.83376,
+      "q_detrended": 0.986578
+    },
+    {
+      "quarter": "1990-Q4",
+      "date": "1990-10-01",
+      "price_to_income": null,
+      "q_raw": 1.818159,
+      "q_detrended": 0.983593
+    },
+    {
+      "quarter": "1991-Q1",
+      "date": "1991-01-01",
+      "price_to_income": null,
+      "q_raw": 1.838217,
+      "q_detrended": 0.995553
+    },
+    {
+      "quarter": "1991-Q2",
+      "date": "1991-04-01",
+      "price_to_income": null,
+      "q_raw": 1.839046,
+      "q_detrended": 0.996667
+    },
+    {
+      "quarter": "1991-Q3",
+      "date": "1991-07-01",
+      "price_to_income": null,
+      "q_raw": 1.870348,
+      "q_detrended": 1.011673
+    },
+    {
+      "quarter": "1991-Q4",
+      "date": "1991-10-01",
+      "price_to_income": null,
+      "q_raw": 1.866194,
+      "q_detrended": 1.008243
+    },
+    {
+      "quarter": "1992-Q1",
+      "date": "1992-01-01",
+      "price_to_income": null,
+      "q_raw": 1.823986,
+      "q_detrended": 0.987047
+    },
+    {
+      "quarter": "1992-Q2",
+      "date": "1992-04-01",
+      "price_to_income": null,
+      "q_raw": 1.839432,
+      "q_detrended": 0.995864
+    },
+    {
+      "quarter": "1992-Q3",
+      "date": "1992-07-01",
+      "price_to_income": null,
+      "q_raw": 1.838579,
+      "q_detrended": 0.995819
+    },
+    {
+      "quarter": "1992-Q4",
+      "date": "1992-10-01",
+      "price_to_income": null,
+      "q_raw": 1.836282,
+      "q_detrended": 0.995026
+    },
+    {
+      "quarter": "1993-Q1",
+      "date": "1993-01-01",
+      "price_to_income": null,
+      "q_raw": 1.794076,
+      "q_detrended": 0.97427
+    },
+    {
+      "quarter": "1993-Q2",
+      "date": "1993-04-01",
+      "price_to_income": null,
+      "q_raw": 1.80152,
+      "q_detrended": 0.979845
+    },
+    {
+      "quarter": "1993-Q3",
+      "date": "1993-07-01",
+      "price_to_income": null,
+      "q_raw": 1.794458,
+      "q_detrended": 0.977586
+    },
+    {
+      "quarter": "1993-Q4",
+      "date": "1993-10-01",
+      "price_to_income": null,
+      "q_raw": 1.812934,
+      "q_detrended": 0.988419
+    },
+    {
+      "quarter": "1994-Q1",
+      "date": "1994-01-01",
+      "price_to_income": null,
+      "q_raw": 1.847409,
+      "q_detrended": 1.006789
+    },
+    {
+      "quarter": "1994-Q2",
+      "date": "1994-04-01",
+      "price_to_income": null,
+      "q_raw": 1.832573,
+      "q_detrended": 0.998776
+    },
+    {
+      "quarter": "1994-Q3",
+      "date": "1994-07-01",
+      "price_to_income": null,
+      "q_raw": 1.836647,
+      "q_detrended": 1.000944
+    },
+    {
+      "quarter": "1994-Q4",
+      "date": "1994-10-01",
+      "price_to_income": null,
+      "q_raw": 1.820518,
+      "q_detrended": 0.992545
+    },
+    {
+      "quarter": "1995-Q1",
+      "date": "1995-01-01",
+      "price_to_income": 0.04769,
+      "q_raw": 1.782464,
+      "q_detrended": 0.973122
+    },
+    {
+      "quarter": "1995-Q2",
+      "date": "1995-04-01",
+      "price_to_income": 0.047214,
+      "q_raw": 1.781494,
+      "q_detrended": 0.973822
+    },
+    {
+      "quarter": "1995-Q3",
+      "date": "1995-07-01",
+      "price_to_income": 0.046749,
+      "q_raw": 1.739042,
+      "q_detrended": 0.952712
+    },
+    {
+      "quarter": "1995-Q4",
+      "date": "1995-10-01",
+      "price_to_income": 0.046726,
+      "q_raw": 1.710008,
+      "q_detrended": 0.939357
+    },
+    {
+      "quarter": "1996-Q1",
+      "date": "1996-01-01",
+      "price_to_income": 0.046169,
+      "q_raw": 1.719865,
+      "q_detrended": 0.946921
+    },
+    {
+      "quarter": "1996-Q2",
+      "date": "1996-04-01",
+      "price_to_income": 0.046574,
+      "q_raw": 1.750297,
+      "q_detrended": 0.965049
+    },
+    {
+      "quarter": "1996-Q3",
+      "date": "1996-07-01",
+      "price_to_income": 0.045998,
+      "q_raw": 1.748479,
+      "q_detrended": 0.965355
+    },
+    {
+      "quarter": "1996-Q4",
+      "date": "1996-10-01",
+      "price_to_income": 0.046142,
+      "q_raw": 1.838201,
+      "q_detrended": 1.014356
+    },
+    {
+      "quarter": "1997-Q1",
+      "date": "1997-01-01",
+      "price_to_income": 0.046109,
+      "q_raw": 1.844444,
+      "q_detrended": 1.017182
+    },
+    {
+      "quarter": "1997-Q2",
+      "date": "1997-04-01",
+      "price_to_income": 0.046641,
+      "q_raw": 1.896704,
+      "q_detrended": 1.044435
+    },
+    {
+      "quarter": "1997-Q3",
+      "date": "1997-07-01",
+      "price_to_income": 0.046967,
+      "q_raw": 1.945879,
+      "q_detrended": 1.069129
+    },
+    {
+      "quarter": "1997-Q4",
+      "date": "1997-10-01",
+      "price_to_income": 0.047902,
+      "q_raw": 1.891938,
+      "q_detrended": 1.038235
+    },
+    {
+      "quarter": "1998-Q1",
+      "date": "1998-01-01",
+      "price_to_income": 0.047858,
+      "q_raw": 1.875952,
+      "q_detrended": 1.028557
+    },
+    {
+      "quarter": "1998-Q2",
+      "date": "1998-04-01",
+      "price_to_income": 0.048713,
+      "q_raw": 1.891269,
+      "q_detrended": 1.035849
+    },
+    {
+      "quarter": "1998-Q3",
+      "date": "1998-07-01",
+      "price_to_income": 0.048677,
+      "q_raw": 1.898686,
+      "q_detrended": 1.038749
+    },
+    {
+      "quarter": "1998-Q4",
+      "date": "1998-10-01",
+      "price_to_income": 0.049404,
+      "q_raw": 1.886749,
+      "q_detrended": 1.03131
+    },
+    {
+      "quarter": "1999-Q1",
+      "date": "1999-01-01",
+      "price_to_income": 0.049706,
+      "q_raw": 1.942758,
+      "q_detrended": 1.060201
+    },
+    {
+      "quarter": "1999-Q2",
+      "date": "1999-04-01",
+      "price_to_income": 0.050692,
+      "q_raw": 1.917192,
+      "q_detrended": 1.045005
+    },
+    {
+      "quarter": "1999-Q3",
+      "date": "1999-07-01",
+      "price_to_income": 0.051292,
+      "q_raw": 1.980228,
+      "q_detrended": 1.077253
+    },
+    {
+      "quarter": "1999-Q4",
+      "date": "1999-10-01",
+      "price_to_income": 0.052732,
+      "q_raw": 2.038183,
+      "q_detrended": 1.105922
+    },
+    {
+      "quarter": "2000-Q1",
+      "date": "2000-01-01",
+      "price_to_income": 0.053681,
+      "q_raw": 1.986791,
+      "q_detrended": 1.076063
+    },
+    {
+      "quarter": "2000-Q2",
+      "date": "2000-04-01",
+      "price_to_income": 0.054723,
+      "q_raw": 1.946107,
+      "q_detrended": 1.052708
+    },
+    {
+      "quarter": "2000-Q3",
+      "date": "2000-07-01",
+      "price_to_income": 0.053051,
+      "q_raw": 1.879008,
+      "q_detrended": 1.016028
+    },
+    {
+      "quarter": "2000-Q4",
+      "date": "2000-10-01",
+      "price_to_income": 0.05413,
+      "q_raw": 1.823821,
+      "q_detrended": 0.986498
+    },
+    {
+      "quarter": "2001-Q1",
+      "date": "2001-01-01",
+      "price_to_income": 0.054784,
+      "q_raw": 1.866142,
+      "q_detrended": 1.00918
+    },
+    {
+      "quarter": "2001-Q2",
+      "date": "2001-04-01",
+      "price_to_income": 0.056537,
+      "q_raw": 1.871311,
+      "q_detrended": 1.011714
+    },
+    {
+      "quarter": "2001-Q3",
+      "date": "2001-07-01",
+      "price_to_income": 0.058032,
+      "q_raw": 1.955398,
+      "q_detrended": 1.055925
+    },
+    {
+      "quarter": "2001-Q4",
+      "date": "2001-10-01",
+      "price_to_income": 0.05992,
+      "q_raw": 1.936971,
+      "q_detrended": 1.044995
+    },
+    {
+      "quarter": "2002-Q1",
+      "date": "2002-01-01",
+      "price_to_income": 0.06144,
+      "q_raw": 1.967337,
+      "q_detrended": 1.060088
+    },
+    {
+      "quarter": "2002-Q2",
+      "date": "2002-04-01",
+      "price_to_income": 0.064854,
+      "q_raw": 2.063056,
+      "q_detrended": 1.109315
+    },
+    {
+      "quarter": "2002-Q3",
+      "date": "2002-07-01",
+      "price_to_income": 0.066547,
+      "q_raw": 2.153135,
+      "q_detrended": 1.15443
+    },
+    {
+      "quarter": "2002-Q4",
+      "date": "2002-10-01",
+      "price_to_income": 0.068607,
+      "q_raw": 2.11191,
+      "q_detrended": 1.129624
+    },
+    {
+      "quarter": "2003-Q1",
+      "date": "2003-01-01",
+      "price_to_income": 0.069556,
+      "q_raw": 2.145554,
+      "q_detrended": 1.144642
+    },
+    {
+      "quarter": "2003-Q2",
+      "date": "2003-04-01",
+      "price_to_income": 0.073016,
+      "q_raw": 2.211017,
+      "q_detrended": 1.175964
+    },
+    {
+      "quarter": "2003-Q3",
+      "date": "2003-07-01",
+      "price_to_income": 0.074902,
+      "q_raw": 2.263073,
+      "q_detrended": 1.199601
+    },
+    {
+      "quarter": "2003-Q4",
+      "date": "2003-10-01",
+      "price_to_income": 0.077285,
+      "q_raw": 2.283714,
+      "q_detrended": 1.206419
+    },
+    {
+      "quarter": "2004-Q1",
+      "date": "2004-01-01",
+      "price_to_income": 0.075777,
+      "q_raw": 2.264992,
+      "q_detrended": 1.192768
+    },
+    {
+      "quarter": "2004-Q2",
+      "date": "2004-04-01",
+      "price_to_income": 0.074716,
+      "q_raw": 2.214925,
+      "q_detrended": 1.163311
+    },
+    {
+      "quarter": "2004-Q3",
+      "date": "2004-07-01",
+      "price_to_income": 0.074562,
+      "q_raw": 2.205956,
+      "q_detrended": 1.155713
+    },
+    {
+      "quarter": "2004-Q4",
+      "date": "2004-10-01",
+      "price_to_income": 0.075395,
+      "q_raw": 2.199348,
+      "q_detrended": 1.149533
+    },
+    {
+      "quarter": "2005-Q1",
+      "date": "2005-01-01",
+      "price_to_income": 0.074034,
+      "q_raw": 2.168428,
+      "q_detrended": 1.131049
+    },
+    {
+      "quarter": "2005-Q2",
+      "date": "2005-04-01",
+      "price_to_income": 0.074219,
+      "q_raw": 2.138137,
+      "q_detrended": 1.113288
+    },
+    {
+      "quarter": "2005-Q3",
+      "date": "2005-07-01",
+      "price_to_income": 0.072022,
+      "q_raw": 2.111218,
+      "q_detrended": 1.097622
+    },
+    {
+      "quarter": "2005-Q4",
+      "date": "2005-10-01",
+      "price_to_income": 0.07301,
+      "q_raw": 2.117752,
+      "q_detrended": 1.099365
+    },
+    {
+      "quarter": "2006-Q1",
+      "date": "2006-01-01",
+      "price_to_income": 0.072962,
+      "q_raw": 2.155494,
+      "q_detrended": 1.117024
+    },
+    {
+      "quarter": "2006-Q2",
+      "date": "2006-04-01",
+      "price_to_income": 0.075249,
+      "q_raw": 2.190133,
+      "q_detrended": 1.132799
+    },
+    {
+      "quarter": "2006-Q3",
+      "date": "2006-07-01",
+      "price_to_income": 0.074968,
+      "q_raw": 2.186587,
+      "q_detrended": 1.128889
+    },
+    {
+      "quarter": "2006-Q4",
+      "date": "2006-10-01",
+      "price_to_income": 0.075892,
+      "q_raw": 2.21518,
+      "q_detrended": 1.141396
+    },
+    {
+      "quarter": "2007-Q1",
+      "date": "2007-01-01",
+      "price_to_income": 0.07555,
+      "q_raw": 2.256132,
+      "q_detrended": 1.159964
+    },
+    {
+      "quarter": "2007-Q2",
+      "date": "2007-04-01",
+      "price_to_income": 0.078498,
+      "q_raw": 2.286396,
+      "q_detrended": 1.172811
+    },
+    {
+      "quarter": "2007-Q3",
+      "date": "2007-07-01",
+      "price_to_income": 0.079569,
+      "q_raw": 2.352301,
+      "q_detrended": 1.203429
+    },
+    {
+      "quarter": "2007-Q4",
+      "date": "2007-10-01",
+      "price_to_income": 0.082157,
+      "q_raw": 2.374394,
+      "q_detrended": 1.211454
+    },
+    {
+      "quarter": "2008-Q1",
+      "date": "2008-01-01",
+      "price_to_income": 0.081669,
+      "q_raw": 2.302516,
+      "q_detrended": 1.172191
+    },
+    {
+      "quarter": "2008-Q2",
+      "date": "2008-04-01",
+      "price_to_income": 0.080492,
+      "q_raw": 2.207218,
+      "q_detrended": 1.121907
+    },
+    {
+      "quarter": "2008-Q3",
+      "date": "2008-07-01",
+      "price_to_income": 0.07803,
+      "q_raw": 2.106256,
+      "q_detrended": 1.069616
+    },
+    {
+      "quarter": "2008-Q4",
+      "date": "2008-10-01",
+      "price_to_income": 0.07656,
+      "q_raw": 1.900699,
+      "q_detrended": 0.965678
+    },
+    {
+      "quarter": "2009-Q1",
+      "date": "2009-01-01",
+      "price_to_income": 0.074726,
+      "q_raw": 1.87906,
+      "q_detrended": 0.955259
+    },
+    {
+      "quarter": "2009-Q2",
+      "date": "2009-04-01",
+      "price_to_income": 0.077434,
+      "q_raw": 1.958067,
+      "q_detrended": 0.995483
+    },
+    {
+      "quarter": "2009-Q3",
+      "date": "2009-07-01",
+      "price_to_income": 0.080385,
+      "q_raw": 2.084548,
+      "q_detrended": 1.059007
+    },
+    {
+      "quarter": "2009-Q4",
+      "date": "2009-10-01",
+      "price_to_income": 0.084317,
+      "q_raw": 2.264089,
+      "q_detrended": 1.148208
+    },
+    {
+      "quarter": "2010-Q1",
+      "date": "2010-01-01",
+      "price_to_income": 0.084022,
+      "q_raw": 2.367302,
+      "q_detrended": 1.197845
+    },
+    {
+      "quarter": "2010-Q2",
+      "date": "2010-04-01",
+      "price_to_income": 0.085263,
+      "q_raw": 2.303867,
+      "q_detrended": 1.163569
+    },
+    {
+      "quarter": "2010-Q3",
+      "date": "2010-07-01",
+      "price_to_income": 0.082877,
+      "q_raw": 2.277654,
+      "q_detrended": 1.148391
+    },
+    {
+      "quarter": "2010-Q4",
+      "date": "2010-10-01",
+      "price_to_income": 0.082757,
+      "q_raw": 2.260274,
+      "q_detrended": 1.137856
+    },
+    {
+      "quarter": "2011-Q1",
+      "date": "2011-01-01",
+      "price_to_income": 0.080848,
+      "q_raw": 2.217493,
+      "q_detrended": 1.114875
+    },
+    {
+      "quarter": "2011-Q2",
+      "date": "2011-04-01",
+      "price_to_income": 0.079945,
+      "q_raw": 2.194277,
+      "q_detrended": 1.101944
+    },
+    {
+      "quarter": "2011-Q3",
+      "date": "2011-07-01",
+      "price_to_income": 0.077625,
+      "q_raw": 2.081203,
+      "q_detrended": 1.044629
+    },
+    {
+      "quarter": "2011-Q4",
+      "date": "2011-10-01",
+      "price_to_income": 0.076407,
+      "q_raw": 2.049277,
+      "q_detrended": 1.028274
+    },
+    {
+      "quarter": "2012-Q1",
+      "date": "2012-01-01",
+      "price_to_income": 0.075877,
+      "q_raw": 2.044992,
+      "q_detrended": 1.025827
+    },
+    {
+      "quarter": "2012-Q2",
+      "date": "2012-04-01",
+      "price_to_income": 0.075842,
+      "q_raw": 2.040123,
+      "q_detrended": 1.023122
+    },
+    {
+      "quarter": "2012-Q3",
+      "date": "2012-07-01",
+      "price_to_income": 0.074803,
+      "q_raw": 2.00251,
+      "q_detrended": 1.004212
+    },
+    {
+      "quarter": "2012-Q4",
+      "date": "2012-10-01",
+      "price_to_income": 0.07587,
+      "q_raw": 2.049852,
+      "q_detrended": 1.027645
+    },
+    {
+      "quarter": "2013-Q1",
+      "date": "2013-01-01",
+      "price_to_income": 0.074824,
+      "q_raw": 2.060459,
+      "q_detrended": 1.032602
+    },
+    {
+      "quarter": "2013-Q2",
+      "date": "2013-04-01",
+      "price_to_income": 0.076339,
+      "q_raw": 2.080354,
+      "q_detrended": 1.04211
+    },
+    {
+      "quarter": "2013-Q3",
+      "date": "2013-07-01",
+      "price_to_income": 0.07702,
+      "q_raw": 2.104474,
+      "q_detrended": 1.053607
+    },
+    {
+      "quarter": "2013-Q4",
+      "date": "2013-10-01",
+      "price_to_income": 0.079517,
+      "q_raw": 2.178486,
+      "q_detrended": 1.089676
+    },
+    {
+      "quarter": "2014-Q1",
+      "date": "2014-01-01",
+      "price_to_income": 0.08048,
+      "q_raw": 2.187993,
+      "q_detrended": 1.093414
+    },
+    {
+      "quarter": "2014-Q2",
+      "date": "2014-04-01",
+      "price_to_income": 0.081576,
+      "q_raw": 2.203966,
+      "q_detrended": 1.100311
+    },
+    {
+      "quarter": "2014-Q3",
+      "date": "2014-07-01",
+      "price_to_income": 0.082392,
+      "q_raw": 2.210934,
+      "q_detrended": 1.102689
+    },
+    {
+      "quarter": "2014-Q4",
+      "date": "2014-10-01",
+      "price_to_income": 0.083519,
+      "q_raw": 2.268535,
+      "q_detrended": 1.130022
+    },
+    {
+      "quarter": "2015-Q1",
+      "date": "2015-01-01",
+      "price_to_income": 0.084961,
+      "q_raw": 2.298758,
+      "q_detrended": 1.143542
+    },
+    {
+      "quarter": "2015-Q2",
+      "date": "2015-04-01",
+      "price_to_income": 0.088426,
+      "q_raw": 2.385164,
+      "q_detrended": 1.184537
+    },
+    {
+      "quarter": "2015-Q3",
+      "date": "2015-07-01",
+      "price_to_income": 0.090057,
+      "q_raw": 2.412086,
+      "q_detrended": 1.195809
+    },
+    {
+      "quarter": "2015-Q4",
+      "date": "2015-10-01",
+      "price_to_income": 0.089641,
+      "q_raw": 2.395152,
+      "q_detrended": 1.185454
+    },
+    {
+      "quarter": "2016-Q1",
+      "date": "2016-01-01",
+      "price_to_income": 0.089378,
+      "q_raw": 2.354926,
+      "q_detrended": 1.163845
+    },
+    {
+      "quarter": "2016-Q2",
+      "date": "2016-04-01",
+      "price_to_income": 0.090707,
+      "q_raw": 2.38723,
+      "q_detrended": 1.177972
+    },
+    {
+      "quarter": "2016-Q3",
+      "date": "2016-07-01",
+      "price_to_income": 0.091297,
+      "q_raw": 2.410372,
+      "q_detrended": 1.187465
+    },
+    {
+      "quarter": "2016-Q4",
+      "date": "2016-10-01",
+      "price_to_income": 0.094488,
+      "q_raw": 2.502644,
+      "q_detrended": 1.230535
+    },
+    {
+      "quarter": "2017-Q1",
+      "date": "2017-01-01",
+      "price_to_income": 0.096929,
+      "q_raw": 2.536512,
+      "q_detrended": 1.244662
+    },
+    {
+      "quarter": "2017-Q2",
+      "date": "2017-04-01",
+      "price_to_income": 0.098449,
+      "q_raw": 2.576626,
+      "q_detrended": 1.261653
+    },
+    {
+      "quarter": "2017-Q3",
+      "date": "2017-07-01",
+      "price_to_income": 0.097365,
+      "q_raw": 2.532193,
+      "q_detrended": 1.237497
+    },
+    {
+      "quarter": "2017-Q4",
+      "date": "2017-10-01",
+      "price_to_income": 0.09764,
+      "q_raw": 2.571302,
+      "q_detrended": 1.254049
+    },
+    {
+      "quarter": "2018-Q1",
+      "date": "2018-01-01",
+      "price_to_income": 0.096467,
+      "q_raw": 2.53407,
+      "q_detrended": 1.233577
+    },
+    {
+      "quarter": "2018-Q2",
+      "date": "2018-04-01",
+      "price_to_income": 0.095591,
+      "q_raw": 2.478483,
+      "q_detrended": 1.204532
+    },
+    {
+      "quarter": "2018-Q3",
+      "date": "2018-07-01",
+      "price_to_income": 0.093292,
+      "q_raw": 2.411929,
+      "q_detrended": 1.170568
+    },
+    {
+      "quarter": "2018-Q4",
+      "date": "2018-10-01",
+      "price_to_income": 0.090422,
+      "q_raw": 2.349053,
+      "q_detrended": 1.138766
+    },
+    {
+      "quarter": "2019-Q1",
+      "date": "2019-01-01",
+      "price_to_income": 0.086802,
+      "q_raw": 2.262546,
+      "q_detrended": 1.095963
+    },
+    {
+      "quarter": "2019-Q2",
+      "date": "2019-04-01",
+      "price_to_income": 0.086082,
+      "q_raw": 2.273534,
+      "q_detrended": 1.100386
+    },
+    {
+      "quarter": "2019-Q3",
+      "date": "2019-07-01",
+      "price_to_income": 0.087686,
+      "q_raw": 2.388039,
+      "q_detrended": 1.1544
+    },
+    {
+      "quarter": "2019-Q4",
+      "date": "2019-10-01",
+      "price_to_income": 0.090439,
+      "q_raw": 2.472638,
+      "q_detrended": 1.193521
+    },
+    {
+      "quarter": "2020-Q1",
+      "date": "2020-01-01",
+      "price_to_income": 0.090786,
+      "q_raw": 2.496514,
+      "q_detrended": 1.203189
+    },
+    {
+      "quarter": "2020-Q2",
+      "date": "2020-04-01",
+      "price_to_income": 0.089094,
+      "q_raw": 2.456408,
+      "q_detrended": 1.182224
+    },
+    {
+      "quarter": "2020-Q3",
+      "date": "2020-07-01",
+      "price_to_income": 0.086993,
+      "q_raw": 2.524753,
+      "q_detrended": 1.213193
+    },
+    {
+      "quarter": "2020-Q4",
+      "date": "2020-10-01",
+      "price_to_income": 0.088954,
+      "q_raw": 2.648302,
+      "q_detrended": 1.27009
+    },
+    {
+      "quarter": "2021-Q1",
+      "date": "2021-01-01",
+      "price_to_income": 0.095773,
+      "q_raw": 2.790869,
+      "q_detrended": 1.335345
+    },
+    {
+      "quarter": "2021-Q2",
+      "date": "2021-04-01",
+      "price_to_income": 0.102017,
+      "q_raw": 2.893261,
+      "q_detrended": 1.380768
+    },
+    {
+      "quarter": "2021-Q3",
+      "date": "2021-07-01",
+      "price_to_income": 0.105857,
+      "q_raw": 3.040642,
+      "q_detrended": 1.446856
+    },
+    {
+      "quarter": "2021-Q4",
+      "date": "2021-10-01",
+      "price_to_income": 0.109968,
+      "q_raw": 3.163188,
+      "q_detrended": 1.500367
+    },
+    {
+      "quarter": "2022-Q1",
+      "date": "2022-01-01",
+      "price_to_income": 0.10996,
+      "q_raw": 3.11334,
+      "q_detrended": 1.472268
+    },
+    {
+      "quarter": "2022-Q2",
+      "date": "2022-04-01",
+      "price_to_income": 0.108517,
+      "q_raw": 2.973094,
+      "q_detrended": 1.402267
+    },
+    {
+      "quarter": "2022-Q3",
+      "date": "2022-07-01",
+      "price_to_income": 0.104616,
+      "q_raw": 2.761857,
+      "q_detrended": 1.30001
+    },
+    {
+      "quarter": "2022-Q4",
+      "date": "2022-10-01",
+      "price_to_income": 0.103807,
+      "q_raw": 2.693112,
+      "q_detrended": 1.265376
+    },
+    {
+      "quarter": "2023-Q1",
+      "date": "2023-01-01",
+      "price_to_income": 0.10154,
+      "q_raw": 2.633368,
+      "q_detrended": 1.235326
+    },
+    {
+      "quarter": "2023-Q2",
+      "date": "2023-04-01",
+      "price_to_income": 0.103821,
+      "q_raw": 2.672584,
+      "q_detrended": 1.251608
+    },
+    {
+      "quarter": "2023-Q3",
+      "date": "2023-07-01",
+      "price_to_income": 0.10447,
+      "q_raw": 2.669043,
+      "q_detrended": 1.247886
+    },
+    {
+      "quarter": "2023-Q4",
+      "date": "2023-10-01",
+      "price_to_income": 0.106299,
+      "q_raw": 2.722673,
+      "q_detrended": 1.270703
+    },
+    {
+      "quarter": "2024-Q1",
+      "date": "2024-01-01",
+      "price_to_income": 0.105619,
+      "q_raw": 2.736511,
+      "q_detrended": 1.274883
+    },
+    {
+      "quarter": "2024-Q2",
+      "date": "2024-04-01",
+      "price_to_income": 0.107233,
+      "q_raw": 2.78041,
+      "q_detrended": 1.292908
+    },
+    {
+      "quarter": "2024-Q3",
+      "date": "2024-07-01",
+      "price_to_income": 0.104861,
+      "q_raw": 2.759625,
+      "q_detrended": 1.280942
+    },
+    {
+      "quarter": "2024-Q4",
+      "date": "2024-10-01",
+      "price_to_income": 0.106053,
+      "q_raw": 2.808193,
+      "q_detrended": 1.301021
+    },
+    {
+      "quarter": "2025-Q1",
+      "date": "2025-01-01",
+      "price_to_income": 0.104975,
+      "q_raw": 2.804503,
+      "q_detrended": 1.296901
+    },
+    {
+      "quarter": "2025-Q2",
+      "date": "2025-04-01",
+      "price_to_income": 0.106592,
+      "q_raw": 2.860822,
+      "q_detrended": 1.32034
+    },
+    {
+      "quarter": "2025-Q3",
+      "date": "2025-07-01",
+      "price_to_income": 0.107573,
+      "q_raw": 2.914358,
+      "q_detrended": 1.342262
+    },
+    {
+      "quarter": "2025-Q4",
+      "date": "2025-10-01",
+      "price_to_income": 0.110539,
+      "q_raw": 3.03768,
+      "q_detrended": 1.395802
+    },
+    {
+      "quarter": "2026-Q1",
+      "date": "2026-01-01",
+      "price_to_income": 0.111963,
+      "q_raw": 3.062199,
+      "q_detrended": 1.403758
+    },
+    {
+      "quarter": "2026-Q2",
+      "date": "2026-04-01",
+      "price_to_income": null,
+      "q_raw": 3.005868,
+      "q_detrended": 1.374913
+    }
+  ],
+  "destinations": [
+    {
+      "measure": "price_to_income",
+      "destination": "1996 trough",
+      "value": 0.046,
+      "fall_required_pct": 58.91
+    },
+    {
+      "measure": "q_raw",
+      "destination": "Q=1 reference",
+      "value": 1,
+      "fall_required_pct": 52.45
+    },
+    {
+      "measure": "q_raw",
+      "destination": "1995 trough",
+      "value": 1.71,
+      "fall_required_pct": 33.89
+    },
+    {
+      "measure": "q_detrended",
+      "destination": "1995 trough",
+      "value": 0.9394,
+      "fall_required_pct": 25.06
+    }
+  ],
+  "ladder": [
+    {
+      "price_fall_pct": 0,
+      "price_to_income": 0.112,
+      "price_to_income_percentile": 100,
+      "q_raw": 3.0059,
+      "q_detrended": 1.3749
+    },
+    {
+      "price_fall_pct": 10,
+      "price_to_income": 0.1008,
+      "price_to_income_percentile": 84,
+      "q_raw": 2.6235,
+      "q_detrended": 1.2011
+    },
+    {
+      "price_fall_pct": 20,
+      "price_to_income": 0.0896,
+      "price_to_income_percentile": 71,
+      "q_raw": 2.2412,
+      "q_detrended": 1.0272
+    },
+    {
+      "price_fall_pct": 30,
+      "price_to_income": 0.0784,
+      "price_to_income_percentile": 49,
+      "q_raw": 1.8588,
+      "q_detrended": 0.8531
+    },
+    {
+      "price_fall_pct": 40,
+      "price_to_income": 0.0672,
+      "price_to_income_percentile": 24,
+      "q_raw": 1.4765,
+      "q_detrended": 0.6787
+    },
+    {
+      "price_fall_pct": 50,
+      "price_to_income": 0.056,
+      "price_to_income_percentile": 20,
+      "q_raw": 1.0942,
+      "q_detrended": 0.504
+    },
+    {
+      "price_fall_pct": 60,
+      "price_to_income": 0.0448,
+      "price_to_income_percentile": 0,
+      "q_raw": 0.7118,
+      "q_detrended": 0.3288
+    }
+  ]
+}

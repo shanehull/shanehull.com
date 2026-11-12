@@ -872,6 +872,29 @@ There are no per-series controls in the layout. Chart.js legends already click-t
 
 ---
 
+## Static SVG Figures
+
+Blog figures that should not depend on JavaScript use `cmd/svg-charts`. The command reads a JSON spec and writes SVG files.
+
+```bash
+go run ./cmd/svg-charts content/blog/data/<post>/figures.json
+```
+
+The spec controls the figure type, titles, source, data file and output path. Data paths are relative to the spec. Output paths are relative to the repository root.
+
+Two types are supported:
+
+- `series`: one or more time-series panels, one line per panel, optional quartile lines. The CSV needs a `date` column in `YYYY-MM-DD` plus one column per panel `field`. Blank values are skipped.
+- `lollipop`: one row per destination, with a stem and dot. The CSV needs `measure`, `destination`, `value` and `fall_required_pct`. Rows are sorted by fall, descending.
+
+Spec fields: `type`, `output`, `title`, `subtitle`, `source`, `data`, `quartiles` (series), `panels` (series), `labels` (lollipop). A panel is `{title, field, format}`. A label is `{label, detail, accent}`, keyed by `measure|destination` or `measure`. `format` and `detail` are Go format strings.
+
+The layout, type scale and light/dark palette are fixed to keep figures consistent across posts. The height grows with the panel or row count. A new chart layout needs a new `type` and renderer in `cmd/svg-charts/main.go`.
+
+Reference spec: `content/blog/data/housing-valuation-2026-q2/figures.json`.
+
+---
+
 ## Rendering Math (KaTeX)
 
 To typeset LaTeX on a page, set `math: true` in the content frontmatter. `baseof.html` then includes `layouts/partials/latex.html`, which loads KaTeX (CSS, core, auto-render) with SRI hashes plus the site's `assets/js/katex-init.js` bootstrap.

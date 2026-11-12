@@ -1,0 +1,5 @@
+measure,destination,value,fall_required_pct
+price_to_income,1996 trough,0.0460,58.91
+q_raw,Q=1 reference,1.0000,52.45
+q_raw,1995 trough,1.7100,33.89
+q_detrended,1995 trough,0.9394,25.06

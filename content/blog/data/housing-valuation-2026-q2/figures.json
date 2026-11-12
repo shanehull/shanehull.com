@@ -1,0 +1,57 @@
+{
+  "figures": [
+    {
+      "type": "series",
+      "output": "content/blog/images/housing-valuation-2026-q2.svg",
+      "title": "Australian housing valuation",
+      "subtitle": "Data to June 2026 (2026-Q2). Dashed lines mark the 25th and 75th percentiles of the full history.",
+      "source": "Source: OECD nominal house price index, ABS average weekly earnings and household balance sheet, RBA housing credit.",
+      "data": "series.csv",
+      "quartiles": true,
+      "panels": [
+        {
+          "title": "Price to weekly income",
+          "field": "price_to_income",
+          "format": "%.3f"
+        },
+        {
+          "title": "Q ratio, raw",
+          "field": "q_raw",
+          "format": "%.2f"
+        },
+        {
+          "title": "Q ratio, detrended",
+          "field": "q_detrended",
+          "format": "%.2f"
+        }
+      ]
+    },
+    {
+      "type": "lollipop",
+      "output": "content/blog/images/housing-valuation-2026-q2-destinations.svg",
+      "title": "Distance to the destinations",
+      "subtitle": "Price fall required to reach each valuation destination. The raw Q has two: Q=1 reference and its 1995 trough.",
+      "source": "Source: OECD, ABS and RBA. Definitions as in the post.",
+      "data": "destinations.csv",
+      "labels": {
+        "price_to_income": {
+          "label": "Price-to-income",
+          "detail": "1996 trough, %.3f"
+        },
+        "q_raw|Q=1 reference": {
+          "label": "Raw Q",
+          "detail": "Q=1 reference, %.2f",
+          "accent": true
+        },
+        "q_raw|1995 trough": {
+          "label": "Raw Q",
+          "detail": "1995 trough, %.2f"
+        },
+        "q_detrended|1995 trough": {
+          "label": "Detrended Q",
+          "detail": "1995 trough, %.2f"
+        }
+      }
+    }
+  ]
+}
