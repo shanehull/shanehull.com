@@ -1,0 +1,6 @@
+measure,destination,value,move_required_pct,direction
+price_to_income,1996 trough,0.046,58.93,fall
+price_to_rent,1996 trough,50.0,62.63,fall
+q_equity,1995 trough,1.7066,32.39,fall
+q_equity,q = 1,1.0,51.53,fall
+q_detrended,1995 trough,0.9347,22.91,fall
