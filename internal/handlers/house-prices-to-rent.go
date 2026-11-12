@@ -17,7 +17,7 @@ import (
 )
 
 // House prices to rent: the OECD nominal house price to rent ratio for
-// Australia, quarterly and oldest first.
+// Australia, indexed to 1996 = 100, quarterly and oldest first.
 
 const (
 	priceToRentCacheKey = "house-prices-to-rent"
@@ -59,6 +59,21 @@ func fetchPriceToRent(ctx context.Context) ([]rentPoint, error) {
 	}
 	if len(ratio) < 8 {
 		return nil, fmt.Errorf("house prices to rent: too few observations")
+	}
+
+	baseDate := time.Date(1996, time.October, 1, 0, 0, 0, 0, time.UTC)
+	var base float64
+	for _, p := range ratio {
+		if !p.Date.Before(baseDate) {
+			base = p.Value
+			break
+		}
+	}
+	if base == 0 {
+		return nil, fmt.Errorf("house prices to rent: 1996 base observation not found")
+	}
+	for i := range ratio {
+		ratio[i].Value = ratio[i].Value / base * 100
 	}
 	return ratio, nil
 }
@@ -122,8 +137,8 @@ func HousePricesToRentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":     "House prices to rent",
-		"yAxisLabel":    "House price index / rent index",
+		"mainLabel":     "House prices to rent index",
+		"yAxisLabel":    "Index, 1996 = 100",
 		"showQuartiles": "false",
 		"showAverage":   "false",
 	}
@@ -217,7 +232,7 @@ func HousePricesToRentCSVHandler(w http.ResponseWriter, r *http.Request) {
 	writer := csv.NewWriter(w)
 	defer writer.Flush()
 
-	header := []string{"date", "price_to_rent"}
+	header := []string{"date", "price_to_rent_index"}
 	if showQuartiles {
 		header = append(header, "quartile1", "quartile3")
 	}
@@ -226,9 +241,9 @@ func HousePricesToRentCSVHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, row := range priceToRentSeries(points, rangeParam, showQuartiles) {
-		cells := []string{row.Date, fmt.Sprintf("%.6f", row.Value)}
+		cells := []string{row.Date, fmt.Sprintf("%.2f", row.Value)}
 		if showQuartiles {
-			cells = append(cells, fmt.Sprintf("%.6f", row.Quartile1), fmt.Sprintf("%.6f", row.Quartile3))
+			cells = append(cells, fmt.Sprintf("%.2f", row.Quartile1), fmt.Sprintf("%.2f", row.Quartile3))
 		}
 		if err := writer.Write(cells); err != nil {
 			log.Print("failed to write CSV row:", err)
