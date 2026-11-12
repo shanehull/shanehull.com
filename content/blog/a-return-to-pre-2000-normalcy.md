@@ -53,8 +53,6 @@ Both measures need a fall to their 1996 trough: 50% for price-to-income and 63% 
 
 The 1996 trough is the last major trough before the current high, and the common destination for both measures. The rent series' all-time low is 1972, before the figure's 1981 start.
 
-Price-to-income is about 2.0 times its 1996 trough. Against the 1983 minimum, it is 2.3 times, but that is a single observation. Price-to-rent is about 2.7 times its 1996 trough. The rent measure is more stretched.
-
 ## The ladder
 
 Every row holds disposable income and rents at their current levels. Only the price of the dwelling stock moves. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent. Percentiles use the full history of each series: income from 1981, rent from 1972.
