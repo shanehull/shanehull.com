@@ -12,7 +12,7 @@ tags:
 
 The exercise prices a reversion. It does not forecast one. It assumes valuation multiples matter, even though the last three decades say otherwise. The question is how far Australian housing prices would have to fall to reach the multiples at the 1996 trough and the 1983 low.
 
-Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. Both are relative valuation multiples. They compare the price with earnings, not with an intrinsic value. They sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
+Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. Both are relative valuation multiples. They compare the price with earnings. They do not estimate an intrinsic value. They sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
 
 ## The measures
 
@@ -81,10 +81,10 @@ The income measure needs about 20 years of flat prices, or a 30% fall and 10 yea
 
 Nominal throughout. In the ladder, income and rents are held at their current levels; the time estimates state their growth assumptions. The exercise measures distance in today's prices.
 
-The exercise assumes these multiples are a useful anchor, not that they must revert. The trough is a reference point, not a target. The likely mechanism is debt: the multiple compresses when credit stops expanding or becomes more expensive.
+The exercise treats these multiples as a useful anchor. It does not require them to revert. The trough is a reference point. The likely mechanism is debt: the multiple compresses when credit stops expanding or becomes more expensive.
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
-This follows [Dousing the Pyre](/blog/dousing-the-pyre/), which argued that policy is delaying the downturn by pushing the cost onto younger buyers. Their mortgages at today's prices let existing owners sell and lenders keep the loans performing. This post prices a destination that policy resists. If that resistance becomes monetisation, the debt behind the bubble is inflated away. A correction through inflation would do less of the work through nominal house prices. The ratios above are an exercise, not a forecast. They would normalise differently in that scenario, if at all.
+This follows [Dousing the Pyre](/blog/dousing-the-pyre/), which argued that policy is delaying the downturn by pushing the cost onto younger buyers. Their mortgages at today's prices let existing owners sell and lenders keep the loans performing. This post prices a destination that policy resists. If that resistance becomes monetisation, the debt behind the bubble is inflated away. A correction through inflation would do less of the work through nominal house prices. The ratios above are an exercise. They do not forecast. They would normalise differently in that scenario, if at all.
 
 Download the data: <a href="/blog/data/housing-valuation-2026-q2/data.json" download hx-boost="false">JSON</a>, <a href="/blog/data/housing-valuation-2026-q2/data.csv" download hx-boost="false">CSV</a>.
