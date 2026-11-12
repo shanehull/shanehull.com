@@ -135,7 +135,7 @@ func mergeAndCalculateBuffet(
 
 		numerator := mc.Value / 1000
 		if includeDebt {
-			numerator += debtValue / 1000
+			numerator -= debtValue / 1000
 		}
 
 		merged = append(merged, BuffetData{
@@ -173,7 +173,7 @@ func BuffettIndicatorHandler(w http.ResponseWriter, r *http.Request) {
 
 	mainLabel := "Buffett Indicator"
 	if showDebt {
-		mainLabel = "Buffett Indicator (incl. federal debt)"
+		mainLabel = "Buffett Indicator (adj. for federal debt)"
 	}
 
 	options := map[string]string{

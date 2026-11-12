@@ -11,7 +11,7 @@ import (
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
-func TestMergeAndCalculateBuffetIncludesDebt(t *testing.T) {
+func TestMergeAndCalculateBuffetSubtractsDebt(t *testing.T) {
 	quarter := time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC)
 	marketCap := []fred.DataPoint{{Date: quarter, Value: 1_000_000}}
 	gdp := []fred.DataPoint{{Date: quarter, Value: 20_000}}
@@ -21,13 +21,13 @@ func TestMergeAndCalculateBuffetIncludesDebt(t *testing.T) {
 	if len(withDebt) != 1 {
 		t.Fatalf("expected 1 point, got %d", len(withDebt))
 	}
-	if got := withDebt[0].Ratio; got != 7.5 {
-		t.Errorf("ratio with debt = %v, want 7.5", got)
+	if got := withDebt[0].Ratio; got != 2.5 {
+		t.Errorf("adjusted ratio = %v, want 2.5", got)
 	}
 
 	withoutDebt := mergeAndCalculateBuffet(marketCap, gdp, debt, false)
 	if got := withoutDebt[0].Ratio; got != 5 {
-		t.Errorf("ratio without debt = %v, want 5", got)
+		t.Errorf("classic ratio = %v, want 5", got)
 	}
 }
 
