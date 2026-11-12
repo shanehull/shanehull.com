@@ -30,14 +30,17 @@ The gross measure is the standard long-run comparison. A net cap rate after vaca
 
 ## Where we are
 
-| Measure              | Latest | Date    | Percentile |
-| -------------------- | ------ | ------- | ---------- |
-| Price-to-income      | 0.0107 | 2026-Q1 | 100th      |
-| Price-to-rent        | 133.9  | 2025-Q3 | 98th       |
+| Measure         | Latest | Date    | Percentile |
+| --------------- | ------ | ------- | ---------- |
+| Price-to-income | 0.0107 | 2026-Q1 | 100th      |
+| Price-to-rent   | 133.9  | 2025-Q3 | 98th       |
 
 Price-to-income is at its all-time high. Price-to-rent is just below its 2022 peak. Both earnings measures are at the top of their history.
 
 ## The destinations
+
+Price-to-income needs 50% to its 1996 trough and 57% to its 1983 low. Price-to-rent needs 63% to its 1996 trough:w
+.
 
 <img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-12" alt="Lollipop chart of the price fall required to reach each valuation destination: 50% for price-to-income at its 1996 trough, 57% at its 1983 low, and 63% for price-to-rent at its 1996 trough." width="900" />
 
@@ -48,8 +51,6 @@ Price-to-income needs 50% to its 1996 trough and 57% to its 1983 low. Price-to-r
 The 1983 low is the all-time low in the income series. The 1996 trough is the last trough. The rent measure has one trough, in 1996.
 
 Price-to-income is about 2.0 times its 1996 low and 2.3 times its 1983 low. Price-to-rent is about 2.7 times its 1996 low. The rent measure is more stretched.
-
-
 
 ## The ladder
 
@@ -79,11 +80,11 @@ The land and debt effects sit inside the market price. They are why the price is
 
 A fall is not the only path. With nominal prices flat:
 
-| Measure         | Assumption                          | Years to the trough |
-| --------------- | ----------------------------------- | ------------------- |
-| Price-to-income | disposable income +3.5% a year      | 20                  |
-| Price-to-rent   | rents +4% a year                    | 25                  |
-| Price-to-income | 30% fall, then flat, income +3.5%   | 7                   |
+| Measure         | Assumption                        | Years to the trough |
+| --------------- | --------------------------------- | ------------------- |
+| Price-to-income | disposable income +3.5% a year    | 20                  |
+| Price-to-rent   | rents +4% a year                  | 25                  |
+| Price-to-income | 30% fall, then flat, income +3.5% | 7                   |
 
 The income measure needs about 20 years of flat prices, or a 30% fall and 7 years of income growth, to return to its 1996 trough. The rent measure needs about 25 years of flat prices, because rents grow more slowly against the price.
 
