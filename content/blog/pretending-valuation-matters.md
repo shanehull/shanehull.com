@@ -67,8 +67,6 @@ The income measure's 50% row is 0.0054, at the 1996 trough. Its 60% row is 0.004
 
 ## What the gap means
 
-Price-to-income needs 50% to its 1996 trough, or 57% to its 1983 low. Price-to-rent needs 63% to its 1996 trough.
-
 The rent measure is more stretched.
 
 The land and debt effects sit inside the market price. They are why the price is high relative to both income and rent. The two measures capture that. A separate leverage or replacement-cost ratio does not add a valuation signal.
