@@ -2,16 +2,13 @@
   "title": "Australian housing valuation",
   "asOf": {
     "priceToIncome": "2026-Q1",
-    "priceToRent": "2025-Q3",
-    "q": "2026-Q2"
+    "priceToRent": "2025-Q3"
   },
   "generated": "2026-11-12",
   "definitions": {
     "priceToIncome": "OECD nominal house price index for Australia divided by ABS average weekly earnings, all employees, persons. The numerator is an index, so the level is index points per dollar of weekly earnings.",
-    "priceToRent": "OECD nominal house price index divided by the OECD rent price index. The ratio is the inverse of the gross rental yield and the housing equivalent of a price-to-earnings multiple. A net cap rate after vacancy, operating costs and depreciation would be lower, but the expense ratio is stable over long periods, so the ranking is similar.",
-    "qRatio": "Owner equity in the dwelling stock divided by the replacement cost of the dwelling structure. Equity is the market value of residential land and dwellings less housing credit. Land is in the numerator. A Q of 1 is the mark where equity equals structure replacement cost.",
-    "qDetrended": "The raw Q divided by its running geometric mean, using every observation to that date.",
-    "ladder": "Each row holds earnings, rents, housing credit and replacement costs at their current levels and moves only the price of the dwelling stock. The Q numerator moves with the price; the replacement cost is fixed. The 0% row uses 2026-Q1 for price-to-income, 2025-Q3 for price-to-rent and 2026-Q2 for the Q."
+    "priceToRent": "OECD nominal house price index divided by the OECD rent price index. The ratio is the inverse of the gross rental yield and the housing equivalent of a price-to-earnings multiple. A net cap rate after vacancy, operating costs and depreciation would be lower, but the expense ratio is stable over long periods, so the ranking is similar. The series begins in 1972; the figure starts in 1990 to align with price-to-income, and the earlier observations do not change the percentile or the destinations.",
+    "ladder": "Each row holds earnings and rents at their current levels and moves only the price of the dwelling stock. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent."
   },
   "sources": [
     {
@@ -28,21 +25,6 @@
       "id": "abs.au.awe",
       "name": "ABS average weekly earnings, all employees, persons",
       "url": "https://data.api.abs.gov.au/rest/data/ABS,AWE,1.0.0/1.1.3.7.TOT.10.AUS.S?format=jsondata"
-    },
-    {
-      "id": "abs.au.housing_value",
-      "name": "ABS 5232.0 Table 35, household balance sheet, residential land and dwellings (market value)",
-      "url": "https://www.abs.gov.au/statistics/economy/national-accounts/australian-national-accounts-finance-and-wealth/latest-release"
-    },
-    {
-      "id": "abs.au.dwelling_replacement",
-      "name": "ABS 5204.0 Table 41, household balance sheet, dwellings (replacement cost)",
-      "url": "https://www.abs.gov.au/statistics/economy/national-accounts/australian-system-national-accounts/latest-release"
-    },
-    {
-      "id": "rba.housing_credit",
-      "name": "RBA D2, owner-occupier plus investor housing credit",
-      "url": "https://www.rba.gov.au/statistics/tables/csv/d2-data.csv"
     }
   ],
   "series": [
@@ -50,1729 +32,1297 @@
       "quarter": "1972-Q3",
       "date": "1972-07-01",
       "price_to_income": null,
-      "price_to_rent": 36.2665,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 36.2665
     },
     {
       "quarter": "1972-Q4",
       "date": "1972-10-01",
       "price_to_income": null,
-      "price_to_rent": 37.7437,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 37.7437
     },
     {
       "quarter": "1973-Q1",
       "date": "1973-01-01",
       "price_to_income": null,
-      "price_to_rent": 37.9201,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 37.9201
     },
     {
       "quarter": "1973-Q2",
       "date": "1973-04-01",
       "price_to_income": null,
-      "price_to_rent": 39.7602,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 39.7602
     },
     {
       "quarter": "1973-Q3",
       "date": "1973-07-01",
       "price_to_income": null,
-      "price_to_rent": 42.424,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.424
     },
     {
       "quarter": "1973-Q4",
       "date": "1973-10-01",
       "price_to_income": null,
-      "price_to_rent": 43.5766,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.5766
     },
     {
       "quarter": "1974-Q1",
       "date": "1974-01-01",
       "price_to_income": null,
-      "price_to_rent": 45.7857,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 45.7857
     },
     {
       "quarter": "1974-Q2",
       "date": "1974-04-01",
       "price_to_income": null,
-      "price_to_rent": 45.5324,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 45.5324
     },
     {
       "quarter": "1974-Q3",
       "date": "1974-07-01",
       "price_to_income": null,
-      "price_to_rent": 44.8869,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.8869
     },
     {
       "quarter": "1974-Q4",
       "date": "1974-10-01",
       "price_to_income": null,
-      "price_to_rent": 44.0488,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.0488
     },
     {
       "quarter": "1975-Q1",
       "date": "1975-01-01",
       "price_to_income": null,
-      "price_to_rent": 43.2042,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.2042
     },
     {
       "quarter": "1975-Q2",
       "date": "1975-04-01",
       "price_to_income": null,
-      "price_to_rent": 43.0761,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.0761
     },
     {
       "quarter": "1975-Q3",
       "date": "1975-07-01",
       "price_to_income": null,
-      "price_to_rent": 42.8327,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.8327
     },
     {
       "quarter": "1975-Q4",
       "date": "1975-10-01",
       "price_to_income": null,
-      "price_to_rent": 42.5668,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.5668
     },
     {
       "quarter": "1976-Q1",
       "date": "1976-01-01",
       "price_to_income": null,
-      "price_to_rent": 42.6074,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.6074
     },
     {
       "quarter": "1976-Q2",
       "date": "1976-04-01",
       "price_to_income": null,
-      "price_to_rent": 42.1996,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.1996
     },
     {
       "quarter": "1976-Q3",
       "date": "1976-07-01",
       "price_to_income": null,
-      "price_to_rent": 40.8208,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.8208
     },
     {
       "quarter": "1976-Q4",
       "date": "1976-10-01",
       "price_to_income": null,
-      "price_to_rent": 41.1898,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.1898
     },
     {
       "quarter": "1977-Q1",
       "date": "1977-01-01",
       "price_to_income": null,
-      "price_to_rent": 40.8029,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.8029
     },
     {
       "quarter": "1977-Q2",
       "date": "1977-04-01",
       "price_to_income": null,
-      "price_to_rent": 40.7339,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.7339
     },
     {
       "quarter": "1977-Q3",
       "date": "1977-07-01",
       "price_to_income": null,
-      "price_to_rent": 40.523,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.523
     },
     {
       "quarter": "1977-Q4",
       "date": "1977-10-01",
       "price_to_income": null,
-      "price_to_rent": 40.4644,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.4644
     },
     {
       "quarter": "1978-Q1",
       "date": "1978-01-01",
       "price_to_income": null,
-      "price_to_rent": 40.3907,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.3907
     },
     {
       "quarter": "1978-Q2",
       "date": "1978-04-01",
       "price_to_income": null,
-      "price_to_rent": 39.2373,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 39.2373
     },
     {
       "quarter": "1978-Q3",
       "date": "1978-07-01",
       "price_to_income": null,
-      "price_to_rent": 39.2212,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 39.2212
     },
     {
       "quarter": "1978-Q4",
       "date": "1978-10-01",
       "price_to_income": null,
-      "price_to_rent": 39.0044,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 39.0044
     },
     {
       "quarter": "1979-Q1",
       "date": "1979-01-01",
       "price_to_income": null,
-      "price_to_rent": 39.7679,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 39.7679
     },
     {
       "quarter": "1979-Q2",
       "date": "1979-04-01",
       "price_to_income": null,
-      "price_to_rent": 40.9759,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.9759
     },
     {
       "quarter": "1979-Q3",
       "date": "1979-07-01",
       "price_to_income": null,
-      "price_to_rent": 41.7727,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.7727
     },
     {
       "quarter": "1979-Q4",
       "date": "1979-10-01",
       "price_to_income": null,
-      "price_to_rent": 42.1349,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.1349
     },
     {
       "quarter": "1980-Q1",
       "date": "1980-01-01",
       "price_to_income": null,
-      "price_to_rent": 42.1083,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.1083
     },
     {
       "quarter": "1980-Q2",
       "date": "1980-04-01",
       "price_to_income": null,
-      "price_to_rent": 42.8885,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.8885
     },
     {
       "quarter": "1980-Q3",
       "date": "1980-07-01",
       "price_to_income": null,
-      "price_to_rent": 44.114,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.114
     },
     {
       "quarter": "1980-Q4",
       "date": "1980-10-01",
       "price_to_income": null,
-      "price_to_rent": 45.1803,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 45.1803
     },
     {
       "quarter": "1981-Q1",
       "date": "1981-01-01",
       "price_to_income": null,
-      "price_to_rent": 46.6083,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 46.6083
     },
     {
       "quarter": "1981-Q2",
       "date": "1981-04-01",
       "price_to_income": null,
-      "price_to_rent": 46.6769,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 46.6769
     },
     {
       "quarter": "1981-Q3",
       "date": "1981-07-01",
       "price_to_income": null,
-      "price_to_rent": 45.6252,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 45.6252
     },
     {
       "quarter": "1981-Q4",
       "date": "1981-10-01",
       "price_to_income": null,
-      "price_to_rent": 46.7159,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 46.7159
     },
     {
       "quarter": "1982-Q1",
       "date": "1982-01-01",
       "price_to_income": null,
-      "price_to_rent": 44.4799,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.4799
     },
     {
       "quarter": "1982-Q2",
       "date": "1982-04-01",
       "price_to_income": null,
-      "price_to_rent": 43.9275,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.9275
     },
     {
       "quarter": "1982-Q3",
       "date": "1982-07-01",
       "price_to_income": null,
-      "price_to_rent": 42.4483,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.4483
     },
     {
       "quarter": "1982-Q4",
       "date": "1982-10-01",
       "price_to_income": null,
-      "price_to_rent": 41.3359,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.3359
     },
     {
       "quarter": "1983-Q1",
       "date": "1983-01-01",
       "price_to_income": null,
-      "price_to_rent": 41.2378,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.2378
     },
     {
       "quarter": "1983-Q2",
       "date": "1983-04-01",
       "price_to_income": null,
-      "price_to_rent": 41.5974,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.5974
     },
     {
       "quarter": "1983-Q3",
       "date": "1983-07-01",
       "price_to_income": null,
-      "price_to_rent": 41.46,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.46
     },
     {
       "quarter": "1983-Q4",
       "date": "1983-10-01",
       "price_to_income": null,
-      "price_to_rent": 42.7104,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.7104
     },
     {
       "quarter": "1984-Q1",
       "date": "1984-01-01",
       "price_to_income": null,
-      "price_to_rent": 42.786,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.786
     },
     {
       "quarter": "1984-Q2",
       "date": "1984-04-01",
       "price_to_income": null,
-      "price_to_rent": 42.7257,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.7257
     },
     {
       "quarter": "1984-Q3",
       "date": "1984-07-01",
       "price_to_income": null,
-      "price_to_rent": 44.4782,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.4782
     },
     {
       "quarter": "1984-Q4",
       "date": "1984-10-01",
       "price_to_income": null,
-      "price_to_rent": 43.5146,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.5146
     },
     {
       "quarter": "1985-Q1",
       "date": "1985-01-01",
       "price_to_income": null,
-      "price_to_rent": 44.3524,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.3524
     },
     {
       "quarter": "1985-Q2",
       "date": "1985-04-01",
       "price_to_income": null,
-      "price_to_rent": 43.9055,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.9055
     },
     {
       "quarter": "1985-Q3",
       "date": "1985-07-01",
       "price_to_income": null,
-      "price_to_rent": 44.2649,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 44.2649
     },
     {
       "quarter": "1985-Q4",
       "date": "1985-10-01",
       "price_to_income": null,
-      "price_to_rent": 43.7266,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.7266
     },
     {
       "quarter": "1986-Q1",
       "date": "1986-01-01",
       "price_to_income": null,
-      "price_to_rent": 43.2372,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.2372
     },
     {
       "quarter": "1986-Q2",
       "date": "1986-04-01",
       "price_to_income": null,
-      "price_to_rent": 43.3609,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.3609
     },
     {
       "quarter": "1986-Q3",
       "date": "1986-07-01",
       "price_to_income": null,
-      "price_to_rent": 42.6378,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 42.6378
     },
     {
       "quarter": "1986-Q4",
       "date": "1986-10-01",
       "price_to_income": null,
-      "price_to_rent": 41.7146,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.7146
     },
     {
       "quarter": "1987-Q1",
       "date": "1987-01-01",
       "price_to_income": null,
-      "price_to_rent": 41.2656,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.2656
     },
     {
       "quarter": "1987-Q2",
       "date": "1987-04-01",
       "price_to_income": null,
-      "price_to_rent": 40.996,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.996
     },
     {
       "quarter": "1987-Q3",
       "date": "1987-07-01",
       "price_to_income": null,
-      "price_to_rent": 40.5679,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 40.5679
     },
     {
       "quarter": "1987-Q4",
       "date": "1987-10-01",
       "price_to_income": null,
-      "price_to_rent": 41.0604,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.0604
     },
     {
       "quarter": "1988-Q1",
       "date": "1988-01-01",
       "price_to_income": null,
-      "price_to_rent": 41.5983,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 41.5983
     },
     {
       "quarter": "1988-Q2",
       "date": "1988-04-01",
       "price_to_income": null,
-      "price_to_rent": 43.0426,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 43.0426
     },
     {
       "quarter": "1988-Q3",
       "date": "1988-07-01",
       "price_to_income": null,
-      "price_to_rent": 46.0871,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 46.0871
     },
     {
       "quarter": "1988-Q4",
       "date": "1988-10-01",
       "price_to_income": null,
-      "price_to_rent": 49.1379,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 49.1379
     },
     {
       "quarter": "1989-Q1",
       "date": "1989-01-01",
       "price_to_income": null,
-      "price_to_rent": 51.8688,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 51.8688
     },
     {
       "quarter": "1989-Q2",
       "date": "1989-04-01",
       "price_to_income": null,
-      "price_to_rent": 52.0403,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 52.0403
     },
     {
       "quarter": "1989-Q3",
       "date": "1989-07-01",
       "price_to_income": null,
-      "price_to_rent": 51.2823,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 51.2823
     },
     {
       "quarter": "1989-Q4",
       "date": "1989-10-01",
       "price_to_income": null,
-      "price_to_rent": 50.186,
-      "q_equity": null,
-      "q_detrended": null
+      "price_to_rent": 50.186
     },
     {
       "quarter": "1990-Q1",
       "date": "1990-01-01",
       "price_to_income": null,
-      "price_to_rent": 49.8395,
-      "q_equity": 1.833205,
-      "q_detrended": 1.0
+      "price_to_rent": 49.8395
     },
     {
       "quarter": "1990-Q2",
       "date": "1990-04-01",
       "price_to_income": null,
-      "price_to_rent": 49.7922,
-      "q_equity": 1.8725,
-      "q_detrended": 1.010661
+      "price_to_rent": 49.7922
     },
     {
       "quarter": "1990-Q3",
       "date": "1990-07-01",
       "price_to_income": null,
-      "price_to_rent": 48.8791,
-      "q_equity": 1.863393,
-      "q_detrended": 1.003827
+      "price_to_rent": 48.8791
     },
     {
       "quarter": "1990-Q4",
       "date": "1990-10-01",
       "price_to_income": null,
-      "price_to_rent": 48.2758,
-      "q_equity": 1.871203,
-      "q_detrended": 1.00602
+      "price_to_rent": 48.2758
     },
     {
       "quarter": "1991-Q1",
       "date": "1991-01-01",
       "price_to_income": null,
-      "price_to_rent": 48.0224,
-      "q_equity": 1.823133,
-      "q_detrended": 0.984109
+      "price_to_rent": 48.0224
     },
     {
       "quarter": "1991-Q2",
       "date": "1991-04-01",
       "price_to_income": null,
-      "price_to_rent": 48.2512,
-      "q_equity": 1.839,
-      "q_detrended": 0.993891
+      "price_to_rent": 48.2512
     },
     {
       "quarter": "1991-Q3",
       "date": "1991-07-01",
       "price_to_income": null,
-      "price_to_rent": 49.7163,
-      "q_equity": 1.884701,
-      "q_detrended": 1.015913
+      "price_to_rent": 49.7163
     },
     {
       "quarter": "1991-Q4",
       "date": "1991-10-01",
       "price_to_income": null,
-      "price_to_rent": 49.4575,
-      "q_equity": 1.894939,
-      "q_detrended": 1.018728
+      "price_to_rent": 49.4575
     },
     {
       "quarter": "1992-Q1",
       "date": "1992-01-01",
       "price_to_income": null,
-      "price_to_rent": 49.0365,
-      "q_equity": 1.808632,
-      "q_detrended": 0.975365
+      "price_to_rent": 49.0365
     },
     {
       "quarter": "1992-Q2",
       "date": "1992-04-01",
       "price_to_income": null,
-      "price_to_rent": 49.0747,
-      "q_equity": 1.8394,
-      "q_detrended": 0.992759
+      "price_to_rent": 49.0747
     },
     {
       "quarter": "1992-Q3",
       "date": "1992-07-01",
       "price_to_income": null,
-      "price_to_rent": 49.0529,
-      "q_equity": 1.856304,
-      "q_detrended": 1.001712
+      "price_to_rent": 49.0529
     },
     {
       "quarter": "1992-Q4",
       "date": "1992-10-01",
       "price_to_income": null,
-      "price_to_rent": 49.4229,
-      "q_equity": 1.873875,
-      "q_detrended": 1.010255
+      "price_to_rent": 49.4229
     },
     {
       "quarter": "1993-Q1",
       "date": "1993-01-01",
       "price_to_income": null,
-      "price_to_rent": 50.0135,
-      "q_equity": 1.771379,
-      "q_detrended": 0.958386
+      "price_to_rent": 50.0135
     },
     {
       "quarter": "1993-Q2",
       "date": "1993-04-01",
       "price_to_income": null,
-      "price_to_rent": 50.151,
-      "q_equity": 1.8015,
-      "q_detrended": 0.97647
+      "price_to_rent": 50.151
     },
     {
       "quarter": "1993-Q3",
       "date": "1993-07-01",
       "price_to_income": null,
-      "price_to_rent": 50.1778,
-      "q_equity": 1.819292,
-      "q_detrended": 0.987033
+      "price_to_rent": 50.1778
     },
     {
       "quarter": "1993-Q4",
       "date": "1993-10-01",
       "price_to_income": null,
-      "price_to_rent": 50.4282,
-      "q_equity": 1.865496,
-      "q_detrended": 1.01134
+      "price_to_rent": 50.4282
     },
     {
       "quarter": "1994-Q1",
       "date": "1994-01-01",
       "price_to_income": null,
-      "price_to_rent": 50.9941,
-      "q_equity": 1.819318,
-      "q_detrended": 0.987106
+      "price_to_rent": 50.9941
     },
     {
       "quarter": "1994-Q2",
       "date": "1994-04-01",
       "price_to_income": null,
-      "price_to_rent": 51.4882,
-      "q_equity": 1.8326,
-      "q_detrended": 0.994627
+      "price_to_rent": 51.4882
     },
     {
       "quarter": "1994-Q3",
       "date": "1994-07-01",
       "price_to_income": null,
-      "price_to_rent": 52.1544,
-      "q_equity": 1.865316,
-      "q_detrended": 1.011728
+      "price_to_rent": 52.1544
     },
     {
       "quarter": "1994-Q4",
       "date": "1994-10-01",
       "price_to_income": null,
-      "price_to_rent": 51.8788,
-      "q_equity": 1.876637,
-      "q_detrended": 1.016968
+      "price_to_rent": 51.8788
     },
     {
       "quarter": "1995-Q1",
       "date": "1995-01-01",
       "price_to_income": 0.0477,
-      "price_to_rent": 52.2152,
-      "q_equity": 1.760191,
-      "q_detrended": 0.956012
+      "price_to_rent": 52.2152
     },
     {
       "quarter": "1995-Q2",
       "date": "1995-04-01",
       "price_to_income": 0.0472,
-      "price_to_rent": 51.3684,
-      "q_equity": 1.7815,
-      "q_detrended": 0.969036
+      "price_to_rent": 51.3684
     },
     {
       "quarter": "1995-Q3",
       "date": "1995-07-01",
       "price_to_income": 0.0467,
-      "price_to_rent": 51.1234,
-      "q_equity": 1.758267,
-      "q_detrended": 0.958254
+      "price_to_rent": 51.1234
     },
     {
       "quarter": "1995-Q4",
       "date": "1995-10-01",
       "price_to_income": 0.0467,
-      "price_to_rent": 50.795,
-      "q_equity": 1.745786,
-      "q_detrended": 0.953427
+      "price_to_rent": 50.795
     },
     {
       "quarter": "1996-Q1",
       "date": "1996-01-01",
       "price_to_income": 0.0462,
-      "price_to_rent": 50.2768,
-      "q_equity": 1.706639,
-      "q_detrended": 0.934675
+      "price_to_rent": 50.2768
     },
     {
       "quarter": "1996-Q2",
       "date": "1996-04-01",
       "price_to_income": 0.0466,
-      "price_to_rent": 50.4204,
-      "q_equity": 1.7503,
-      "q_detrended": 0.960147
+      "price_to_rent": 50.4204
     },
     {
       "quarter": "1996-Q3",
       "date": "1996-07-01",
       "price_to_income": 0.046,
-      "price_to_rent": 50.2714,
-      "q_equity": 1.761982,
-      "q_detrended": 0.967774
+      "price_to_rent": 50.2714
     },
     {
       "quarter": "1996-Q4",
       "date": "1996-10-01",
       "price_to_income": 0.0461,
-      "price_to_rent": 50.0469,
-      "q_equity": 1.866547,
-      "q_detrended": 1.024296
+      "price_to_rent": 50.0469
     },
     {
       "quarter": "1997-Q1",
       "date": "1997-01-01",
       "price_to_income": 0.0461,
-      "price_to_rent": 50.1512,
-      "q_equity": 1.829201,
-      "q_detrended": 1.00367
+      "price_to_rent": 50.1512
     },
     {
       "quarter": "1997-Q2",
       "date": "1997-04-01",
       "price_to_income": 0.0466,
-      "price_to_rent": 50.3613,
-      "q_equity": 1.8967,
-      "q_detrended": 1.039323
+      "price_to_rent": 50.3613
     },
     {
       "quarter": "1997-Q3",
       "date": "1997-07-01",
       "price_to_income": 0.047,
-      "price_to_rent": 51.0356,
-      "q_equity": 1.9638,
-      "q_detrended": 1.073549
+      "price_to_rent": 51.0356
     },
     {
       "quarter": "1997-Q4",
       "date": "1997-10-01",
       "price_to_income": 0.0479,
-      "price_to_rent": 51.5738,
-      "q_equity": 1.929245,
-      "q_detrended": 1.052906
+      "price_to_rent": 51.5738
     },
     {
       "quarter": "1998-Q1",
       "date": "1998-01-01",
       "price_to_income": 0.0479,
-      "price_to_rent": 52.5116,
-      "q_equity": 1.849215,
-      "q_detrended": 1.008948
+      "price_to_rent": 52.5116
     },
     {
       "quarter": "1998-Q2",
       "date": "1998-04-01",
       "price_to_income": 0.0487,
-      "price_to_rent": 52.9903,
-      "q_equity": 1.8913,
-      "q_detrended": 1.030957
+      "price_to_rent": 52.9903
     },
     {
       "quarter": "1998-Q3",
       "date": "1998-07-01",
       "price_to_income": 0.0487,
-      "price_to_rent": 52.8052,
-      "q_equity": 1.93137,
-      "q_detrended": 1.051253
+      "price_to_rent": 52.8052
     },
     {
       "quarter": "1998-Q4",
       "date": "1998-10-01",
       "price_to_income": 0.0494,
-      "price_to_rent": 53.2962,
-      "q_equity": 1.954736,
-      "q_detrended": 1.06214
+      "price_to_rent": 53.2962
     },
     {
       "quarter": "1999-Q1",
       "date": "1999-01-01",
       "price_to_income": 0.0497,
-      "price_to_rent": 53.8981,
-      "q_equity": 1.908373,
-      "q_detrended": 1.035932
+      "price_to_rent": 53.8981
     },
     {
       "quarter": "1999-Q2",
       "date": "1999-04-01",
       "price_to_income": 0.0507,
-      "price_to_rent": 54.6911,
-      "q_equity": 1.9172,
-      "q_detrended": 1.039631
+      "price_to_rent": 54.6911
     },
     {
       "quarter": "1999-Q3",
       "date": "1999-07-01",
       "price_to_income": 0.0513,
-      "price_to_rent": 55.6892,
-      "q_equity": 2.013603,
-      "q_detrended": 1.089448
+      "price_to_rent": 55.6892
     },
     {
       "quarter": "1999-Q4",
       "date": "1999-10-01",
       "price_to_income": 0.0527,
-      "price_to_rent": 56.7562,
-      "q_equity": 2.110087,
-      "q_detrended": 1.137875
+      "price_to_rent": 56.7562
     },
     {
       "quarter": "2000-Q1",
       "date": "2000-01-01",
       "price_to_income": 0.0537,
-      "price_to_rent": 57.5346,
-      "q_equity": 1.932329,
-      "q_detrended": 1.040973
+      "price_to_rent": 57.5346
     },
     {
       "quarter": "2000-Q2",
       "date": "2000-04-01",
       "price_to_income": 0.0547,
-      "price_to_rent": 58.1842,
-      "q_equity": 1.9461,
-      "q_detrended": 1.047212
+      "price_to_rent": 58.1842
     },
     {
       "quarter": "2000-Q3",
       "date": "2000-07-01",
       "price_to_income": 0.0531,
-      "price_to_rent": 57.8325,
-      "q_equity": 1.946412,
-      "q_detrended": 1.046253
+      "price_to_rent": 57.8325
     },
     {
       "quarter": "2000-Q4",
       "date": "2000-10-01",
       "price_to_income": 0.0541,
-      "price_to_rent": 58.6976,
-      "q_equity": 1.962378,
-      "q_detrended": 1.053556
+      "price_to_rent": 58.6976
     },
     {
       "quarter": "2001-Q1",
       "date": "2001-01-01",
       "price_to_income": 0.0548,
-      "price_to_rent": 59.6998,
-      "q_equity": 1.813074,
-      "q_detrended": 0.973982
+      "price_to_rent": 59.6998
     },
     {
       "quarter": "2001-Q2",
       "date": "2001-04-01",
       "price_to_income": 0.0565,
-      "price_to_rent": 61.1301,
-      "q_equity": 1.8713,
-      "q_detrended": 1.005146
+      "price_to_rent": 61.1301
     },
     {
       "quarter": "2001-Q3",
       "date": "2001-07-01",
       "price_to_income": 0.058,
-      "price_to_rent": 64.002,
-      "q_equity": 1.994401,
-      "q_detrended": 1.0697
+      "price_to_rent": 64.002
     },
     {
       "quarter": "2001-Q4",
       "date": "2001-10-01",
       "price_to_income": 0.0599,
-      "price_to_rent": 65.6436,
-      "q_equity": 2.002625,
-      "q_detrended": 1.072513
+      "price_to_rent": 65.6436
     },
     {
       "quarter": "2002-Q1",
       "date": "2002-01-01",
       "price_to_income": 0.0614,
-      "price_to_rent": 68.2289,
-      "q_equity": 1.941678,
-      "q_detrended": 1.039043
+      "price_to_rent": 68.2289
     },
     {
       "quarter": "2002-Q2",
       "date": "2002-04-01",
       "price_to_income": 0.0649,
-      "price_to_rent": 71.5823,
-      "q_equity": 2.0631,
-      "q_detrended": 1.101836
+      "price_to_rent": 71.5823
     },
     {
       "quarter": "2002-Q3",
       "date": "2002-07-01",
       "price_to_income": 0.0665,
-      "price_to_rent": 74.1971,
-      "q_equity": 2.19197,
-      "q_detrended": 1.16705
+      "price_to_rent": 74.1971
     },
     {
       "quarter": "2002-Q4",
       "date": "2002-10-01",
       "price_to_income": 0.0686,
-      "price_to_rent": 76.2257,
-      "q_equity": 2.197411,
-      "q_detrended": 1.166421
+      "price_to_rent": 76.2257
     },
     {
       "quarter": "2003-Q1",
       "date": "2003-01-01",
       "price_to_income": 0.0696,
-      "price_to_rent": 78.7793,
-      "q_equity": 2.091694,
-      "q_detrended": 1.108115
+      "price_to_rent": 78.7793
     },
     {
       "quarter": "2003-Q2",
       "date": "2003-04-01",
       "price_to_income": 0.073,
-      "price_to_rent": 82.3198,
-      "q_equity": 2.211,
-      "q_detrended": 1.167895
+      "price_to_rent": 82.3198
     },
     {
       "quarter": "2003-Q3",
       "date": "2003-07-01",
       "price_to_income": 0.0749,
-      "price_to_rent": 86.5702,
-      "q_equity": 2.322627,
-      "q_detrended": 1.222306
+      "price_to_rent": 86.5702
     },
     {
       "quarter": "2003-Q4",
       "date": "2003-10-01",
       "price_to_income": 0.0773,
-      "price_to_rent": 88.6174,
-      "q_equity": 2.404915,
-      "q_detrended": 1.260299
+      "price_to_rent": 88.6174
     },
     {
       "quarter": "2004-Q1",
       "date": "2004-01-01",
       "price_to_income": 0.0758,
-      "price_to_rent": 88.6261,
-      "q_equity": 2.210669,
-      "q_detrended": 1.155517
+      "price_to_rent": 88.6261
     },
     {
       "quarter": "2004-Q2",
       "date": "2004-04-01",
       "price_to_income": 0.0747,
-      "price_to_rent": 86.8591,
-      "q_equity": 2.2149,
-      "q_detrended": 1.154809
+      "price_to_rent": 86.8591
     },
     {
       "quarter": "2004-Q3",
       "date": "2004-07-01",
       "price_to_income": 0.0746,
-      "price_to_rent": 86.3037,
-      "q_equity": 2.258681,
-      "q_detrended": 1.174376
+      "price_to_rent": 86.3037
     },
     {
       "quarter": "2004-Q4",
       "date": "2004-10-01",
       "price_to_income": 0.0754,
-      "price_to_rent": 86.8285,
-      "q_equity": 2.302934,
-      "q_detrended": 1.193796
+      "price_to_rent": 86.8285
     },
     {
       "quarter": "2005-Q1",
       "date": "2005-01-01",
       "price_to_income": 0.074,
-      "price_to_rent": 87.2121,
-      "q_equity": 2.125791,
-      "q_detrended": 1.100216
+      "price_to_rent": 87.2121
     },
     {
       "quarter": "2005-Q2",
       "date": "2005-04-01",
       "price_to_income": 0.0742,
-      "price_to_rent": 86.9054,
-      "q_equity": 2.1381,
-      "q_detrended": 1.10478
+      "price_to_rent": 86.9054
     },
     {
       "quarter": "2005-Q3",
       "date": "2005-07-01",
       "price_to_income": 0.072,
-      "price_to_rent": 86.3405,
-      "q_equity": 2.150828,
-      "q_detrended": 1.109495
+      "price_to_rent": 86.3405
     },
     {
       "quarter": "2005-Q4",
       "date": "2005-10-01",
       "price_to_income": 0.073,
-      "price_to_rent": 86.838,
-      "q_equity": 2.196061,
-      "q_detrended": 1.130623
+      "price_to_rent": 86.838
     },
     {
       "quarter": "2006-Q1",
       "date": "2006-01-01",
       "price_to_income": 0.073,
-      "price_to_rent": 87.8637,
-      "q_equity": 2.119922,
-      "q_detrended": 1.089956
+      "price_to_rent": 87.8637
     },
     {
       "quarter": "2006-Q2",
       "date": "2006-04-01",
       "price_to_income": 0.0752,
-      "price_to_rent": 89.967,
-      "q_equity": 2.1901,
-      "q_detrended": 1.124015
+      "price_to_rent": 89.967
     },
     {
       "quarter": "2006-Q3",
       "date": "2006-07-01",
       "price_to_income": 0.075,
-      "price_to_rent": 90.7808,
-      "q_equity": 2.223887,
-      "q_detrended": 1.139105
+      "price_to_rent": 90.7808
     },
     {
       "quarter": "2006-Q4",
       "date": "2006-10-01",
       "price_to_income": 0.0759,
-      "price_to_rent": 90.9488,
-      "q_equity": 2.291558,
-      "q_detrended": 1.171005
+      "price_to_rent": 90.9488
     },
     {
       "quarter": "2007-Q1",
       "date": "2007-01-01",
       "price_to_income": 0.0756,
-      "price_to_rent": 91.164,
-      "q_equity": 2.217278,
-      "q_detrended": 1.130998
+      "price_to_rent": 91.164
     },
     {
       "quarter": "2007-Q2",
       "date": "2007-04-01",
       "price_to_income": 0.0785,
-      "price_to_rent": 93.3423,
-      "q_equity": 2.2864,
-      "q_detrended": 1.163696
+      "price_to_rent": 93.3423
     },
     {
       "quarter": "2007-Q3",
       "date": "2007-07-01",
       "price_to_income": 0.0796,
-      "price_to_rent": 95.3956,
-      "q_equity": 2.394581,
-      "q_detrended": 1.215365
+      "price_to_rent": 95.3956
     },
     {
       "quarter": "2007-Q4",
       "date": "2007-10-01",
       "price_to_income": 0.0822,
-      "price_to_rent": 96.7827,
-      "q_equity": 2.459756,
-      "q_detrended": 1.244603
+      "price_to_rent": 96.7827
     },
     {
       "quarter": "2008-Q1",
       "date": "2008-01-01",
       "price_to_income": 0.0817,
-      "price_to_rent": 96.0761,
-      "q_equity": 2.26783,
-      "q_detrended": 1.145331
+      "price_to_rent": 96.0761
     },
     {
       "quarter": "2008-Q2",
       "date": "2008-04-01",
       "price_to_income": 0.0805,
-      "price_to_rent": 92.6148,
-      "q_equity": 2.2072,
-      "q_detrended": 1.113076
+      "price_to_rent": 92.6148
     },
     {
       "quarter": "2008-Q3",
       "date": "2008-07-01",
       "price_to_income": 0.078,
-      "price_to_rent": 89.1778,
-      "q_equity": 2.135163,
-      "q_detrended": 1.075687
+      "price_to_rent": 89.1778
     },
     {
       "quarter": "2008-Q4",
       "date": "2008-10-01",
       "price_to_income": 0.0766,
-      "price_to_rent": 85.7761,
-      "q_equity": 1.950368,
-      "q_detrended": 0.982815
+      "price_to_rent": 85.7761
     },
     {
       "quarter": "2009-Q1",
       "date": "2009-01-01",
       "price_to_income": 0.0747,
-      "price_to_rent": 84.697,
-      "q_equity": 1.858973,
-      "q_detrended": 0.937555
+      "price_to_rent": 84.697
     },
     {
       "quarter": "2009-Q2",
       "date": "2009-04-01",
       "price_to_income": 0.0774,
-      "price_to_rent": 86.5651,
-      "q_equity": 1.9581,
-      "q_detrended": 0.987707
+      "price_to_rent": 86.5651
     },
     {
       "quarter": "2009-Q3",
       "date": "2009-07-01",
       "price_to_income": 0.0804,
-      "price_to_rent": 89.7566,
-      "q_equity": 2.106985,
-      "q_detrended": 1.061989
+      "price_to_rent": 89.7566
     },
     {
       "quarter": "2009-Q4",
       "date": "2009-10-01",
       "price_to_income": 0.0843,
-      "price_to_rent": 93.212,
-      "q_equity": 2.31329,
-      "q_detrended": 1.163737
+      "price_to_rent": 93.212
     },
     {
       "quarter": "2010-Q1",
       "date": "2010-01-01",
       "price_to_income": 0.084,
-      "price_to_rent": 95.5468,
-      "q_equity": 2.342822,
-      "q_detrended": 1.176205
+      "price_to_rent": 95.5468
     },
     {
       "quarter": "2010-Q2",
       "date": "2010-04-01",
       "price_to_income": 0.0853,
-      "price_to_rent": 96.0002,
-      "q_equity": 2.3039,
-      "q_detrended": 1.154614
+      "price_to_rent": 96.0002
     },
     {
       "quarter": "2010-Q3",
       "date": "2010-07-01",
       "price_to_income": 0.0829,
-      "price_to_rent": 94.4523,
-      "q_equity": 2.301583,
-      "q_detrended": 1.15147
+      "price_to_rent": 94.4523
     },
     {
       "quarter": "2010-Q4",
       "date": "2010-10-01",
       "price_to_income": 0.0828,
-      "price_to_rent": 93.3232,
-      "q_equity": 2.306879,
-      "q_detrended": 1.152152
+      "price_to_rent": 93.3232
     },
     {
       "quarter": "2011-Q1",
       "date": "2011-01-01",
       "price_to_income": 0.0808,
-      "price_to_rent": 91.811,
-      "q_equity": 2.199614,
-      "q_detrended": 1.097365
+      "price_to_rent": 91.811
     },
     {
       "quarter": "2011-Q2",
       "date": "2011-04-01",
       "price_to_income": 0.0799,
-      "price_to_rent": 89.8286,
-      "q_equity": 2.1943,
-      "q_detrended": 1.093563
+      "price_to_rent": 89.8286
     },
     {
       "quarter": "2011-Q3",
       "date": "2011-07-01",
       "price_to_income": 0.0776,
-      "price_to_rent": 87.8064,
-      "q_equity": 2.095943,
-      "q_detrended": 1.044022
+      "price_to_rent": 87.8064
     },
     {
       "quarter": "2011-Q4",
       "date": "2011-10-01",
       "price_to_income": 0.0764,
-      "price_to_rent": 85.4787,
-      "q_equity": 2.076752,
-      "q_detrended": 1.034064
+      "price_to_rent": 85.4787
     },
     {
       "quarter": "2012-Q1",
       "date": "2012-01-01",
       "price_to_income": 0.0759,
-      "price_to_rent": 85.5972,
-      "q_equity": 2.031861,
-      "q_detrended": 1.011579
+      "price_to_rent": 85.5972
     },
     {
       "quarter": "2012-Q2",
       "date": "2012-04-01",
       "price_to_income": 0.0758,
-      "price_to_rent": 84.681,
-      "q_equity": 2.0401,
-      "q_detrended": 1.015506
+      "price_to_rent": 84.681
     },
     {
       "quarter": "2012-Q3",
       "date": "2012-07-01",
       "price_to_income": 0.0748,
-      "price_to_rent": 84.4355,
-      "q_equity": 2.01742,
-      "q_detrended": 1.00417
+      "price_to_rent": 84.4355
     },
     {
       "quarter": "2012-Q4",
       "date": "2012-10-01",
       "price_to_income": 0.0759,
-      "price_to_rent": 84.9076,
-      "q_equity": 2.082687,
-      "q_detrended": 1.036251
+      "price_to_rent": 84.9076
     },
     {
       "quarter": "2013-Q1",
       "date": "2013-01-01",
       "price_to_income": 0.0748,
-      "price_to_rent": 85.3223,
-      "q_equity": 2.039294,
-      "q_detrended": 1.014502
+      "price_to_rent": 85.3223
     },
     {
       "quarter": "2013-Q2",
       "date": "2013-04-01",
       "price_to_income": 0.0763,
-      "price_to_rent": 86.182,
-      "q_equity": 2.0804,
-      "q_detrended": 1.034573
+      "price_to_rent": 86.182
     },
     {
       "quarter": "2013-Q3",
       "date": "2013-07-01",
       "price_to_income": 0.077,
-      "price_to_rent": 88.3623,
-      "q_equity": 2.128935,
-      "q_detrended": 1.058074
+      "price_to_rent": 88.3623
     },
     {
       "quarter": "2013-Q4",
       "date": "2013-10-01",
       "price_to_income": 0.0795,
-      "price_to_rent": 90.6593,
-      "q_equity": 2.231245,
-      "q_detrended": 1.107728
+      "price_to_rent": 90.6593
     },
     {
       "quarter": "2014-Q1",
       "date": "2014-01-01",
       "price_to_income": 0.0805,
-      "price_to_rent": 91.9111,
-      "q_equity": 2.159164,
-      "q_detrended": 1.071174
+      "price_to_rent": 91.9111
     },
     {
       "quarter": "2014-Q2",
       "date": "2014-04-01",
       "price_to_income": 0.0816,
-      "price_to_rent": 92.6807,
-      "q_equity": 2.204,
-      "q_detrended": 1.092422
+      "price_to_rent": 92.6807
     },
     {
       "quarter": "2014-Q3",
       "date": "2014-07-01",
       "price_to_income": 0.0824,
-      "price_to_rent": 93.7551,
-      "q_equity": 2.241148,
-      "q_detrended": 1.109656
+      "price_to_rent": 93.7551
     },
     {
       "quarter": "2014-Q4",
       "date": "2014-10-01",
       "price_to_income": 0.0835,
-      "price_to_rent": 94.5662,
-      "q_equity": 2.331142,
-      "q_detrended": 1.15256
+      "price_to_rent": 94.5662
     },
     {
       "quarter": "2015-Q1",
       "date": "2015-01-01",
       "price_to_income": 0.085,
-      "price_to_rent": 96.3166,
-      "q_equity": 2.268853,
-      "q_detrended": 1.120488
+      "price_to_rent": 96.3166
     },
     {
       "quarter": "2015-Q2",
       "date": "2015-04-01",
       "price_to_income": 0.0884,
-      "price_to_rent": 99.897,
-      "q_equity": 2.3852,
-      "q_detrended": 1.176057
+      "price_to_rent": 99.897
     },
     {
       "quarter": "2015-Q3",
       "date": "2015-07-01",
       "price_to_income": 0.0901,
-      "price_to_rent": 102.2296,
-      "q_equity": 2.443236,
-      "q_detrended": 1.202496
+      "price_to_rent": 102.2296
     },
     {
       "quarter": "2015-Q4",
       "date": "2015-10-01",
       "price_to_income": 0.0896,
-      "price_to_rent": 101.5569,
-      "q_equity": 2.456893,
-      "q_detrended": 1.207011
+      "price_to_rent": 101.5569
     },
     {
       "quarter": "2016-Q1",
       "date": "2016-01-01",
       "price_to_income": 0.0894,
-      "price_to_rent": 101.9294,
-      "q_equity": 2.325334,
-      "q_detrended": 1.140932
+      "price_to_rent": 101.9294
     },
     {
       "quarter": "2016-Q2",
       "date": "2016-04-01",
       "price_to_income": 0.0907,
-      "price_to_rent": 103.2455,
-      "q_equity": 2.3872,
-      "q_detrended": 1.169541
+      "price_to_rent": 103.2455
     },
     {
       "quarter": "2016-Q3",
       "date": "2016-07-01",
       "price_to_income": 0.0913,
-      "price_to_rent": 105.049,
-      "q_equity": 2.44189,
-      "q_detrended": 1.194332
+      "price_to_rent": 105.049
     },
     {
       "quarter": "2016-Q4",
       "date": "2016-10-01",
       "price_to_income": 0.0945,
-      "price_to_rent": 108.6338,
-      "q_equity": 2.569121,
-      "q_detrended": 1.253907
+      "price_to_rent": 108.6338
     },
     {
       "quarter": "2017-Q1",
       "date": "2017-01-01",
       "price_to_income": 0.0969,
-      "price_to_rent": 111.5672,
-      "q_equity": 2.503154,
-      "q_detrended": 1.219468
+      "price_to_rent": 111.5672
     },
     {
       "quarter": "2017-Q2",
       "date": "2017-04-01",
       "price_to_income": 0.0984,
-      "price_to_rent": 113.0671,
-      "q_equity": 2.5766,
-      "q_detrended": 1.252658
+      "price_to_rent": 113.0671
     },
     {
       "quarter": "2017-Q3",
       "date": "2017-07-01",
       "price_to_income": 0.0974,
-      "price_to_rent": 113.1443,
-      "q_equity": 2.566169,
-      "q_detrended": 1.245103
+      "price_to_rent": 113.1443
     },
     {
       "quarter": "2017-Q4",
       "date": "2017-10-01",
       "price_to_income": 0.0976,
-      "price_to_rent": 113.2087,
-      "q_equity": 2.63946,
-      "q_detrended": 1.277838
+      "price_to_rent": 113.2087
     },
     {
       "quarter": "2018-Q1",
       "date": "2018-01-01",
       "price_to_income": 0.0965,
-      "price_to_rent": 112.8061,
-      "q_equity": 2.507031,
-      "q_detrended": 1.211647
+      "price_to_rent": 112.8061
     },
     {
       "quarter": "2018-Q2",
       "date": "2018-04-01",
       "price_to_income": 0.0956,
-      "price_to_rent": 111.7212,
-      "q_equity": 2.4785,
-      "q_detrended": 1.195962
+      "price_to_rent": 111.7212
     },
     {
       "quarter": "2018-Q3",
       "date": "2018-07-01",
       "price_to_income": 0.0933,
-      "price_to_rent": 110.3173,
-      "q_equity": 2.434705,
-      "q_detrended": 1.173184
+      "price_to_rent": 110.3173
     },
     {
       "quarter": "2018-Q4",
       "date": "2018-10-01",
       "price_to_income": 0.0904,
-      "price_to_rent": 106.7922,
-      "q_equity": 2.390521,
-      "q_detrended": 1.150491
+      "price_to_rent": 106.7922
     },
     {
       "quarter": "2019-Q1",
       "date": "2019-01-01",
       "price_to_income": 0.0868,
-      "price_to_rent": 103.928,
-      "q_equity": 2.249483,
-      "q_detrended": 1.081879
+      "price_to_rent": 103.928
     },
     {
       "quarter": "2019-Q2",
       "date": "2019-04-01",
       "price_to_income": 0.0861,
-      "price_to_rent": 102.9956,
-      "q_equity": 2.2735,
-      "q_detrended": 1.092602
+      "price_to_rent": 102.9956
     },
     {
       "quarter": "2019-Q3",
       "date": "2019-07-01",
       "price_to_income": 0.0877,
-      "price_to_rent": 105.9357,
-      "q_equity": 2.400318,
-      "q_detrended": 1.152165
+      "price_to_rent": 105.9357
     },
     {
       "quarter": "2019-Q4",
       "date": "2019-10-01",
       "price_to_income": 0.0904,
-      "price_to_rent": 109.3025,
-      "q_equity": 2.498722,
-      "q_detrended": 1.197583
+      "price_to_rent": 109.3025
     },
     {
       "quarter": "2020-Q1",
       "date": "2020-01-01",
       "price_to_income": 0.0908,
-      "price_to_rent": 111.2933,
-      "q_equity": 2.474421,
-      "q_detrended": 1.184266
+      "price_to_rent": 111.2933
     },
     {
       "quarter": "2020-Q2",
       "date": "2020-04-01",
       "price_to_income": 0.0891,
-      "price_to_rent": 110.6499,
-      "q_equity": 2.4564,
-      "q_detrended": 1.174083
+      "price_to_rent": 110.6499
     },
     {
       "quarter": "2020-Q3",
       "date": "2020-07-01",
       "price_to_income": 0.087,
-      "price_to_rent": 112.4127,
-      "q_equity": 2.555915,
-      "q_detrended": 1.219661
+      "price_to_rent": 112.4127
     },
     {
       "quarter": "2020-Q4",
       "date": "2020-10-01",
       "price_to_income": 0.089,
-      "price_to_rent": 114.8041,
-      "q_equity": 2.724964,
-      "q_detrended": 1.297579
+      "price_to_rent": 114.8041
     },
     {
       "quarter": "2021-Q1",
       "date": "2021-01-01",
       "price_to_income": 0.0958,
-      "price_to_rent": 121.2692,
-      "q_equity": 2.720777,
-      "q_detrended": 1.292904
+      "price_to_rent": 121.2692
     },
     {
       "quarter": "2021-Q2",
       "date": "2021-04-01",
       "price_to_income": 0.102,
-      "price_to_rent": 129.0757,
-      "q_equity": 2.8933,
-      "q_detrended": 1.371417
+      "price_to_rent": 129.0757
     },
     {
       "quarter": "2021-Q3",
       "date": "2021-07-01",
       "price_to_income": 0.1059,
-      "price_to_rent": 136.4924,
-      "q_equity": 3.135141,
-      "q_detrended": 1.481421
+      "price_to_rent": 136.4924
     },
     {
       "quarter": "2021-Q4",
       "date": "2021-10-01",
       "price_to_income": 0.11,
-      "price_to_rent": 141.4674,
-      "q_equity": 3.37268,
-      "q_detrended": 1.587871
+      "price_to_rent": 141.4674
     },
     {
       "quarter": "2022-Q1",
       "date": "2022-01-01",
       "price_to_income": 0.11,
-      "price_to_rent": 143.0351,
-      "q_equity": 3.013591,
-      "q_detrended": 1.414968
+      "price_to_rent": 143.0351
     },
     {
       "quarter": "2022-Q2",
       "date": "2022-04-01",
       "price_to_income": 0.1085,
-      "price_to_rent": 140.2804,
-      "q_equity": 2.9731,
-      "q_detrended": 1.392379
+      "price_to_rent": 140.2804
     },
     {
       "quarter": "2022-Q3",
       "date": "2022-07-01",
       "price_to_income": 0.1046,
-      "price_to_rent": 135.2416,
-      "q_equity": 2.846764,
-      "q_detrended": 1.330289
+      "price_to_rent": 135.2416
     },
     {
       "quarter": "2022-Q4",
       "date": "2022-10-01",
       "price_to_income": 0.1038,
-      "price_to_rent": 132.2122,
-      "q_equity": 2.852341,
-      "q_detrended": 1.329997
+      "price_to_rent": 132.2122
     },
     {
       "quarter": "2023-Q1",
       "date": "2023-01-01",
       "price_to_income": 0.1015,
-      "price_to_rent": 130.5633,
-      "q_equity": 2.578971,
-      "q_detrended": 1.200863
+      "price_to_rent": 130.5633
     },
     {
       "quarter": "2023-Q2",
       "date": "2023-04-01",
       "price_to_income": 0.1038,
-      "price_to_rent": 130.467,
-      "q_equity": 2.67241,
-      "q_detrended": 1.242343
+      "price_to_rent": 130.467
     },
     {
       "quarter": "2023-Q3",
       "date": "2023-07-01",
       "price_to_income": 0.1045,
-      "price_to_rent": 130.6561,
-      "q_equity": 2.717139,
-      "q_detrended": 1.260953
+      "price_to_rent": 130.6561
     },
     {
       "quarter": "2023-Q4",
       "date": "2023-10-01",
       "price_to_income": 0.1063,
-      "price_to_rent": 131.2651,
-      "q_equity": 2.814328,
-      "q_detrended": 1.303494
+      "price_to_rent": 131.2651
     },
     {
       "quarter": "2024-Q1",
       "date": "2024-01-01",
       "price_to_income": 0.1056,
-      "price_to_rent": 130.8408,
-      "q_equity": 2.705976,
-      "q_detrended": 1.251245
+      "price_to_rent": 130.8408
     },
     {
       "quarter": "2024-Q2",
       "date": "2024-04-01",
       "price_to_income": 0.1072,
-      "price_to_rent": 130.5151,
-      "q_equity": 2.780026,
-      "q_detrended": 1.283149
+      "price_to_rent": 130.5151
     },
     {
       "quarter": "2024-Q3",
       "date": "2024-07-01",
       "price_to_income": 0.1049,
-      "price_to_rent": 130.0933,
-      "q_equity": 2.786395,
-      "q_detrended": 1.283763
+      "price_to_rent": 130.0933
     },
     {
       "quarter": "2024-Q4",
       "date": "2024-10-01",
       "price_to_income": 0.1061,
-      "price_to_rent": 130.1878,
-      "q_equity": 2.860375,
-      "q_detrended": 1.315252
+      "price_to_rent": 130.1878
     },
     {
       "quarter": "2025-Q1",
       "date": "2025-01-01",
       "price_to_income": 0.105,
-      "price_to_rent": 129.9461,
-      "q_equity": 2.74512,
-      "q_detrended": 1.260172
+      "price_to_rent": 129.9461
     },
     {
       "quarter": "2025-Q2",
       "date": "2025-04-01",
       "price_to_income": 0.1066,
-      "price_to_rent": 130.963,
-      "q_equity": 2.821946,
-      "q_detrended": 1.29308
+      "price_to_rent": 130.963
     },
     {
       "quarter": "2025-Q3",
       "date": "2025-07-01",
       "price_to_income": 0.1076,
-      "price_to_rent": 133.9153,
-      "q_equity": 2.897316,
-      "q_detrended": 1.324988
+      "price_to_rent": 133.9153
     },
     {
       "quarter": "2025-Q4",
       "date": "2025-10-01",
       "price_to_income": 0.1105,
-      "price_to_rent": null,
-      "q_equity": 3.044609,
-      "q_detrended": 1.389151
+      "price_to_rent": null
     },
     {
       "quarter": "2026-Q1",
       "date": "2026-01-01",
       "price_to_income": 0.112,
-      "price_to_rent": null,
-      "q_equity": 2.928222,
-      "q_detrended": 1.333381
+      "price_to_rent": null
     },
     {
       "quarter": "2026-Q2",
       "date": "2026-04-01",
       "price_to_income": null,
-      "price_to_rent": null,
-      "q_equity": 2.902255,
-      "q_detrended": 1.319035
+      "price_to_rent": null
     }
   ],
   "destinations": [
@@ -1789,27 +1339,6 @@
       "value": 50.0,
       "move_required_pct": 62.63,
       "direction": "fall"
-    },
-    {
-      "measure": "q_equity",
-      "destination": "1995 trough",
-      "value": 1.7066,
-      "move_required_pct": 32.39,
-      "direction": "fall"
-    },
-    {
-      "measure": "q_equity",
-      "destination": "q = 1",
-      "value": 1.0,
-      "move_required_pct": 51.53,
-      "direction": "fall"
-    },
-    {
-      "measure": "q_detrended",
-      "destination": "1995 trough",
-      "value": 0.9347,
-      "move_required_pct": 22.91,
-      "direction": "fall"
     }
   ],
   "ladder": [
@@ -1818,77 +1347,49 @@
       "price_to_income": 0.112,
       "price_to_income_percentile": 100,
       "price_to_rent": 133.9,
-      "price_to_rent_percentile": 98,
-      "q_equity": 2.9023,
-      "q_equity_percentile": 96,
-      "q_detrended": 1.319,
-      "q_detrended_percentile": 93
+      "price_to_rent_percentile": 98
     },
     {
       "price_fall_pct": 10,
       "price_to_income": 0.1008,
       "price_to_income_percentile": 84,
       "price_to_rent": 120.5,
-      "price_to_rent_percentile": 91,
-      "q_equity": 2.5331,
-      "q_equity_percentile": 81,
-      "q_detrended": 1.1513,
-      "q_detrended_percentile": 59
+      "price_to_rent_percentile": 91
     },
     {
       "price_fall_pct": 20,
       "price_to_income": 0.0896,
       "price_to_income_percentile": 72,
       "price_to_rent": 107.1,
-      "price_to_rent_percentile": 85,
-      "q_equity": 2.164,
-      "q_equity_percentile": 48,
-      "q_detrended": 0.9835,
-      "q_detrended_percentile": 9
+      "price_to_rent_percentile": 85
     },
     {
       "price_fall_pct": 30,
       "price_to_income": 0.0784,
       "price_to_income_percentile": 50,
       "price_to_rent": 93.7,
-      "price_to_rent_percentile": 76,
-      "q_equity": 1.7948,
-      "q_equity_percentile": 5,
-      "q_detrended": 0.8157,
-      "q_detrended_percentile": 0
+      "price_to_rent_percentile": 76
     },
     {
       "price_fall_pct": 40,
       "price_to_income": 0.0672,
       "price_to_income_percentile": 25,
       "price_to_rent": 80.3,
-      "price_to_rent_percentile": 58,
-      "q_equity": 1.4257,
-      "q_equity_percentile": 0,
-      "q_detrended": 0.6479,
-      "q_detrended_percentile": 0
+      "price_to_rent_percentile": 58
     },
     {
       "price_fall_pct": 50,
       "price_to_income": 0.056,
       "price_to_income_percentile": 20,
       "price_to_rent": 67.0,
-      "price_to_rent_percentile": 55,
-      "q_equity": 1.0565,
-      "q_equity_percentile": 0,
-      "q_detrended": 0.4802,
-      "q_detrended_percentile": 0
+      "price_to_rent_percentile": 55
     },
     {
       "price_fall_pct": 60,
       "price_to_income": 0.0448,
       "price_to_income_percentile": 0,
       "price_to_rent": 53.6,
-      "price_to_rent_percentile": 50,
-      "q_equity": 0.6874,
-      "q_equity_percentile": 0,
-      "q_detrended": 0.3124,
-      "q_detrended_percentile": 0
+      "price_to_rent_percentile": 50
     }
   ]
 }

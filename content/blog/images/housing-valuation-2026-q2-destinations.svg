@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="466" viewBox="0 0 900 466" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="298" viewBox="0 0 900 298" role="img" aria-labelledby="title desc">
   <title id="title">Distance to the destinations</title>
-  <desc id="desc">Price fall required to reach each valuation destination. The Q is equity over structure replacement cost; the detrended Q is the ratio to its running mean.</desc>
+  <desc id="desc">Price fall required to reach each valuation destination.</desc>
   <style>text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     .bg { fill: #f5f2ed; }
     .heading { fill: #3a3432; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -41,25 +41,25 @@
       .dot.accent { fill: #cc8850; }
     }</style>
 
-  <rect width="900" height="466" class="bg"/>
+  <rect width="900" height="298" class="bg"/>
   <text x="42" y="40" class="heading">Distance to the destinations</text>
-  <text x="42" y="66" class="subhead">Price fall required to reach each valuation destination. The Q is equity over structure replacement cost; the detrended Q is the ratio to its running mean.</text>
-  <line x1="258.0" y1="106" x2="258.0" y2="398" class="grid"/>
-  <text x="258.0" y="422" class="tick" text-anchor="middle">0%</text>
-  <line x1="328.7" y1="106" x2="328.7" y2="398" class="grid"/>
-  <text x="328.7" y="422" class="tick" text-anchor="middle">10%</text>
-  <line x1="399.3" y1="106" x2="399.3" y2="398" class="grid"/>
-  <text x="399.3" y="422" class="tick" text-anchor="middle">20%</text>
-  <line x1="470.0" y1="106" x2="470.0" y2="398" class="grid"/>
-  <text x="470.0" y="422" class="tick" text-anchor="middle">30%</text>
-  <line x1="540.7" y1="106" x2="540.7" y2="398" class="grid"/>
-  <text x="540.7" y="422" class="tick" text-anchor="middle">40%</text>
-  <line x1="611.3" y1="106" x2="611.3" y2="398" class="grid"/>
-  <text x="611.3" y="422" class="tick" text-anchor="middle">50%</text>
-  <line x1="682.0" y1="106" x2="682.0" y2="398" class="grid"/>
-  <text x="682.0" y="422" class="tick" text-anchor="middle">60%</text>
-  <line x1="752.7" y1="106" x2="752.7" y2="398" class="grid"/>
-  <text x="752.7" y="422" class="tick" text-anchor="middle">70%</text>
+  <text x="42" y="66" class="subhead">Price fall required to reach each valuation destination.</text>
+  <line x1="258.0" y1="106" x2="258.0" y2="230" class="grid"/>
+  <text x="258.0" y="254" class="tick" text-anchor="middle">0%</text>
+  <line x1="328.7" y1="106" x2="328.7" y2="230" class="grid"/>
+  <text x="328.7" y="254" class="tick" text-anchor="middle">10%</text>
+  <line x1="399.3" y1="106" x2="399.3" y2="230" class="grid"/>
+  <text x="399.3" y="254" class="tick" text-anchor="middle">20%</text>
+  <line x1="470.0" y1="106" x2="470.0" y2="230" class="grid"/>
+  <text x="470.0" y="254" class="tick" text-anchor="middle">30%</text>
+  <line x1="540.7" y1="106" x2="540.7" y2="230" class="grid"/>
+  <text x="540.7" y="254" class="tick" text-anchor="middle">40%</text>
+  <line x1="611.3" y1="106" x2="611.3" y2="230" class="grid"/>
+  <text x="611.3" y="254" class="tick" text-anchor="middle">50%</text>
+  <line x1="682.0" y1="106" x2="682.0" y2="230" class="grid"/>
+  <text x="682.0" y="254" class="tick" text-anchor="middle">60%</text>
+  <line x1="752.7" y1="106" x2="752.7" y2="230" class="grid"/>
+  <text x="752.7" y="254" class="tick" text-anchor="middle">70%</text>
   <text x="240" y="142" class="row-label" text-anchor="end">Price-to-rent</text>
   <text x="240" y="162" class="row-detail" text-anchor="end">1996 trough, 50.0</text>
   <line x1="258.0" y1="144" x2="700.6" y2="144" class="stem"/>
@@ -70,21 +70,6 @@
   <line x1="258.0" y1="200" x2="674.4" y2="200" class="stem"/>
   <circle cx="674.4" cy="200" r="6" class="dot"/>
   <text x="688.4" y="204" class="fall">59%</text>
-  <text x="240" y="254" class="row-label" text-anchor="end">Housing Q, raw</text>
-  <text x="240" y="274" class="row-detail" text-anchor="end">q = 1, 1.00</text>
-  <line x1="258.0" y1="256" x2="622.1" y2="256" class="stem accent"/>
-  <circle cx="622.1" cy="256" r="6" class="dot accent"/>
-  <text x="636.1" y="260" class="fall">52%</text>
-  <text x="240" y="310" class="row-label" text-anchor="end">Housing Q, raw</text>
-  <text x="240" y="330" class="row-detail" text-anchor="end">1995 trough, 1.71</text>
-  <line x1="258.0" y1="312" x2="486.9" y2="312" class="stem"/>
-  <circle cx="486.9" cy="312" r="6" class="dot"/>
-  <text x="500.9" y="316" class="fall">32%</text>
-  <text x="240" y="366" class="row-label" text-anchor="end">Housing Q, detrended</text>
-  <text x="240" y="386" class="row-detail" text-anchor="end">1995 trough, 0.93</text>
-  <line x1="258.0" y1="368" x2="419.9" y2="368" class="stem"/>
-  <circle cx="419.9" cy="368" r="6" class="dot"/>
-  <text x="433.9" y="372" class="fall">23%</text>
 
-  <text x="42" y="448" class="subhead">Source: OECD, ABS and RBA. Definitions as in the post.</text>
+  <text x="42" y="280" class="subhead">Source: OECD and ABS. Definitions as in the post.</text>
 </svg>

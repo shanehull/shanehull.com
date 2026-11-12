@@ -1,8 +1,8 @@
-price_fall_pct,price_to_income,price_to_income_percentile,price_to_rent,price_to_rent_percentile,q_equity,q_equity_percentile,q_detrended,q_detrended_percentile
-0,0.112,100,133.9,98,2.9023,96,1.319,93
-10,0.1008,84,120.5,91,2.5331,81,1.1513,59
-20,0.0896,72,107.1,85,2.164,48,0.9835,9
-30,0.0784,50,93.7,76,1.7948,5,0.8157,0
-40,0.0672,25,80.3,58,1.4257,0,0.6479,0
-50,0.056,20,67.0,55,1.0565,0,0.4802,0
-60,0.0448,0,53.6,50,0.6874,0,0.3124,0
+price_fall_pct,price_to_income,price_to_income_percentile,price_to_rent,price_to_rent_percentile
+0,0.112,100,133.9,98
+10,0.1008,84,120.5,91
+20,0.0896,72,107.1,85
+30,0.0784,50,93.7,76
+40,0.0672,25,80.3,58
+50,0.056,20,67.0,55
+60,0.0448,0,53.6,50
