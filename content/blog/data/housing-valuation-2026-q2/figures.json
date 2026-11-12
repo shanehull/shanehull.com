@@ -3,7 +3,7 @@
     {
       "type": "series",
       "output": "content/blog/images/housing-valuation-2026-q2.svg",
-      "title": "Australian housing valuation",
+      "title": "Australian house prices: income and rent",
       "subtitle": "Data to 2026-Q1; rent to 2025-Q3. Dashed lines mark the 25th and 75th percentiles of the period shown.",
       "source": "Source: OECD and ABS.",
       "data": "data.csv",

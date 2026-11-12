@@ -1,18 +1,18 @@
 ---
-title: Let's Pretend Valuation Matters
+title: Let's Pretend Reality Matters
 date: 2026-11-12
 description: An exercise in pricing an Australian housing reversion against household income and rent.
 tags:
   - housing
-  - valuation
+  - housing-affordability
   - australian-property
   - capital-cycle
   - mean-reversion
 ---
 
-The exercise prices a reversion. It does not forecast one. It assumes valuation multiples matter, even though the last three decades say otherwise. The question is how far Australian housing prices would have to fall to reach the multiples at the 1996 trough and the 1983 low.
+The exercise prices a reversion to reality. It does not forecast one. It assumes the historical relationships between house prices, income and rent still matter, even though the last three decades say otherwise. The question is how far prices would have to fall to reach the levels of the 1996 trough and the 1983 low.
 
-Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. Both are relative valuation multiples. They compare the price with earnings. They do not estimate an intrinsic value. They sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
+Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. They sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
 
 ## The measures
 
@@ -20,7 +20,7 @@ Price-to-income divides the Organisation for Economic Co-operation and Developme
 
 Disposable income is after tax and transfers, before housing costs. It is the standard affordability denominator used by the OECD and the Reserve Bank of Australia. It includes rent received by household landlords and excludes corporate, institutional and foreign investors' income. The series begins in 1981.
 
-Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield and the housing equivalent of a price-to-earnings multiple. A higher ratio means more years of gross rent to buy the dwelling. The series begins in 1972.
+Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield. A higher ratio means more years of gross rent to buy the dwelling. The series begins in 1972.
 
 The gross measure is the usual long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower. The ranking is similar if the expense ratio is broadly stable over long periods, which this exercise assumes.
 
@@ -41,7 +41,7 @@ Price-to-income is at its series high. Price-to-rent is about 6% below its 2022 
 
 Price-to-income needs a 50% fall to its 1996 trough and a 57% fall to its 1983 low. Price-to-rent needs a 63% fall to its 1996 trough.
 
-<img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-12" alt="Lollipop chart of the price fall required to reach each valuation destination: 50% for price-to-income at its 1996 trough, 57% at its 1983 low, and 63% for price-to-rent at its 1996 trough." width="900" />
+<img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-12" alt="Lollipop chart of the price fall required to reach each destination: 50% for price-to-income at its 1996 trough, 57% at its 1983 low, and 63% for price-to-rent at its 1996 trough." width="900" />
 
 <p><em>Price fall required to reach each destination.</em></p>
 
@@ -81,10 +81,10 @@ The income measure needs about 20 years of flat prices, or a 30% fall and 10 yea
 
 Nominal throughout. In the ladder, income and rents are held at their current levels; the time estimates state their growth assumptions. The exercise measures distance in today's prices.
 
-The exercise treats these multiples as a useful anchor. It does not require them to revert. The trough is a reference point. The likely mechanism is debt: the multiple compresses when credit stops expanding or becomes more expensive.
+The exercise treats the historical relationships as a useful guide. It does not require prices to return there. The trough is a reference point. The likely mechanism is debt: the price falls relative to income and rent when credit stops expanding or becomes more expensive.
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
-This follows [Dousing the Pyre](/blog/dousing-the-pyre/), which argued that policy is delaying the downturn by pushing the cost onto younger buyers. Their mortgages at today's prices let existing owners sell and lenders keep the loans performing. This post prices a destination that policy resists. If that resistance becomes monetisation, the debt behind the bubble is inflated away. A correction through inflation would do less of the work through nominal house prices. The ratios above are an exercise. They do not forecast. They would normalise differently in that scenario, if at all.
+This follows [Dousing the Pyre](/blog/dousing-the-pyre/), which argued that policy is delaying the downturn by pushing the cost onto younger buyers. Their mortgages at today's prices let existing owners sell and lenders keep the loans performing. This post prices a destination that policy resists. If that resistance becomes monetisation, the debt behind the bubble is inflated away. A correction through inflation would do less of the work through nominal house prices. The numbers above are an exercise. They do not forecast. They would look different in that scenario, if at all.
 
 Download the data: <a href="/blog/data/housing-valuation-2026-q2/data.json" download hx-boost="false">JSON</a>, <a href="/blog/data/housing-valuation-2026-q2/data.csv" download hx-boost="false">CSV</a>.
