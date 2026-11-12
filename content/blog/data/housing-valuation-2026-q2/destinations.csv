@@ -1,3 +1,4 @@
 measure,destination,value,move_required_pct,direction
-price_to_income,1996 trough,0.046,58.93,fall
+price_to_income,1996 trough,0.005345,50.15,fall
+price_to_income,1983 low,0.004616,56.95,fall
 price_to_rent,1996 trough,50.0,62.63,fall

@@ -4,16 +4,16 @@
       "type": "series",
       "output": "content/blog/images/housing-valuation-2026-q2.svg",
       "title": "Australian housing valuation",
-      "subtitle": "Data to 2026-Q2. Dashed lines mark the 25th and 75th percentiles of the full history.",
+      "subtitle": "Data to 2026-Q1. Dashed lines mark the 25th and 75th percentiles of the full history.",
       "source": "Source: OECD and ABS.",
       "data": "series.csv",
-      "start": "1990-01-01",
+      "start": "1981-01-01",
       "quartiles": true,
       "panels": [
         {
-          "title": "Price to weekly income",
+          "title": "Price to household income",
           "field": "price_to_income",
-          "format": "%.3f"
+          "format": "%.4f"
         },
         {
           "title": "Price to rent",
@@ -30,11 +30,15 @@
       "source": "Source: OECD and ABS. Definitions as in the post.",
       "data": "destinations.csv",
       "labels": {
-        "price_to_income": {
+        "price_to_income|1996 trough": {
           "label": "Price-to-income",
-          "detail": "1996 trough, %.3f"
+          "detail": "1996 trough, %.4f"
         },
-        "price_to_rent": {
+        "price_to_income|1983 low": {
+          "label": "Price-to-income",
+          "detail": "1983 low, %.4f"
+        },
+        "price_to_rent|1996 trough": {
           "label": "Price-to-rent",
           "detail": "1996 trough, %.1f"
         }
