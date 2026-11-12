@@ -45,7 +45,7 @@ The pre-2000 index levels are the reference because the rules changed after that
 
 ## The destinations
 
-Both measures need a fall to their 1996 trough: 50% for price-to-income and 63% for price-to-rent. The income series' 1983 minimum is a deeper stress case, 57% below today. It is a single data point, so it is not a destination.
+A fall to the 1996 trough is 50% for price-to-income and 63% for price-to-rent.
 
 <img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-13c" alt="Lollipop chart of the price fall required to reach each destination: 50% for price-to-income at its 1996 trough and 63% for price-to-rent at its 1996 trough." width="900" />
 
