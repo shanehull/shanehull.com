@@ -1,0 +1,1840 @@
+{
+  "title": "Australian house prices: income and rent",
+  "asOf": {
+    "priceToIncome": "2026-Q1",
+    "priceToRent": "2025-Q3"
+  },
+  "generated": "2026-11-13",
+  "definitions": {
+    "priceToIncome": "OECD nominal house price index for Australia divided by ABS household gross disposable income per capita, seasonally adjusted, indexed to 1996 = 100. Income is divided by estimated resident population. This is a relative price measure. It is not a household affordability measure.",
+    "priceToRent": "OECD house price to rent ratio, indexed to 1996 = 100. The ratio is the inverse of the gross rental yield. A net cap rate after vacancy, operating costs and depreciation would be lower, but the expense ratio is stable over long periods, so the ranking is similar. The series begins in 1972; the figure starts in 1981, and the earlier observations are below 100.",
+    "ladder": "Each row holds disposable income and rents at their current levels and moves only the price of the dwelling stock. Price-to-income and price-to-rent are indices, 1996 = 100. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent."
+  },
+  "sources": [
+    {
+      "id": "oecd.au.hpi",
+      "name": "OECD nominal house price index for Australia, 2015 = 100",
+      "url": "https://sdmx.oecd.org/public/rest/data/OECD.ECO.MPD,DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES,1.0/AUS.Q.HPI.?format=csvfile"
+    },
+    {
+      "id": "oecd.au.price_to_rent",
+      "name": "OECD house price to rent ratio for Australia, 2015 = 100",
+      "url": "https://sdmx.oecd.org/public/rest/data/OECD.ECO.MPD,DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES,1.0/AUS.Q.HPI_RPI.?format=csvfile"
+    },
+    {
+      "id": "abs.au.household_disposable_income",
+      "name": "ABS 5206.0 Table 20, household gross disposable income (seasonally adjusted)",
+      "url": "https://www.abs.gov.au/statistics/economy/national-accounts/australian-national-accounts-national-income-expenditure-and-product/latest-release"
+    },
+    {
+      "id": "abs.au.population",
+      "name": "ABS estimated resident population, Australia",
+      "url": "https://data.api.abs.gov.au/rest/data/ABS,ERP_Q,1.0.0/1.3.TOT.AUS.Q?format=jsondata"
+    }
+  ],
+  "series": [
+    {
+      "quarter": "1972-Q3",
+      "date": "1972-07-01",
+      "price_to_income": null,
+      "price_to_rent": 36.2665,
+      "price_to_income_index": null,
+      "price_to_rent_index": 72.47
+    },
+    {
+      "quarter": "1972-Q4",
+      "date": "1972-10-01",
+      "price_to_income": null,
+      "price_to_rent": 37.7437,
+      "price_to_income_index": null,
+      "price_to_rent_index": 75.42
+    },
+    {
+      "quarter": "1973-Q1",
+      "date": "1973-01-01",
+      "price_to_income": null,
+      "price_to_rent": 37.9201,
+      "price_to_income_index": null,
+      "price_to_rent_index": 75.77
+    },
+    {
+      "quarter": "1973-Q2",
+      "date": "1973-04-01",
+      "price_to_income": null,
+      "price_to_rent": 39.7602,
+      "price_to_income_index": null,
+      "price_to_rent_index": 79.45
+    },
+    {
+      "quarter": "1973-Q3",
+      "date": "1973-07-01",
+      "price_to_income": null,
+      "price_to_rent": 42.424,
+      "price_to_income_index": null,
+      "price_to_rent_index": 84.77
+    },
+    {
+      "quarter": "1973-Q4",
+      "date": "1973-10-01",
+      "price_to_income": null,
+      "price_to_rent": 43.5766,
+      "price_to_income_index": null,
+      "price_to_rent_index": 87.07
+    },
+    {
+      "quarter": "1974-Q1",
+      "date": "1974-01-01",
+      "price_to_income": null,
+      "price_to_rent": 45.7857,
+      "price_to_income_index": null,
+      "price_to_rent_index": 91.49
+    },
+    {
+      "quarter": "1974-Q2",
+      "date": "1974-04-01",
+      "price_to_income": null,
+      "price_to_rent": 45.5324,
+      "price_to_income_index": null,
+      "price_to_rent_index": 90.98
+    },
+    {
+      "quarter": "1974-Q3",
+      "date": "1974-07-01",
+      "price_to_income": null,
+      "price_to_rent": 44.8869,
+      "price_to_income_index": null,
+      "price_to_rent_index": 89.69
+    },
+    {
+      "quarter": "1974-Q4",
+      "date": "1974-10-01",
+      "price_to_income": null,
+      "price_to_rent": 44.0488,
+      "price_to_income_index": null,
+      "price_to_rent_index": 88.02
+    },
+    {
+      "quarter": "1975-Q1",
+      "date": "1975-01-01",
+      "price_to_income": null,
+      "price_to_rent": 43.2042,
+      "price_to_income_index": null,
+      "price_to_rent_index": 86.33
+    },
+    {
+      "quarter": "1975-Q2",
+      "date": "1975-04-01",
+      "price_to_income": null,
+      "price_to_rent": 43.0761,
+      "price_to_income_index": null,
+      "price_to_rent_index": 86.07
+    },
+    {
+      "quarter": "1975-Q3",
+      "date": "1975-07-01",
+      "price_to_income": null,
+      "price_to_rent": 42.8327,
+      "price_to_income_index": null,
+      "price_to_rent_index": 85.59
+    },
+    {
+      "quarter": "1975-Q4",
+      "date": "1975-10-01",
+      "price_to_income": null,
+      "price_to_rent": 42.5668,
+      "price_to_income_index": null,
+      "price_to_rent_index": 85.05
+    },
+    {
+      "quarter": "1976-Q1",
+      "date": "1976-01-01",
+      "price_to_income": null,
+      "price_to_rent": 42.6074,
+      "price_to_income_index": null,
+      "price_to_rent_index": 85.13
+    },
+    {
+      "quarter": "1976-Q2",
+      "date": "1976-04-01",
+      "price_to_income": null,
+      "price_to_rent": 42.1996,
+      "price_to_income_index": null,
+      "price_to_rent_index": 84.32
+    },
+    {
+      "quarter": "1976-Q3",
+      "date": "1976-07-01",
+      "price_to_income": null,
+      "price_to_rent": 40.8208,
+      "price_to_income_index": null,
+      "price_to_rent_index": 81.57
+    },
+    {
+      "quarter": "1976-Q4",
+      "date": "1976-10-01",
+      "price_to_income": null,
+      "price_to_rent": 41.1898,
+      "price_to_income_index": null,
+      "price_to_rent_index": 82.3
+    },
+    {
+      "quarter": "1977-Q1",
+      "date": "1977-01-01",
+      "price_to_income": null,
+      "price_to_rent": 40.8029,
+      "price_to_income_index": null,
+      "price_to_rent_index": 81.53
+    },
+    {
+      "quarter": "1977-Q2",
+      "date": "1977-04-01",
+      "price_to_income": null,
+      "price_to_rent": 40.7339,
+      "price_to_income_index": null,
+      "price_to_rent_index": 81.39
+    },
+    {
+      "quarter": "1977-Q3",
+      "date": "1977-07-01",
+      "price_to_income": null,
+      "price_to_rent": 40.523,
+      "price_to_income_index": null,
+      "price_to_rent_index": 80.97
+    },
+    {
+      "quarter": "1977-Q4",
+      "date": "1977-10-01",
+      "price_to_income": null,
+      "price_to_rent": 40.4644,
+      "price_to_income_index": null,
+      "price_to_rent_index": 80.85
+    },
+    {
+      "quarter": "1978-Q1",
+      "date": "1978-01-01",
+      "price_to_income": null,
+      "price_to_rent": 40.3907,
+      "price_to_income_index": null,
+      "price_to_rent_index": 80.71
+    },
+    {
+      "quarter": "1978-Q2",
+      "date": "1978-04-01",
+      "price_to_income": null,
+      "price_to_rent": 39.2373,
+      "price_to_income_index": null,
+      "price_to_rent_index": 78.4
+    },
+    {
+      "quarter": "1978-Q3",
+      "date": "1978-07-01",
+      "price_to_income": null,
+      "price_to_rent": 39.2212,
+      "price_to_income_index": null,
+      "price_to_rent_index": 78.37
+    },
+    {
+      "quarter": "1978-Q4",
+      "date": "1978-10-01",
+      "price_to_income": null,
+      "price_to_rent": 39.0044,
+      "price_to_income_index": null,
+      "price_to_rent_index": 77.94
+    },
+    {
+      "quarter": "1979-Q1",
+      "date": "1979-01-01",
+      "price_to_income": null,
+      "price_to_rent": 39.7679,
+      "price_to_income_index": null,
+      "price_to_rent_index": 79.46
+    },
+    {
+      "quarter": "1979-Q2",
+      "date": "1979-04-01",
+      "price_to_income": null,
+      "price_to_rent": 40.9759,
+      "price_to_income_index": null,
+      "price_to_rent_index": 81.88
+    },
+    {
+      "quarter": "1979-Q3",
+      "date": "1979-07-01",
+      "price_to_income": null,
+      "price_to_rent": 41.7727,
+      "price_to_income_index": null,
+      "price_to_rent_index": 83.47
+    },
+    {
+      "quarter": "1979-Q4",
+      "date": "1979-10-01",
+      "price_to_income": null,
+      "price_to_rent": 42.1349,
+      "price_to_income_index": null,
+      "price_to_rent_index": 84.19
+    },
+    {
+      "quarter": "1980-Q1",
+      "date": "1980-01-01",
+      "price_to_income": null,
+      "price_to_rent": 42.1083,
+      "price_to_income_index": null,
+      "price_to_rent_index": 84.14
+    },
+    {
+      "quarter": "1980-Q2",
+      "date": "1980-04-01",
+      "price_to_income": null,
+      "price_to_rent": 42.8885,
+      "price_to_income_index": null,
+      "price_to_rent_index": 85.7
+    },
+    {
+      "quarter": "1980-Q3",
+      "date": "1980-07-01",
+      "price_to_income": null,
+      "price_to_rent": 44.114,
+      "price_to_income_index": null,
+      "price_to_rent_index": 88.15
+    },
+    {
+      "quarter": "1980-Q4",
+      "date": "1980-10-01",
+      "price_to_income": null,
+      "price_to_rent": 45.1803,
+      "price_to_income_index": null,
+      "price_to_rent_index": 90.28
+    },
+    {
+      "quarter": "1981-Q1",
+      "date": "1981-01-01",
+      "price_to_income": null,
+      "price_to_rent": 46.6083,
+      "price_to_income_index": null,
+      "price_to_rent_index": 93.13
+    },
+    {
+      "quarter": "1981-Q2",
+      "date": "1981-04-01",
+      "price_to_income": null,
+      "price_to_rent": 46.6769,
+      "price_to_income_index": null,
+      "price_to_rent_index": 93.27
+    },
+    {
+      "quarter": "1981-Q3",
+      "date": "1981-07-01",
+      "price_to_income": 0.005044,
+      "price_to_rent": 45.6252,
+      "price_to_income_index": 94.37,
+      "price_to_rent_index": 91.16
+    },
+    {
+      "quarter": "1981-Q4",
+      "date": "1981-10-01",
+      "price_to_income": 0.00519,
+      "price_to_rent": 46.7159,
+      "price_to_income_index": 97.1,
+      "price_to_rent_index": 93.34
+    },
+    {
+      "quarter": "1982-Q1",
+      "date": "1982-01-01",
+      "price_to_income": 0.004893,
+      "price_to_rent": 44.4799,
+      "price_to_income_index": 91.54,
+      "price_to_rent_index": 88.88
+    },
+    {
+      "quarter": "1982-Q2",
+      "date": "1982-04-01",
+      "price_to_income": 0.004905,
+      "price_to_rent": 43.9275,
+      "price_to_income_index": 91.77,
+      "price_to_rent_index": 87.77
+    },
+    {
+      "quarter": "1982-Q3",
+      "date": "1982-07-01",
+      "price_to_income": 0.004703,
+      "price_to_rent": 42.4483,
+      "price_to_income_index": 87.99,
+      "price_to_rent_index": 84.82
+    },
+    {
+      "quarter": "1982-Q4",
+      "date": "1982-10-01",
+      "price_to_income": 0.004667,
+      "price_to_rent": 41.3359,
+      "price_to_income_index": 87.32,
+      "price_to_rent_index": 82.59
+    },
+    {
+      "quarter": "1983-Q1",
+      "date": "1983-01-01",
+      "price_to_income": 0.004621,
+      "price_to_rent": 41.2378,
+      "price_to_income_index": 86.45,
+      "price_to_rent_index": 82.4
+    },
+    {
+      "quarter": "1983-Q2",
+      "date": "1983-04-01",
+      "price_to_income": 0.004636,
+      "price_to_rent": 41.5974,
+      "price_to_income_index": 86.74,
+      "price_to_rent_index": 83.12
+    },
+    {
+      "quarter": "1983-Q3",
+      "date": "1983-07-01",
+      "price_to_income": 0.004752,
+      "price_to_rent": 41.46,
+      "price_to_income_index": 88.91,
+      "price_to_rent_index": 82.84
+    },
+    {
+      "quarter": "1983-Q4",
+      "date": "1983-10-01",
+      "price_to_income": 0.004616,
+      "price_to_rent": 42.7104,
+      "price_to_income_index": 86.36,
+      "price_to_rent_index": 85.34
+    },
+    {
+      "quarter": "1984-Q1",
+      "date": "1984-01-01",
+      "price_to_income": 0.004712,
+      "price_to_rent": 42.786,
+      "price_to_income_index": 88.16,
+      "price_to_rent_index": 85.49
+    },
+    {
+      "quarter": "1984-Q2",
+      "date": "1984-04-01",
+      "price_to_income": 0.0047,
+      "price_to_rent": 42.7257,
+      "price_to_income_index": 87.93,
+      "price_to_rent_index": 85.37
+    },
+    {
+      "quarter": "1984-Q3",
+      "date": "1984-07-01",
+      "price_to_income": 0.004873,
+      "price_to_rent": 44.4782,
+      "price_to_income_index": 91.17,
+      "price_to_rent_index": 88.87
+    },
+    {
+      "quarter": "1984-Q4",
+      "date": "1984-10-01",
+      "price_to_income": 0.004861,
+      "price_to_rent": 43.5146,
+      "price_to_income_index": 90.94,
+      "price_to_rent_index": 86.95
+    },
+    {
+      "quarter": "1985-Q1",
+      "date": "1985-01-01",
+      "price_to_income": 0.004948,
+      "price_to_rent": 44.3524,
+      "price_to_income_index": 92.57,
+      "price_to_rent_index": 88.62
+    },
+    {
+      "quarter": "1985-Q2",
+      "date": "1985-04-01",
+      "price_to_income": 0.004883,
+      "price_to_rent": 43.9055,
+      "price_to_income_index": 91.36,
+      "price_to_rent_index": 87.73
+    },
+    {
+      "quarter": "1985-Q3",
+      "date": "1985-07-01",
+      "price_to_income": 0.005006,
+      "price_to_rent": 44.2649,
+      "price_to_income_index": 93.66,
+      "price_to_rent_index": 88.45
+    },
+    {
+      "quarter": "1985-Q4",
+      "date": "1985-10-01",
+      "price_to_income": 0.004981,
+      "price_to_rent": 43.7266,
+      "price_to_income_index": 93.19,
+      "price_to_rent_index": 87.37
+    },
+    {
+      "quarter": "1986-Q1",
+      "date": "1986-01-01",
+      "price_to_income": 0.004887,
+      "price_to_rent": 43.2372,
+      "price_to_income_index": 91.43,
+      "price_to_rent_index": 86.39
+    },
+    {
+      "quarter": "1986-Q2",
+      "date": "1986-04-01",
+      "price_to_income": 0.00494,
+      "price_to_rent": 43.3609,
+      "price_to_income_index": 92.42,
+      "price_to_rent_index": 86.64
+    },
+    {
+      "quarter": "1986-Q3",
+      "date": "1986-07-01",
+      "price_to_income": 0.00492,
+      "price_to_rent": 42.6378,
+      "price_to_income_index": 92.05,
+      "price_to_rent_index": 85.2
+    },
+    {
+      "quarter": "1986-Q4",
+      "date": "1986-10-01",
+      "price_to_income": 0.004873,
+      "price_to_rent": 41.7146,
+      "price_to_income_index": 91.17,
+      "price_to_rent_index": 83.35
+    },
+    {
+      "quarter": "1987-Q1",
+      "date": "1987-01-01",
+      "price_to_income": 0.004805,
+      "price_to_rent": 41.2656,
+      "price_to_income_index": 89.9,
+      "price_to_rent_index": 82.45
+    },
+    {
+      "quarter": "1987-Q2",
+      "date": "1987-04-01",
+      "price_to_income": 0.004892,
+      "price_to_rent": 40.996,
+      "price_to_income_index": 91.52,
+      "price_to_rent_index": 81.92
+    },
+    {
+      "quarter": "1987-Q3",
+      "date": "1987-07-01",
+      "price_to_income": 0.004837,
+      "price_to_rent": 40.5679,
+      "price_to_income_index": 90.5,
+      "price_to_rent_index": 81.06
+    },
+    {
+      "quarter": "1987-Q4",
+      "date": "1987-10-01",
+      "price_to_income": 0.004903,
+      "price_to_rent": 41.0604,
+      "price_to_income_index": 91.73,
+      "price_to_rent_index": 82.04
+    },
+    {
+      "quarter": "1988-Q1",
+      "date": "1988-01-01",
+      "price_to_income": 0.005142,
+      "price_to_rent": 41.5983,
+      "price_to_income_index": 96.2,
+      "price_to_rent_index": 83.12
+    },
+    {
+      "quarter": "1988-Q2",
+      "date": "1988-04-01",
+      "price_to_income": 0.005252,
+      "price_to_rent": 43.0426,
+      "price_to_income_index": 98.26,
+      "price_to_rent_index": 86.0
+    },
+    {
+      "quarter": "1988-Q3",
+      "date": "1988-07-01",
+      "price_to_income": 0.005643,
+      "price_to_rent": 46.0871,
+      "price_to_income_index": 105.58,
+      "price_to_rent_index": 92.09
+    },
+    {
+      "quarter": "1988-Q4",
+      "date": "1988-10-01",
+      "price_to_income": 0.006109,
+      "price_to_rent": 49.1379,
+      "price_to_income_index": 114.29,
+      "price_to_rent_index": 98.18
+    },
+    {
+      "quarter": "1989-Q1",
+      "date": "1989-01-01",
+      "price_to_income": 0.006321,
+      "price_to_rent": 51.8688,
+      "price_to_income_index": 118.26,
+      "price_to_rent_index": 103.64
+    },
+    {
+      "quarter": "1989-Q2",
+      "date": "1989-04-01",
+      "price_to_income": 0.00625,
+      "price_to_rent": 52.0403,
+      "price_to_income_index": 116.93,
+      "price_to_rent_index": 103.98
+    },
+    {
+      "quarter": "1989-Q3",
+      "date": "1989-07-01",
+      "price_to_income": 0.006098,
+      "price_to_rent": 51.2823,
+      "price_to_income_index": 114.09,
+      "price_to_rent_index": 102.47
+    },
+    {
+      "quarter": "1989-Q4",
+      "date": "1989-10-01",
+      "price_to_income": 0.006119,
+      "price_to_rent": 50.186,
+      "price_to_income_index": 114.48,
+      "price_to_rent_index": 100.28
+    },
+    {
+      "quarter": "1990-Q1",
+      "date": "1990-01-01",
+      "price_to_income": 0.005819,
+      "price_to_rent": 49.8395,
+      "price_to_income_index": 108.87,
+      "price_to_rent_index": 99.59
+    },
+    {
+      "quarter": "1990-Q2",
+      "date": "1990-04-01",
+      "price_to_income": 0.005805,
+      "price_to_rent": 49.7922,
+      "price_to_income_index": 108.61,
+      "price_to_rent_index": 99.49
+    },
+    {
+      "quarter": "1990-Q3",
+      "date": "1990-07-01",
+      "price_to_income": 0.005748,
+      "price_to_rent": 48.8791,
+      "price_to_income_index": 107.54,
+      "price_to_rent_index": 97.67
+    },
+    {
+      "quarter": "1990-Q4",
+      "date": "1990-10-01",
+      "price_to_income": 0.005741,
+      "price_to_rent": 48.2758,
+      "price_to_income_index": 107.41,
+      "price_to_rent_index": 96.46
+    },
+    {
+      "quarter": "1991-Q1",
+      "date": "1991-01-01",
+      "price_to_income": 0.005609,
+      "price_to_rent": 48.0224,
+      "price_to_income_index": 104.94,
+      "price_to_rent_index": 95.95
+    },
+    {
+      "quarter": "1991-Q2",
+      "date": "1991-04-01",
+      "price_to_income": 0.005818,
+      "price_to_rent": 48.2512,
+      "price_to_income_index": 108.85,
+      "price_to_rent_index": 96.41
+    },
+    {
+      "quarter": "1991-Q3",
+      "date": "1991-07-01",
+      "price_to_income": 0.005945,
+      "price_to_rent": 49.7163,
+      "price_to_income_index": 111.23,
+      "price_to_rent_index": 99.34
+    },
+    {
+      "quarter": "1991-Q4",
+      "date": "1991-10-01",
+      "price_to_income": 0.005881,
+      "price_to_rent": 49.4575,
+      "price_to_income_index": 110.03,
+      "price_to_rent_index": 98.82
+    },
+    {
+      "quarter": "1992-Q1",
+      "date": "1992-01-01",
+      "price_to_income": 0.005869,
+      "price_to_rent": 49.0365,
+      "price_to_income_index": 109.8,
+      "price_to_rent_index": 97.98
+    },
+    {
+      "quarter": "1992-Q2",
+      "date": "1992-04-01",
+      "price_to_income": 0.005767,
+      "price_to_rent": 49.0747,
+      "price_to_income_index": 107.9,
+      "price_to_rent_index": 98.06
+    },
+    {
+      "quarter": "1992-Q3",
+      "date": "1992-07-01",
+      "price_to_income": 0.005767,
+      "price_to_rent": 49.0529,
+      "price_to_income_index": 107.9,
+      "price_to_rent_index": 98.01
+    },
+    {
+      "quarter": "1992-Q4",
+      "date": "1992-10-01",
+      "price_to_income": 0.005716,
+      "price_to_rent": 49.4229,
+      "price_to_income_index": 106.94,
+      "price_to_rent_index": 98.75
+    },
+    {
+      "quarter": "1993-Q1",
+      "date": "1993-01-01",
+      "price_to_income": 0.005807,
+      "price_to_rent": 50.0135,
+      "price_to_income_index": 108.64,
+      "price_to_rent_index": 99.93
+    },
+    {
+      "quarter": "1993-Q2",
+      "date": "1993-04-01",
+      "price_to_income": 0.00579,
+      "price_to_rent": 50.151,
+      "price_to_income_index": 108.33,
+      "price_to_rent_index": 100.21
+    },
+    {
+      "quarter": "1993-Q3",
+      "date": "1993-07-01",
+      "price_to_income": 0.005726,
+      "price_to_rent": 50.1778,
+      "price_to_income_index": 107.13,
+      "price_to_rent_index": 100.26
+    },
+    {
+      "quarter": "1993-Q4",
+      "date": "1993-10-01",
+      "price_to_income": 0.00583,
+      "price_to_rent": 50.4282,
+      "price_to_income_index": 109.07,
+      "price_to_rent_index": 100.76
+    },
+    {
+      "quarter": "1994-Q1",
+      "date": "1994-01-01",
+      "price_to_income": 0.00583,
+      "price_to_rent": 50.9941,
+      "price_to_income_index": 109.07,
+      "price_to_rent_index": 101.89
+    },
+    {
+      "quarter": "1994-Q2",
+      "date": "1994-04-01",
+      "price_to_income": 0.005765,
+      "price_to_rent": 51.4882,
+      "price_to_income_index": 107.86,
+      "price_to_rent_index": 102.88
+    },
+    {
+      "quarter": "1994-Q3",
+      "date": "1994-07-01",
+      "price_to_income": 0.005724,
+      "price_to_rent": 52.1544,
+      "price_to_income_index": 107.09,
+      "price_to_rent_index": 104.21
+    },
+    {
+      "quarter": "1994-Q4",
+      "date": "1994-10-01",
+      "price_to_income": 0.005723,
+      "price_to_rent": 51.8788,
+      "price_to_income_index": 107.07,
+      "price_to_rent_index": 103.66
+    },
+    {
+      "quarter": "1995-Q1",
+      "date": "1995-01-01",
+      "price_to_income": 0.005706,
+      "price_to_rent": 52.2152,
+      "price_to_income_index": 106.75,
+      "price_to_rent_index": 104.33
+    },
+    {
+      "quarter": "1995-Q2",
+      "date": "1995-04-01",
+      "price_to_income": 0.005603,
+      "price_to_rent": 51.3684,
+      "price_to_income_index": 104.83,
+      "price_to_rent_index": 102.64
+    },
+    {
+      "quarter": "1995-Q3",
+      "date": "1995-07-01",
+      "price_to_income": 0.005599,
+      "price_to_rent": 51.1234,
+      "price_to_income_index": 104.75,
+      "price_to_rent_index": 102.15
+    },
+    {
+      "quarter": "1995-Q4",
+      "date": "1995-10-01",
+      "price_to_income": 0.005491,
+      "price_to_rent": 50.795,
+      "price_to_income_index": 102.73,
+      "price_to_rent_index": 101.49
+    },
+    {
+      "quarter": "1996-Q1",
+      "date": "1996-01-01",
+      "price_to_income": 0.005422,
+      "price_to_rent": 50.2768,
+      "price_to_income_index": 101.44,
+      "price_to_rent_index": 100.46
+    },
+    {
+      "quarter": "1996-Q2",
+      "date": "1996-04-01",
+      "price_to_income": 0.005409,
+      "price_to_rent": 50.4204,
+      "price_to_income_index": 101.2,
+      "price_to_rent_index": 100.75
+    },
+    {
+      "quarter": "1996-Q3",
+      "date": "1996-07-01",
+      "price_to_income": 0.005358,
+      "price_to_rent": 50.2714,
+      "price_to_income_index": 100.24,
+      "price_to_rent_index": 100.45
+    },
+    {
+      "quarter": "1996-Q4",
+      "date": "1996-10-01",
+      "price_to_income": 0.005345,
+      "price_to_rent": 50.0469,
+      "price_to_income_index": 100.0,
+      "price_to_rent_index": 100.0
+    },
+    {
+      "quarter": "1997-Q1",
+      "date": "1997-01-01",
+      "price_to_income": 0.005313,
+      "price_to_rent": 50.1512,
+      "price_to_income_index": 99.4,
+      "price_to_rent_index": 100.21
+    },
+    {
+      "quarter": "1997-Q2",
+      "date": "1997-04-01",
+      "price_to_income": 0.00532,
+      "price_to_rent": 50.3613,
+      "price_to_income_index": 99.53,
+      "price_to_rent_index": 100.63
+    },
+    {
+      "quarter": "1997-Q3",
+      "date": "1997-07-01",
+      "price_to_income": 0.005358,
+      "price_to_rent": 51.0356,
+      "price_to_income_index": 100.24,
+      "price_to_rent_index": 101.98
+    },
+    {
+      "quarter": "1997-Q4",
+      "date": "1997-10-01",
+      "price_to_income": 0.005429,
+      "price_to_rent": 51.5738,
+      "price_to_income_index": 101.57,
+      "price_to_rent_index": 103.05
+    },
+    {
+      "quarter": "1998-Q1",
+      "date": "1998-01-01",
+      "price_to_income": 0.005543,
+      "price_to_rent": 52.5116,
+      "price_to_income_index": 103.7,
+      "price_to_rent_index": 104.92
+    },
+    {
+      "quarter": "1998-Q2",
+      "date": "1998-04-01",
+      "price_to_income": 0.005673,
+      "price_to_rent": 52.9903,
+      "price_to_income_index": 106.14,
+      "price_to_rent_index": 105.88
+    },
+    {
+      "quarter": "1998-Q3",
+      "date": "1998-07-01",
+      "price_to_income": 0.005663,
+      "price_to_rent": 52.8052,
+      "price_to_income_index": 105.95,
+      "price_to_rent_index": 105.51
+    },
+    {
+      "quarter": "1998-Q4",
+      "date": "1998-10-01",
+      "price_to_income": 0.005635,
+      "price_to_rent": 53.2962,
+      "price_to_income_index": 105.43,
+      "price_to_rent_index": 106.49
+    },
+    {
+      "quarter": "1999-Q1",
+      "date": "1999-01-01",
+      "price_to_income": 0.005813,
+      "price_to_rent": 53.8981,
+      "price_to_income_index": 108.76,
+      "price_to_rent_index": 107.7
+    },
+    {
+      "quarter": "1999-Q2",
+      "date": "1999-04-01",
+      "price_to_income": 0.005871,
+      "price_to_rent": 54.6911,
+      "price_to_income_index": 109.84,
+      "price_to_rent_index": 109.28
+    },
+    {
+      "quarter": "1999-Q3",
+      "date": "1999-07-01",
+      "price_to_income": 0.005785,
+      "price_to_rent": 55.6892,
+      "price_to_income_index": 108.23,
+      "price_to_rent_index": 111.27
+    },
+    {
+      "quarter": "1999-Q4",
+      "date": "1999-10-01",
+      "price_to_income": 0.005944,
+      "price_to_rent": 56.7562,
+      "price_to_income_index": 111.21,
+      "price_to_rent_index": 113.41
+    },
+    {
+      "quarter": "2000-Q1",
+      "date": "2000-01-01",
+      "price_to_income": 0.005974,
+      "price_to_rent": 57.5346,
+      "price_to_income_index": 111.77,
+      "price_to_rent_index": 114.96
+    },
+    {
+      "quarter": "2000-Q2",
+      "date": "2000-04-01",
+      "price_to_income": 0.005991,
+      "price_to_rent": 58.1842,
+      "price_to_income_index": 112.09,
+      "price_to_rent_index": 116.26
+    },
+    {
+      "quarter": "2000-Q3",
+      "date": "2000-07-01",
+      "price_to_income": 0.006083,
+      "price_to_rent": 57.8325,
+      "price_to_income_index": 113.81,
+      "price_to_rent_index": 115.56
+    },
+    {
+      "quarter": "2000-Q4",
+      "date": "2000-10-01",
+      "price_to_income": 0.005726,
+      "price_to_rent": 58.6976,
+      "price_to_income_index": 107.13,
+      "price_to_rent_index": 117.29
+    },
+    {
+      "quarter": "2001-Q1",
+      "date": "2001-01-01",
+      "price_to_income": 0.006043,
+      "price_to_rent": 59.6998,
+      "price_to_income_index": 113.06,
+      "price_to_rent_index": 119.29
+    },
+    {
+      "quarter": "2001-Q2",
+      "date": "2001-04-01",
+      "price_to_income": 0.006103,
+      "price_to_rent": 61.1301,
+      "price_to_income_index": 114.18,
+      "price_to_rent_index": 122.15
+    },
+    {
+      "quarter": "2001-Q3",
+      "date": "2001-07-01",
+      "price_to_income": 0.006316,
+      "price_to_rent": 64.002,
+      "price_to_income_index": 118.17,
+      "price_to_rent_index": 127.88
+    },
+    {
+      "quarter": "2001-Q4",
+      "date": "2001-10-01",
+      "price_to_income": 0.006396,
+      "price_to_rent": 65.6436,
+      "price_to_income_index": 119.66,
+      "price_to_rent_index": 131.16
+    },
+    {
+      "quarter": "2002-Q1",
+      "date": "2002-01-01",
+      "price_to_income": 0.006464,
+      "price_to_rent": 68.2289,
+      "price_to_income_index": 120.94,
+      "price_to_rent_index": 136.33
+    },
+    {
+      "quarter": "2002-Q2",
+      "date": "2002-04-01",
+      "price_to_income": 0.006823,
+      "price_to_rent": 71.5823,
+      "price_to_income_index": 127.65,
+      "price_to_rent_index": 143.03
+    },
+    {
+      "quarter": "2002-Q3",
+      "date": "2002-07-01",
+      "price_to_income": 0.007355,
+      "price_to_rent": 74.1971,
+      "price_to_income_index": 137.61,
+      "price_to_rent_index": 148.26
+    },
+    {
+      "quarter": "2002-Q4",
+      "date": "2002-10-01",
+      "price_to_income": 0.007434,
+      "price_to_rent": 76.2257,
+      "price_to_income_index": 139.08,
+      "price_to_rent_index": 152.31
+    },
+    {
+      "quarter": "2003-Q1",
+      "date": "2003-01-01",
+      "price_to_income": 0.00766,
+      "price_to_rent": 78.7793,
+      "price_to_income_index": 143.31,
+      "price_to_rent_index": 157.41
+    },
+    {
+      "quarter": "2003-Q2",
+      "date": "2003-04-01",
+      "price_to_income": 0.007887,
+      "price_to_rent": 82.3198,
+      "price_to_income_index": 147.56,
+      "price_to_rent_index": 164.49
+    },
+    {
+      "quarter": "2003-Q3",
+      "date": "2003-07-01",
+      "price_to_income": 0.008252,
+      "price_to_rent": 86.5702,
+      "price_to_income_index": 154.39,
+      "price_to_rent_index": 172.98
+    },
+    {
+      "quarter": "2003-Q4",
+      "date": "2003-10-01",
+      "price_to_income": 0.008427,
+      "price_to_rent": 88.6174,
+      "price_to_income_index": 157.66,
+      "price_to_rent_index": 177.07
+    },
+    {
+      "quarter": "2004-Q1",
+      "date": "2004-01-01",
+      "price_to_income": 0.008297,
+      "price_to_rent": 88.6261,
+      "price_to_income_index": 155.23,
+      "price_to_rent_index": 177.09
+    },
+    {
+      "quarter": "2004-Q2",
+      "date": "2004-04-01",
+      "price_to_income": 0.008046,
+      "price_to_rent": 86.8591,
+      "price_to_income_index": 150.53,
+      "price_to_rent_index": 173.56
+    },
+    {
+      "quarter": "2004-Q3",
+      "date": "2004-07-01",
+      "price_to_income": 0.00774,
+      "price_to_rent": 86.3037,
+      "price_to_income_index": 144.81,
+      "price_to_rent_index": 172.45
+    },
+    {
+      "quarter": "2004-Q4",
+      "date": "2004-10-01",
+      "price_to_income": 0.007908,
+      "price_to_rent": 86.8285,
+      "price_to_income_index": 147.95,
+      "price_to_rent_index": 173.49
+    },
+    {
+      "quarter": "2005-Q1",
+      "date": "2005-01-01",
+      "price_to_income": 0.007789,
+      "price_to_rent": 87.2121,
+      "price_to_income_index": 145.72,
+      "price_to_rent_index": 174.26
+    },
+    {
+      "quarter": "2005-Q2",
+      "date": "2005-04-01",
+      "price_to_income": 0.007713,
+      "price_to_rent": 86.9054,
+      "price_to_income_index": 144.3,
+      "price_to_rent_index": 173.65
+    },
+    {
+      "quarter": "2005-Q3",
+      "date": "2005-07-01",
+      "price_to_income": 0.007555,
+      "price_to_rent": 86.3405,
+      "price_to_income_index": 141.35,
+      "price_to_rent_index": 172.52
+    },
+    {
+      "quarter": "2005-Q4",
+      "date": "2005-10-01",
+      "price_to_income": 0.007611,
+      "price_to_rent": 86.838,
+      "price_to_income_index": 142.39,
+      "price_to_rent_index": 173.51
+    },
+    {
+      "quarter": "2006-Q1",
+      "date": "2006-01-01",
+      "price_to_income": 0.007786,
+      "price_to_rent": 87.8637,
+      "price_to_income_index": 145.67,
+      "price_to_rent_index": 175.56
+    },
+    {
+      "quarter": "2006-Q2",
+      "date": "2006-04-01",
+      "price_to_income": 0.007881,
+      "price_to_rent": 89.967,
+      "price_to_income_index": 147.45,
+      "price_to_rent_index": 179.77
+    },
+    {
+      "quarter": "2006-Q3",
+      "date": "2006-07-01",
+      "price_to_income": 0.007991,
+      "price_to_rent": 90.7808,
+      "price_to_income_index": 149.5,
+      "price_to_rent_index": 181.39
+    },
+    {
+      "quarter": "2006-Q4",
+      "date": "2006-10-01",
+      "price_to_income": 0.007783,
+      "price_to_rent": 90.9488,
+      "price_to_income_index": 145.61,
+      "price_to_rent_index": 181.73
+    },
+    {
+      "quarter": "2007-Q1",
+      "date": "2007-01-01",
+      "price_to_income": 0.007796,
+      "price_to_rent": 91.164,
+      "price_to_income_index": 145.86,
+      "price_to_rent_index": 182.16
+    },
+    {
+      "quarter": "2007-Q2",
+      "date": "2007-04-01",
+      "price_to_income": 0.007967,
+      "price_to_rent": 93.3423,
+      "price_to_income_index": 149.06,
+      "price_to_rent_index": 186.51
+    },
+    {
+      "quarter": "2007-Q3",
+      "date": "2007-07-01",
+      "price_to_income": 0.008069,
+      "price_to_rent": 95.3956,
+      "price_to_income_index": 150.96,
+      "price_to_rent_index": 190.61
+    },
+    {
+      "quarter": "2007-Q4",
+      "date": "2007-10-01",
+      "price_to_income": 0.008281,
+      "price_to_rent": 96.7827,
+      "price_to_income_index": 154.93,
+      "price_to_rent_index": 193.38
+    },
+    {
+      "quarter": "2008-Q1",
+      "date": "2008-01-01",
+      "price_to_income": 0.008221,
+      "price_to_rent": 96.0761,
+      "price_to_income_index": 153.81,
+      "price_to_rent_index": 191.97
+    },
+    {
+      "quarter": "2008-Q2",
+      "date": "2008-04-01",
+      "price_to_income": 0.007925,
+      "price_to_rent": 92.6148,
+      "price_to_income_index": 148.27,
+      "price_to_rent_index": 185.06
+    },
+    {
+      "quarter": "2008-Q3",
+      "date": "2008-07-01",
+      "price_to_income": 0.007718,
+      "price_to_rent": 89.1778,
+      "price_to_income_index": 144.4,
+      "price_to_rent_index": 178.19
+    },
+    {
+      "quarter": "2008-Q4",
+      "date": "2008-10-01",
+      "price_to_income": 0.007502,
+      "price_to_rent": 85.7761,
+      "price_to_income_index": 140.36,
+      "price_to_rent_index": 171.39
+    },
+    {
+      "quarter": "2009-Q1",
+      "date": "2009-01-01",
+      "price_to_income": 0.007113,
+      "price_to_rent": 84.697,
+      "price_to_income_index": 133.08,
+      "price_to_rent_index": 169.24
+    },
+    {
+      "quarter": "2009-Q2",
+      "date": "2009-04-01",
+      "price_to_income": 0.007482,
+      "price_to_rent": 86.5651,
+      "price_to_income_index": 139.98,
+      "price_to_rent_index": 172.97
+    },
+    {
+      "quarter": "2009-Q3",
+      "date": "2009-07-01",
+      "price_to_income": 0.007633,
+      "price_to_rent": 89.7566,
+      "price_to_income_index": 142.81,
+      "price_to_rent_index": 179.34
+    },
+    {
+      "quarter": "2009-Q4",
+      "date": "2009-10-01",
+      "price_to_income": 0.008196,
+      "price_to_rent": 93.212,
+      "price_to_income_index": 153.34,
+      "price_to_rent_index": 186.25
+    },
+    {
+      "quarter": "2010-Q1",
+      "date": "2010-01-01",
+      "price_to_income": 0.008373,
+      "price_to_rent": 95.5468,
+      "price_to_income_index": 156.65,
+      "price_to_rent_index": 190.91
+    },
+    {
+      "quarter": "2010-Q2",
+      "date": "2010-04-01",
+      "price_to_income": 0.00837,
+      "price_to_rent": 96.0002,
+      "price_to_income_index": 156.59,
+      "price_to_rent_index": 191.82
+    },
+    {
+      "quarter": "2010-Q3",
+      "date": "2010-07-01",
+      "price_to_income": 0.008278,
+      "price_to_rent": 94.4523,
+      "price_to_income_index": 154.87,
+      "price_to_rent_index": 188.73
+    },
+    {
+      "quarter": "2010-Q4",
+      "date": "2010-10-01",
+      "price_to_income": 0.008112,
+      "price_to_rent": 93.3232,
+      "price_to_income_index": 151.77,
+      "price_to_rent_index": 186.47
+    },
+    {
+      "quarter": "2011-Q1",
+      "date": "2011-01-01",
+      "price_to_income": 0.007897,
+      "price_to_rent": 91.811,
+      "price_to_income_index": 147.75,
+      "price_to_rent_index": 183.45
+    },
+    {
+      "quarter": "2011-Q2",
+      "date": "2011-04-01",
+      "price_to_income": 0.007665,
+      "price_to_rent": 89.8286,
+      "price_to_income_index": 143.41,
+      "price_to_rent_index": 179.49
+    },
+    {
+      "quarter": "2011-Q3",
+      "date": "2011-07-01",
+      "price_to_income": 0.007559,
+      "price_to_rent": 87.8064,
+      "price_to_income_index": 141.42,
+      "price_to_rent_index": 175.45
+    },
+    {
+      "quarter": "2011-Q4",
+      "date": "2011-10-01",
+      "price_to_income": 0.007363,
+      "price_to_rent": 85.4787,
+      "price_to_income_index": 137.75,
+      "price_to_rent_index": 170.8
+    },
+    {
+      "quarter": "2012-Q1",
+      "date": "2012-01-01",
+      "price_to_income": 0.007368,
+      "price_to_rent": 85.5972,
+      "price_to_income_index": 137.85,
+      "price_to_rent_index": 171.03
+    },
+    {
+      "quarter": "2012-Q2",
+      "date": "2012-04-01",
+      "price_to_income": 0.007412,
+      "price_to_rent": 84.681,
+      "price_to_income_index": 138.67,
+      "price_to_rent_index": 169.2
+    },
+    {
+      "quarter": "2012-Q3",
+      "date": "2012-07-01",
+      "price_to_income": 0.007329,
+      "price_to_rent": 84.4355,
+      "price_to_income_index": 137.12,
+      "price_to_rent_index": 168.71
+    },
+    {
+      "quarter": "2012-Q4",
+      "date": "2012-10-01",
+      "price_to_income": 0.007561,
+      "price_to_rent": 84.9076,
+      "price_to_income_index": 141.46,
+      "price_to_rent_index": 169.66
+    },
+    {
+      "quarter": "2013-Q1",
+      "date": "2013-01-01",
+      "price_to_income": 0.007559,
+      "price_to_rent": 85.3223,
+      "price_to_income_index": 141.42,
+      "price_to_rent_index": 170.48
+    },
+    {
+      "quarter": "2013-Q2",
+      "date": "2013-04-01",
+      "price_to_income": 0.007613,
+      "price_to_rent": 86.182,
+      "price_to_income_index": 142.43,
+      "price_to_rent_index": 172.2
+    },
+    {
+      "quarter": "2013-Q3",
+      "date": "2013-07-01",
+      "price_to_income": 0.007833,
+      "price_to_rent": 88.3623,
+      "price_to_income_index": 146.55,
+      "price_to_rent_index": 176.56
+    },
+    {
+      "quarter": "2013-Q4",
+      "date": "2013-10-01",
+      "price_to_income": 0.008019,
+      "price_to_rent": 90.6593,
+      "price_to_income_index": 150.03,
+      "price_to_rent_index": 181.15
+    },
+    {
+      "quarter": "2014-Q1",
+      "date": "2014-01-01",
+      "price_to_income": 0.008072,
+      "price_to_rent": 91.9111,
+      "price_to_income_index": 151.02,
+      "price_to_rent_index": 183.65
+    },
+    {
+      "quarter": "2014-Q2",
+      "date": "2014-04-01",
+      "price_to_income": 0.008104,
+      "price_to_rent": 92.6807,
+      "price_to_income_index": 151.62,
+      "price_to_rent_index": 185.19
+    },
+    {
+      "quarter": "2014-Q3",
+      "date": "2014-07-01",
+      "price_to_income": 0.008142,
+      "price_to_rent": 93.7551,
+      "price_to_income_index": 152.33,
+      "price_to_rent_index": 187.33
+    },
+    {
+      "quarter": "2014-Q4",
+      "date": "2014-10-01",
+      "price_to_income": 0.008232,
+      "price_to_rent": 94.5662,
+      "price_to_income_index": 154.01,
+      "price_to_rent_index": 188.96
+    },
+    {
+      "quarter": "2015-Q1",
+      "date": "2015-01-01",
+      "price_to_income": 0.008353,
+      "price_to_rent": 96.3166,
+      "price_to_income_index": 156.28,
+      "price_to_rent_index": 192.45
+    },
+    {
+      "quarter": "2015-Q2",
+      "date": "2015-04-01",
+      "price_to_income": 0.008677,
+      "price_to_rent": 99.897,
+      "price_to_income_index": 162.34,
+      "price_to_rent_index": 199.61
+    },
+    {
+      "quarter": "2015-Q3",
+      "date": "2015-07-01",
+      "price_to_income": 0.008807,
+      "price_to_rent": 102.2296,
+      "price_to_income_index": 164.77,
+      "price_to_rent_index": 204.27
+    },
+    {
+      "quarter": "2015-Q4",
+      "date": "2015-10-01",
+      "price_to_income": 0.008752,
+      "price_to_rent": 101.5569,
+      "price_to_income_index": 163.74,
+      "price_to_rent_index": 202.92
+    },
+    {
+      "quarter": "2016-Q1",
+      "date": "2016-01-01",
+      "price_to_income": 0.008895,
+      "price_to_rent": 101.9294,
+      "price_to_income_index": 166.42,
+      "price_to_rent_index": 203.67
+    },
+    {
+      "quarter": "2016-Q2",
+      "date": "2016-04-01",
+      "price_to_income": 0.009011,
+      "price_to_rent": 103.2455,
+      "price_to_income_index": 168.59,
+      "price_to_rent_index": 206.3
+    },
+    {
+      "quarter": "2016-Q3",
+      "date": "2016-07-01",
+      "price_to_income": 0.009121,
+      "price_to_rent": 105.049,
+      "price_to_income_index": 170.65,
+      "price_to_rent_index": 209.9
+    },
+    {
+      "quarter": "2016-Q4",
+      "date": "2016-10-01",
+      "price_to_income": 0.009397,
+      "price_to_rent": 108.6338,
+      "price_to_income_index": 175.81,
+      "price_to_rent_index": 217.06
+    },
+    {
+      "quarter": "2017-Q1",
+      "date": "2017-01-01",
+      "price_to_income": 0.009664,
+      "price_to_rent": 111.5672,
+      "price_to_income_index": 180.8,
+      "price_to_rent_index": 222.93
+    },
+    {
+      "quarter": "2017-Q2",
+      "date": "2017-04-01",
+      "price_to_income": 0.009757,
+      "price_to_rent": 113.0671,
+      "price_to_income_index": 182.54,
+      "price_to_rent_index": 225.92
+    },
+    {
+      "quarter": "2017-Q3",
+      "date": "2017-07-01",
+      "price_to_income": 0.009774,
+      "price_to_rent": 113.1443,
+      "price_to_income_index": 182.86,
+      "price_to_rent_index": 226.08
+    },
+    {
+      "quarter": "2017-Q4",
+      "date": "2017-10-01",
+      "price_to_income": 0.009773,
+      "price_to_rent": 113.2087,
+      "price_to_income_index": 182.84,
+      "price_to_rent_index": 226.21
+    },
+    {
+      "quarter": "2018-Q1",
+      "date": "2018-01-01",
+      "price_to_income": 0.009622,
+      "price_to_rent": 112.8061,
+      "price_to_income_index": 180.02,
+      "price_to_rent_index": 225.4
+    },
+    {
+      "quarter": "2018-Q2",
+      "date": "2018-04-01",
+      "price_to_income": 0.009482,
+      "price_to_rent": 111.7212,
+      "price_to_income_index": 177.4,
+      "price_to_rent_index": 223.23
+    },
+    {
+      "quarter": "2018-Q3",
+      "date": "2018-07-01",
+      "price_to_income": 0.009325,
+      "price_to_rent": 110.3173,
+      "price_to_income_index": 174.46,
+      "price_to_rent_index": 220.43
+    },
+    {
+      "quarter": "2018-Q4",
+      "date": "2018-10-01",
+      "price_to_income": 0.008984,
+      "price_to_rent": 106.7922,
+      "price_to_income_index": 168.08,
+      "price_to_rent_index": 213.38
+    },
+    {
+      "quarter": "2019-Q1",
+      "date": "2019-01-01",
+      "price_to_income": 0.008676,
+      "price_to_rent": 103.928,
+      "price_to_income_index": 162.32,
+      "price_to_rent_index": 207.66
+    },
+    {
+      "quarter": "2019-Q2",
+      "date": "2019-04-01",
+      "price_to_income": 0.008569,
+      "price_to_rent": 102.9956,
+      "price_to_income_index": 160.32,
+      "price_to_rent_index": 205.8
+    },
+    {
+      "quarter": "2019-Q3",
+      "date": "2019-07-01",
+      "price_to_income": 0.008838,
+      "price_to_rent": 105.9357,
+      "price_to_income_index": 165.35,
+      "price_to_rent_index": 211.67
+    },
+    {
+      "quarter": "2019-Q4",
+      "date": "2019-10-01",
+      "price_to_income": 0.00892,
+      "price_to_rent": 109.3025,
+      "price_to_income_index": 166.88,
+      "price_to_rent_index": 218.4
+    },
+    {
+      "quarter": "2020-Q1",
+      "date": "2020-01-01",
+      "price_to_income": 0.009134,
+      "price_to_rent": 111.2933,
+      "price_to_income_index": 170.89,
+      "price_to_rent_index": 222.38
+    },
+    {
+      "quarter": "2020-Q2",
+      "date": "2020-04-01",
+      "price_to_income": 0.008834,
+      "price_to_rent": 110.6499,
+      "price_to_income_index": 165.28,
+      "price_to_rent_index": 221.09
+    },
+    {
+      "quarter": "2020-Q3",
+      "date": "2020-07-01",
+      "price_to_income": 0.008647,
+      "price_to_rent": 112.4127,
+      "price_to_income_index": 161.78,
+      "price_to_rent_index": 224.61
+    },
+    {
+      "quarter": "2020-Q4",
+      "date": "2020-10-01",
+      "price_to_income": 0.008565,
+      "price_to_rent": 114.8041,
+      "price_to_income_index": 160.24,
+      "price_to_rent_index": 229.39
+    },
+    {
+      "quarter": "2021-Q1",
+      "date": "2021-01-01",
+      "price_to_income": 0.009243,
+      "price_to_rent": 121.2692,
+      "price_to_income_index": 172.93,
+      "price_to_rent_index": 242.31
+    },
+    {
+      "quarter": "2021-Q2",
+      "date": "2021-04-01",
+      "price_to_income": 0.009669,
+      "price_to_rent": 129.0757,
+      "price_to_income_index": 180.9,
+      "price_to_rent_index": 257.91
+    },
+    {
+      "quarter": "2021-Q3",
+      "date": "2021-07-01",
+      "price_to_income": 0.010262,
+      "price_to_rent": 136.4924,
+      "price_to_income_index": 191.99,
+      "price_to_rent_index": 272.73
+    },
+    {
+      "quarter": "2021-Q4",
+      "date": "2021-10-01",
+      "price_to_income": 0.010117,
+      "price_to_rent": 141.4674,
+      "price_to_income_index": 189.28,
+      "price_to_rent_index": 282.67
+    },
+    {
+      "quarter": "2022-Q1",
+      "date": "2022-01-01",
+      "price_to_income": 0.010456,
+      "price_to_rent": 143.0351,
+      "price_to_income_index": 195.62,
+      "price_to_rent_index": 285.8
+    },
+    {
+      "quarter": "2022-Q2",
+      "date": "2022-04-01",
+      "price_to_income": 0.010174,
+      "price_to_rent": 140.2804,
+      "price_to_income_index": 190.35,
+      "price_to_rent_index": 280.3
+    },
+    {
+      "quarter": "2022-Q3",
+      "date": "2022-07-01",
+      "price_to_income": 0.009892,
+      "price_to_rent": 135.2416,
+      "price_to_income_index": 185.07,
+      "price_to_rent_index": 270.23
+    },
+    {
+      "quarter": "2022-Q4",
+      "date": "2022-10-01",
+      "price_to_income": 0.009636,
+      "price_to_rent": 132.2122,
+      "price_to_income_index": 180.28,
+      "price_to_rent_index": 264.18
+    },
+    {
+      "quarter": "2023-Q1",
+      "date": "2023-01-01",
+      "price_to_income": 0.009813,
+      "price_to_rent": 130.5633,
+      "price_to_income_index": 183.59,
+      "price_to_rent_index": 260.88
+    },
+    {
+      "quarter": "2023-Q2",
+      "date": "2023-04-01",
+      "price_to_income": 0.01009,
+      "price_to_rent": 130.467,
+      "price_to_income_index": 188.77,
+      "price_to_rent_index": 260.69
+    },
+    {
+      "quarter": "2023-Q3",
+      "date": "2023-07-01",
+      "price_to_income": 0.010224,
+      "price_to_rent": 130.6561,
+      "price_to_income_index": 191.28,
+      "price_to_rent_index": 261.07
+    },
+    {
+      "quarter": "2023-Q4",
+      "date": "2023-10-01",
+      "price_to_income": 0.010332,
+      "price_to_rent": 131.2651,
+      "price_to_income_index": 193.3,
+      "price_to_rent_index": 262.28
+    },
+    {
+      "quarter": "2024-Q1",
+      "date": "2024-01-01",
+      "price_to_income": 0.010323,
+      "price_to_rent": 130.8408,
+      "price_to_income_index": 193.13,
+      "price_to_rent_index": 261.44
+    },
+    {
+      "quarter": "2024-Q2",
+      "date": "2024-04-01",
+      "price_to_income": 0.01041,
+      "price_to_rent": 130.5151,
+      "price_to_income_index": 194.76,
+      "price_to_rent_index": 260.79
+    },
+    {
+      "quarter": "2024-Q3",
+      "date": "2024-07-01",
+      "price_to_income": 0.010447,
+      "price_to_rent": 130.0933,
+      "price_to_income_index": 195.45,
+      "price_to_rent_index": 259.94
+    },
+    {
+      "quarter": "2024-Q4",
+      "date": "2024-10-01",
+      "price_to_income": 0.010345,
+      "price_to_rent": 130.1878,
+      "price_to_income_index": 193.55,
+      "price_to_rent_index": 260.13
+    },
+    {
+      "quarter": "2025-Q1",
+      "date": "2025-01-01",
+      "price_to_income": 0.010288,
+      "price_to_rent": 129.9461,
+      "price_to_income_index": 192.48,
+      "price_to_rent_index": 259.65
+    },
+    {
+      "quarter": "2025-Q2",
+      "date": "2025-04-01",
+      "price_to_income": 0.010222,
+      "price_to_rent": 130.963,
+      "price_to_income_index": 191.24,
+      "price_to_rent_index": 261.68
+    },
+    {
+      "quarter": "2025-Q3",
+      "date": "2025-07-01",
+      "price_to_income": 0.010493,
+      "price_to_rent": 133.9153,
+      "price_to_income_index": 196.31,
+      "price_to_rent_index": 267.58
+    },
+    {
+      "quarter": "2025-Q4",
+      "date": "2025-10-01",
+      "price_to_income": 0.01064,
+      "price_to_rent": null,
+      "price_to_income_index": 199.06,
+      "price_to_rent_index": null
+    },
+    {
+      "quarter": "2026-Q1",
+      "date": "2026-01-01",
+      "price_to_income": 0.010723,
+      "price_to_rent": null,
+      "price_to_income_index": 200.62,
+      "price_to_rent_index": null
+    }
+  ],
+  "destinations": [
+    {
+      "measure": "price_to_income",
+      "destination": "1996 trough",
+      "value": 100.0,
+      "move_required_pct": 50.15,
+      "direction": "fall",
+      "value_raw": 0.005345
+    },
+    {
+      "measure": "price_to_rent",
+      "destination": "1996 trough",
+      "value": 100.0,
+      "move_required_pct": 62.63,
+      "direction": "fall",
+      "value_raw": 50.0
+    }
+  ],
+  "ladder": [
+    {
+      "price_fall_pct": 0,
+      "price_to_income": 0.010723,
+      "price_to_income_percentile": 100,
+      "price_to_rent": 133.9,
+      "price_to_rent_percentile": 98,
+      "price_to_income_index": 200.6,
+      "price_to_rent_index": 267.6
+    },
+    {
+      "price_fall_pct": 10,
+      "price_to_income": 0.009651,
+      "price_to_income_percentile": 87,
+      "price_to_rent": 120.5,
+      "price_to_rent_percentile": 91,
+      "price_to_income_index": 180.6,
+      "price_to_rent_index": 240.8
+    },
+    {
+      "price_fall_pct": 20,
+      "price_to_income": 0.008578,
+      "price_to_income_percentile": 77,
+      "price_to_rent": 107.1,
+      "price_to_rent_percentile": 85,
+      "price_to_income_index": 160.5,
+      "price_to_rent_index": 214.0
+    },
+    {
+      "price_fall_pct": 30,
+      "price_to_income": 0.007506,
+      "price_to_income_percentile": 52,
+      "price_to_rent": 93.7,
+      "price_to_rent_percentile": 76,
+      "price_to_income_index": 140.4,
+      "price_to_rent_index": 187.2
+    },
+    {
+      "price_fall_pct": 40,
+      "price_to_income": 0.006434,
+      "price_to_income_percentile": 46,
+      "price_to_rent": 80.3,
+      "price_to_rent_percentile": 58,
+      "price_to_income_index": 120.4,
+      "price_to_rent_index": 160.4
+    },
+    {
+      "price_fall_pct": 50,
+      "price_to_income": 0.005361,
+      "price_to_income_percentile": 18,
+      "price_to_rent": 67.0,
+      "price_to_rent_percentile": 55,
+      "price_to_income_index": 100.3,
+      "price_to_rent_index": 133.9
+    },
+    {
+      "price_fall_pct": 60,
+      "price_to_income": 0.004289,
+      "price_to_income_percentile": 0,
+      "price_to_rent": 53.6,
+      "price_to_rent_percentile": 50,
+      "price_to_income_index": 80.2,
+      "price_to_rent_index": 107.1
+    }
+  ]
+}
