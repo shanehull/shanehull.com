@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="648" viewBox="0 0 900 648" role="img" aria-labelledby="title desc">
   <title id="title">Australian housing valuation</title>
-  <desc id="desc">Data to 2026-Q1. Dashed lines mark the 25th and 75th percentiles of the full history.</desc>
+  <desc id="desc">Data to 2026-Q1; rent to 2025-Q3. Dashed lines mark the 25th and 75th percentiles of the period shown.</desc>
   <style>text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     .bg { fill: #f5f2ed; }
     .heading { fill: #3a3432; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -43,7 +43,7 @@
 
   <rect width="900" height="648" class="bg"/>
   <text x="78" y="38" class="heading">Australian housing valuation</text>
-  <text x="78" y="62" class="subhead">Data to 2026-Q1. Dashed lines mark the 25th and 75th percentiles of the full history.</text>
+  <text x="78" y="62" class="subhead">Data to 2026-Q1; rent to 2025-Q3. Dashed lines mark the 25th and 75th percentiles of the period shown.</text>
 <g>
     <text x="78" y="88" class="panel-title">Price to household income</text>
     <text x="768" y="88" class="latest" text-anchor="end">0.0107</text>
