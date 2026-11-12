@@ -6,7 +6,7 @@
       "title": "Australian housing valuation",
       "subtitle": "Data to 2026-Q1. Dashed lines mark the 25th and 75th percentiles of the full history.",
       "source": "Source: OECD and ABS.",
-      "data": "series.csv",
+      "data": "data.csv",
       "start": "1981-01-01",
       "quartiles": true,
       "panels": [

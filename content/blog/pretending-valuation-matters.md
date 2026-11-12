@@ -95,4 +95,4 @@ The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and
 
 This follows [Dousing the Pyre](/blog/dousing-the-pyre/), which argued that policy is delaying the downturn by pushing the cost onto younger buyers. Their mortgages at today's prices let existing owners sell and lenders keep the loans performing. This post prices a destination that policy resists. If that resistance becomes monetisation, the debt behind the bubble is inflated away. The correction arrives through inflation, and nominal house prices do less of the work. The ratios above would still normalise. Just not the way this exercise assumes.
 
-Download the data: <a href="/blog/data/housing-valuation-2026-q2/data.json" download hx-boost="false">JSON</a>, <a href="/blog/data/housing-valuation-2026-q2/series.csv" download hx-boost="false">CSV</a>.
+Download the data: <a href="/blog/data/housing-valuation-2026-q2/data.json" download hx-boost="false">JSON</a>, <a href="/blog/data/housing-valuation-2026-q2/data.csv" download hx-boost="false">CSV</a>.
