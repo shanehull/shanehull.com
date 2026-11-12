@@ -1,5 +1,5 @@
 ---
-title: "House Prices to Household Income"
+title: "House Prices to Income"
 description: "Australian house prices measured against household disposable income per capita."
 layout: "house-prices-to-income"
 tool_type: "chart"
