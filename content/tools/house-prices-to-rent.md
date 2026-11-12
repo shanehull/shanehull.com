@@ -1,18 +1,18 @@
 ---
 title: "House Prices to Rent"
-description: "Australian house prices measured against rent, the investment earnings of the dwelling."
+description: "Australian house prices measured against rent, the investment earnings of the dwelling, indexed to 1996 = 100."
 layout: "house-prices-to-rent"
 tool_type: "chart"
 math: true
 ---
 
 $$
-\text{Price to rent}_t = \frac{\text{nominal house price index}_t}{\text{rent index}_t}
+\text{Price to rent index}_t = 100 \times \frac{\text{nominal house price index}_t / \text{rent index}_t}{\text{1996 value}}
 $$
 
-The numerator is the Organisation for Economic Co-operation and Development nominal house price index for Australia, 2015 = 100. The denominator is the OECD rent price index for Australia. The ratio is the inverse of the gross rental yield. It is the housing equivalent of a price-to-earnings multiple: how many years of gross rent buy the dwelling.
+The numerator is the Organisation for Economic Co-operation and Development nominal house price index for Australia, 2015 = 100. The denominator is the OECD rent price index for Australia. The ratio is the inverse of the gross rental yield. A higher index means more years of gross rent to buy the dwelling.
 
-The published series is an index, 2015 = 100. The absolute level is not a yield. Read it against its own history: the shape shows whether housing is stretched relative to the income it earns.
+The index is 1996 = 100. The absolute level is not a yield. Read it against its own history: the shape shows whether housing is stretched relative to the income it earns.
 
 The gross measure is the standard long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower, but the expense ratio is stable over long periods, so the ranking is similar. The gross price-to-rent ratio is the simpler and more consistent series across five decades.
 
