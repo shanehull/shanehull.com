@@ -45,7 +45,7 @@ Price-to-income needs 50% to its 1996 trough and 57% to its 1983 low. Price-to-r
 
 <p><em>Price fall required to reach each destination.</em></p>
 
-The 1983 low is the all-time low in the income series. The 1996 trough is the last trough. The rent measure has one trough, in 1996.
+The 1983 low is the all-time low in the income series. The 1996 trough is the last major trough. The rent series' all-time low is 1972, at the start of its history.
 
 Price-to-income is about 2.0 times its 1996 low and 2.3 times its 1983 low. Price-to-rent is about 2.7 times its 1996 low. The rent measure is more stretched.
 
@@ -63,7 +63,7 @@ Every row holds disposable income and rents at their current levels. Only the pr
 | 50%         | 0.0054          | 18th                       | 67.0          | 55th                     |
 | 60%         | 0.0043          | 0th                        | 53.6          | 50th                     |
 
-The income measure's 50% row is 0.0054, at the 1996 trough. Its 60% row is 0.0043, below the 1983 low. The rent measure's 60% row is 53.6, near its 1996 trough. The rent measure needs more of a fall to reach its last trough.
+The income measure's 50% row is 0.0054, at the 1996 trough. Its 60% row is 0.0043, below the 1983 low. The rent measure's 60% row is 53.6, near its 1996 trough. The rent measure needs more of a fall to reach its last major trough.
 
 ## What the gap means
 
