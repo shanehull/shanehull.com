@@ -20,8 +20,8 @@ import (
 )
 
 // House prices to household income: the OECD nominal house price index divided
-// by ABS household gross disposable income per capita. Income is seasonally
-// adjusted and divided by estimated resident population.
+// by ABS household gross disposable income per capita, indexed to 1996 = 100.
+// Income is seasonally adjusted and divided by estimated resident population.
 
 const (
 	priceToIncomeCacheKey = "house-prices-to-income"
@@ -116,6 +116,21 @@ func fetchPriceToIncomeRatio(ctx context.Context) ([]incomePoint, error) {
 	if len(ratio) < 8 {
 		return nil, fmt.Errorf("house prices to household income: too few observations")
 	}
+
+	baseDate := time.Date(1996, time.October, 1, 0, 0, 0, 0, time.UTC)
+	var base float64
+	for _, p := range ratio {
+		if !p.Date.Before(baseDate) {
+			base = p.Value
+			break
+		}
+	}
+	if base == 0 {
+		return nil, fmt.Errorf("house prices to household income: 1996 base observation not found")
+	}
+	for i := range ratio {
+		ratio[i].Value = ratio[i].Value / base * 100
+	}
 	return ratio, nil
 }
 
@@ -186,8 +201,8 @@ func HousePricesIncomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":     "House prices to income",
-		"yAxisLabel":    "House price index / disposable income per capita ($)",
+		"mainLabel":     "House prices to income index",
+		"yAxisLabel":    "Index, 1996 = 100",
 		"showQuartiles": "false",
 		"showAverage":   "false",
 	}
@@ -281,7 +296,7 @@ func HousePricesIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
 	writer := csv.NewWriter(w)
 	defer writer.Flush()
 
-	header := []string{"date", "price_to_income"}
+	header := []string{"date", "price_to_income_index"}
 	if showQuartiles {
 		header = append(header, "quartile1", "quartile3")
 	}
@@ -290,9 +305,9 @@ func HousePricesIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, row := range priceToIncomeSeries(points, rangeParam, showQuartiles) {
-		cells := []string{row.Date, fmt.Sprintf("%.6f", row.Value)}
+		cells := []string{row.Date, fmt.Sprintf("%.2f", row.Value)}
 		if showQuartiles {
-			cells = append(cells, fmt.Sprintf("%.6f", row.Quartile1), fmt.Sprintf("%.6f", row.Quartile3))
+			cells = append(cells, fmt.Sprintf("%.2f", row.Quartile1), fmt.Sprintf("%.2f", row.Quartile3))
 		}
 		if err := writer.Write(cells); err != nil {
 			log.Print("failed to write CSV row:", err)
