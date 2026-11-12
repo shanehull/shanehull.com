@@ -186,7 +186,7 @@ func HousePricesIncomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":     "House prices to household income",
+		"mainLabel":     "House prices to income",
 		"yAxisLabel":    "House price index / disposable income per capita ($)",
 		"showQuartiles": "false",
 		"showAverage":   "false",
