@@ -1,6 +1,6 @@
 ---
 title: A Return to Pre-2000 Normalcy
-date: 2026-11-12
+date: 2026-11-13
 description: An exercise in the fall required to return Australian house prices to their pre-2000 relationship with household income and rent.
 tags:
   - housing
