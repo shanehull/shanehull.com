@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0](https://github.com/shanehull/shanehull.com/compare/v1.2.0...v1.3.0) (2026-11-12)
+
+
+### Features
+
+* add Australian housing valuation chart tools ([#192](https://github.com/shanehull/shanehull.com/issues/192)) ([5861baf](https://github.com/shanehull/shanehull.com/commit/5861bafe5b9d3437d1cfe01e53e620a20bcfb343))
+* add quartiles to housing valuation charts ([#196](https://github.com/shanehull/shanehull.com/issues/196)) ([9d5f4a7](https://github.com/shanehull/shanehull.com/commit/9d5f4a74efb35f4d4b08995301bb7b2d660d46a7))
+* move chart tools above the description ([#194](https://github.com/shanehull/shanehull.com/issues/194)) ([d7a6479](https://github.com/shanehull/shanehull.com/commit/d7a6479915d231d1f0f6daa2f66df10ffb6711bd))
+* show a spinner while chart data loads ([#193](https://github.com/shanehull/shanehull.com/issues/193)) ([76f6c94](https://github.com/shanehull/shanehull.com/commit/76f6c94c6461c82957e1315b01e1a99c2b402dab))
+
 ## [1.2.0](https://github.com/shanehull/shanehull.com/compare/v1.1.2...v1.2.0) (2026-11-12)
 
 
