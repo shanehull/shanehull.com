@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="298" viewBox="0 0 900 298" role="img" aria-labelledby="title desc">
+  <title id="title">Distance to the destinations</title>
+  <desc id="desc">Price fall required to reach each destination.</desc>
+  <style>text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .bg { fill: #f5f2ed; }
+    .heading { fill: #3a3432; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .subhead { fill: #6b7280; font-size: 13px; }
+    .panel-title { fill: #3a3432; font-size: 15px; font-weight: 600; }
+    .latest { fill: #3a3432; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .plot { fill: none; stroke: rgba(75, 85, 99, 0.18); }
+    .grid { stroke: rgba(75, 85, 99, 0.15); stroke-width: 1; }
+    .tick { fill: #6b7280; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .line { fill: none; stroke: #3b82f6; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+    .quartile { stroke-width: 1; stroke-dasharray: 5 5; }
+    .quartile.q1 { stroke: #c86464; }
+    .quartile.q3 { stroke: #64a864; }
+    .quartile-label { font-size: 12px; }
+    .quartile-label.q1 { fill: #c86464; }
+    .quartile-label.q3 { fill: #64a864; }
+    .row-label { fill: #3a3432; font-size: 14px; font-weight: 600; }
+    .row-detail { fill: #6b7280; font-size: 12px; }
+    .stem { stroke: #9aa6b8; stroke-width: 2; }
+    .stem.accent { stroke: #b86e3b; }
+    .dot { fill: #3b82f6; }
+    .dot.accent { fill: #b86e3b; }
+    .fall { fill: #3a3432; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .foot { fill: #6b7280; font-size: 12px; }
+
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1a1b1e; }
+      .heading, .panel-title, .latest, .row-label, .fall { fill: #e5dfd7; }
+      .subhead, .tick, .row-detail, .foot { fill: #9ca3af; }
+      .plot { stroke: rgba(209, 213, 219, 0.2); }
+      .grid { stroke: rgba(209, 213, 219, 0.15); }
+      .quartile.q1 { stroke: #f87171; }
+      .quartile.q3 { stroke: #4ade80; }
+      .quartile-label.q1 { fill: #f87171; }
+      .quartile-label.q3 { fill: #4ade80; }
+      .stem { stroke: #6b7280; }
+      .stem.accent { stroke: #cc8850; }
+      .dot.accent { fill: #cc8850; }
+    }</style>
+
+  <rect width="900" height="298" class="bg"/>
+  <text x="42" y="40" class="heading">Distance to the destinations</text>
+  <text x="42" y="66" class="subhead">Price fall required to reach each destination.</text>
+  <line x1="258.0" y1="106" x2="258.0" y2="230" class="grid"/>
+  <text x="258.0" y="254" class="tick" text-anchor="middle">0%</text>
+  <line x1="328.7" y1="106" x2="328.7" y2="230" class="grid"/>
+  <text x="328.7" y="254" class="tick" text-anchor="middle">10%</text>
+  <line x1="399.3" y1="106" x2="399.3" y2="230" class="grid"/>
+  <text x="399.3" y="254" class="tick" text-anchor="middle">20%</text>
+  <line x1="470.0" y1="106" x2="470.0" y2="230" class="grid"/>
+  <text x="470.0" y="254" class="tick" text-anchor="middle">30%</text>
+  <line x1="540.7" y1="106" x2="540.7" y2="230" class="grid"/>
+  <text x="540.7" y="254" class="tick" text-anchor="middle">40%</text>
+  <line x1="611.3" y1="106" x2="611.3" y2="230" class="grid"/>
+  <text x="611.3" y="254" class="tick" text-anchor="middle">50%</text>
+  <line x1="682.0" y1="106" x2="682.0" y2="230" class="grid"/>
+  <text x="682.0" y="254" class="tick" text-anchor="middle">60%</text>
+  <line x1="752.7" y1="106" x2="752.7" y2="230" class="grid"/>
+  <text x="752.7" y="254" class="tick" text-anchor="middle">70%</text>
+  <text x="240" y="142" class="row-label" text-anchor="end">Price-to-rent</text>
+  <text x="240" y="162" class="row-detail" text-anchor="end">1996 trough, 100.0</text>
+  <line x1="258.0" y1="144" x2="700.6" y2="144" class="stem"/>
+  <circle cx="700.6" cy="144" r="6" class="dot"/>
+  <text x="714.6" y="148" class="fall">63%</text>
+  <text x="240" y="198" class="row-label" text-anchor="end">Price-to-income</text>
+  <text x="240" y="218" class="row-detail" text-anchor="end">1996 trough, 100.0</text>
+  <line x1="258.0" y1="200" x2="612.4" y2="200" class="stem"/>
+  <circle cx="612.4" cy="200" r="6" class="dot"/>
+  <text x="626.4" y="204" class="fall">50%</text>
+
+  <text x="42" y="280" class="subhead">Source: OECD and ABS. Definitions as in the post.</text>
+</svg>

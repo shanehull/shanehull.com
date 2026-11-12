@@ -731,6 +731,10 @@ div.no-posts {
   flex-direction: column;
   justify-content: flex-start;
 
+  > * {
+    min-width: 0;
+  }
+
   > img,
   > small {
     align-self: center;
@@ -873,6 +877,61 @@ div.no-posts {
 
   pre {
     font-size: 0.8rem;
+  }
+}
+
+// Content tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+
+  th,
+  td {
+    padding: 0.7rem 0.85rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba($light-text, 0.15);
+  }
+
+  th {
+    font-weight: 600;
+    border-bottom-width: 2px;
+  }
+
+  thead {
+    background-color: rgba($light-icon, 0.08);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgba($light-icon, 0.04);
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.2rem;
+    table-layout: fixed;
+
+    th,
+    td {
+      padding: 0.5rem 0.55rem;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    th,
+    td {
+      border-bottom-color: rgba($dark-text, 0.2);
+    }
+
+    thead {
+      background-color: rgba($dark-icon, 0.12);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: rgba($dark-icon, 0.06);
+    }
   }
 }
 
