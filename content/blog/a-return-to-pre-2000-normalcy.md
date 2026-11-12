@@ -91,7 +91,7 @@ The exercise treats the historical relationships as a useful guide. It does not 
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
-## They will print
+## And they will print
 
 The exercise asks how far prices would have to fall to return to the pre-2000 relationship. The answer is a long way.
 
@@ -99,9 +99,9 @@ If anything remotely close to this scenario occurs, it is this author's opinion 
 
 Policy is currently resisting a fall by pushing the cost onto younger buyers, as argued in [Dousing the Pyre](/blog/dousing-the-pyre/). Younger buyers' mortgages at today's prices let existing owners sell and lenders keep the loans performing.
 
-It is also priming the fall: the 2026-27 Budget abolishes negative gearing for established homes from 1 July 2027 for properties bought after 12 May 2026, and replaces the 50% CGT discount with cost-base indexation and a 30% minimum tax. The two pull in opposite directions, but the post-2000 low-rate regime is the historical anomaly behind the distortion of property prices.
+Since that article, policy has also begun priming the fall: the 2026-27 Budget abolishes negative gearing for established homes from 1 July 2027 for properties bought after 12 May 2026, and replaces the 50% CGT discount with cost-base indexation and a 30% minimum tax. Resistance and priming pull in opposite directions, but the post-2000 low-rate regime is the historical anomaly behind the distortion of property prices.
 
-If the government turns to monetisation instead, the price level rises. The debt is fixed in nominal terms, so its real value falls. But low rates and repression can also filter into financialised assets, including investment housing, which bids up prices and worsens the ratios. The effect on the ratios is ambiguous. But one would hope, for the next generation, that this time they go down and stay down.
+If the government turns to monetisation, the price level rises. The debt is fixed in nominal terms, so its real value falls. But historically, low rates and repression filter into financialised assets, including investment housing, which bids up prices and worsens the ratios. The effect on the ratios is ambiguous. But one would hope, for the next generation, that this time they go down and stay down.
 
 The numbers above are the nominal-fall scenario. They are an exercise and do not forecast the future.
 
