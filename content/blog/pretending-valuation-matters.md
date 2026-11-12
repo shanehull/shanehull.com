@@ -39,17 +39,17 @@ Price-to-income is at its all-time high. Price-to-rent is just below its 2022 pe
 
 ## The destinations
 
+<img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-12" alt="Lollipop chart of the price fall required to reach each valuation destination: 50% for price-to-income at its 1996 trough, 57% at its 1983 low, and 63% for price-to-rent at its 1996 trough." width="900" />
+
+<p><em>Price fall required to reach each destination.</em></p>
+
 Price-to-income needs 50% to its 1996 trough and 57% to its 1983 low. Price-to-rent needs 63% to its 1996 trough.
 
 The 1983 low is the all-time low in the income series. The 1996 trough is the last trough. The rent measure has one trough, in 1996.
 
 Price-to-income is about 2.0 times its 1996 low and 2.3 times its 1983 low. Price-to-rent is about 2.7 times its 1996 low. The rent measure is more stretched.
 
-The lollipop shows the distances:
 
-<img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-12" alt="Lollipop chart of the price fall required to reach each valuation destination: 50% for price-to-income at its 1996 trough, 57% at its 1983 low, and 63% for price-to-rent at its 1996 trough." width="900" />
-
-<p><em>Price fall required to reach each destination.</em></p>
 
 ## The ladder
 
