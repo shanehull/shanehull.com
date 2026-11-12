@@ -7,7 +7,10 @@ math: true
 ---
 
 $$
-\text{Price to income index}_t = 100 \times \frac{\text{nominal house price index}_t / \text{household disposable income per capita}_t}{\text{1996 value}}
+\begin{gathered}
+\text{Price to income index}_t = \\
+100 \times \frac{\text{nominal house price index}_t / \text{household disposable income per capita}_t}{\text{1996 value}}
+\end{gathered}
 $$
 
 The numerator is the Organisation for Economic Co-operation and Development nominal house price index for Australia, 2015 = 100. The denominator is Australian Bureau of Statistics household gross disposable income, seasonally adjusted, divided by estimated resident population. The income is quarterly and in dollars per person.
