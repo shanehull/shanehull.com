@@ -4,8 +4,6 @@
   <p class="description"><i>{{ .Description }}</i></p>
   <hr />
 
-  <div class="tool-instructions">{{ .Content }}</div>
-
   <div class="chart-tool-wrapper">
     <div class="chart-controls" id="chart-controls">
       <div class="control-group">
@@ -108,6 +106,8 @@
       hx-swap="innerHTML"
     ></div>
   </div>
+
+  <div class="tool-instructions">{{ .Content }}</div>
 
   <nav class="back-nav">
     <a href="/tools/" class="back-link">&larr; Tools</a>
