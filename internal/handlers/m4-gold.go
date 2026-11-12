@@ -268,7 +268,9 @@ func M4GoldDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	rangeParam := requestM4Range(r)
-	component := templates.ChartDownloads("m4-gold", rangeParam, "average", false)
+	component := templates.ChartDownloads("m4-gold", rangeParam, map[string]string{
+		"average": templates.Param(false),
+	})
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()

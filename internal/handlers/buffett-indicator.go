@@ -210,7 +210,9 @@ func BuffettIndicatorDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 
 	showAverage := r.URL.Query().Get("average") == "on"
 
-	component := templates.ChartDownloads("buffett-indicator", rangeParam, "average", showAverage)
+	component := templates.ChartDownloads("buffett-indicator", rangeParam, map[string]string{
+		"average": templates.Param(showAverage),
+	})
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
