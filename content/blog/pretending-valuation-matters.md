@@ -39,17 +39,13 @@ Price-to-income is at its all-time high. Price-to-rent is just below its 2022 pe
 
 ## The destinations
 
-| Measure         | Destination | Value  | Fall required |
-| --------------- | ----------- | ------ | ------------- |
-| Price-to-income | 1996 trough | 0.005345 | 50%         |
-| Price-to-income | 1983 low    | 0.004616 | 57%         |
-| Price-to-rent   | 1996 trough | 50.0   | 63%           |
+Price-to-income needs 50% to its 1996 trough and 57% to its 1983 low. Price-to-rent needs 63% to its 1996 trough.
 
 The 1983 low is the all-time low in the income series. The 1996 trough is the last trough. The rent measure has one trough, in 1996.
 
-Price-to-income is about 2.0 times its 1996 low and 2.3 times its 1983 low. Price-to-rent is about 2.7 times its 1996 low. The rent measure is more stretched than the income measure.
+Price-to-income is about 2.0 times its 1996 low and 2.3 times its 1983 low. Price-to-rent is about 2.7 times its 1996 low. The rent measure is more stretched.
 
-The lollipop chart shows the same distances:
+The lollipop shows the distances:
 
 <img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-12" alt="Lollipop chart of the price fall required to reach each valuation destination: 50% for price-to-income at its 1996 trough, 57% at its 1983 low, and 63% for price-to-rent at its 1996 trough." width="900" />
 
@@ -75,7 +71,7 @@ The income measure's 50% row is 0.0054, at the 1996 trough. Its 60% row is 0.004
 
 Price-to-income needs 50% to its 1996 trough, or 57% to its 1983 low. Price-to-rent needs 63% to its 1996 trough.
 
-The two measures no longer agree at 60%. The rent measure is more stretched. That is a meaningful divergence: household income is high relative to house prices by the standards of the 1980s and 1990s, but rent is even lower relative to prices.
+The rent measure is more stretched.
 
 The land and debt effects sit inside the market price. They are why the price is high relative to both income and rent. The two measures capture that. A separate leverage or replacement-cost ratio does not add a valuation signal.
 
