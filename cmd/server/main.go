@@ -231,6 +231,66 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
+	// Housing Q ratio tool
+	mux.HandleFunc(
+		"/housing-q-ratio/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousingQRatioHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/housing-q-ratio/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousingQRatioDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/housing-q-ratio/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousingQRatioDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/housing-q-ratio/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousingQRatioCSVHandler),
+			allowedOrigin,
+		),
+	)
+
+	// House prices to weekly income tool
+	mux.HandleFunc(
+		"/house-prices-to-weekly-income/chart",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesWeeklyIncomeHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/house-prices-to-weekly-income/downloads",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesWeeklyIncomeDownloadsHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/house-prices-to-weekly-income/data",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesWeeklyIncomeDataHandler),
+			allowedOrigin,
+		),
+	)
+	mux.HandleFunc(
+		"/house-prices-to-weekly-income/data.csv",
+		middleware.CORS(
+			http.HandlerFunc(handlers.HousePricesWeeklyIncomeCSVHandler),
+			allowedOrigin,
+		),
+	)
+
 	// Divisia M4 to Gold tool
 	mux.HandleFunc(
 		"/m4-gold/chart",
