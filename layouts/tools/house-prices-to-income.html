@@ -15,7 +15,7 @@
               name="range"
               value="max"
               checked
-              hx-get="/house-prices-to-weekly-income/chart"
+              hx-get="/house-prices-to-income/chart"
               hx-target="#chart-inner"
               hx-include="[name=quartiles]"
               hx-swap="innerHTML"
@@ -28,7 +28,7 @@
               type="radio"
               name="range"
               value="20y"
-              hx-get="/house-prices-to-weekly-income/chart"
+              hx-get="/house-prices-to-income/chart"
               hx-target="#chart-inner"
               hx-include="[name=quartiles]"
               hx-swap="innerHTML"
@@ -41,7 +41,7 @@
               type="radio"
               name="range"
               value="10y"
-              hx-get="/house-prices-to-weekly-income/chart"
+              hx-get="/house-prices-to-income/chart"
               hx-target="#chart-inner"
               hx-include="[name=quartiles]"
               hx-swap="innerHTML"
@@ -54,7 +54,7 @@
               type="radio"
               name="range"
               value="5y"
-              hx-get="/house-prices-to-weekly-income/chart"
+              hx-get="/house-prices-to-income/chart"
               hx-target="#chart-inner"
               hx-include="[name=quartiles]"
               hx-swap="innerHTML"
@@ -71,7 +71,7 @@
             type="checkbox"
             name="quartiles"
             checked
-            hx-get="/house-prices-to-weekly-income/chart"
+            hx-get="/house-prices-to-income/chart"
             hx-target="#chart-inner"
             hx-include="[name=range]"
             hx-swap="innerHTML"
@@ -90,7 +90,7 @@
 
     <div
       id="chart-downloads"
-      hx-get="/house-prices-to-weekly-income/downloads"
+      hx-get="/house-prices-to-income/downloads"
       hx-include="[name=range],[name=quartiles]"
       hx-trigger="load, change from:[name=range], change from:[name=quartiles]"
       hx-swap="innerHTML"

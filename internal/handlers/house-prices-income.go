@@ -19,45 +19,45 @@ import (
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
-// House prices to weekly income: the OECD nominal house price index divided by
-// ABS average weekly earnings per employee. Both series are quarterly, with
-// earnings forward-filled onto each house price date.
+// House prices to household income: the OECD nominal house price index divided
+// by ABS household gross disposable income per capita. Income is seasonally
+// adjusted and divided by estimated resident population.
 
 const (
-	weeklyIncomeCacheKey = "house-prices-to-weekly-income"
-	weeklyIncomeTTL      = 24 * time.Hour
+	priceToIncomeCacheKey = "house-prices-to-income"
+	priceToIncomeTTL      = 24 * time.Hour
 )
 
-var weeklyIncomeCache = cache.New()
+var priceToIncomeCache = cache.New()
 
-// incomePoint is one observation of the ratio.
+// incomePoint is one observation.
 type incomePoint struct {
 	Date  time.Time
 	Value float64
 }
 
-func loadWeeklyIncomeRatio(ctx context.Context) ([]incomePoint, error) {
-	if cached, found := weeklyIncomeCache.Get(weeklyIncomeCacheKey); found {
+func loadPriceToIncomeRatio(ctx context.Context) ([]incomePoint, error) {
+	if cached, found := priceToIncomeCache.Get(priceToIncomeCacheKey); found {
 		return cached.([]incomePoint), nil
 	}
 
 	fetchCtx, cancel := context.WithTimeout(ctx, 90*time.Second)
 	defer cancel()
 
-	raw, err := fetchWeeklyIncomeRatio(fetchCtx)
+	raw, err := fetchPriceToIncomeRatio(fetchCtx)
 	if err != nil {
 		return nil, err
 	}
-	weeklyIncomeCache.Set(weeklyIncomeCacheKey, raw, weeklyIncomeTTL)
+	priceToIncomeCache.Set(priceToIncomeCacheKey, raw, priceToIncomeTTL)
 	return raw, nil
 }
 
-// fetchWeeklyIncomeRatio fetches house prices and earnings concurrently, then
-// divides prices by forward-filled weekly earnings.
-func fetchWeeklyIncomeRatio(ctx context.Context) ([]incomePoint, error) {
+// fetchPriceToIncomeRatio fetches prices, household disposable income and
+// population concurrently, then divides prices by income per capita.
+func fetchPriceToIncomeRatio(ctx context.Context) ([]incomePoint, error) {
 	var (
-		prices, earnings       []incomePoint
-		errPrices, errEarnings error
+		prices, income, population          []incomePoint
+		errPrices, errIncome, errPopulation error
 	)
 
 	var wg sync.WaitGroup
@@ -72,18 +72,28 @@ func fetchWeeklyIncomeRatio(ctx context.Context) ([]incomePoint, error) {
 		}
 	})
 	wg.Go(func() {
-		points, err := abs.New().FetchAverageWeeklyEarnings(ctx)
+		points, err := abs.New().FetchHouseholdDisposableIncome(ctx)
 		if err != nil {
-			errEarnings = err
+			errIncome = err
 			return
 		}
 		for _, p := range points {
-			earnings = append(earnings, incomePoint{Date: p.Date, Value: p.Value})
+			income = append(income, incomePoint{Date: p.Date, Value: p.Value})
+		}
+	})
+	wg.Go(func() {
+		points, err := abs.New().FetchPopulation(ctx)
+		if err != nil {
+			errPopulation = err
+			return
+		}
+		for _, p := range points {
+			population = append(population, incomePoint{Date: p.Date, Value: p.Value})
 		}
 	})
 	wg.Wait()
 
-	for _, err := range []error{errPrices, errEarnings} {
+	for _, err := range []error{errPrices, errIncome, errPopulation} {
 		if err != nil {
 			return nil, err
 		}
@@ -91,14 +101,20 @@ func fetchWeeklyIncomeRatio(ctx context.Context) ([]incomePoint, error) {
 
 	ratio := make([]incomePoint, 0, len(prices))
 	for _, p := range prices {
-		income, ok := incomeAsOf(earnings, p.Date)
-		if !ok || income == 0 {
+		disposable, ok := incomeAsOf(income, p.Date)
+		if !ok || disposable == 0 {
 			continue
 		}
-		ratio = append(ratio, incomePoint{Date: p.Date, Value: p.Value / income})
+		people, ok := incomeAsOf(population, p.Date)
+		if !ok || people == 0 {
+			continue
+		}
+		// Disposable income is published in millions of dollars.
+		perCapita := disposable * 1e6 / people
+		ratio = append(ratio, incomePoint{Date: p.Date, Value: p.Value / perCapita})
 	}
 	if len(ratio) < 8 {
-		return nil, fmt.Errorf("house prices to weekly income: too few observations")
+		return nil, fmt.Errorf("house prices to household income: too few observations")
 	}
 	return ratio, nil
 }
@@ -111,7 +127,7 @@ func incomeAsOf(points []incomePoint, t time.Time) (float64, bool) {
 	return points[idx-1].Value, true
 }
 
-func weeklyIncomeControls(r *http.Request) (rangeParam string, showQuartiles bool) {
+func priceToIncomeControls(r *http.Request) (rangeParam string, showQuartiles bool) {
 	rangeParam = r.URL.Query().Get("range")
 	if rangeParam == "" {
 		rangeParam = "max"
@@ -119,9 +135,9 @@ func weeklyIncomeControls(r *http.Request) (rangeParam string, showQuartiles boo
 	return rangeParam, r.URL.Query().Get("quartiles") == "on"
 }
 
-// weeklyIncomeSeries converts the ratio into chart rows for the selected range.
-// Quartiles are the 25th and 75th percentiles of the displayed range.
-func weeklyIncomeSeries(points []incomePoint, rangeParam string, showQuartiles bool) []templates.LineChartData {
+// priceToIncomeSeries converts the ratio into chart rows for the selected
+// range. Quartiles are the 25th and 75th percentiles of the displayed range.
+func priceToIncomeSeries(points []incomePoint, rangeParam string, showQuartiles bool) []templates.LineChartData {
 	start := charts.CalculateRangeStart(rangeParam)
 	data := make([]templates.LineChartData, 0, len(points))
 	for _, p := range points {
@@ -148,30 +164,30 @@ func weeklyIncomeSeries(points []incomePoint, rangeParam string, showQuartiles b
 	return data
 }
 
-// HousePricesWeeklyIncomeHandler renders the house prices to weekly income chart.
-func HousePricesWeeklyIncomeHandler(w http.ResponseWriter, r *http.Request) {
+// HousePricesIncomeHandler renders the house prices to household income chart.
+func HousePricesIncomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	rangeParam, showQuartiles := weeklyIncomeControls(r)
-	points, err := loadWeeklyIncomeRatio(r.Context())
+	rangeParam, showQuartiles := priceToIncomeControls(r)
+	points, err := loadPriceToIncomeRatio(r.Context())
 	if err != nil {
-		log.Print("failed to get house prices to weekly income data:", err)
+		log.Print("failed to get house prices to household income data:", err)
 		renderError(w, "Unable to load chart data. Please try again later.")
 		return
 	}
 
-	data := weeklyIncomeSeries(points, rangeParam, showQuartiles)
+	data := priceToIncomeSeries(points, rangeParam, showQuartiles)
 	if len(data) == 0 {
 		renderError(w, "No data in the selected time range.")
 		return
 	}
 
 	options := map[string]string{
-		"mainLabel":     "House prices to weekly income",
-		"yAxisLabel":    "House price index / weekly earnings ($)",
+		"mainLabel":     "House prices to household income",
+		"yAxisLabel":    "House price index / disposable income per capita ($)",
 		"showQuartiles": "false",
 		"showAverage":   "false",
 	}
@@ -195,15 +211,15 @@ func HousePricesWeeklyIncomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// HousePricesWeeklyIncomeDownloadsHandler renders the JSON and CSV download links.
-func HousePricesWeeklyIncomeDownloadsHandler(w http.ResponseWriter, r *http.Request) {
+// HousePricesIncomeDownloadsHandler renders the JSON and CSV download links.
+func HousePricesIncomeDownloadsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	rangeParam, showQuartiles := weeklyIncomeControls(r)
-	component := templates.ChartDownloads("house-prices-to-weekly-income", rangeParam, map[string]string{
+	rangeParam, showQuartiles := priceToIncomeControls(r)
+	component := templates.ChartDownloads("house-prices-to-income", rangeParam, map[string]string{
 		"quartiles": templates.Param(showQuartiles),
 	})
 
@@ -221,46 +237,46 @@ func HousePricesWeeklyIncomeDownloadsHandler(w http.ResponseWriter, r *http.Requ
 	}
 }
 
-// HousePricesWeeklyIncomeDataHandler returns the ratio as JSON.
-func HousePricesWeeklyIncomeDataHandler(w http.ResponseWriter, r *http.Request) {
+// HousePricesIncomeDataHandler returns the ratio as JSON.
+func HousePricesIncomeDataHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	rangeParam, showQuartiles := weeklyIncomeControls(r)
-	points, err := loadWeeklyIncomeRatio(r.Context())
+	rangeParam, showQuartiles := priceToIncomeControls(r)
+	points, err := loadPriceToIncomeRatio(r.Context())
 	if err != nil {
-		log.Print("failed to get house prices to weekly income data:", err)
+		log.Print("failed to get house prices to household income data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
 		return
 	}
 
-	rows := weeklyIncomeSeries(points, rangeParam, showQuartiles)
+	rows := priceToIncomeSeries(points, rangeParam, showQuartiles)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Header().Set("Content-Disposition", "attachment; filename=\"house-prices-to-weekly-income-data.json\"")
+	w.Header().Set("Content-Disposition", "attachment; filename=\"house-prices-to-income-data.json\"")
 	if err := json.NewEncoder(w).Encode(rows); err != nil {
 		log.Print("failed to encode JSON:", err)
 	}
 }
 
-// HousePricesWeeklyIncomeCSVHandler returns the ratio as CSV.
-func HousePricesWeeklyIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
+// HousePricesIncomeCSVHandler returns the ratio as CSV.
+func HousePricesIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	rangeParam, showQuartiles := weeklyIncomeControls(r)
-	points, err := loadWeeklyIncomeRatio(r.Context())
+	rangeParam, showQuartiles := priceToIncomeControls(r)
+	points, err := loadPriceToIncomeRatio(r.Context())
 	if err != nil {
-		log.Print("failed to get house prices to weekly income data:", err)
+		log.Print("failed to get house prices to household income data:", err)
 		http.Error(w, "Unable to load chart data. Please try again later.", http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "text/csv; charset=utf-8")
-	w.Header().Set("Content-Disposition", "attachment; filename=\"house-prices-to-weekly-income-data.csv\"")
+	w.Header().Set("Content-Disposition", "attachment; filename=\"house-prices-to-income-data.csv\"")
 
 	writer := csv.NewWriter(w)
 	defer writer.Flush()
@@ -273,7 +289,7 @@ func HousePricesWeeklyIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print("failed to write CSV header:", err)
 		return
 	}
-	for _, row := range weeklyIncomeSeries(points, rangeParam, showQuartiles) {
+	for _, row := range priceToIncomeSeries(points, rangeParam, showQuartiles) {
 		cells := []string{row.Date, fmt.Sprintf("%.6f", row.Value)}
 		if showQuartiles {
 			cells = append(cells, fmt.Sprintf("%.6f", row.Quartile1), fmt.Sprintf("%.6f", row.Quartile3))

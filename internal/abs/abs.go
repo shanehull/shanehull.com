@@ -8,10 +8,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/shanehull/shanehull.com/internal/xlsx"
 )
 
 // Point is one observation.
@@ -21,13 +25,22 @@ type Point struct {
 }
 
 const (
-	defaultAPIURL = "https://data.api.abs.gov.au"
-	earningsKey   = "/rest/data/ABS,AWE,1.0.0/1.1.3.7.TOT.10.AUS.S?format=jsondata"
+	defaultAPIURL  = "https://data.api.abs.gov.au"
+	defaultSiteURL = "https://www.abs.gov.au"
+
+	populationKey = "/rest/data/ABS,ERP_Q,1.0.0/1.3.TOT.AUS.Q?format=jsondata"
+	incomePage    = "/statistics/economy/national-accounts/" +
+		"australian-national-accounts-national-income-expenditure-and-product/latest-release"
+
+	xlsxMIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
+
+var incomeHref = regexp.MustCompile(`href="([^"]*5206020_Household_Income\.xlsx)"`)
 
 // Client fetches ABS data.
 type Client struct {
 	apiURL     string
+	siteURL    string
 	httpClient *http.Client
 }
 
@@ -39,6 +52,12 @@ func WithAPIURL(rawURL string) Option {
 	return func(c *Client) { c.apiURL = rawURL }
 }
 
+// WithSiteURL overrides the publication site endpoint, used to locate the
+// household income workbook. Used by tests.
+func WithSiteURL(rawURL string) Option {
+	return func(c *Client) { c.siteURL = rawURL }
+}
+
 // WithHTTPClient overrides the HTTP client, including its timeout.
 func WithHTTPClient(client *http.Client) Option {
 	return func(c *Client) { c.httpClient = client }
@@ -48,6 +67,7 @@ func WithHTTPClient(client *http.Client) Option {
 func New(opts ...Option) *Client {
 	c := &Client{
 		apiURL:     defaultAPIURL,
+		siteURL:    defaultSiteURL,
 		httpClient: &http.Client{Timeout: 60 * time.Second},
 	}
 	for _, opt := range opts {
@@ -56,23 +76,80 @@ func New(opts ...Option) *Client {
 	return c
 }
 
-// FetchAverageWeeklyEarnings returns average weekly earnings for all employees,
-// persons, in dollars, half-yearly and oldest first.
-func (c *Client) FetchAverageWeeklyEarnings(ctx context.Context) ([]Point, error) {
-	body, err := c.get(ctx, c.apiURL+earningsKey, "application/vnd.sdmx.data+json")
+// FetchHouseholdDisposableIncome returns household gross disposable income in
+// millions of dollars, quarterly, seasonally adjusted and oldest first.
+func (c *Client) FetchHouseholdDisposableIncome(ctx context.Context) ([]Point, error) {
+	page, err := c.get(ctx, c.siteURL+incomePage, "text/html")
+	if err != nil {
+		return nil, err
+	}
+	m := incomeHref.FindSubmatch(page)
+	if m == nil {
+		return nil, fmt.Errorf("household income workbook link not found (page layout changed)")
+	}
+	href, err := url.Parse(string(m[1]))
+	if err != nil {
+		return nil, fmt.Errorf("parse household income link: %w", err)
+	}
+	pageURL, err := url.Parse(c.siteURL + incomePage)
+	if err != nil {
+		return nil, fmt.Errorf("parse household income page URL: %w", err)
+	}
+
+	body, err := c.get(ctx, pageURL.ResolveReference(href).String(), xlsxMIME)
+	if err != nil {
+		return nil, err
+	}
+	sheets, err := xlsx.Read(body)
+	if err != nil {
+		return nil, fmt.Errorf("read household income workbook: %w", err)
+	}
+	data := sheets["Data1"]
+	if len(data) == 0 {
+		return nil, fmt.Errorf("household income Data1 sheet missing")
+	}
+
+	col := findColumnSA(data, "GROSS DISPOSABLE INCOME")
+	if col < 0 {
+		return nil, fmt.Errorf("household income gross disposable income column not found")
+	}
+
+	var points []Point
+	for _, row := range data[dataStart(data):] {
+		if len(row) == 0 {
+			continue
+		}
+		t, ok := cellDate(row[0])
+		if !ok {
+			continue
+		}
+		if v, ok := cellFloat(row, col); ok {
+			points = append(points, Point{Date: t, Value: v})
+		}
+	}
+	if len(points) == 0 {
+		return nil, fmt.Errorf("no household income rows parsed")
+	}
+	return points, nil
+}
+
+// FetchPopulation returns estimated resident population for Australia,
+// quarterly and oldest first.
+func (c *Client) FetchPopulation(ctx context.Context) ([]Point, error) {
+	body, err := c.get(ctx, c.apiURL+populationKey, "application/vnd.sdmx.data+json")
 	if err != nil {
 		return nil, err
 	}
 	observations, err := parseSDMX(body)
 	if err != nil {
-		return nil, fmt.Errorf("parse ABS average weekly earnings: %w", err)
+		return nil, fmt.Errorf("parse ABS population: %w", err)
 	}
 	points, err := toPoints(observations)
 	if err != nil {
-		return nil, fmt.Errorf("parse ABS average weekly earnings: %w", err)
+		return nil, fmt.Errorf("parse ABS population: %w", err)
 	}
 	if len(points) == 0 {
-		return nil, fmt.Errorf("no ABS average weekly earnings observations")
+		return nil, fmt.Errorf("no ABS population observations")
 	}
 	return points, nil
 }
@@ -235,4 +312,63 @@ func parseNumbered(s, marker string) (year, index int, err error) {
 		return 0, 0, err
 	}
 	return year, index, nil
+}
+
+// dataStart finds the first row whose first cell is a date.
+func dataStart(rows [][]string) int {
+	for i, row := range rows {
+		if len(row) > 0 {
+			if _, ok := cellDate(row[0]); ok {
+				return i
+			}
+		}
+	}
+	return len(rows)
+}
+
+// cellDate parses either an ISO date string or an Excel serial number (1900
+// system).
+func cellDate(raw string) (time.Time, bool) {
+	raw = strings.TrimSpace(raw)
+	if len(raw) >= 10 {
+		if t, err := time.Parse("2006-01-02", raw[:10]); err == nil {
+			return t, true
+		}
+	}
+	if serial, err := strconv.ParseFloat(raw, 64); err == nil {
+		return time.Date(1899, 12, 30, 0, 0, 0, 0, time.UTC).AddDate(0, 0, int(serial)), true
+	}
+	return time.Time{}, false
+}
+
+// findColumnSA finds a series title in the seasonally adjusted block. ABS
+// workbooks repeat the title once per adjustment basis.
+func findColumnSA(rows [][]string, title string) int {
+	if len(rows) < 3 {
+		return -1
+	}
+	for i, h := range rows[0] {
+		if strings.TrimSpace(strings.TrimSuffix(strings.TrimSpace(h), ";")) != title {
+			continue
+		}
+		if i < len(rows[2]) && strings.TrimSpace(rows[2][i]) == "Seasonally Adjusted" {
+			return i
+		}
+	}
+	return -1
+}
+
+func cellFloat(row []string, col int) (float64, bool) {
+	if col < 0 || col >= len(row) {
+		return 0, false
+	}
+	raw := strings.ReplaceAll(strings.TrimSpace(row[col]), ",", "")
+	if raw == "" {
+		return 0, false
+	}
+	v, err := strconv.ParseFloat(raw, 64)
+	if err != nil {
+		return 0, false
+	}
+	return v, true
 }

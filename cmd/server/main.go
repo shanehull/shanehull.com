@@ -231,32 +231,32 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
-	// House prices to weekly income tool
+	// House prices to household income tool
 	mux.HandleFunc(
-		"/house-prices-to-weekly-income/chart",
+		"/house-prices-to-income/chart",
 		middleware.CORS(
-			http.HandlerFunc(handlers.HousePricesWeeklyIncomeHandler),
+			http.HandlerFunc(handlers.HousePricesIncomeHandler),
 			allowedOrigin,
 		),
 	)
 	mux.HandleFunc(
-		"/house-prices-to-weekly-income/downloads",
+		"/house-prices-to-income/downloads",
 		middleware.CORS(
-			http.HandlerFunc(handlers.HousePricesWeeklyIncomeDownloadsHandler),
+			http.HandlerFunc(handlers.HousePricesIncomeDownloadsHandler),
 			allowedOrigin,
 		),
 	)
 	mux.HandleFunc(
-		"/house-prices-to-weekly-income/data",
+		"/house-prices-to-income/data",
 		middleware.CORS(
-			http.HandlerFunc(handlers.HousePricesWeeklyIncomeDataHandler),
+			http.HandlerFunc(handlers.HousePricesIncomeDataHandler),
 			allowedOrigin,
 		),
 	)
 	mux.HandleFunc(
-		"/house-prices-to-weekly-income/data.csv",
+		"/house-prices-to-income/data.csv",
 		middleware.CORS(
-			http.HandlerFunc(handlers.HousePricesWeeklyIncomeCSVHandler),
+			http.HandlerFunc(handlers.HousePricesIncomeCSVHandler),
 			allowedOrigin,
 		),
 	)
