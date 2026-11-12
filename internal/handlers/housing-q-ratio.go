@@ -20,10 +20,10 @@ import (
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
-// Housing Q ratio: the market value of the dwelling stock, net of the housing
-// credit written against it, over the cost of replacing the structures. The
-// ratio is detrended by default, dividing each reading by the running geometric
-// mean of every reading to that date.
+// Housing Q ratio: residential land at market plus dwellings at replacement
+// cost, less housing credit, over dwelling replacement cost. The numerator is a
+// mixed balance sheet value. The ratio is detrended by default, dividing each
+// reading by the running geometric mean of every reading to that date.
 
 const (
 	qRatioCacheKey = "housing-q-ratio"
@@ -235,7 +235,7 @@ func HousingQRatioHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	if !detrended {
 		options["mainLabel"] = "Q ratio, raw"
-		options["yAxisLabel"] = "Equity / replacement cost"
+		options["yAxisLabel"] = "Balance sheet equity / dwelling replacement cost"
 	}
 	if showQuartiles {
 		options["showQuartiles"] = "true"
