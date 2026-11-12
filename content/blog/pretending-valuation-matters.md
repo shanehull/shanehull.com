@@ -24,7 +24,7 @@ The numerator is an index, so the level is index points per dollar of weekly ear
 
 Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield. It is the housing equivalent of a price-to-earnings multiple: how many years of gross rent buy the dwelling.
 
-The gross measure is the standard long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower, but the expense ratio is stable over long periods, so the ranking is similar. The gross price-to-rent ratio is the simpler and more consistent series across five decades. That is why it is the measure used here.
+The gross measure is the standard long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower, but the expense ratio is stable over long periods, so the ranking is similar. The gross price-to-rent ratio is the simpler and more consistent series across five decades. The series begins in 1972. The chart starts in 1990 to align with the Q and price-to-income; the earlier observations remain in the CSV and JSON and do not change the percentile or the destinations.
 
 The Q ratio divides owner equity by the replacement cost of the dwelling structures. Equity is the market value of residential land and dwellings less housing credit. Land is in the numerator. The denominator is the replacement cost of the buildings. A Q of 1 is the mark where equity equals the replacement cost of the structures. It is a theoretical reference, not an empirical fair value.
 
@@ -34,7 +34,7 @@ The raw Q trends, so a percentile against its own history is mechanically high. 
 
 <img src="/blog/images/housing-valuation-2026-q2.svg?v=2026-11-12" alt="Four panels: price to weekly income, price to rent, the raw housing Q ratio and the detrended housing Q ratio, with 25th and 75th percentile lines, data to 2026-Q2" width="900" />
 
-<p><em>Data to 2026-Q2. Dashed lines mark the 25th and 75th percentiles of the full history. Sources: OECD, ABS and the Reserve Bank of Australia (RBA). Live charts: <a href="/tools/house-prices-to-weekly-income/">price to weekly income</a>, <a href="/tools/house-prices-to-rent/">price to rent</a> and <a href="/tools/housing-q-ratio/">Q ratio</a>.</em></p>
+<p><em>Data to 2026-Q2. Dashed lines mark the 25th and 75th percentiles of the full history. Sources: OECD, ABS and the Reserve Bank of Australia (RBA). The price-to-rent series begins in 1972; the chart starts in 1990 to align with the other measures. The earlier observations are in the CSV and JSON and do not change the percentiles or destinations. Live charts: <a href="/tools/house-prices-to-weekly-income/">price to weekly income</a>, <a href="/tools/house-prices-to-rent/">price to rent</a> and <a href="/tools/housing-q-ratio/">Q ratio</a>.</em></p>
 
 ## Where we are
 

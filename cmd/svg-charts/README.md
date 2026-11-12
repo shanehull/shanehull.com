@@ -33,6 +33,7 @@ A CSV with `measure`, `destination`, `value` and `move_required_pct`. Rows are s
 | `subtitle`  | all        | One line under the title.                                          |
 | `source`    | all        | Footer text.                                                       |
 | `data`      | all        | CSV path, relative to the spec file.                               |
+| `start`     | `series`   | Optional ISO date. Rows before it are not plotted; the data file can keep the full history. |
 | `quartiles` | `series`   | Draw 25th and 75th percentile lines when `true`.                   |
 | `panels`    | `series`   | Array of `{title, field, format}`. `format` is a Go format string. |
 | `labels`    | `lollipop` | Map keyed by `measure\|destination`, or `measure`.                 |

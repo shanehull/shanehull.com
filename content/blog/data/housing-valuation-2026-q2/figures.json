@@ -29,7 +29,8 @@
           "field": "q_detrended",
           "format": "%.2f"
         }
-      ]
+      ],
+      "start": "1990-01-01"
     },
     {
       "type": "lollipop",

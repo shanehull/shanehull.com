@@ -30,6 +30,7 @@ type figure struct {
 	Subtitle  string           `json:"subtitle"`
 	Source    string           `json:"source"`
 	Data      string           `json:"data"`
+	Start     string           `json:"start"`
 	Quartiles bool             `json:"quartiles"`
 	Panels    []panel          `json:"panels"`
 	Labels    map[string]label `json:"labels"`
@@ -100,13 +101,28 @@ func seriesSVG(fig figure, baseDir string) (string, error) {
 	plotWidth := width - left - right
 	height := top + len(fig.Panels)*panelHeight + (len(fig.Panels)-1)*panelGap + bottom
 
+	startTime := time.Time{}
+	if fig.Start != "" {
+		var err error
+		startTime, err = time.Parse("2006-01-02", fig.Start)
+		if err != nil {
+			return "", fmt.Errorf("parse start %q: %w", fig.Start, err)
+		}
+	}
+
 	times := make([]time.Time, 0, len(rows))
 	for _, row := range rows {
 		t, err := time.Parse("2006-01-02", row["date"])
 		if err != nil {
 			return "", fmt.Errorf("parse date %q: %w", row["date"], err)
 		}
+		if !startTime.IsZero() && t.Before(startTime) {
+			continue
+		}
 		times = append(times, t)
+	}
+	if len(times) == 0 {
+		return "", fmt.Errorf("no rows on or after the start date")
 	}
 	minTime, maxTime := times[0], times[0]
 	for _, t := range times {
@@ -159,6 +175,9 @@ func seriesSVG(fig figure, baseDir string) (string, error) {
 			t, err := time.Parse("2006-01-02", row["date"])
 			if err != nil {
 				return "", err
+			}
+			if !startTime.IsZero() && t.Before(startTime) {
+				continue
 			}
 			v, err := strconv.ParseFloat(raw, 64)
 			if err != nil {
