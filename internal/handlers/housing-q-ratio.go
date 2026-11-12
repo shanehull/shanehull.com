@@ -20,10 +20,10 @@ import (
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
 
-// Housing Q ratio: the market value of the dwelling stock, net of the housing
-// credit written against it, over the cost of replacing the structures. The
-// ratio is detrended by default, dividing each reading by the running geometric
-// mean of every reading to that date.
+// Housing Q ratio: the owner's equity in the dwelling stock divided by the
+// replacement cost of the dwelling structure. Equity is the market value of
+// residential land and dwellings less housing credit. Land is in the numerator.
+// A reading of 1 is the mark where equity equals structure replacement cost.
 
 const (
 	qRatioCacheKey = "housing-q-ratio"
@@ -54,25 +54,32 @@ func loadQRatio(ctx context.Context) ([]qPoint, error) {
 	return raw, nil
 }
 
-// fetchQRatio fetches the ABS household balance sheet and RBA housing credit
-// concurrently, then builds the raw ratio.
+// fetchQRatio fetches the household balance sheet, the replacement cost of
+// those dwellings and housing credit, then builds the equity ratio.
 func fetchQRatio(ctx context.Context) ([]qPoint, error) {
 	var (
-		housing, replacement, credit []qPoint
-		errSheet, errCredit          error
+		market, replacement, credit         []qPoint
+		errSheet, errReplacement, errCredit error
 	)
 
 	var wg sync.WaitGroup
 	wg.Go(func() {
-		value, dwellings, err := abs.New().FetchHouseholdBalanceSheet(ctx)
+		value, _, err := abs.New().FetchHouseholdBalanceSheet(ctx)
 		if err != nil {
 			errSheet = err
 			return
 		}
 		for _, p := range value {
-			housing = append(housing, qPoint{Date: p.Date, Value: p.Value})
+			market = append(market, qPoint{Date: p.Date, Value: p.Value})
 		}
-		for _, p := range dwellings {
+	})
+	wg.Go(func() {
+		points, err := abs.New().FetchHouseholdDwellingReplacement(ctx)
+		if err != nil {
+			errReplacement = err
+			return
+		}
+		for _, p := range points {
 			replacement = append(replacement, qPoint{Date: p.Date, Value: p.Value})
 		}
 	})
@@ -88,38 +95,34 @@ func fetchQRatio(ctx context.Context) ([]qPoint, error) {
 	})
 	wg.Wait()
 
-	for _, err := range []error{errSheet, errCredit} {
+	for _, err := range []error{errSheet, errReplacement, errCredit} {
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	var equity []qPoint
-	for _, p := range housing {
-		debt, ok := qAsOf(credit, p.Date)
-		if !ok {
-			continue
-		}
-		equity = append(equity, qPoint{Date: p.Date, Value: p.Value - debt})
-	}
-
-	ratio := qRatio(equity, replacement)
+	ratio := equityQRatio(market, replacement, credit)
 	if len(ratio) < 8 {
 		return nil, fmt.Errorf("q ratio: too few observations")
 	}
 	return ratio, nil
 }
 
-// qRatio returns equity/replacement with replacement forward-filled onto each
-// balance sheet date.
-func qRatio(equity, replacement []qPoint) []qPoint {
-	out := make([]qPoint, 0, len(equity))
-	for _, p := range equity {
+// equityQRatio divides equity by the replacement cost of the dwelling
+// structure at each balance sheet date. Replacement cost and housing credit are
+// forward-filled.
+func equityQRatio(market, replacement, credit []qPoint) []qPoint {
+	out := make([]qPoint, 0, len(market))
+	for _, p := range market {
 		r, ok := qAsOf(replacement, p.Date)
 		if !ok || r == 0 {
 			continue
 		}
-		out = append(out, qPoint{Date: p.Date, Value: p.Value / r})
+		d, ok := qAsOf(credit, p.Date)
+		if !ok {
+			continue
+		}
+		out = append(out, qPoint{Date: p.Date, Value: (p.Value - d) / r})
 	}
 	return out
 }
@@ -228,14 +231,14 @@ func HousingQRatioHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	options := map[string]string{
-		"mainLabel":     "Q ratio, detrended",
+		"mainLabel":     "Housing Q ratio, detrended",
 		"yAxisLabel":    "Ratio to running geometric mean",
 		"showQuartiles": "false",
 		"showAverage":   "false",
 	}
 	if !detrended {
-		options["mainLabel"] = "Q ratio, raw"
-		options["yAxisLabel"] = "Equity / replacement cost"
+		options["mainLabel"] = "Housing Q ratio, raw"
+		options["yAxisLabel"] = "Equity / structure replacement cost"
 	}
 	if showQuartiles {
 		options["showQuartiles"] = "true"

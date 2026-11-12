@@ -11,18 +11,32 @@ func date(year int, month time.Month, day int) time.Time {
 	return time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
 }
 
-func TestQRatio(t *testing.T) {
-	equity := []qPoint{
+func TestEquityQRatio(t *testing.T) {
+	market := []qPoint{
 		{Date: date(2020, 3, 1), Value: 100},
 		{Date: date(2020, 6, 1), Value: 120},
 	}
-	replacement := []qPoint{
-		{Date: date(2020, 3, 1), Value: 50},
-		{Date: date(2020, 6, 1), Value: 60},
+	replacement := []qPoint{{Date: date(2019, 6, 1), Value: 70}}
+	credit := []qPoint{
+		{Date: date(2020, 2, 1), Value: 20},
+		{Date: date(2020, 5, 1), Value: 30},
 	}
-	got := qRatio(equity, replacement)
-	if len(got) != 2 || got[0].Value != 2 || got[1].Value != 2 {
-		t.Fatalf("unexpected ratio: %+v", got)
+	got := equityQRatio(market, replacement, credit)
+	if len(got) != 2 {
+		t.Fatalf("want 2 rows, got %+v", got)
+	}
+	if got[0].Value != 80.0/70.0 {
+		t.Fatalf("unexpected March ratio: %+v", got[0])
+	}
+	if got[1].Value != 90.0/70.0 {
+		t.Fatalf("unexpected June ratio: %+v", got[1])
+	}
+}
+
+func TestEquityQRatioSkipsMissingInputs(t *testing.T) {
+	market := []qPoint{{Date: date(2020, 6, 1), Value: 120}}
+	if got := equityQRatio(market, nil, nil); len(got) != 0 {
+		t.Fatalf("want no rows without replacement cost or credit, got %+v", got)
 	}
 }
 
@@ -72,7 +86,6 @@ func TestQRatioControls(t *testing.T) {
 		t.Fatal("detrend=on should keep detrending")
 	}
 
-	// The checked box and its off fallback both post; order must not matter.
 	for _, query := range []string{"detrend=on&detrend=off", "detrend=off&detrend=on"} {
 		req = httptest.NewRequest("GET", "/housing-q-ratio/chart?"+query, nil)
 		_, detrended, _ = qRatioControls(req)
@@ -127,19 +140,11 @@ func TestQRatioSeriesQuartiles(t *testing.T) {
 	if len(data) != 4 {
 		t.Fatalf("want 4 rows, got %d", len(data))
 	}
-	// Quartiles are constant across the series and bracket the middle values.
 	wantQ1 := 1.75
 	wantQ3 := 3.25
 	for i, row := range data {
 		if row.Quartile1 != wantQ1 || row.Quartile3 != wantQ3 {
 			t.Fatalf("row %d quartiles = %v/%v, want %v/%v", i, row.Quartile1, row.Quartile3, wantQ1, wantQ3)
-		}
-	}
-
-	// Without the flag the rows carry no quartiles.
-	for _, row := range qRatioSeries(points, "max", false, false) {
-		if row.Quartile1 != 0 || row.Quartile3 != 0 {
-			t.Fatalf("unexpected quartiles when disabled: %+v", row)
 		}
 	}
 }

@@ -31,9 +31,16 @@ const (
 	earningsKey = "/rest/data/ABS,AWE,1.0.0/1.1.3.7.TOT.10.AUS.S?format=jsondata"
 	balancePage = "/statistics/economy/national-accounts/" +
 		"australian-national-accounts-finance-and-wealth/latest-release"
+	asnaPage = "/statistics/economy/national-accounts/" +
+		"australian-system-national-accounts/latest-release"
+
+	xlsxMIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
-var xlsxHref = regexp.MustCompile(`href="([^"]*5232035\.xlsx)"`)
+var (
+	xlsxHref          = regexp.MustCompile(`href="([^"]*5232035\.xlsx)"`)
+	asnaHouseholdHref = regexp.MustCompile(`href="([^"]*5204041_Household_Balance_Sheet\.xlsx)"`)
+)
 
 // Client fetches ABS data.
 type Client struct {
@@ -95,9 +102,9 @@ func (c *Client) FetchAverageWeeklyEarnings(ctx context.Context) ([]Point, error
 	return points, nil
 }
 
-// FetchHouseholdBalanceSheet returns the value of residential land and
-// dwellings at market prices, and the replacement cost of the dwelling stock.
-// Both are in dollars, quarterly and oldest first.
+// FetchHouseholdBalanceSheet returns the market value of residential land and
+// dwellings, and the market value of the dwellings alone. Both are in billions
+// of dollars, quarterly and oldest first.
 func (c *Client) FetchHouseholdBalanceSheet(ctx context.Context) ([]Point, []Point, error) {
 	page, err := c.get(ctx, c.siteURL+balancePage, "text/html")
 	if err != nil {
@@ -116,8 +123,7 @@ func (c *Client) FetchHouseholdBalanceSheet(ctx context.Context) ([]Point, []Poi
 		return nil, nil, fmt.Errorf("parse household balance sheet page URL: %w", err)
 	}
 
-	body, err := c.get(ctx, pageURL.ResolveReference(href).String(),
-		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	body, err := c.get(ctx, pageURL.ResolveReference(href).String(), xlsxMIME)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -156,6 +162,64 @@ func (c *Client) FetchHouseholdBalanceSheet(ctx context.Context) ([]Point, []Poi
 		return nil, nil, fmt.Errorf("no household balance sheet rows parsed")
 	}
 	return housing, replacement, nil
+}
+
+// FetchHouseholdDwellingReplacement returns the replacement cost of
+// household-owned dwellings from the ASNA household balance sheet. Values are
+// in billions of dollars, annual as at 30 June, oldest first.
+func (c *Client) FetchHouseholdDwellingReplacement(ctx context.Context) ([]Point, error) {
+	page, err := c.get(ctx, c.siteURL+asnaPage, "text/html")
+	if err != nil {
+		return nil, err
+	}
+	m := asnaHouseholdHref.FindSubmatch(page)
+	if m == nil {
+		return nil, fmt.Errorf("ASNA household balance sheet workbook link not found (page layout changed)")
+	}
+	href, err := url.Parse(string(m[1]))
+	if err != nil {
+		return nil, fmt.Errorf("parse ASNA household balance sheet link: %w", err)
+	}
+	pageURL, err := url.Parse(c.siteURL + asnaPage)
+	if err != nil {
+		return nil, fmt.Errorf("parse ASNA household balance sheet page URL: %w", err)
+	}
+
+	body, err := c.get(ctx, pageURL.ResolveReference(href).String(), xlsxMIME)
+	if err != nil {
+		return nil, err
+	}
+	sheets, err := xlsx.Read(body)
+	if err != nil {
+		return nil, fmt.Errorf("read ASNA household balance sheet workbook: %w", err)
+	}
+	data := sheets["Data1"]
+	if len(data) == 0 {
+		return nil, fmt.Errorf("ASNA household balance sheet Data1 sheet missing")
+	}
+
+	col := findColumn(data[0], "Non-financial - Produced - Fixed assets - Dwellings")
+	if col < 0 {
+		return nil, fmt.Errorf("ASNA household balance sheet dwellings column not found")
+	}
+
+	var points []Point
+	for _, row := range data[dataStart(data):] {
+		if len(row) == 0 {
+			continue
+		}
+		t, ok := cellDate(row[0])
+		if !ok {
+			continue
+		}
+		if v, ok := cellFloat(row, col); ok {
+			points = append(points, Point{Date: t, Value: v})
+		}
+	}
+	if len(points) == 0 {
+		return nil, fmt.Errorf("no ASNA household balance sheet rows parsed")
+	}
+	return points, nil
 }
 
 func (c *Client) get(ctx context.Context, endpoint, accept string) ([]byte, error) {
