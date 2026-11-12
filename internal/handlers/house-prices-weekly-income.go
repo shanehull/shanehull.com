@@ -111,15 +111,17 @@ func incomeAsOf(points []incomePoint, t time.Time) (float64, bool) {
 	return points[idx-1].Value, true
 }
 
-func weeklyIncomeControls(r *http.Request) string {
-	rangeParam := r.URL.Query().Get("range")
+func weeklyIncomeControls(r *http.Request) (rangeParam string, showQuartiles bool) {
+	rangeParam = r.URL.Query().Get("range")
 	if rangeParam == "" {
 		rangeParam = "max"
 	}
-	return rangeParam
+	return rangeParam, r.URL.Query().Get("quartiles") == "on"
 }
 
-func weeklyIncomeSeries(points []incomePoint, rangeParam string) []templates.LineChartData {
+// weeklyIncomeSeries converts the ratio into chart rows for the selected range.
+// Quartiles are the 25th and 75th percentiles of the displayed range.
+func weeklyIncomeSeries(points []incomePoint, rangeParam string, showQuartiles bool) []templates.LineChartData {
 	start := charts.CalculateRangeStart(rangeParam)
 	data := make([]templates.LineChartData, 0, len(points))
 	for _, p := range points {
@@ -131,6 +133,18 @@ func weeklyIncomeSeries(points []incomePoint, rangeParam string) []templates.Lin
 			Value: p.Value,
 		})
 	}
+
+	if showQuartiles && len(data) > 0 {
+		values := make([]float64, len(data))
+		for i, d := range data {
+			values[i] = d.Value
+		}
+		q1, q3 := calculateQuartiles(values)
+		for i := range data {
+			data[i].Quartile1 = q1[i]
+			data[i].Quartile3 = q3[i]
+		}
+	}
 	return data
 }
 
@@ -141,7 +155,7 @@ func HousePricesWeeklyIncomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rangeParam := weeklyIncomeControls(r)
+	rangeParam, showQuartiles := weeklyIncomeControls(r)
 	points, err := loadWeeklyIncomeRatio(r.Context())
 	if err != nil {
 		log.Print("failed to get house prices to weekly income data:", err)
@@ -149,7 +163,7 @@ func HousePricesWeeklyIncomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := weeklyIncomeSeries(points, rangeParam)
+	data := weeklyIncomeSeries(points, rangeParam, showQuartiles)
 	if len(data) == 0 {
 		renderError(w, "No data in the selected time range.")
 		return
@@ -161,7 +175,10 @@ func HousePricesWeeklyIncomeHandler(w http.ResponseWriter, r *http.Request) {
 		"showQuartiles": "false",
 		"showAverage":   "false",
 	}
-	component := templates.LineChart("chart-canvas", data, false, options)
+	if showQuartiles {
+		options["showQuartiles"] = "true"
+	}
+	component := templates.LineChart("chart-canvas", data, showQuartiles, options)
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
@@ -185,8 +202,10 @@ func HousePricesWeeklyIncomeDownloadsHandler(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	rangeParam := weeklyIncomeControls(r)
-	component := templates.ChartDownloads("house-prices-to-weekly-income", rangeParam, nil)
+	rangeParam, showQuartiles := weeklyIncomeControls(r)
+	component := templates.ChartDownloads("house-prices-to-weekly-income", rangeParam, map[string]string{
+		"quartiles": templates.Param(showQuartiles),
+	})
 
 	buf := new(bytes.Buffer)
 	defer buf.Reset()
@@ -209,7 +228,7 @@ func HousePricesWeeklyIncomeDataHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	rangeParam := weeklyIncomeControls(r)
+	rangeParam, showQuartiles := weeklyIncomeControls(r)
 	points, err := loadWeeklyIncomeRatio(r.Context())
 	if err != nil {
 		log.Print("failed to get house prices to weekly income data:", err)
@@ -217,7 +236,7 @@ func HousePricesWeeklyIncomeDataHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	rows := weeklyIncomeSeries(points, rangeParam)
+	rows := weeklyIncomeSeries(points, rangeParam, showQuartiles)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.Header().Set("Content-Disposition", "attachment; filename=\"house-prices-to-weekly-income-data.json\"")
 	if err := json.NewEncoder(w).Encode(rows); err != nil {
@@ -232,7 +251,7 @@ func HousePricesWeeklyIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rangeParam := weeklyIncomeControls(r)
+	rangeParam, showQuartiles := weeklyIncomeControls(r)
 	points, err := loadWeeklyIncomeRatio(r.Context())
 	if err != nil {
 		log.Print("failed to get house prices to weekly income data:", err)
@@ -246,12 +265,20 @@ func HousePricesWeeklyIncomeCSVHandler(w http.ResponseWriter, r *http.Request) {
 	writer := csv.NewWriter(w)
 	defer writer.Flush()
 
-	if err := writer.Write([]string{"date", "price_to_income"}); err != nil {
+	header := []string{"date", "price_to_income"}
+	if showQuartiles {
+		header = append(header, "quartile1", "quartile3")
+	}
+	if err := writer.Write(header); err != nil {
 		log.Print("failed to write CSV header:", err)
 		return
 	}
-	for _, row := range weeklyIncomeSeries(points, rangeParam) {
-		if err := writer.Write([]string{row.Date, fmt.Sprintf("%.6f", row.Value)}); err != nil {
+	for _, row := range weeklyIncomeSeries(points, rangeParam, showQuartiles) {
+		cells := []string{row.Date, fmt.Sprintf("%.6f", row.Value)}
+		if showQuartiles {
+			cells = append(cells, fmt.Sprintf("%.6f", row.Quartile1), fmt.Sprintf("%.6f", row.Quartile3))
+		}
+		if err := writer.Write(cells); err != nil {
 			log.Print("failed to write CSV row:", err)
 			return
 		}
