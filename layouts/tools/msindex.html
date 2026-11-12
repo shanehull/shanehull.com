@@ -7,7 +7,7 @@
   <div class="tool-instructions">{{ .Content }}</div>
 
   <div class="chart-tool-wrapper">
-    <div class="chart-controls">
+    <div class="chart-controls" hx-indicator="#chart-spinner">
       <div class="control-group">
         <label>Time Range:</label>
         <div class="button-group">
@@ -113,6 +113,7 @@
     <div class="chart-container">
       <canvas id="chart-canvas"></canvas>
       <div id="chart-inner"></div>
+      <div id="chart-spinner" class="chart-spinner" aria-hidden="true"></div>
     </div>
 
     <div
