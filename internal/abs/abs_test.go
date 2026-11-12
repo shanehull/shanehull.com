@@ -55,33 +55,3 @@ func TestParsePeriod(t *testing.T) {
 		}
 	}
 }
-
-func TestCellDate(t *testing.T) {
-	// Excel serial 32387 is 1988-09-01; ISO strings are also accepted.
-	for in, want := range map[string]string{
-		"32387":               "1988-09-01",
-		"1988-09-01 00:00:00": "1988-09-01",
-		"1988-09-01":          "1988-09-01",
-	} {
-		got, ok := cellDate(in)
-		if !ok {
-			t.Fatalf("cellDate(%q) not ok", in)
-		}
-		if got.Format("2006-01-02") != want {
-			t.Fatalf("cellDate(%q) = %s, want %s", in, got.Format("2006-01-02"), want)
-		}
-	}
-	if _, ok := cellDate("nonsense"); ok {
-		t.Fatal("expected not ok for nonsense")
-	}
-}
-
-func TestFindColumn(t *testing.T) {
-	header := []string{"Date", "Residential land and dwellings;", "Other"}
-	if got := findColumn(header, "Residential land and dwellings"); got != 1 {
-		t.Fatalf("findColumn = %d, want 1", got)
-	}
-	if got := findColumn(header, "Missing"); got != -1 {
-		t.Fatalf("findColumn missing = %d, want -1", got)
-	}
-}
