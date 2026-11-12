@@ -129,11 +129,12 @@ func mergeAndCalculateBuffet(
 		}
 
 		debtValue, hasDebt := debtMap[dateStr]
+		if !hasDebt {
+			continue
+		}
+
 		numerator := mc.Value / 1000
 		if includeDebt {
-			if !hasDebt {
-				continue
-			}
 			numerator += debtValue / 1000
 		}
 

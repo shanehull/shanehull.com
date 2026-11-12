@@ -32,4 +32,4 @@ When the ratio is high, it suggests stocks are overpriced. When it's low, the ma
 - **Debt adjustment:** Federal Debt: Total Public Debt (GFDEBTN), added to the numerator
 - **Denominator:** Gross Domestic Product (GDP)
 - **Frequency:** Quarterly
-- **Coverage:** GFDEBTN begins in 1966, so the adjusted series starts there. Turn the debt switch off to chart the full market-cap-only history.
+- **Coverage:** GFDEBTN begins in 1966, so both modes start there. The window stays fixed when the debt switch is toggled.

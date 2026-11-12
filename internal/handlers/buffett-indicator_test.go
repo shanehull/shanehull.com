@@ -44,14 +44,13 @@ func TestMergeAndCalculateBuffetSkipsQuartersWithoutDebt(t *testing.T) {
 	}
 	debt := []fred.DataPoint{{Date: covered, Value: 500_000}}
 
-	withDebt := mergeAndCalculateBuffet(marketCap, gdp, debt, true)
-	if len(withDebt) != 1 || !withDebt[0].Date.Equal(covered) {
-		t.Fatalf("expected only the covered quarter, got %+v", withDebt)
-	}
-
-	withoutDebt := mergeAndCalculateBuffet(marketCap, gdp, debt, false)
-	if len(withoutDebt) != 2 {
-		t.Errorf("expected full history without debt, got %d points", len(withoutDebt))
+	// Both modes share the debt coverage window so the x-axis does not move
+	// when the debt switch is toggled.
+	for _, includeDebt := range []bool{true, false} {
+		merged := mergeAndCalculateBuffet(marketCap, gdp, debt, includeDebt)
+		if len(merged) != 1 || !merged[0].Date.Equal(covered) {
+			t.Errorf("includeDebt=%v: expected only the covered quarter, got %+v", includeDebt, merged)
+		}
 	}
 }
 
