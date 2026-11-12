@@ -1,0 +1,48 @@
+{
+  "figures": [
+    {
+      "type": "series",
+      "output": "content/blog/images/housing-valuation-2026-q2.svg",
+      "title": "Australian house prices: income and rent",
+      "subtitle": "Indices, 1996 = 100. Data to 2026-Q1; rent to 2025-Q3. Dashed lines mark the 25th and 75th percentiles of the period shown.",
+      "source": "Source: OECD and ABS.",
+      "data": "data.csv",
+      "start": "1981-01-01",
+      "quartiles": true,
+      "panels": [
+        {
+          "title": "Price to income index (1996=100)",
+          "field": "price_to_income_index",
+          "format": "%.1f"
+        },
+        {
+          "title": "Price to rent index (1996=100)",
+          "field": "price_to_rent_index",
+          "format": "%.1f"
+        }
+      ]
+    },
+    {
+      "type": "lollipop",
+      "output": "content/blog/images/housing-valuation-2026-q2-destinations.svg",
+      "title": "Distance to the destinations",
+      "subtitle": "Price fall required to reach each valuation destination.",
+      "source": "Source: OECD and ABS. Definitions as in the post.",
+      "data": "destinations.csv",
+      "labels": {
+        "price_to_income|1996 trough": {
+          "label": "Price-to-income",
+          "detail": "1996 trough, %.1f"
+        },
+        "price_to_income|1983 low": {
+          "label": "Price-to-income",
+          "detail": "1983 low, %.1f"
+        },
+        "price_to_rent|1996 trough": {
+          "label": "Price-to-rent",
+          "detail": "1996 trough, %.1f"
+        }
+      }
+    }
+  ]
+}
