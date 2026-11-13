@@ -99,6 +99,4 @@ The exercise asks how far prices would have to fall to return to the pre-2000 re
 
 If the government turns to monetisation, the price level rises. The debt is fixed in nominal terms, so its real value falls. But historically, low rates and repression filter into financialised assets, including investment housing, which bids up prices and worsens the ratios. The effect on the ratios is ambiguous. But one would hope, for the next generation, that this time they go down and stay down.
 
-The numbers above are the nominal-fall scenario. They are an exercise and do not forecast the future.
-
 Download the data: <a href="/blog/data/housing-valuation-2026-q2/data.json" download hx-boost="false">JSON</a>, <a href="/blog/data/housing-valuation-2026-q2/data.csv" download hx-boost="false">CSV</a>.
