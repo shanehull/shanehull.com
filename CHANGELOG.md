@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/shanehull/shanehull.com/compare/v1.4.0...v1.4.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **blog:** separate flat prices from the partial fall ([#219](https://github.com/shanehull/shanehull.com/issues/219)) ([efba4a2](https://github.com/shanehull/shanehull.com/commit/efba4a25c768aef68f0a858885ac80fa094c2461))
+
 ## [1.4.0](https://github.com/shanehull/shanehull.com/compare/v1.3.0...v1.4.0) (2026-11-13)
 
 
