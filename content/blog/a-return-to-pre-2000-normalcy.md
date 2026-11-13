@@ -76,8 +76,8 @@ A fall is not the only path. Prices can stay flat, or fall part of the way:
 | Measure         | Assumption                        | Years to the trough |
 | --------------- | --------------------------------- | ------------------- |
 | Price-to-income | disposable income +3.5% a year    | 20                  |
-| Price-to-rent   | rents +4% a year                  | 25                  |
 | Price-to-income | 30% fall, then flat, income +3.5% | 10                  |
+| Price-to-rent   | rents +4% a year                  | 25                  |
 
 The income measure needs about 20 years of flat prices, or a 30% fall and 10 years of income growth, to return to its 1996 trough. The rent measure needs about 25 years of flat prices at 4% rent growth, because the gap to its 1996 trough is larger.
 
