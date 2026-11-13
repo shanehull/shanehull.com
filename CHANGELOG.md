@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.4.0](https://github.com/shanehull/shanehull.com/compare/v1.3.0...v1.4.0) (2026-11-13)
+
+
+### Features
+
+* add house prices to rent tool ([#200](https://github.com/shanehull/shanehull.com/issues/200)) ([bcafbf5](https://github.com/shanehull/shanehull.com/commit/bcafbf53244513f5919387e9e57b667f34dbea4b))
+* **blog:** add A Return to Pre-2000 Normalcy post and figures ([#209](https://github.com/shanehull/shanehull.com/issues/209)) ([a0ae67c](https://github.com/shanehull/shanehull.com/commit/a0ae67c560ae70c48e70e5c0756e7f387b4738fa))
+* index the house prices to rent tool to 1996 ([#208](https://github.com/shanehull/shanehull.com/issues/208)) ([29c5ed7](https://github.com/shanehull/shanehull.com/commit/29c5ed73e309d14e2a73eb9a875eae62bd04cf15))
+
+
+### Bug Fixes
+
+* **blog:** bridge the caveats and the policy outro ([#217](https://github.com/shanehull/shanehull.com/issues/217)) ([0e39a55](https://github.com/shanehull/shanehull.com/commit/0e39a550e0cef5abebaea2ac9802551abe351d4e))
+* **blog:** refine the A Return to Pre-2000 Normalcy outro ([#210](https://github.com/shanehull/shanehull.com/issues/210)) ([fbe8d1b](https://github.com/shanehull/shanehull.com/commit/fbe8d1b4a504e7705ea781060754f38f24e68e54))
+* **blog:** tighten the destinations section ([#216](https://github.com/shanehull/shanehull.com/issues/216)) ([c20581e](https://github.com/shanehull/shanehull.com/commit/c20581ef0a769e8c09319f16a5f0a19f53d67506))
+* **blog:** trim unused valuation references and bump the date ([#212](https://github.com/shanehull/shanehull.com/issues/212)) ([1ab2a26](https://github.com/shanehull/shanehull.com/commit/1ab2a2600fd3081cb2540d7b4fb51539d04620d4))
+* center and fit the house price tool formulas ([#215](https://github.com/shanehull/shanehull.com/issues/215)) ([3926ea9](https://github.com/shanehull/shanehull.com/commit/3926ea9f42e4f9838ba5f57d8d9a22d3b7b8f8ac))
+* clarify the house prices to income tool page ([#207](https://github.com/shanehull/shanehull.com/issues/207)) ([bd7623b](https://github.com/shanehull/shanehull.com/commit/bd7623b6bc72ea0ad9282f8b834b93c7f4b90ffd))
+* install tzdata for the Hugo build ([#214](https://github.com/shanehull/shanehull.com/issues/214)) ([65ba6d7](https://github.com/shanehull/shanehull.com/commit/65ba6d7eeb5e2a8508994162d89522234e770cbd))
+* parse dates in the site timezone ([#213](https://github.com/shanehull/shanehull.com/issues/213)) ([05b522b](https://github.com/shanehull/shanehull.com/commit/05b522b98c8bad8338fd0b62f1d8590312333f81))
+* shorten the house prices to income tool title ([#205](https://github.com/shanehull/shanehull.com/issues/205)) ([692f576](https://github.com/shanehull/shanehull.com/commit/692f5769bbcf228d9f7bb032b9c25c24c902034b))
+* **tools:** index the house prices to income tool to 1996 ([#211](https://github.com/shanehull/shanehull.com/issues/211)) ([8731ba7](https://github.com/shanehull/shanehull.com/commit/8731ba7de07e82f45f2aee5c97ece30081838fbd))
+* use household disposable income for price-to-income ([#204](https://github.com/shanehull/shanehull.com/issues/204)) ([360dda3](https://github.com/shanehull/shanehull.com/commit/360dda3f46e26ccf906ca189c3a341b631fc2984))
+
 ## [1.3.0](https://github.com/shanehull/shanehull.com/compare/v1.2.0...v1.3.0) (2026-11-12)
 
 
