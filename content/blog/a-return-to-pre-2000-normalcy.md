@@ -71,7 +71,7 @@ The income measure's 50% row is 100.3, just above the 1996 trough. Its 60% row i
 
 ## Time does part of the work
 
-A fall is not the only path. With nominal prices flat:
+A fall is not the only path. Prices can stay flat, or fall part of the way:
 
 | Measure         | Assumption                        | Years to the trough |
 | --------------- | --------------------------------- | ------------------- |
