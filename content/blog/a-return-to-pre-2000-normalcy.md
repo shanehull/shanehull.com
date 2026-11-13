@@ -87,7 +87,7 @@ Prices, income and rents are nominal. The indices are inflation-neutral. In the 
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
-The exercise measures the distance. It treats the historical relationships as a useful guide; it does not require prices to return there. The trough is a reference point. The likely mechanism is debt: the price falls relative to income and rent when credit stops expanding or becomes more expensive. How the distance closes is a policy question.
+The exercise measures the distance. It treats the historical relationships as a useful guide; it does not require prices to return there. The trough is a reference point. The likely mechanism is debt: the price falls relative to income and rent when credit stops expanding or becomes more expensive.
 
 ## And they will print
 
