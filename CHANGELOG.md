@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/shanehull/shanehull.com/compare/v1.4.1...v1.4.2) (2026-11-13)
+
+
+### Bug Fixes
+
+* **blog:** group the time-to-trough rows by measure ([#221](https://github.com/shanehull/shanehull.com/issues/221)) ([0ccb244](https://github.com/shanehull/shanehull.com/commit/0ccb24411f474fe0f786cea5a5cb1abe82e0fdaa))
+
 ## [1.4.1](https://github.com/shanehull/shanehull.com/compare/v1.4.0...v1.4.1) (2026-11-13)
 
 
