@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/shanehull/shanehull.com/compare/v1.4.2...v1.4.3) (2026-11-16)
+
+
+### Bug Fixes
+
+* **blog:** clarify the 1996 reference and section leads ([#223](https://github.com/shanehull/shanehull.com/issues/223)) ([eb270d1](https://github.com/shanehull/shanehull.com/commit/eb270d13c48df4cca378eef71fff2c0643027b08))
+
 ## [1.4.2](https://github.com/shanehull/shanehull.com/compare/v1.4.1...v1.4.2) (2026-11-13)
 
 
