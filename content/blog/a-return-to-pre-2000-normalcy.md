@@ -10,9 +10,9 @@ tags:
   - mean-reversion
 ---
 
-Australian house prices have outrun income and rent for the last three decades. The relationship between prices, income and rent was treated as obsolete. Prices are now falling. This exercise asks how far they would have to fall to return to the pre-2000 relationship, using the 1996 trough as the destination.
+Australian house prices have outrun income and rent for the last three decades. The relationship between prices, income and rent was treated as obsolete. Prices are now falling. This exercise asks how far they would have to fall to return to the pre-2000 relationship, using the 1996 level as the destination.
 
-Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. They sit near the top of their history, but the rent measure needs a larger fall to reach its 1996 trough.
+Two measures do the work. Price-to-income compares the house price index with household disposable income per capita. Price-to-rent compares the same price index with rent, the investment earnings of the dwelling. They sit near the top of their history, but the rent measure is further from its 1996 level.
 
 ## The measures
 
@@ -22,7 +22,7 @@ Disposable income is after tax and transfers, before housing costs. It includes 
 
 The measure is per capita. Population is a stable denominator over the long run. Household formation responds to house prices, so population is the cleaner base for a long series. This is a relative price measure. It is not a household affordability measure.
 
-Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield. It is indexed to 1996 = 100. A higher index means more years of gross rent to buy the dwelling. The series begins in 1972, and its all-time low sits before the figure's start.
+Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield. It is indexed to 1996 = 100. A higher index means more years of gross rent to buy the dwelling. The series begins in 1972, and its all-time low sits before the figure below starts.
 
 The gross measure is the usual long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower. The ranking is similar if the expense ratio is broadly stable over long periods, which this exercise assumes.
 
@@ -45,17 +45,17 @@ The pre-2000 index levels are the reference because the rules changed after that
 
 ## The destinations
 
-A fall to the 1996 trough is 50% for price-to-income and 63% for price-to-rent.
+The central question is how far prices would have to fall to reach the 1996 level. Price-to-income falls 50%; price-to-rent falls 63%.
 
-<img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-13c" alt="Lollipop chart of the price fall required to reach each destination: 50% for price-to-income at its 1996 trough and 63% for price-to-rent at its 1996 trough." width="900" />
+<img src="/blog/images/housing-valuation-2026-q2-destinations.svg?v=2026-11-13c" alt="Lollipop chart of the price fall required to reach each destination: 50% for price-to-income at its 1996 level and 63% for price-to-rent at its 1996 level." width="900" />
 
-<p><em>Price fall required to reach each destination.</em></p>
+<p><em>Price fall required to reach the 1996 level.</em></p>
 
-The 1996 trough is the last major trough before the current high, and the common destination for both measures.
+The 1996 level is the last major low before the current high, and the common reference for both measures.
 
 ## The ladder
 
-Every row holds disposable income and rents at their current levels. Only the price of the dwelling stock moves. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent. Percentiles use the full history of each series.
+The ladder shows the percentile rank at each 10% price fall. Every row holds disposable income and rents at their current levels; only the price of the dwelling stock moves. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent. Percentiles use the full history of each series.
 
 | Price fall  | Price-to-income | Price-to-income percentile | Price-to-rent | Price-to-rent percentile |
 | ----------- | --------------- | -------------------------- | ------------- | ------------------------ |
@@ -67,19 +67,19 @@ Every row holds disposable income and rents at their current levels. Only the pr
 | 50%         | 100.3           | 18th                       | 133.9         | 55th                     |
 | 60%         | 80.2            | 0th                        | 107.1         | 50th                     |
 
-The income measure's 50% row is 100.3, just above the 1996 trough. Its 60% row is 80.2, below the income series' minimum. The rent measure's 60% row is 107.1, near its 1996 trough. The rent measure needs more of a fall to reach its last major trough.
+The income measure's 50% row is 100.3, just above the 1996 level. Its 60% row is 80.2, below the income series' minimum. The rent measure's 60% row is 107.1, near its 1996 level. The rent measure is further from its last major low.
 
 ## Time does part of the work
 
 A fall is not the only path. Prices can stay flat, or fall part of the way:
 
-| Measure         | Assumption                        | Years to the trough |
-| --------------- | --------------------------------- | ------------------- |
-| Price-to-income | disposable income +3.5% a year    | 20                  |
-| Price-to-income | 30% fall, then flat, income +3.5% | 10                  |
-| Price-to-rent   | rents +4% a year                  | 25                  |
+| Measure         | Assumption                        | Years to the 1996 level |
+| --------------- | --------------------------------- | ----------------------- |
+| Price-to-income | disposable income +3.5% a year    | 20                      |
+| Price-to-income | 30% fall, then flat, income +3.5% | 10                      |
+| Price-to-rent   | rents +4% a year                  | 25                      |
 
-The income measure needs about 20 years of flat prices, or a 30% fall and 10 years of income growth, to return to its 1996 trough. The rent measure needs about 25 years of flat prices at 4% rent growth, because the gap to its 1996 trough is larger.
+The income measure needs about 20 years of flat prices, or a 30% fall and 10 years of income growth, to return to its 1996 level. The rent measure needs about 25 years of flat prices at 4% rent growth, because the gap to its 1996 level is larger.
 
 ## Caveats
 
@@ -87,7 +87,7 @@ Prices, income and rents are nominal. The indices are inflation-neutral. In the 
 
 The data is quarterly and published with a lag. Price-to-income ends 2026-Q1 and price-to-rent ends 2025-Q3.
 
-The exercise measures the distance. It treats the historical relationships as a useful guide; it does not require prices to return there. The trough is a reference point. The likely mechanism is debt: the price falls relative to income and rent when credit stops expanding or becomes more expensive.
+The exercise measures the distance. It treats the historical relationships as a useful guide; it does not require prices to return there. The 1996 level is a reference point. The likely mechanism is debt: the price falls relative to income and rent when credit stops expanding or becomes more expensive.
 
 ## And they will print
 

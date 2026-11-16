@@ -30,13 +30,13 @@
       "source": "Source: OECD and ABS. Definitions as in the post.",
       "data": "destinations.csv",
       "labels": {
-        "price_to_income|1996 trough": {
+        "price_to_income|1996 level": {
           "label": "Price-to-income",
-          "detail": "1996 trough, %.1f"
+          "detail": "1996 level, %.1f"
         },
-        "price_to_rent|1996 trough": {
+        "price_to_rent|1996 level": {
           "label": "Price-to-rent",
-          "detail": "1996 trough, %.1f"
+          "detail": "1996 level, %.1f"
         }
       }
     }

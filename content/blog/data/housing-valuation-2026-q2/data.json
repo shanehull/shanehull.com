@@ -1757,7 +1757,7 @@
   "destinations": [
     {
       "measure": "price_to_income",
-      "destination": "1996 trough",
+      "destination": "1996 level",
       "value": 100.0,
       "move_required_pct": 50.15,
       "direction": "fall",
@@ -1765,7 +1765,7 @@
     },
     {
       "measure": "price_to_rent",
-      "destination": "1996 trough",
+      "destination": "1996 level",
       "value": 100.0,
       "move_required_pct": 62.63,
       "direction": "fall",
