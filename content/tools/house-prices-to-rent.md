@@ -13,7 +13,7 @@ $$
 \end{gathered}
 $$
 
-The numerator is the Organisation for Economic Co-operation and Development nominal house price index for Australia, 2015 = 100. The denominator is the OECD rent price index for Australia. The ratio is the inverse of the gross rental yield. A higher index means more years of gross rent to buy the dwelling.
+The numerator is the Organisation for Economic Co-operation and Development nominal house price index for Australia, 2015 = 100. The denominator is the OECD rent price index for Australia. The ratio is the inverse of the gross rental yield. A higher index means a higher price relative to rent than in 1996.
 
 The index is 1996 = 100. The absolute level is not a yield. Read it against its own history: the shape shows whether housing is stretched relative to the income it earns.
 

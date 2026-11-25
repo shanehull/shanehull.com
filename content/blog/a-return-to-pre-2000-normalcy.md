@@ -22,7 +22,7 @@ Disposable income is after tax and transfers, before housing costs. It includes 
 
 The measure is per capita. Population is a stable denominator over the long run. Household formation responds to house prices, so population is the cleaner base for a long series. This is a relative price measure. It is not a household affordability measure.
 
-Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield. It is indexed to 1996 = 100. A higher index means more years of gross rent to buy the dwelling. The series begins in 1972, and its all-time low sits before the figure below starts.
+Price-to-rent divides the same house price index by the OECD rent price index. The ratio is the inverse of the gross rental yield. It is indexed to 1996 = 100. A higher index means a higher price relative to rent than in 1996. The series begins in 1972, and its all-time low sits before the figure below starts.
 
 The gross measure is the usual long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower. The ranking is similar if the expense ratio is broadly stable over long periods, which this exercise assumes.
 
@@ -32,10 +32,10 @@ The gross measure is the usual long-run comparison. A net cap rate after vacancy
 
 ## Where we are
 
-| Measure         | Latest | Date    | Percentile |
-| --------------- | ------ | ------- | ---------- |
-| Price-to-income | 200.6  | 2026-Q1 | 100th      |
-| Price-to-rent   | 267.6  | 2025-Q3 | 98th       |
+| Measure         | Index, 1996 = 100 | Date    | Percentile |
+| --------------- | ----------------- | ------- | ---------- |
+| Price-to-income | 200.6             | 2026-Q1 | 100th      |
+| Price-to-rent   | 267.6             | 2025-Q3 | 98th       |
 
 Price-to-income is at its series high. Price-to-rent is about 6% below its 2022 peak. Both sit near the top of their history.
 
@@ -55,7 +55,7 @@ The 1996 level is the last major low before the current high, and the common ref
 
 ## The ladder
 
-The ladder shows the percentile rank at each 10% price fall. Every row holds disposable income and rents at their current levels; only the price of the dwelling stock moves. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent. Percentiles use the full history of each series.
+The ladder shows the percentile rank at each 10% price fall. Both measures are indices, 1996 = 100. Every row holds disposable income and rents at their current levels; only the price of the dwelling stock moves. The 0% row uses 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent. Percentiles use the full history of each series.
 
 | Price fall  | Price-to-income | Price-to-income percentile | Price-to-rent | Price-to-rent percentile |
 | ----------- | --------------- | -------------------------- | ------------- | ------------------------ |
