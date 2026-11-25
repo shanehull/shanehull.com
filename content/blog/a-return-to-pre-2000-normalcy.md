@@ -26,6 +26,8 @@ Price-to-rent divides the same house price index by the OECD rent price index. T
 
 The gross measure is the usual long-run comparison. A net cap rate after vacancy, operating costs and depreciation would be lower. The ranking is similar if the expense ratio is broadly stable over long periods, which this exercise assumes.
 
+The numerator is an index, not a dollar price. Both measures are therefore indices, 1996 = 100. They show the change in the ratio, not the level in years of income or rent.
+
 <img src="/blog/images/housing-valuation-2026-q2.svg?v=2026-11-13b" alt="Two panels: price to income index and price to rent index, 1996 = 100, with 25th and 75th percentile lines, income to 2026-Q1 and rent to 2025-Q3" width="900" />
 
 <p><em>Indices, 1996 = 100. Data to 2026-Q1 for price-to-income and 2025-Q3 for price-to-rent. Dashed lines mark the 25th and 75th percentiles of the period shown. The figure starts below 100. The rent series' earlier observations are lower. Sources: OECD and ABS. Live charts: <a href="/tools/house-prices-to-income/">price to income</a> and <a href="/tools/house-prices-to-rent/">price to rent</a>.</em></p>
