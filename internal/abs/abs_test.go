@@ -7,13 +7,13 @@ import (
 
 const aweFixture = `{
   "data": {
-    "structures": [{
+    "structure": {
       "dimensions": {
         "observation": [
           {"id":"TIME_PERIOD","values":[{"id":"2024-S1"},{"id":"2024-S2"}]}
         ]
       }
-    }],
+    },
     "dataSets": [{
       "series": {
         "0:0": {"observations": {"0":[1600.0],"1":[1650.0]}}

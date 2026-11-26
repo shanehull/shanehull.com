@@ -189,11 +189,11 @@ type sdmxDimension struct {
 
 type sdmxResponse struct {
 	Data struct {
-		Structures []struct {
+		Structure struct {
 			Dimensions struct {
 				Observation []sdmxDimension `json:"observation"`
 			} `json:"dimensions"`
-		} `json:"structures"`
+		} `json:"structure"`
 		DataSets []struct {
 			Series map[string]struct {
 				Observations map[string][]json.RawMessage `json:"observations"`
@@ -215,15 +215,13 @@ func parseSDMX(raw []byte) (map[string]float64, error) {
 	if len(resp.Errors) > 0 {
 		return nil, fmt.Errorf("SDMX error: %s", resp.Errors[0].Title)
 	}
-	if len(resp.Data.Structures) == 0 || len(resp.Data.DataSets) == 0 {
+	if len(resp.Data.DataSets) == 0 || len(resp.Data.Structure.Dimensions.Observation) == 0 {
 		return nil, fmt.Errorf("empty SDMX response")
 	}
 
 	var periods []string
-	if dims := resp.Data.Structures[0].Dimensions.Observation; len(dims) > 0 {
-		for _, v := range dims[0].Values {
-			periods = append(periods, v.ID)
-		}
+	for _, v := range resp.Data.Structure.Dimensions.Observation[0].Values {
+		periods = append(periods, v.ID)
 	}
 
 	observations := map[string]float64{}
