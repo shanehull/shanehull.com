@@ -838,7 +838,7 @@ Pass every control that should carry into the download URL. `templates.Param` em
 
 ## Multi-Series Chart Tools
 
-Use this pattern when a chart stacks two or more independent lines the user can toggle on and off (e.g. the debt-gdp tool comparing countries). Render with `MultiLineChart`; single-series tools keep `LineChart`.
+Use this pattern when a chart stacks two or more independent lines the user can toggle on and off (e.g. the spending-gdp tool comparing countries). Render with `MultiLineChart`; single-series tools keep `LineChart`.
 
 ### Data model
 
@@ -868,7 +868,7 @@ There are no per-series controls in the layout. Chart.js legends already click-t
 
 ### Reference implementation
 
-`internal/handlers/debt-gdp.go`. The handler drives series from a data slice binding a code, name, source series and chart color; for debt-gdp the series are seven countries. The BIS general-government series are percent-of-GDP, so the value is plotted directly with no currency conversion. `internal/yahoo` covers the live-price leg for tools that need one.
+`internal/handlers/spending-gdp.go`. The handler drives series from a data slice binding a code, name, source series and chart color; for spending-gdp the series are seven countries. The World Bank expense series are percent-of-GDP, so the value is plotted directly with no currency conversion. `internal/yahoo` covers the live-price leg for tools that need one.
 
 ---
 

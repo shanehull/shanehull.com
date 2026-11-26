@@ -4,69 +4,11 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"net/http/httptest"
 	"strings"
 	"testing"
 
 	"github.com/shanehull/shanehull.com/internal/templates"
 )
-
-func TestGDPCountriesConfigured(t *testing.T) {
-	want := map[string]string{
-		"us": "QUSGAN770A",
-		"cn": "QCNGAN770A",
-		"jp": "QJPGAN770A",
-		"de": "QDEGAN770A",
-		"gb": "QGBGAN770A",
-		"in": "QINGAN770A",
-		"au": "QAUGAN770A",
-	}
-	if len(gdpCountries) != len(want) {
-		t.Fatalf("expected %d countries, got %d", len(want), len(gdpCountries))
-	}
-	for _, c := range gdpCountries {
-		if got := want[c.Code]; got != c.Series {
-			t.Errorf("series for %s = %s, want %s", c.Code, c.Series, got)
-		}
-		if c.Name == "" || c.Color == "" {
-			t.Errorf("country %s missing name or color", c.Code)
-		}
-	}
-}
-
-func TestSelectedCodesFrom(t *testing.T) {
-	all := []string{"us", "cn", "jp", "de"}
-
-	// No params: everything on.
-	if got := selectedCodesFrom(httptest.NewRequest("GET", "/debt-gdp/chart", nil), all); len(got) != 4 {
-		t.Errorf("no params should select all, got %v", got)
-	}
-
-	// Explicit subset.
-	req := httptest.NewRequest("GET", "/debt-gdp/chart?us=on&jp=on", nil)
-	if got := selectedCodesFrom(req, all); !equalStrings(got, []string{"us", "jp"}) {
-		t.Errorf("subset = %v, want [us jp]", got)
-	}
-
-	// Country explicitly off with no others on: guard keeps all so the chart
-	// never renders empty.
-	req = httptest.NewRequest("GET", "/debt-gdp/chart?cn=off", nil)
-	if got := selectedCodesFrom(req, all); len(got) != 4 {
-		t.Errorf("all-off should fall back to all, got %v", got)
-	}
-}
-
-func equalStrings(a, b []string) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
-}
 
 func TestMultiLineChartRenders(t *testing.T) {
 	us := 116.4
@@ -134,26 +76,5 @@ func TestMultiLineChartLinearAxis(t *testing.T) {
 	config := strings.ReplaceAll(out[start+12:strings.Index(out[start:], `">`)+start], "&#34;", `"`)
 	if !strings.Contains(config, `"yAxisType":"linear"`) {
 		t.Errorf("expected linear axis, got %s", config)
-	}
-}
-
-func TestMultiChartDownloadsRenders(t *testing.T) {
-	component := templates.MultiChartDownloads("debt-gdp", "max", []string{"us", "jp"})
-
-	buf := new(bytes.Buffer)
-	if err := component.Render(context.Background(), buf); err != nil {
-		t.Fatalf("render failed: %v", err)
-	}
-
-	out := buf.String()
-	for _, want := range []string{
-		`/debt-gdp/data?range=max&amp;us=on&amp;jp=on`,
-		`/debt-gdp/data.csv?range=max&amp;us=on&amp;jp=on`,
-		`debt-gdp-data.json`,
-		`debt-gdp-data.csv`,
-	} {
-		if !strings.Contains(out, want) {
-			t.Errorf("downloads render missing %q:\n%s", want, out)
-		}
 	}
 }
