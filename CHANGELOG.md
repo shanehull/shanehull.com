@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/shanehull/shanehull.com/compare/v1.4.3...v1.5.0) (2026-11-26)
+
+
+### Features
+
+* remove the debt-to-GDP tool ([#227](https://github.com/shanehull/shanehull.com/issues/227)) ([bce6bf1](https://github.com/shanehull/shanehull.com/commit/bce6bf10acd8062767220acc1aa989e28e585844))
+
+
+### Bug Fixes
+
+* label the indices and drop the years wording ([#225](https://github.com/shanehull/shanehull.com/issues/225)) ([907be23](https://github.com/shanehull/shanehull.com/commit/907be23501f98560d39fbec9177effb83dca5575))
+* parse the ABS SDMX structure block ([#228](https://github.com/shanehull/shanehull.com/issues/228)) ([6f9857f](https://github.com/shanehull/shanehull.com/commit/6f9857f91d436f2d1c33451465ae5a978ebcb1f9))
+
 ## [1.4.3](https://github.com/shanehull/shanehull.com/compare/v1.4.2...v1.4.3) (2026-11-16)
 
 
