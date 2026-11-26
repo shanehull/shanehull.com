@@ -201,36 +201,6 @@ func registerHandlers(mux *http.ServeMux) {
 		),
 	)
 
-	// Debt to GDP tool
-	mux.HandleFunc(
-		"/debt-gdp/chart",
-		middleware.CORS(
-			http.HandlerFunc(handlers.DebtGDPHandler),
-			allowedOrigin,
-		),
-	)
-	mux.HandleFunc(
-		"/debt-gdp/downloads",
-		middleware.CORS(
-			http.HandlerFunc(handlers.DebtGDPDownloadsHandler),
-			allowedOrigin,
-		),
-	)
-	mux.HandleFunc(
-		"/debt-gdp/data",
-		middleware.CORS(
-			http.HandlerFunc(handlers.DebtGDPDataHandler),
-			allowedOrigin,
-		),
-	)
-	mux.HandleFunc(
-		"/debt-gdp/data.csv",
-		middleware.CORS(
-			http.HandlerFunc(handlers.DebtGDPCSVHandler),
-			allowedOrigin,
-		),
-	)
-
 	// House prices to household income tool
 	mux.HandleFunc(
 		"/house-prices-to-income/chart",
